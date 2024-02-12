@@ -22,11 +22,11 @@ public class DoorHandleInteraction : UdonSharpBehaviour
 
     private void Update()
     {
-        //if (VRUserHold)
-        //{
+        if (VRUserHold)
+        {
             Vector3 dir = new Vector3(gameObject.transform.position.x, Door.transform.position.y, gameObject.gameObject.transform.position.z);
             Door.transform.LookAt(dir);
-        //}
+        }
     }
 
     public override void OnPickup()
@@ -34,6 +34,7 @@ public class DoorHandleInteraction : UdonSharpBehaviour
         //Si es VR, entonces nada
         //si no es VR, entonces mueves el objeto a la nueva posicion
         VRUserHold = _Pickup.currentPlayer.IsUserInVR();
+        //VRUserHold = true;
         if (VRUserHold)
         {
 
@@ -51,12 +52,29 @@ public class DoorHandleInteraction : UdonSharpBehaviour
     {
         //Si es VR, entonces calcular si esta mas cerca de abrir o cerrar
         //En cualquier caso, mueves el handle nuevamente a su posicion
-        float IsClosedLenght = Vector3.Distance(Door.transform.localRotation.eulerAngles, DoorRotation[0]);//Vector3.Distance(HandleDefaultPosition.position, NonvrDoorPosition[0].position);
-        //Debug.Log(Door.transform.localRotation.eulerAngles);
-        //Debug.Log(DoorRotation[0]);
-        float IsOpenedLenght = Vector3.Distance(Door.transform.localRotation.eulerAngles, DoorRotation[1]);//Vector3.Distance(HandleDefaultPosition.position, NonvrDoorPosition[1].position);
-        //Debug.Log(Door.transform.localRotation.eulerAngles);
-        //Debug.Log(DoorRotation[1]);
+        Vector4 LocalRotation = new Vector4(Door.transform.localRotation.x,Door.transform.localRotation.y,Door.transform.localRotation.z,Door.transform.localRotation.w);
+        Quaternion DoorRotation0Q = Quaternion.Euler(DoorRotation[0]);
+        Vector4 DoorRotation0 = new Vector4(
+            DoorRotation0Q.x,
+            DoorRotation0Q.y,
+            DoorRotation0Q.z,
+            DoorRotation0Q.w);
+        Quaternion DoorRotation1Q = Quaternion.Euler(DoorRotation[1]);
+        Vector4 DoorRotation1 = new Vector4(
+            DoorRotation1Q.x,
+            DoorRotation1Q.y,
+            DoorRotation1Q.z,
+            DoorRotation1Q.w);
+        float IsClosedLenght = Vector4.Distance(LocalRotation, DoorRotation0);//Vector3.Distance(HandleDefaultPosition.position, NonvrDoorPosition[0].position);
+        float IsOpenedLenght = Vector4.Distance(LocalRotation, DoorRotation1);//Vector3.Distance(HandleDefaultPosition.position, NonvrDoorPosition[1].position);
+        //Debug.Log("LocalRot:" + Door.transform.localRotation.eulerAngles);
+        //Debug.Log("Rot" + Door.transform.rotation.eulerAngles);
+        //Debug.Log("DoorRot0: " + DoorRotation[0]);
+        //Debug.Log("DoorRot1: " + DoorRotation[1]);
+        //Debug.Log("RotQuat: " + Door.transform.rotation);
+        //Debug.Log("DoorRot0Quat: " + Quaternion.Euler(DoorRotation[0]));
+        //Debug.Log("DoorRot1Quat: " + Quaternion.Euler(DoorRotation[1]));
+
         if (IsClosedLenght < IsOpenedLenght)
         {
             IsDoorOpened = false;
@@ -67,7 +85,7 @@ public class DoorHandleInteraction : UdonSharpBehaviour
             IsDoorOpened = true;
             //Debug.Log("Opened");
         }
-        //Debug.Log("IsClossed: " + IsClosedLenght + ", IsOppened: " + IsOpenedLenght);
+        Debug.Log("IsClossed: " + IsClosedLenght + ", IsOppened: " + IsOpenedLenght + ", EstaAbierto: " + IsDoorOpened);
         //if (!VRUserHold)
         //{        
         //    IsDoorOpened = !IsDoorOpened;

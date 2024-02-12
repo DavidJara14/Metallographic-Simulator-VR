@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311860062083417422}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: -0.808857, y: -0.06078712, z: 2.314011}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
@@ -37,7 +37,7 @@ Transform:
   - {fileID: 8201914416297776059}
   - {fileID: 7883502233772660058}
   m_Father: {fileID: 4465768267464951481}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}
 --- !u!33 &4303014807085524070
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -137,10 +137,10 @@ HingeJoint:
   m_GameObject: {fileID: 311860062083417422}
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -0.0001, z: 0}
-  m_Axis: {x: 0, y: 0, z: 1}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.808857, y: 0.79198927, z: 3.657926}
+  m_ConnectedAnchor: {x: -0.808857, y: 0.79198927, z: 3.6010113}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -149,8 +149,8 @@ HingeJoint:
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
-    targetVelocity: 0
-    force: 0
+    targetVelocity: 45.87
+    force: 1.57
     freeSpin: 0
   m_UseLimits: 1
   m_ExtendedLimits: 0
@@ -158,7 +158,7 @@ HingeJoint:
   m_Limits:
     min: 0
     max: 180
-    bounciness: 0
+    bounciness: 0.27
     bounceMinVelocity: 0.2
     contactDistance: 0
   m_BreakForce: Infinity
@@ -192,7 +192,7 @@ Transform:
   m_GameObject: {fileID: 685871878584254165}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071067, y: 0.000000030908616, z: -0.000000030908623, w: 0.7071068}
-  m_LocalPosition: {x: 0.0015185701, y: 0.009810111, z: -0.00024213016}
+  m_LocalPosition: {x: -0.00005, y: 0.00181, z: 0.01093}
   m_LocalScale: {x: 0.005, y: 0.005000001, z: 0.005000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -229,8 +229,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375673012092246167}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071067, y: 0.000000030908616, z: -0.000000030908623, w: 0.7071068}
-  m_LocalPosition: {x: 0.0002, y: -0.0105, z: -0.0008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.00006000005, y: 0.00034999987, z: 0.01016}
   m_LocalScale: {x: 0.005, y: 0.005000001, z: 0.005000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -390,8 +390,8 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 8820785709236435221}
   _Pickup: {fileID: 315947089140448382}
   DoorRotation:
-  - {x: 270, y: 0, z: 0}
-  - {x: 270, y: 250, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: -110, z: 0}
   Door: {fileID: 9057703844918373471}
   GrabbableHandle: {fileID: 1375673012092246167}
   HandleDefaultPosition: {fileID: 138584600547619148}
@@ -482,7 +482,7 @@ Transform:
   m_GameObject: {fileID: 2577519489638271986}
   serializedVersion: 2
   m_LocalRotation: {x: 0.70710665, y: 0.00000006181723, z: -0.00000006181723, w: 0.7071069}
-  m_LocalPosition: {x: -0.0001, y: 0.0106, z: 0.0002}
+  m_LocalPosition: {x: 0.00013, y: 0.00221, z: 0.00979}
   m_LocalScale: {x: 0.005, y: 0.005000001, z: 0.005000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -517,8 +517,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3275428775299810391}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071067, y: -0.000000030908616, z: 0.000000030908623, w: 0.7071068}
-  m_LocalPosition: {x: 0.7973589, y: -0.012107086, z: 0.02596185}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8053756, y: -0.012107086, z: 0.02596185}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -598,8 +598,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -625,10 +625,10 @@ HingeJoint:
   m_GameObject: {fileID: 3275428775299810391}
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.0005, z: 0}
-  m_Axis: {x: 0, y: 0, z: 1}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0.84789294, z: 0}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -637,8 +637,8 @@ HingeJoint:
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
-    targetVelocity: 0
-    force: 0
+    targetVelocity: 45.87
+    force: 1.57
     freeSpin: 0
   m_UseLimits: 1
   m_ExtendedLimits: 0
@@ -646,7 +646,7 @@ HingeJoint:
   m_Limits:
     min: 0
     max: 180
-    bounciness: 0
+    bounciness: 0.27
     bounceMinVelocity: 0.2
     contactDistance: 0
   m_BreakForce: Infinity
@@ -686,8 +686,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3697663817343672968}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071067, y: 0.000000030908616, z: -0.000000030908623, w: 0.7071068}
-  m_LocalPosition: {x: 0.0003, y: -0.0109, z: -0.0007}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00003999999, y: 0.00031000096, z: 0.0095}
   m_LocalScale: {x: 0.005, y: 0.005000001, z: 0.005000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -847,8 +847,8 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 8792184142769981721}
   _Pickup: {fileID: 2646465605796425443}
   DoorRotation:
-  - {x: 270, y: 0, z: 0}
-  - {x: 270, y: 110, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 110, z: 0}
   Door: {fileID: 2095943531294075894}
   GrabbableHandle: {fileID: 3697663817343672968}
   HandleDefaultPosition: {fileID: 1517482387518686664}
@@ -891,7 +891,7 @@ GameObject:
   - component: {fileID: 3001921310593833144}
   - component: {fileID: 3915510781430914289}
   - component: {fileID: 1701235431682625999}
-  - component: {fileID: 4938400076855160677}
+  - component: {fileID: 9046718242567621698}
   m_Layer: 0
   m_Name: Puerta1
   m_TagString: Untagged
@@ -907,8 +907,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4886742292834696336}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071067, y: -0.000000030908616, z: 0.000000030908623, w: 0.7071068}
-  m_LocalPosition: {x: -0.80498224, y: -0.0021445155, z: 0.025975585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.808857, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -988,7 +988,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllowCollisionOwnershipTransfer: 1
---- !u!59 &4938400076855160677
+--- !u!59 &9046718242567621698
 HingeJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1015,10 +1015,10 @@ HingeJoint:
   m_GameObject: {fileID: 4886742292834696336}
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -0.001, z: 0}
-  m_Axis: {x: 0, y: 0, z: 1}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.80498224, y: 1.354056, z: 1.3639756}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1027,16 +1027,16 @@ HingeJoint:
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
-    targetVelocity: 0
-    force: 0
+    targetVelocity: 45.87
+    force: 1.57
     freeSpin: 0
   m_UseLimits: 1
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: 0
-    max: 180
-    bounciness: 0
+    min: -180
+    max: 0
+    bounciness: 0.27
     bounceMinVelocity: 0.2
     contactDistance: 0
   m_BreakForce: Infinity
@@ -1077,7 +1077,7 @@ Transform:
   m_GameObject: {fileID: 5260986205006814738}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071067, y: 0.000000030908616, z: -0.000000030908623, w: 0.7071068}
-  m_LocalPosition: {x: -0.0003, y: 0.0104, z: 0.0002}
+  m_LocalPosition: {x: -0.00007, y: 0.00201, z: 0.00979}
   m_LocalScale: {x: 0.005, y: 0.005000001, z: 0.005000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1237,8 +1237,8 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 5415169288716114002}
   _Pickup: {fileID: 8398684428457107895}
   DoorRotation:
-  - {x: 270, y: 0, z: 0}
-  - {x: 270, y: 250, z: 0}
+  - {x: 180, y: 0, z: 180}
+  - {x: 180, y: -110, z: 180}
   Door: {fileID: 5826558391727744760}
   GrabbableHandle: {fileID: 5260986205006814738}
   HandleDefaultPosition: {fileID: 3643079214754515701}
@@ -1292,8 +1292,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5659814015606239677}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.70710665, y: 0.00000006181723, z: -0.00000006181724, w: 0.7071069}
-  m_LocalPosition: {x: 0.0001, y: -0.0104, z: -0.0008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.00006000005, y: 0.00034999987, z: 0.01016}
   m_LocalScale: {x: 0.005, y: 0.005000001, z: 0.005000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1331,7 +1331,7 @@ Transform:
   m_GameObject: {fileID: 7728724429662642347}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.0006, y: 0.0092, z: -0.0002}
+  m_LocalPosition: {x: -0.0001, y: 0.0012, z: 0.01086}
   m_LocalScale: {x: 0.005, y: 0.0049999985, z: 0.0049999985}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1491,8 +1491,8 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 5470286559024985078}
   _Pickup: {fileID: 2728332412304962908}
   DoorRotation:
-  - {x: 270, y: 0, z: 0}
-  - {x: 270, y: 110, z: 0}
+  - {x: 180, y: 0, z: 180}
+  - {x: 180, y: 110, z: 180}
   Door: {fileID: 1157357321604025686}
   GrabbableHandle: {fileID: 7728724429662642347}
   HandleDefaultPosition: {fileID: 7883502233772660058}
@@ -1546,8 +1546,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8033835797792088070}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.70710665, y: 0.00000006181723, z: -0.000000061817246, w: 0.7071069}
-  m_LocalPosition: {x: 0.0001, y: -0.0104, z: -0.0007}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00003999999, y: 0.00031000096, z: 0.0095}
   m_LocalScale: {x: 0.005, y: 0.005000001, z: 0.005000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1564,6 +1564,8 @@ GameObject:
   - component: {fileID: 5008359136731075102}
   - component: {fileID: 46378482221877236}
   - component: {fileID: 1252196001011511664}
+  - component: {fileID: 1310402891196959276}
+  - component: {fileID: 8325617146484071066}
   m_Layer: 0
   m_Name: Gabinete
   m_TagString: Untagged
@@ -1636,6 +1638,48 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &1310402891196959276
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331905685877774124}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!138 &8325617146484071066
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331905685877774124}
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &8794044941349431242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,7 +1709,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8794044941349431242}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071067, y: -0.000000030908616, z: 0.000000030908623, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 0.80537564, y: -0.099698216, z: 2.3140335}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
@@ -1673,7 +1717,7 @@ Transform:
   - {fileID: 7309993326904571935}
   - {fileID: 3643079214754515701}
   m_Father: {fileID: 4465768267464951481}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}
 --- !u!33 &1004244482239457033
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1746,7 +1790,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -1760,10 +1804,10 @@ HingeJoint:
   m_GameObject: {fileID: 8794044941349431242}
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.0005, z: 0}
-  m_Axis: {x: 0, y: 0, z: 1}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0.7603018, z: 3.6510334}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1772,16 +1816,16 @@ HingeJoint:
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
-    targetVelocity: 0
-    force: 0
+    targetVelocity: 45.87
+    force: 1.57
     freeSpin: 0
   m_UseLimits: 1
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: 0
-    max: 180
-    bounciness: 0
+    min: -180
+    max: 0
+    bounciness: 0.27
     bounceMinVelocity: 0.2
     contactDistance: 0
   m_BreakForce: Infinity
