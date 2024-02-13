@@ -1862,6 +1862,7 @@ GameObject:
   - component: {fileID: 3405369709956553522}
   - component: {fileID: 4242402416623048046}
   - component: {fileID: 8106926401746227189}
+  - component: {fileID: 5331048163577616932}
   m_Layer: 0
   m_Name: PrefabMueble
   m_TagString: Untagged
@@ -1988,8 +1989,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.47, y: 1.0168605, z: 0.07320118}
-  m_Center: {x: 0, y: -0.0023722649, z: 1.17}
+  m_Size: {x: 0.06738973, y: 1.0168605, z: 0.05169034}
+  m_Center: {x: -0.73085916, y: -0.0023722649, z: 1.1491548}
 --- !u!65 &8106926401746227189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2011,3 +2012,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5433776, y: 0.10828692, z: 1.1724335}
   m_Center: {x: -0.0016669035, y: -0.0010309517, z: 0.582515}
+--- !u!65 &5331048163577616932
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848103059166884327}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.06738973, y: 1.0168605, z: 0.05169034}
+  m_Center: {x: 0.72, y: -0.0023722649, z: 1.1491548}
