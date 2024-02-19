@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f11136daadff0b44ac2278a314682ab, type: 3}
-  m_Name: Cube Udon Graph Program Asset
+  m_Name: PuertaA Udon Graph Program Asset
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 1cfed8caec1da814fa2f0db0cbce3efd,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 699368f9fb4ef2d46894121f563c71c0,
     type: 2}
   udonAssembly: ".data_start\r\n\r\n    .export Animator\r\n    \r\n    __instance_0:
     %UnityEngineAnimator, null\r\n    __name_0: %SystemString, null\r\n    __value_0:
@@ -56,8 +56,8 @@ MonoBehaviour:
       - unityObjectValue: {fileID: 0}
         stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|none
     - fullName: Get_Variable
-      uid: 38226fa3-9b5d-4b0a-a0aa-b593234f8338
-      position: {x: -229.74042, y: 314.28412}
+      uid: ceb1b080-b24d-47c2-8063-80cfa797f38b
+      position: {x: 92.13364, y: 143.77301}
       nodeUIDs:
       - 
       flowUIDs: []
@@ -67,50 +67,50 @@ MonoBehaviour:
       - unityObjectValue: {fileID: 0}
         stringValue: 
     - fullName: SystemBoolean.__op_UnaryNegation__SystemBoolean__SystemBoolean
-      uid: 2a618f0c-61f6-42db-aeb1-8f540f434ebd
-      position: {x: 289.5623, y: 242.27417}
+      uid: d640a525-ccb2-4474-812f-572c987447c1
+      position: {x: 611.43634, y: 71.76306}
       nodeUIDs:
-      - a552e4db-488d-44c6-a588-3eb073a531cc|0
+      - 9b98be39-4b66-4c6e-8d40-d8d8a1f054ae
       flowUIDs: []
       nodeValues:
       - unityObjectValue: {fileID: 0}
         stringValue: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089|False
     - fullName: UnityEngineAnimator.__GetBool__SystemString__SystemBoolean
-      uid: a552e4db-488d-44c6-a588-3eb073a531cc
-      position: {x: 64.67673, y: 371.6306}
+      uid: 9b98be39-4b66-4c6e-8d40-d8d8a1f054ae
+      position: {x: 386.55078, y: 201.1195}
       nodeUIDs:
-      - 38226fa3-9b5d-4b0a-a0aa-b593234f8338|0
+      - ceb1b080-b24d-47c2-8063-80cfa797f38b
       - 
       flowUIDs: []
       nodeValues:
       - unityObjectValue: {fileID: 0}
         stringValue: 
       - unityObjectValue: {fileID: 0}
-        stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|clickDoor
+        stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|openWindow
     - fullName: UnityEngineAnimator.__SetBool__SystemString_SystemBoolean__SystemVoid
-      uid: b4908196-1ba6-46b3-8b55-179ca3531a0d
-      position: {x: 193.57956, y: 6.9505997}
+      uid: 0b66040d-a805-44dd-a06d-84c9356e05ae
+      position: {x: 515.4536, y: -163.5605}
       nodeUIDs:
-      - 38226fa3-9b5d-4b0a-a0aa-b593234f8338|0
+      - ceb1b080-b24d-47c2-8063-80cfa797f38b
       - 
-      - 2a618f0c-61f6-42db-aeb1-8f540f434ebd|0
+      - d640a525-ccb2-4474-812f-572c987447c1
       flowUIDs:
       - 
       nodeValues:
       - unityObjectValue: {fileID: 0}
         stringValue: 
       - unityObjectValue: {fileID: 0}
-        stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|clickDoor
+        stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|openWindow
       - unityObjectValue: {fileID: 0}
         stringValue: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089|True
     - fullName: Event_Interact
-      uid: 76d56d77-4b86-4ff6-8328-5ec425f17e3d
-      position: {x: -146.08652, y: 62.264545}
+      uid: 80868dc1-0b51-4fa0-b9c3-bf27bdc7995b
+      position: {x: 175.78754, y: -108.24657}
       nodeUIDs: []
       flowUIDs:
-      - b4908196-1ba6-46b3-8b55-179ca3531a0d
+      - 0b66040d-a805-44dd-a06d-84c9356e05ae
       nodeValues: []
     updateOrder: 0
   graphElementData: []
