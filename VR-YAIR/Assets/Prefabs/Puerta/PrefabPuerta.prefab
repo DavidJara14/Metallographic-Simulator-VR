@@ -343,7 +343,7 @@ HingeJoint:
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: 0
+    min: -100
     max: 100
     bounciness: 0
     bounceMinVelocity: 0.2

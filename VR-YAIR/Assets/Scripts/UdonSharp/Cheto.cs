@@ -12,8 +12,8 @@ public class Cheto : UdonSharpBehaviour
 
     public override void OnDrop()
     {
-        gameObject.transform.position = _ref.position;
         _particleSystem.Emit(1);
         _audioSource.Play();
+        gameObject.transform.position = _ref.position;
     }
 }
