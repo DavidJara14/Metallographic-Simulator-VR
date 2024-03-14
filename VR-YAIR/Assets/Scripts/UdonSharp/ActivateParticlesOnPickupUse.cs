@@ -1,5 +1,4 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -10,6 +9,27 @@ public class ActivateParticlesOnPickupUse : UdonSharpBehaviour
     [SerializeField] private MeshRenderer m_Renderer;
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private Transform _Visual;
+    bool LastUserWasVr = false;
+
+    public override void OnPickup()
+    {
+        //LastUserWasVr |= _pickupComp != null;
+        LastUserWasVr = _pickupComp.currentPlayer.IsUserInVR();
+        if(!LastUserWasVr)
+        {
+            _Visual.rotation = Quaternion.Euler(-gameObject.transform.rotation.eulerAngles);
+        }
+    }
+
+    public override void OnDrop()
+    {
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "UnUseThisThing");
+        if (!LastUserWasVr)
+        {
+            gameObject.transform.rotation = Quaternion.identity;
+            _Visual.rotation = Quaternion.identity;
+        }
+    }
 
     public override void OnPickupUseDown()
     {
@@ -32,7 +52,7 @@ public class ActivateParticlesOnPickupUse : UdonSharpBehaviour
         }
         else
         {
-            _Visual.transform.localRotation = Quaternion.Euler(15f, 0, 0);
+            _Visual.transform.localRotation = Quaternion.Euler(-15f, 0, 0);
             _particleSystem.gameObject.SetActive(true);
             _particleSystem.Play();
         }
@@ -42,11 +62,6 @@ public class ActivateParticlesOnPickupUse : UdonSharpBehaviour
     {
         _particleSystem.Stop();
         _Visual.transform.localRotation = Quaternion.Euler(0, 0, 00);
-    }
-
-    public override void OnDrop()
-    {
-        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "UnUseThisThing");
     }
 
 }
