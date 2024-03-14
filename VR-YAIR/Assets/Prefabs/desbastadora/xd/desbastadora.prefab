@@ -90,10 +90,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6501319758559873680, guid: 18b7a11077d24e24a95ded55b2c2b849,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 18b7a11077d24e24a95ded55b2c2b849,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -3133498875991405556, guid: 18b7a11077d24e24a95ded55b2c2b849,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 506078564699123463, guid: 18b7a11077d24e24a95ded55b2c2b849,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 18b7a11077d24e24a95ded55b2c2b849,
         type: 3}
       propertyPath: m_Name
       value: DESBASTADORAVisual
+      objectReference: {fileID: 0}
+    - target: {fileID: 3025492192847002814, guid: 18b7a11077d24e24a95ded55b2c2b849,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -127,6 +152,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8791057880805787179}
+    - targetCorrespondingSourceObject: {fileID: -6501319758559873680, guid: 18b7a11077d24e24a95ded55b2c2b849,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4535349150467932332}
   m_SourcePrefab: {fileID: 100100000, guid: 18b7a11077d24e24a95ded55b2c2b849, type: 3}
 --- !u!1 &1493646076561856375 stripped
 GameObject:
@@ -173,7 +202,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0.0005000074, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.8310646, y: 1.5819316, z: 2.0929222}
+  m_ConnectedAnchor: {x: -0.83106464, y: 1.5819316, z: 2.0929222}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -399,3 +428,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4938129085829977481}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7008003568081101049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6501319758559873680, guid: 18b7a11077d24e24a95ded55b2c2b849,
+    type: 3}
+  m_PrefabInstance: {fileID: 4938129085829977481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4535349150467932332
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7008003568081101049}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0007821353, y: 0.0010005097, z: 0.0037790092}
+  m_Center: {x: -0.0000056908134, y: 0.0000002549291, z: 0.001389503}

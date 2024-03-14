@@ -10,7 +10,7 @@ public class EventCallerOnHoldOnDrop : UdonSharpBehaviour
 {
     [Header("References")]
     [SerializeField] GameObject[] GOListeners;
-    [SerializeField] UdonBehaviour[] UdonBehabiourListenersRef;
+    [SerializeField] UdonBehaviour[] UdonBehabiourListenersDebugVisualization;
     [Header("Configuration")]
     [SerializeField] string[] OnPickupEventNames;
     [SerializeField] string[] OnDropEventNames;
@@ -26,20 +26,20 @@ public class EventCallerOnHoldOnDrop : UdonSharpBehaviour
                 list.Add(item);
             }
         }
-        UdonBehabiourListenersRef = new UdonBehaviour[list.Count];
-        for (int i = 0;i < UdonBehabiourListenersRef.Length; i++)
+        UdonBehabiourListenersDebugVisualization = new UdonBehaviour[list.Count];
+        for (int i = 0;i < UdonBehabiourListenersDebugVisualization.Length; i++)
         {
-            UdonBehabiourListenersRef[i] = (UdonBehaviour)list[i].Reference;
+            UdonBehabiourListenersDebugVisualization[i] = (UdonBehaviour)list[i].Reference;
         }
     }
 
     public override void OnPickup()
     {
-        for (int i = 0; i < UdonBehabiourListenersRef.Length; i++)
+        for (int i = 0; i < UdonBehabiourListenersDebugVisualization.Length; i++)
         {
             for(int j = 0; j < OnPickupEventNames.Length; j++)
             {
-                UdonBehabiourListenersRef[i].SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All,
+                UdonBehabiourListenersDebugVisualization[i].SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All,
                     OnPickupEventNames[j]);
             }
         }
@@ -47,11 +47,11 @@ public class EventCallerOnHoldOnDrop : UdonSharpBehaviour
 
     public override void OnDrop()
     {
-        for (int i = 0; i < UdonBehabiourListenersRef.Length; i++)
+        for (int i = 0; i < UdonBehabiourListenersDebugVisualization.Length; i++)
         {
             for( int j = 0;j < OnDropEventNames.Length;j++)
             {
-                UdonBehabiourListenersRef[i].SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All,
+                UdonBehabiourListenersDebugVisualization[i].SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All,
                     OnDropEventNames[j]);
             }
         }

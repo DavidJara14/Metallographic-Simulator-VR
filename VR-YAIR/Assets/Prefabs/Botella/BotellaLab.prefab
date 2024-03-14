@@ -1967,10 +1967,8 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8819204144046790404}
-  GOListeners:
-  - {fileID: 0}
-  - {fileID: 0}
-  UdonBehabiourListenersRef: []
+  GOListeners: []
+  UdonBehabiourListenersDebugVisualization: []
   OnPickupEventNames:
   - Show
   OnDropEventNames:

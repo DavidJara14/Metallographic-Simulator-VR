@@ -1,13 +1,7 @@
-﻿
-using System.Linq;
-using UdonSharp;
-using UdonSharpEditor;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDK3.Data;
-using VRC.SDKBase;
 using VRC.Udon;
-using VRC.Udon.Serialization.OdinSerializer.Utilities;
-
 public class ObjectSnapBehabiour : UdonSharpBehaviour
 {
     [Header("Snap config")]
