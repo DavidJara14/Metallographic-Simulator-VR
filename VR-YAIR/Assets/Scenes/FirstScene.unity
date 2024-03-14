@@ -35731,12 +35731,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1990306581}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1031552433 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2031072717209304373, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
-    type: 3}
-  m_PrefabInstance: {fileID: 1673865237}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1032839104 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2707951138119154023, guid: 1bdb9baf53b0b274bb3662de90bf2f3d,
@@ -44734,36 +44728,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 487079506728047510, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
         type: 3}
-      propertyPath: m_Renderer
-      value: 
-      objectReference: {fileID: 1031552433}
-    - target: {fileID: 487079506728047510, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
-        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 487079506728047510, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
         type: 3}
-    - target: {fileID: 864543096268126959, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
-        type: 3}
-      propertyPath: serializedProgramAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: a63d117046d8f374a8f01006e11ac03b,
-        type: 2}
-    - target: {fileID: 3431219017216392642, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3431219017216392642, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3431219017216392642, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3431219017216392642, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -44814,17 +44782,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3431219017216392642, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3492113366106444649, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
-        type: 3}
-      propertyPath: serializedProgramAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 3e885f5cf075e314aaaddc21c99d308b,
-        type: 2}
     - target: {fileID: 7103730540667858155, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
         type: 3}
       propertyPath: m_Name
@@ -44836,12 +44793,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7588461257857001980, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
         type: 3}
-    - target: {fileID: 9196480896346701631, guid: d9e27a14b1ca8614f821c3007ff6e3a2,
-        type: 3}
-      propertyPath: serializedProgramAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 0b8fa79e8f032484b9cbfc87339b0464,
-        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
