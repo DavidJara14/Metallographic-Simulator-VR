@@ -17,7 +17,7 @@ public class ActivateParticlesOnPickupUse : UdonSharpBehaviour
         LastUserWasVr = _pickupComp.currentPlayer.IsUserInVR();
         if(!LastUserWasVr)
         {
-            _Visual.rotation = Quaternion.Euler(-gameObject.transform.rotation.eulerAngles);
+            _Visual.rotation = Quaternion.Euler(0, -50f, 0);
         }
     }
 
@@ -27,7 +27,7 @@ public class ActivateParticlesOnPickupUse : UdonSharpBehaviour
         if (!LastUserWasVr)
         {
             gameObject.transform.rotation = Quaternion.identity;
-            _Visual.rotation = Quaternion.identity;
+            _Visual.rotation = Quaternion.identity;gameObject.transform.rotation = Quaternion.Euler(0, -50f, 0);
         }
     }
 
@@ -61,7 +61,10 @@ public class ActivateParticlesOnPickupUse : UdonSharpBehaviour
     public void UnUseThisThing()
     {
         _particleSystem.Stop();
-        _Visual.transform.localRotation = Quaternion.Euler(0, 0, 00);
+        if(!LastUserWasVr)
+        {
+            _Visual.transform.localRotation = Quaternion.Euler(0, 0, 00);
+        }
     }
 
 }
