@@ -140,7 +140,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.808857, y: 0.79198927, z: 3.6010113}
+  m_ConnectedAnchor: {x: -0.808857, y: 0.7992129, z: 3.651011}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -628,7 +628,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.84789294, z: 0}
+  m_ConnectedAnchor: {x: 0.8053756, y: 0.84789294, z: 1.3629619}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1018,7 +1018,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.80498224, y: 1.354056, z: 1.3639756}
+  m_ConnectedAnchor: {x: -0.808857, y: 0.86, z: 1.337}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1807,7 +1807,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.7603018, z: 3.6510334}
+  m_ConnectedAnchor: {x: 0.80537564, y: 0.7603018, z: 3.6510334}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -1947,8 +1947,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4944292, y: 0.03650409, z: 2.3241515}
-  m_Center: {x: 0, y: 0.48158526, z: 1.1650298}
+  m_Size: {x: 1.4944292, y: 0.03963995, z: 2.3241515}
+  m_Center: {x: 0, y: 0.50549555, z: 1.1650298}
 --- !u!65 &3405369709956553522
 BoxCollider:
   m_ObjectHideFlags: 0

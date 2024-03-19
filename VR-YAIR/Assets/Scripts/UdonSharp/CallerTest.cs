@@ -8,7 +8,7 @@ public class CallerTest : UdonSharpBehaviour
 
     int value = 0;
     [SerializeField] Material[] materials;
-    new MeshRenderer renderer;
+    private new MeshRenderer renderer;
 
     private void Start()
     {
