@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7728939335422871405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4525530569160188619}
+  - component: {fileID: 3810528249179019614}
+  m_Layer: 0
+  m_Name: bridgeGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4525530569160188619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728939335422871405}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 32.2, y: -2.1, z: 47.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3810528249179019614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728939335422871405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e980b6c8c9a824683397dd6d7af2db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlanksPrefab:
+  - {fileID: 2914116954597283897, guid: 69998b6f90a938e45b6dccfa663d4c47, type: 3}
+  - {fileID: 719166136282059293, guid: b58ad5da3c00eb949adefedf1e906df8, type: 3}
+  - {fileID: 4391660637488759219, guid: b44aeb51773035345814c7c940925311, type: 3}
+  SupportPrefab: {fileID: 933214059640007050, guid: b9a31ee762375c2439198103080bbfb3,
+    type: 3}
+  RopePrefab: {fileID: 1088467269827743295, guid: 256ce24f291122649bf8f0ea961a3053,
+    type: 3}
+  PlankMeshPreview: {fileID: 5217878089045938632, guid: e705102afa256bd49a1e62c0bb3755d5,
+    type: 3}
+  SupportMeshPreview: {fileID: -8930418581296880188, guid: 73f40d22332bd3c4f81e9cbefd9fa59f,
+    type: 3}
+  RopeMeshPreview: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  pos1: {x: 20.474672, y: 0.15070283, z: 58.606953}
+  pos2: {x: 37.39908, y: 0.7406296, z: 32.283188}
+  posSoporte1: {x: 16.523577, y: 0.1507028, z: 55.667747}
+  posSoporte2: {x: 21.855976, y: 0.1507028, z: 59.360405}
+  posSoporte3: {x: 36.10458, y: 0.7406296, z: 28.43918}
+  posSoporte4: {x: 40.698025, y: 0.7406296, z: 32.100002}
+  RopeOffset: {x: 0, y: 1.36, z: 0}
+  PlankSeparation: 0.65
+  SupportSeparation: 1.67
+  RopeSeparation: 0.595
