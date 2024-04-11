@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f11136daadff0b44ac2278a314682ab, type: 3}
+  m_Name: SetCustomMesh
+  m_EditorClassIdentifier: 
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 778c962c40324f446aca8b296e95866c,
+    type: 2}
+  udonAssembly: ".data_start\r\n\r\n    \r\n    __message_0: %SystemObject, null\r\n   
+    __format_0: %SystemString, null\r\n    __arg0_0: %SystemObject, null\r\n    __instance_0:
+    %UnityEngineGameObject, this\r\n    __instance_1: %UnityEngineCollider, null\r\n   
+    onTriggerEnterOther: %UnityEngineCollider, null\r\n\r\n.data_end\r\n\r\n.code_start\r\n\r\n   
+    .export _onTriggerEnter\r\n    \r\n    _onTriggerEnter:\r\n    \r\n        PUSH,
+    onTriggerEnterOther\r\n        PUSH, __instance_1\r\n        COPY\r\n       
+    PUSH, __instance_1\r\n        PUSH, __instance_0\r\n        EXTERN, \"UnityEngineCollider.__get_gameObject__UnityEngineGameObject\"\r\n       
+    PUSH, __instance_0\r\n        PUSH, __arg0_0\r\n        EXTERN, \"UnityEngineGameObject.__get_name__SystemString\"\r\n       
+    PUSH, __format_0\r\n        PUSH, __arg0_0\r\n        PUSH, __message_0\r\n       
+    EXTERN, \"SystemString.__Format__SystemString_SystemObject__SystemString\"\r\n       
+    PUSH, __message_0\r\n        EXTERN, \"UnityEngineDebug.__Log__SystemObject__SystemVoid\"\r\n       
+    JUMP, 0xFFFFFFFC\r\n    \r\n\r\n.code_end\r\n"
+  assemblyError: 
+  graphData:
+    name: 
+    description: 
+    nodes:
+    - fullName: UnityEngineDebug.__Log__SystemObject__SystemVoid
+      uid: 7c72b305-7142-45c1-aed6-6dc8768fbd20
+      position: {x: 1248, y: 176.79999}
+      nodeUIDs:
+      - d666c3c4-c2d0-4205-9f86-7ace811f0788|0
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+    - fullName: UnityEngineGameObject.__get_name__SystemString
+      uid: cc039aaa-925e-48a1-a58f-451db9c5d763
+      position: {x: 798.9219, y: 362.4}
+      nodeUIDs:
+      - e798e68d-a05e-47f0-a718-97af212db3bd|0
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+    - fullName: SystemString.__Format__SystemString_SystemObject__SystemString
+      uid: d666c3c4-c2d0-4205-9f86-7ace811f0788
+      position: {x: 975.2, y: 320}
+      nodeUIDs:
+      - 
+      - cc039aaa-925e-48a1-a58f-451db9c5d763|0
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Toco
+          el objeto {0}
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+    - fullName: Event_OnTriggerEnter
+      uid: f5866d67-9e0a-453b-a242-466c11effd76
+      position: {x: 430.46252, y: 212.79999}
+      nodeUIDs: []
+      flowUIDs:
+      - 7c72b305-7142-45c1-aed6-6dc8768fbd20
+      nodeValues: []
+    - fullName: UnityEngineCollider.__get_gameObject__UnityEngineGameObject
+      uid: e798e68d-a05e-47f0-a718-97af212db3bd
+      position: {x: 590, y: 362.39996}
+      nodeUIDs:
+      - f5866d67-9e0a-453b-a242-466c11effd76|0
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+    updateOrder: 0
+  graphElementData: []
+  version: 1.0.0
+  showAssembly: 0

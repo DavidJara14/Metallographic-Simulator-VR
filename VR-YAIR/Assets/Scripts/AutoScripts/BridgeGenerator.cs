@@ -7,15 +7,17 @@ using UnityEditor;
 #endif
 public class BridgeGenerator : MonoBehaviour
 {
-
+    [Header("Prefabs")]
     public GameObject[] PlanksPrefab;
     public GameObject SupportPrefab;
     public GameObject RopePrefab;
 
+    [Header("Meshes")]
     public Mesh PlankMeshPreview;
     public Mesh SupportMeshPreview;
     public Mesh RopeMeshPreview;
 
+    [Header("Posiciones")]
     public Vector3 pos1;
     public Vector3 pos2;
     public Vector3 posSoporte1;
@@ -24,6 +26,7 @@ public class BridgeGenerator : MonoBehaviour
     public Vector3 posSoporte4;
     public Vector3 RopeOffset;
 
+    [Header("Variables")]
     [Range(0.05f, 10f)] public float PlankSeparation;
     [Range(0.05f, 10f)] public float SupportSeparation;
     [Range(0.005f, 1f)] public float RopeSeparation;
@@ -33,6 +36,8 @@ public class BridgeGenerator : MonoBehaviour
         var Father = new GameObject("Bridge");
         Father.transform.position = (pos2 - pos1)/2 + pos1;
         var Distance = Vector3.Distance(pos1, pos2);
+
+        //planks
         Rigidbody PreviousPlankRB = null;
         for (float i = 0; i < Distance; i += PlankSeparation)
         {
@@ -52,6 +57,9 @@ public class BridgeGenerator : MonoBehaviour
         if (PreviousPlankRB == null) 
             return;
         PreviousPlankRB.constraints = RigidbodyConstraints.FreezeAll;
+        PreviousPlankRB = PreviousPlankRB.GetComponent<Rigidbody>();
+
+        //Suports
         Instantiate(SupportPrefab, pos1 + (posSoporte1 - pos1).normalized * SupportSeparation
             , Quaternion.Euler(new Vector3(0, Random.Range(-180, 180), 0)), Father.transform);
         Instantiate(SupportPrefab, pos1 + (posSoporte2 - pos1).normalized * SupportSeparation
@@ -60,7 +68,57 @@ public class BridgeGenerator : MonoBehaviour
             , Quaternion.Euler(new Vector3(0, Random.Range(-180, 180), 0)), Father.transform);
         Instantiate(SupportPrefab, pos2 + (posSoporte4 - pos2).normalized * SupportSeparation
             , Quaternion.Euler(new Vector3(0, Random.Range(-180, 180), 0)), Father.transform);
-        PreviousPlankRB = PreviousPlankRB.GetComponent<Rigidbody>();
+
+        //Rope 1
+        var RopePos1 = pos1 + (posSoporte1 - pos1).normalized * SupportSeparation + RopeOffset;
+        var RopePos2 = pos2 + (posSoporte3 - pos2).normalized * SupportSeparation + RopeOffset;
+        Distance = Vector3.Distance(RopePos1, RopePos2);
+        Rigidbody PreviousRopeRB = null;
+        for (float i = 0; i < Distance; i += RopeSeparation)
+        {
+            var obj = Instantiate(RopePrefab, Father.transform);
+            var Quat = Quaternion.FromToRotation(obj.transform.forward, RopePos2 - RopePos1);
+            obj.transform.SetPositionAndRotation(RopePos1 + (RopePos2 - RopePos1).normalized * i
+                , Quaternion.Euler(new Vector3(0, Quat.eulerAngles.y, 0)));
+            if (PreviousRopeRB == null)
+            {
+                obj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                PreviousRopeRB = obj.GetComponent<Rigidbody>();
+                continue;
+            }
+            obj.GetComponent<HingeJoint>().connectedBody = PreviousRopeRB;
+            PreviousRopeRB = obj.GetComponent<Rigidbody>();
+        }
+        if (PreviousRopeRB == null)
+            return;
+        PreviousRopeRB.constraints = RigidbodyConstraints.FreezeAll;
+
+        //Rope 1
+        RopePos1 = pos1 + (posSoporte2 - pos1).normalized * SupportSeparation + RopeOffset;
+        RopePos2 = pos2 + (posSoporte4 - pos2).normalized * SupportSeparation + RopeOffset;
+        Distance = Vector3.Distance(RopePos1, RopePos2);
+        PreviousRopeRB = null;
+        for (float i = 0; i < Distance; i += RopeSeparation)
+        {
+            var obj = Instantiate(RopePrefab, Father.transform);
+            var Quat = Quaternion.FromToRotation(obj.transform.forward, RopePos2 - RopePos1);
+            obj.transform.SetPositionAndRotation(RopePos1 + (RopePos2 - RopePos1).normalized * i
+                , Quaternion.Euler(new Vector3(0, Quat.eulerAngles.y, 0)));
+            if (PreviousRopeRB == null)
+            {
+                obj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                PreviousRopeRB = obj.GetComponent<Rigidbody>();
+                continue;
+            }
+            obj.GetComponent<HingeJoint>().connectedBody = PreviousRopeRB;
+            PreviousRopeRB = obj.GetComponent<Rigidbody>();
+        }
+        if (PreviousRopeRB == null)
+            return;
+        PreviousRopeRB.constraints = RigidbodyConstraints.FreezeAll;
+        PreviousRopeRB = PreviousRopeRB.GetComponent<Rigidbody>();
+
+        gameObject.SetActive(false);
     }
 
 #if UNITY_EDITOR
@@ -72,6 +130,7 @@ public class BridgeGenerator : MonoBehaviour
         Gizmos.DrawSphere(pos2, 1.5f);
         Gizmos.color = Color.white;
         var Distance = Vector3.Distance(pos1, pos2);
+        var meshScale = new Vector3(1.5f, 1f, 1f);
         for (float i = 0; i < Distance; i += PlankSeparation)
         {
             if (PlankMeshPreview == null)
@@ -86,7 +145,7 @@ public class BridgeGenerator : MonoBehaviour
                             Quaternion.FromToRotation(Vector3.forward, pos2 - pos1).eulerAngles.y,
                             0)
                         )
-                    );
+                    , meshScale);
         }
         if(SupportMeshPreview == null)
         {
@@ -117,16 +176,19 @@ public class BridgeGenerator : MonoBehaviour
             var SuportPoint1 = pos1 + (posSoporte1 - pos1).normalized * SupportSeparation + RopeOffset;
             var SuportPoint3 = pos2 + (posSoporte3 - pos2).normalized * SupportSeparation + RopeOffset;
             var firstSeparation = Vector3.Distance(SuportPoint1, SuportPoint3);
+            var meshRotation = Quaternion.FromToRotation(Vector3.up, SuportPoint3 - SuportPoint1);
+            meshScale = new Vector3(0.2f, 0.3f, 0.2f);
             for (float i = 0; i < firstSeparation; i += RopeSeparation)
             {
-                Gizmos.DrawMesh(RopeMeshPreview, SuportPoint1 + (SuportPoint3 - SuportPoint1).normalized * i);
+                Gizmos.DrawMesh(RopeMeshPreview, SuportPoint1 + (SuportPoint3 - SuportPoint1).normalized * i, meshRotation, meshScale);
             }
             var SuportPoint2 = pos1 + (posSoporte2 - pos1).normalized * SupportSeparation + RopeOffset;
             var SuportPoint4 = pos2 + (posSoporte4 - pos2).normalized * SupportSeparation + RopeOffset;
             var SecondSeparation = Vector3.Distance(SuportPoint1, SuportPoint3);
+            meshRotation = Quaternion.FromToRotation(Vector3.up, SuportPoint4 - SuportPoint2);
             for (float i = 0; i < SecondSeparation; i += RopeSeparation)
             {
-                Gizmos.DrawMesh(RopeMeshPreview, SuportPoint2 + (SuportPoint4 - SuportPoint2).normalized * i);
+                Gizmos.DrawMesh(RopeMeshPreview, SuportPoint2 + (SuportPoint4 - SuportPoint2).normalized * i, meshRotation, meshScale);
             }
         }
     }
@@ -141,7 +203,7 @@ public class BridgeGeneratorEditor : Editor
     {
         DrawDefaultInspector();
         BridgeGenerator generator = (BridgeGenerator)target;
-
+        GUILayout.Space(10);
         if(GUILayout.Button("Create"))
         {
             generator.GenerateBridge();

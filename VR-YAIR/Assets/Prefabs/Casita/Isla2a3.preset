@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Isla2a3
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 39e980b6c8c9a824683397dd6d7af2db,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: PlanksPrefab.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: PlanksPrefab.Array.data[0]
+    value: 
+    objectReference: {fileID: 2914116954597283897, guid: 69998b6f90a938e45b6dccfa663d4c47,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: PlanksPrefab.Array.data[1]
+    value: 
+    objectReference: {fileID: 719166136282059293, guid: b58ad5da3c00eb949adefedf1e906df8,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: PlanksPrefab.Array.data[2]
+    value: 
+    objectReference: {fileID: 4391660637488759219, guid: b44aeb51773035345814c7c940925311,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: SupportPrefab
+    value: 
+    objectReference: {fileID: 933214059640007050, guid: b9a31ee762375c2439198103080bbfb3,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: RopePrefab
+    value: 
+    objectReference: {fileID: 1088467269827743295, guid: 256ce24f291122649bf8f0ea961a3053,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: PlankMeshPreview
+    value: 
+    objectReference: {fileID: 5217878089045938632, guid: e705102afa256bd49a1e62c0bb3755d5,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: SupportMeshPreview
+    value: 
+    objectReference: {fileID: -8930418581296880188, guid: 73f40d22332bd3c4f81e9cbefd9fa59f,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: RopeMeshPreview
+    value: 
+    objectReference: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  - target: {fileID: 0}
+    propertyPath: pos1.x
+    value: -1.0215883
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: pos1.y
+    value: 0.18089771
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: pos1.z
+    value: -15.293928
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: pos2.x
+    value: 8.5641575
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: pos2.y
+    value: -0.36694288
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: pos2.z
+    value: -40.843563
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte1.x
+    value: 2.0716362
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte1.y
+    value: 0.0130624175
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte1.z
+    value: -13.784329
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte2.x
+    value: -3.681694
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte2.y
+    value: 0.029971123
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte2.z
+    value: -16.479006
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte3.x
+    value: 12.126944
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte3.y
+    value: -0.50846285
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte3.z
+    value: -41.005898
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte4.x
+    value: 6.040955
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte4.y
+    value: -0.4268919
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: posSoporte4.z
+    value: -43.459743
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RopeOffset.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RopeOffset.y
+    value: 1.2516384
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RopeOffset.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: PlankSeparation
+    value: 0.65
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SupportSeparation
+    value: 1.67
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RopeSeparation
+    value: 0.555
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
