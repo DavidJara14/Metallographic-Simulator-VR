@@ -1,5 +1,4 @@
-﻿using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.BC;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -9,6 +8,8 @@ public class LijaRotation : UdonSharpBehaviour
 
     [SerializeField] bool LijaLoaded;
     [SerializeField] bool CanRotate;
+
+    [SerializeField] bool Stayed;
 
     [SerializeField] float RotationVelocity = 1f;
 
@@ -20,16 +21,17 @@ public class LijaRotation : UdonSharpBehaviour
         }
     }
 
-    public void OnLijaSnap()
+    public void OnLijaSnap(Transform go)
     {
         LijaLoaded = true;
+        go.SetParent(gameObject.transform);
     }
 
-    public void RemoveLija()
+    public void RemoveLija(Transform go)
     {
         LijaLoaded = false;
+        go.parent = null;
     }
-
 
     public void StartMachine()
     {
@@ -41,6 +43,25 @@ public class LijaRotation : UdonSharpBehaviour
         {
             CanRotate = false;
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log(other.gameObject.GetComponent<VRC_Pickup>().currentPlayer);
+        if(!other.GetComponent<LijaCircularBehabiour>()) { return; }
+        if(other.gameObject.GetComponent<VRC_Pickup>().currentPlayer != null) { return; }
+        if(!Stayed)
+        {
+            OnLijaSnap(other.gameObject.transform);
+            Stayed = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.GetComponent<LijaCircularBehabiour>()) { return; }
+        RemoveLija(other.gameObject.transform);
+        Stayed = false;
     }
 
 }
