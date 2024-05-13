@@ -40,7 +40,7 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
         }
     }
 
-    public void OnDropCustom()
+    public void SnapFunc()
     {
         GameObject GOToSnap = null;
         GameObjectsNear = Physics.OverlapSphere(transform.position, DetectionRadius);

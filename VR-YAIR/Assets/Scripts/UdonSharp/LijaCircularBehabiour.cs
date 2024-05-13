@@ -1,18 +1,11 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
 public class LijaCircularBehabiour : UdonSharpBehaviour
 {
-    public override void OnDrop()
-    {
-        
-    }
+    //Etiqueta, no eliminar
 
-    public override void OnPickup()
-    {
-        
-    }
+    [SerializeField] public int TamañoDeGrano;
 }
