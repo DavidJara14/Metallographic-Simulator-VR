@@ -14,15 +14,12 @@ public class IsProbeTouched : UdonSharpBehaviour
     private void OnTriggerEnter(Collider other)
     {
         isTouched = true;
-        behabiour.SetVar(ProgramingVarName, isTouched);
-        Debug.Log("trued " + gameObject.name);
+        //behabiour.SetVar(ProgramingVarName, isTouched);
     }
 
     private void OnTriggerExit(Collider other)
     {
         isTouched = false;
-        behabiour.SetVar(ProgramingVarName, isTouched);
-        Debug.Log("falsed " + gameObject.name);
+        //behabiour.SetVar(ProgramingVarName, isTouched);
     }
-
 }
