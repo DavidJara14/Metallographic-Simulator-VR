@@ -4,6 +4,7 @@ Shader "Unlit/Rayas"
     {
         _MainTex("Texture", 2D) = "white" {}
         _RotationVec("Rotation Vector", Vector) = (0,0,0,0)
+        _AlphaValue("Alpha Value", Range(80, 800)) = 80
     }
         SubShader
         {
@@ -32,6 +33,7 @@ Shader "Unlit/Rayas"
 
                 sampler2D _MainTex;
                 float4 _RotationVec;
+                float _AlphaValue;
 
                 v2f vert(appdata v)
                 {
@@ -51,6 +53,7 @@ Shader "Unlit/Rayas"
                 fixed4 frag(v2f i) : SV_Target
                 {
                     fixed4 col = tex2D(_MainTex, i.uv);
+                    col.a = _AlphaValue / 800.0; // Normaliza el valor alfa al rango [0, 1]
                     return col;
                 }
                 ENDCG

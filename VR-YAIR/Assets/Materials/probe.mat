@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: probe
-  m_Shader: {fileID: 4800000, guid: e9c08fd00796f774e86223f9c97e9abf, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b3022a6ebd8d52343bee58d7cc7ed9b7,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -30,7 +31,8 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -61,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b0086434460086c45b167e138769b29e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 835e718baa2e7854e8883d04e87c227b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -76,24 +78,55 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_630529eee9b24269abcd2f0ef73d9258_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 048c3870016419340b6da9ae939a3c4a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_6b033e67ddfa4cb786f30eaa3d7e053a_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 8130fb0b5498c994f95265a8f15aa704, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_6b4462efd3c84517bf75e5c8a31e1c89_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: f5bdca8a97593164fbb40f0c7a2aa5c1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_9a0c69a4f39f481b94ad4bbab769b6d5_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: d8a6efb07c17ac94c8a6ee19a3385f96, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_9c8de45341534f808ba540552570001b_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 048c3870016419340b6da9ae939a3c4a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_cbf1c5c00b794cd2b14ba32a9b65ae31_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 290de6eddfd8a6f459589674eb3fca55, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_b1503e52ff374cbba2c19c4e6699e849_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: d8a6efb07c17ac94c8a6ee19a3385f96, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 1
     - _AlphaClip: 0
+    - _AlphaValue: 800
+    - _AngleRotation: 0
     - _Blend: 0
     - _BumpScale: 1
     - _CullMode: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Float: 7.65
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _GranoLija: 0
+    - _IsFirstSanding: 1
     - _Metallic: 0
     - _Mode: 0
+    - _Nital: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 1
@@ -111,6 +144,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RotationVec: {r: 0.62, g: 5.41, b: 0, a: 0}
+    - _RotationVec: {r: 1.1, g: -4, b: 0.72, a: -0.28}
     - _Vector2: {r: 10, g: 1, b: 0, a: 0}
+    - _XYRotation: {r: 1.64, g: 1.02, b: 0, a: 0}
   m_BuildTextureStacks: []
