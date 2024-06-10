@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 376f43af9153cd34fbb6eab8ddc2add0
+guid: 48ee6d08a21c972409f43615cf5bb4b4
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Rayas
-    second: {fileID: 2100000, guid: 80d87d77e7bab4e4bac6e27cc2b1d581, type: 2}
+      name: MatCylinder
+    second: {fileID: 2100000, guid: ec1efcd75cc7bcd48987f08ef32b4dc9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +40,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.05
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -95,7 +95,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.05
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

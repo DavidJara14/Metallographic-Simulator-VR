@@ -8,56 +8,68 @@ public class ActivateMirror : UdonSharpBehaviour
 {
     public GameObject probetaShader;
     public GameObject probetaMirror;
-    public int vectorval; 
 
     public bool hasAluminaGris = false;
     public bool hasAluminaBlanca = false;
 
     private void Start()
     {
-        
+        probetaShader.SetActive(true);
+        probetaMirror.SetActive(false);
+
     }
 
     private void Update()
     {
+        // Alumina gris -> Para efectos practicos le dara brillo
+        // Alumina blanca ->´Para efectos practicos le dara acabado espejo
 
-        if (hasAluminaBlanca & !hasAluminaGris)
+        if (!hasAluminaBlanca & !hasAluminaGris) // Hasta esta etapa solo se ha lijado
+        {
+            //probetaShader.SetActive(true);
+            //probetaMirror.SetActive(false);
+            probetaShader.GetComponent<Renderer>().material.SetFloat("Reflexion", 0);
+            Debug.Log("reflexion 0");
+        }
+        else if (hasAluminaGris & !hasAluminaBlanca) // Primera etapa de pulido, TIENE ALUMINA GRIS
+        {
+            //probetaShader.SetActive(true);
+            //probetaMirror.SetActive(false);
+            probetaShader.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
+
+            Debug.Log("reflexion 1");
+
+        }
+        else if (!hasAluminaGris & hasAluminaBlanca) // Segunda etapa de pulido, TIENE ALUMINA BLANCA
         {
             probetaShader.SetActive(false);
             probetaMirror.SetActive(true);
-        }
-        else if (hasAluminaGris & !hasAluminaBlanca)
-        {
-            probetaShader.SetActive(true);
-            probetaMirror.SetActive(false);
+            Debug.Log("Mirror active");
+
         }
     }
+
     private void OnParticleCollision(GameObject other)
     {
-        vectorval= other.GetComponent<ParticleSystem>().customData.GetVectorComponentCount(((int)ParticleSystemCustomData.Custom1));
-        //vectorval = ((int)other.GetComponent<ParticleSystemCustomData>());
-        Debug.Log(vectorval);
+        string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
 
-        if (vectorval == 1)
+        Debug.Log(tipo);
+
+        if (tipo == "AGris")
         {
+            hasAluminaGris = true;
+            hasAluminaBlanca = false;
+
             Debug.Log("Alumina Gris");
         }
-        else if (vectorval == 2)
+        else if (tipo == "ABlanca")
         {
+            hasAluminaGris = false;
+            hasAluminaBlanca = true;
             Debug.Log("Alumina Blanca");
         }
-    }   
+    }
 }
 
 
-/*public void ToggleObject()
-    {
-        if (objectToToggle != null)
-        {
-            // Comprueba si el objeto está activo en la escena
-            bool isActive = objectToToggle.activeSelf;
 
-            // Cambia el estado del objeto
-            objectToToggle.SetActive(!isActive);
-        }
-    }*/
