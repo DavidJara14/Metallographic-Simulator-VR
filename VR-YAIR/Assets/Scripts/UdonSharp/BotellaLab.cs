@@ -6,10 +6,10 @@ using VRC.Udon;
 public class BotellaLab : UdonSharpBehaviour
 {
 
-    private const float Max = 250f;
+    private const float MaxLiquidFill = 250f;
     public bool isInfinite = false;
     public string Tipo = "";
-    [SerializeField][Range(0f, Max)] private float LiquidFill;
+    [SerializeField][Range(0f, MaxLiquidFill)] private float LiquidFill;
     [SerializeField] private float LiquidPourVel;
 
     [SerializeField] private GameObject InfillGO;
@@ -24,12 +24,12 @@ public class BotellaLab : UdonSharpBehaviour
     {
         WaterMaterial = InfillGO.GetComponent<MeshRenderer>().material;
         var main = _particleSystem.main;
-        main.startColor = WaterMaterial.GetColor("_ColorSuperficie");
+        main.startColor = WaterMaterial.GetColor("_ColorAguaSuperficie");
     }
 
     private void Update()
     {
-        WaterMaterial.SetFloat("_FillPercentage", (Mathf.Clamp(LiquidFill, 0f, Max)/ Max)*100f);
+        WaterMaterial.SetFloat("_FillPercentage", (Mathf.Clamp(LiquidFill, 0f, MaxLiquidFill)/ MaxLiquidFill)*100f);
         if(_particleSystem.isEmitting)
         {
             if(!isInfinite)
@@ -53,7 +53,7 @@ public class BotellaLab : UdonSharpBehaviour
         LastUserWasVr = _pickupComp.currentPlayer.IsUserInVR();
         if (!LastUserWasVr)
         {
-            _Visual.rotation = Quaternion.Euler(0, -50f, 0);
+            _Visual.localRotation = Quaternion.Euler(0f, 180f, 0f);
         }
     }
 
@@ -62,8 +62,10 @@ public class BotellaLab : UdonSharpBehaviour
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "UnUseThisThing");
         if (!LastUserWasVr)
         {
-            gameObject.transform.rotation = Quaternion.identity;
-            _Visual.rotation = Quaternion.identity; gameObject.transform.rotation = Quaternion.Euler(0, -50f, 0);
+            gameObject.transform.rotation = Quaternion.Euler(0f, gameObject.transform.rotation.eulerAngles.y, 0f);
+            //_Visual.rotation = Quaternion.identity; 
+            //gameObject.transform.rotation = Quaternion.Euler(0, 50f, 0);
+            _Visual.localRotation = Quaternion.Euler(0f, 180f, 0f);
         }
     }
 
@@ -93,7 +95,7 @@ public class BotellaLab : UdonSharpBehaviour
         {
             if(LiquidFill > 0)
             {
-                _Visual.transform.localRotation = Quaternion.Euler(-15f, 0, 0);
+                _Visual.transform.localRotation = Quaternion.Euler(-15f, _Visual.transform.localRotation.eulerAngles.y, _Visual.transform.localRotation.eulerAngles.z);
                 _particleSystem.gameObject.SetActive(true);
                 _particleSystem.Play();
             }
@@ -105,8 +107,23 @@ public class BotellaLab : UdonSharpBehaviour
         _particleSystem.Stop();
         if (!LastUserWasVr)
         {
-            _Visual.transform.localRotation = Quaternion.Euler(0, 0, 00);
+            _Visual.transform.localRotation = Quaternion.Euler(0, _Visual.transform.localRotation.eulerAngles.y, _Visual.transform.localRotation.eulerAngles.z);
         }
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.GetComponentInParent<IsLiquidSource>() != null)
+        {
+            fill();
+        }
+    }
+
+    private void fill()
+    {
+        LiquidFill += 5;
+        if(LiquidFill > MaxLiquidFill)
+            LiquidFill = MaxLiquidFill;
     }
 
 }

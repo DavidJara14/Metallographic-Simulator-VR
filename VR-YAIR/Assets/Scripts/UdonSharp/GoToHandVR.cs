@@ -100,8 +100,8 @@ public class GoToHandVR : UdonSharpBehaviour
     private void CheckForFingers()
     {
         LocalPlayerInstance = Networking.LocalPlayer;
-        Debug.Log(LocalPlayerInstance);
-        Debug.Log(LocalPlayerInstance.displayName);
+        //Debug.Log(LocalPlayerInstance);
+        //Debug.Log(LocalPlayerInstance.displayName);
         if (LocalPlayerInstance != null)
         {
             LFingers[0] = LocalPlayerInstance.GetBonePosition(HumanBodyBones.LeftIndexDistal) != Vector3.zero;

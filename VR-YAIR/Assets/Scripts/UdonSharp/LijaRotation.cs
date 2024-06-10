@@ -1,5 +1,4 @@
 ﻿using UdonSharp;
-using UdonSharpEditor;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -17,8 +16,8 @@ public class LijaRotation : UdonSharpBehaviour
     [SerializeField] const float MaxTemp = 100f;
     [SerializeField] float Temperature = 24f;
 
-    [SerializeField] public GameObject LijaGO = null;
-    [SerializeField] public VRC_Pickup Lija = null;
+    public GameObject LijaGO = null;
+    public VRC_Pickup Lija = null;
 
     private void Update()
     {
@@ -39,11 +38,11 @@ public class LijaRotation : UdonSharpBehaviour
     {
         LijaLoaded = true;
         go.SetParent(gameObject.transform);
-        Debug.Log(go);
+        //Debug.Log(go);
         LijaGO = go.gameObject;
-        Debug.Log(LijaGO);
+        //Debug.Log(LijaGO);
         Lija = LijaGO.GetComponent<VRC_Pickup>();
-        Debug.Log(Lija);
+        //Debug.Log(Lija);
     }
 
     public void RemoveLija(Transform go)
@@ -61,9 +60,26 @@ public class LijaRotation : UdonSharpBehaviour
     {
         if (LijaLoaded)
         {
-            Rotating = !Rotating;
+            Rotating = true;
             Lija.pickupable = !Rotating;
             if(Lija.pickupable)
+                Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            else
+                Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+        }
+        else
+        {
+            Rotating = false;
+        }
+    }
+
+    public void StopMachine()
+    {
+        if (LijaLoaded)
+        {
+            Rotating = false;
+            Lija.pickupable = !Rotating;
+            if (Lija.pickupable)
                 Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             else
                 Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;

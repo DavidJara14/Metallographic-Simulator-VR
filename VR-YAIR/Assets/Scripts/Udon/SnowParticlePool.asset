@@ -14,14 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedUdonProgramAsset: {fileID: 11400000, guid: 8b1a9922eb7744e4398837e33cdfcd4c,
     type: 2}
-  udonAssembly: ".data_start\r\n\r\n    .export Pool\r\n    \r\n    __instance_0:
-    %VRCSDK3ComponentsVRCObjectPool, null\r\n    __GameObject_0: %UnityEngineGameObject,
-    this\r\n    Pool: %VRCSDK3ComponentsVRCObjectPool, null\r\n    __returnValue:
+  udonAssembly: ".data_start\r\n\r\n    .export Pool\r\n    \r\n    __GameObject_0:
+    %UnityEngineGameObject, this\r\n    __Boolean_0: %SystemBoolean, null\r\n   
+    __instance_1: %UnityEngineGameObject, this\r\n    __other_0: %SystemObject, null\r\n   
+    __instance_0: %VRCSDK3ComponentsVRCObjectPool, null\r\n    __var_0: %SystemObject,
+    null\r\n    Pool: %VRCSDK3ComponentsVRCObjectPool, null\r\n    __returnValue:
     %SystemObject, null\r\n\r\n.data_end\r\n\r\n.code_start\r\n\r\n    .export _onPlayerJoined\r\n   
     \r\n    _onPlayerJoined:\r\n    \r\n        PUSH, Pool\r\n        PUSH, __instance_0\r\n       
     COPY\r\n        PUSH, __instance_0\r\n        PUSH, __GameObject_0\r\n       
     EXTERN, \"VRCSDK3ComponentsVRCObjectPool.__TryToSpawn__UnityEngineGameObject\"\r\n       
-    JUMP, 0xFFFFFFFC\r\n    \r\n\r\n.code_end\r\n"
+    PUSH, Pool\r\n        PUSH, __instance_0\r\n        COPY\r\n        PUSH, __GameObject_0\r\n       
+    PUSH, __instance_1\r\n        COPY\r\n        PUSH, __var_0\r\n        PUSH,
+    __other_0\r\n        COPY\r\n        PUSH, __GameObject_0\r\n        PUSH, __other_0\r\n       
+    PUSH, __Boolean_0\r\n        EXTERN, \"UnityEngineGameObject.__Equals__SystemObject__SystemBoolean\"\r\n       
+    PUSH, __Boolean_0\r\n        JUMP_IF_FALSE, 0x00000098\r\n        JUMP, 0xFFFFFFFC\r\n   
+    \r\n\r\n.code_end\r\n"
   assemblyError: 
   graphData:
     name: 
@@ -73,7 +80,8 @@ MonoBehaviour:
       position: {x: 737.6, y: 110.40001}
       nodeUIDs:
       - 753808ac-0e5d-4805-886f-cd8f8556f797|0
-      flowUIDs: []
+      flowUIDs:
+      - abbe9602-4a69-43e2-bbc3-00e21a1e98f9
       nodeValues:
       - unityObjectValue: {fileID: 0}
         stringValue: 
@@ -119,6 +127,37 @@ MonoBehaviour:
         stringValue: 
       - unityObjectValue: {fileID: 0}
         stringValue: 
+    - fullName: Const_Null
+      uid: f43d4695-ab10-4293-9a87-cb914930aba1
+      position: {x: 883.2, y: 300.8}
+      nodeUIDs:
+      - 
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+    - fullName: UnityEngineGameObject.__Equals__SystemObject__SystemBoolean
+      uid: 3f0911f7-c046-4f5d-b985-909e891046cf
+      position: {x: 990.20245, y: 217.6}
+      nodeUIDs:
+      - 2fa69cec-d9dc-4f4d-80c5-f89e44bca002|0
+      - f43d4695-ab10-4293-9a87-cb914930aba1
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+    - fullName: Branch
+      uid: abbe9602-4a69-43e2-bbc3-00e21a1e98f9
+      position: {x: 1153.7958, y: 110.40001}
+      nodeUIDs:
+      - 3f0911f7-c046-4f5d-b985-909e891046cf|0
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089|False
     updateOrder: 0
   graphElementData: []
   version: 1.0.0

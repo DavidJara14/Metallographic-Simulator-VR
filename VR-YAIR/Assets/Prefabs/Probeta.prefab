@@ -252,10 +252,11 @@ MonoBehaviour:
   First: 
   Last: 
   Desgaste: 0
-  VectorDeDireccionDeLijado: {x: 0, y: 0}
   LijaToObjSize: {x: 0, y: 0, z: 0}
   Up: {x: 0, y: 0, z: 0}
   VectorDeDireccionDeDesgasteActual: {x: 0, y: 0, z: 0}
+  CaraAModificar: {fileID: 1059714684871739240}
+  EsteMaterial: {fileID: 0}
   EsteParticleSystem: {fileID: 8009736309109176791}
   LijaRotationActivaGO: {fileID: 0}
   LijaRotationActiva: {fileID: 0}
@@ -5582,6 +5583,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7464936540614672795, guid: 48ee6d08a21c972409f43615cf5bb4b4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 23d036414e4edb142a7ec2909faebfe4, type: 2}
     - target: {fileID: -7019123921754007757, guid: 48ee6d08a21c972409f43615cf5bb4b4,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -5652,6 +5658,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48ee6d08a21c972409f43615cf5bb4b4, type: 3}
+--- !u!1 &1059714684871739240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8654891792243408253, guid: 48ee6d08a21c972409f43615cf5bb4b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 673139853749700075}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1071223788094726656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48ee6d08a21c972409f43615cf5bb4b4,

@@ -8,23 +8,26 @@ using VRC.Udon;
 public class ProbeBehabiour : UdonSharpBehaviour
 {
 
-    public float VarCount = 0f;
     private float timer = 0f;
-    public string First = "";
-    public string Last = "";
 
     const float DesgasteMin = 0f;
     const float DesgasteMax = 1f;
     [SerializeField][Range(DesgasteMin, DesgasteMax)] private float Desgaste; //0 a 1
 
     [SerializeField] public Vector3 LijaToObjSize;
-    [SerializeField] public Vector3 Up;
+    [SerializeField] public Vector3 Down;
     [SerializeField] public Vector3 VectorDeDireccionDeDesgasteActual;
 
-    Material EsteMaterial;
+    public GameObject CaraAModificar;
+    public Material EsteMaterial;
     [SerializeField] ParticleSystem EsteParticleSystem;
-    [SerializeField] GameObject LijaRotationActivaGO;
-    [SerializeField] LijaRotation LijaRotationActiva;
+    public GameObject LijaRotationActivaGO;
+    public LijaRotation LijaRotationActiva;
+
+    private void Start()
+    {
+        EsteMaterial = CaraAModificar.GetComponent<MeshRenderer>().material;
+    }
 
     private void Update()
     { 
@@ -33,20 +36,20 @@ public class ProbeBehabiour : UdonSharpBehaviour
             if(LijaRotationActiva.Rotating == true) 
             {
                 LijaToObjSize = new Vector3(gameObject.transform.position.x - LijaRotationActiva.Lija.transform.position.x, 0f, gameObject.transform.position.z - LijaRotationActiva.Lija.transform.position.z);
-                Up = gameObject.transform.up;
-                VectorDeDireccionDeDesgasteActual = Vector3.Cross(LijaToObjSize, Up);
+                Down = -gameObject.transform.up;
+                VectorDeDireccionDeDesgasteActual = Vector3.Cross(LijaToObjSize, Down);
             }
         }
         else if(LijaRotationActivaGO != null)
         {
             LijaRotationActiva = LijaRotationActivaGO.GetComponent<LijaRotation>();
         }
-        if(First != "" && LijaRotationActiva != null)
+        if(LijaRotationActiva != null)
         {
-            if(LijaRotationActiva.Rotating)
+            if (LijaRotationActiva.Rotating)
             {
                 EsteParticleSystem.Play();
-                EsteParticleSystem.gameObject.transform.rotation = Quaternion.FromToRotation(EsteParticleSystem.transform.rotation.eulerAngles, VectorDeDireccionDeDesgasteActual);
+                EsteParticleSystem.gameObject.transform.LookAt(gameObject.transform.position + VectorDeDireccionDeDesgasteActual);
             }
         }
         else if(EsteParticleSystem.isEmitting)
@@ -62,38 +65,15 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     void UpdateMaterial()
     {
-        Desgaste = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
+        if(LijaRotationActiva != null)
+            Desgaste = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
         EsteMaterial.SetFloat("_GranoLija", Desgaste);
-        EsteMaterial.SetVector("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).ToVector4());
-    }
-
-    //public void SetVar(string name, bool value)
-    //{
-    //    switch (name)
-    //    {
-    //        case "UpTouched":
-    //            //UpTouched = value;
-    //            break;
-    //        case "DownTouched":
-    //            //DownTouched = value;
-    //            break;
-    //        case "LeftTouched":
-    //            //LeftTouched = value;
-    //            break;
-    //        case "RightTouched":
-    //            //RightTouched = value;
-    //            break;
-    //        default:
-    //            Debug.Log(string.Format("error in direction, {0} not identified", First));
-    //            break;
-    //    }
-    //}
-
-    public void ResetVariables()
-    {
-        VarCount = 0f;
-        First = "";
-        Last = "";
+        EsteMaterial.SetFloat("_AngleRotation", 
+            Quaternion.AngleAxis(
+                Vector3.Angle(
+                    gameObject.transform.up, 
+                    VectorDeDireccionDeDesgasteActual),
+                gameObject.transform.forward).eulerAngles.x);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -111,7 +91,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
     {
         if(other.GetComponent<LijaRotation>())
         {
-            ResetVariables();
             LijaRotationActivaGO = null;
             LijaRotationActiva = null;
         }
@@ -126,7 +105,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(LijaRotationActiva.Lija.transform.position, LijaRotationActiva.Lija.transform.position + LijaToObjSize);
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + Up);
+                Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + Down);
                 Gizmos.color = Color.blue;
                 Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + VectorDeDireccionDeDesgasteActual);
             }
