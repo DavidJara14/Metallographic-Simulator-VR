@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedUdonProgramAsset: {fileID: 11400000, guid: a0c3743ee53fa9141952c2dbea0fbfe3,
     type: 2}
-  udonAssembly: ".data_start\r\n\r\n    \r\n    __Boolean_0: %SystemBoolean, null\r\n   
-    __instance_0: %UnityEngineParticleSystem, null\r\n    __instance_1: %UnityEngineParticleSystem,
-    null\r\n    __instance_2: %UnityEngineParticleSystem, null\r\n    PartSys: %UnityEngineParticleSystem,
-    null\r\n\r\n.data_end\r\n\r\n.code_start\r\n\r\n    .export _interact\r\n   
-    \r\n    _interact:\r\n    \r\n        PUSH, PartSys\r\n        PUSH, __instance_0\r\n       
-    COPY\r\n        PUSH, __instance_0\r\n        PUSH, __Boolean_0\r\n        EXTERN,
-    \"UnityEngineParticleSystem.__get_isPlaying__SystemBoolean\"\r\n        PUSH,
-    __Boolean_0\r\n        JUMP_IF_FALSE, 0x00000068\r\n        PUSH, PartSys\r\n       
+  udonAssembly: ".data_start\r\n\r\n    .export PartSys\r\n    \r\n    __Boolean_0:
+    %SystemBoolean, null\r\n    __instance_0: %UnityEngineParticleSystem, null\r\n   
+    __instance_1: %UnityEngineParticleSystem, null\r\n    __instance_2: %UnityEngineParticleSystem,
+    null\r\n    PartSys: %UnityEngineParticleSystem, null\r\n\r\n.data_end\r\n\r\n.code_start\r\n\r\n   
+    .export _interact\r\n    \r\n    _interact:\r\n    \r\n        PUSH, PartSys\r\n       
+    PUSH, __instance_0\r\n        COPY\r\n        PUSH, __instance_0\r\n        PUSH,
+    __Boolean_0\r\n        EXTERN, \"UnityEngineParticleSystem.__get_isEmitting__SystemBoolean\"\r\n       
+    PUSH, __Boolean_0\r\n        JUMP_IF_FALSE, 0x00000068\r\n        PUSH, PartSys\r\n       
     PUSH, __instance_1\r\n        COPY\r\n        PUSH, __instance_1\r\n        EXTERN,
     \"UnityEngineParticleSystem.__Stop__SystemVoid\"\r\n        JUMP, 0x0000008C\r\n       
     PUSH, PartSys\r\n        PUSH, __instance_2\r\n        COPY\r\n        PUSH,
@@ -56,7 +56,7 @@ MonoBehaviour:
         stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|PartSys
       - unityObjectValue: {fileID: 0}
         stringValue: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089|False
+          PublicKeyToken=b77a5c561934e089|True
       - unityObjectValue: {fileID: 0}
         stringValue: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089|False
@@ -95,7 +95,7 @@ MonoBehaviour:
       uid: e469854f-9a4c-44b1-b9c8-d4482b131629
       position: {x: 769.79504, y: -144.79997}
       nodeUIDs:
-      - b350c4cc-4c64-4ab8-b5f2-d8fed7f9cd5f|0
+      - 09a8584d-5f01-4c6d-8401-cf05fe14da3b|0
       flowUIDs:
       - 10598265-108e-4963-a02d-27106ffdfaf7
       - dff91e3e-1747-4676-828e-44632bde76a5
@@ -103,9 +103,9 @@ MonoBehaviour:
       - unityObjectValue: {fileID: 0}
         stringValue: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089|False
-    - fullName: UnityEngineParticleSystem.__get_isPlaying__SystemBoolean
-      uid: b350c4cc-4c64-4ab8-b5f2-d8fed7f9cd5f
-      position: {x: 490.39996, y: -42.40001}
+    - fullName: UnityEngineParticleSystem.__get_isEmitting__SystemBoolean
+      uid: 09a8584d-5f01-4c6d-8401-cf05fe14da3b
+      position: {x: 494.00003, y: -61.60003}
       nodeUIDs:
       - 8e5df418-72ad-4656-83a7-5179ec2a329d|0
       flowUIDs: []
