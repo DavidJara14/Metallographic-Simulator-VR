@@ -6,17 +6,24 @@ using VRC.Udon;
 
 public class ActivateMirror : UdonSharpBehaviour
 {
-    public GameObject probetaShader;
-    public GameObject probetaMirror;
+    public GameObject probetaShader1;
+    public GameObject probetaMirror1;
 
-    public bool hasAluminaGris = false;
-    public bool hasAluminaBlanca = false;
+    public GameObject probetaShader2;
+    public GameObject probetaMirror2;
+
+    public bool haveAluminaGris = false;
+    public bool haveAluminaBlanca = false;
+
+    public int caraTrabajada = 2;
 
     private void Start()
     {
-        probetaShader.SetActive(true);
-        probetaMirror.SetActive(false);
+        probetaShader1.SetActive(true);
+        probetaMirror1.SetActive(false);
 
+        probetaShader2.SetActive(true);
+        probetaMirror2.SetActive(false);
     }
 
     private void Update()
@@ -24,48 +31,63 @@ public class ActivateMirror : UdonSharpBehaviour
         // Alumina gris -> Para efectos practicos le dara brillo
         // Alumina blanca ->´Para efectos practicos le dara acabado espejo
 
-        if (!hasAluminaBlanca & !hasAluminaGris) // Hasta esta etapa solo se ha lijado
+        if (!haveAluminaBlanca & !haveAluminaGris) // Hasta esta etapa solo se ha lijado
         {
-            //probetaShader.SetActive(true);
-            //probetaMirror.SetActive(false);
-            probetaShader.GetComponent<Renderer>().material.SetFloat("Reflexion", 0);
-            Debug.Log("reflexion 0");
+            if (caraTrabajada == 1)
+            { 
+                probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0);
+            }
+            
+            else if (caraTrabajada == 2)
+            {
+                probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0);
+            }
         }
-        else if (hasAluminaGris & !hasAluminaBlanca) // Primera etapa de pulido, TIENE ALUMINA GRIS
+        else if (haveAluminaGris & !haveAluminaBlanca) // Primera etapa de pulido, TIENE ALUMINA GRIS
         {
-            //probetaShader.SetActive(true);
-            //probetaMirror.SetActive(false);
-            probetaShader.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
+            if (caraTrabajada == 1)
+            {
+                probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
+            }
 
-            Debug.Log("reflexion 1");
-
+            else if (caraTrabajada == 2)
+            {
+                probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
+            }
         }
-        else if (!hasAluminaGris & hasAluminaBlanca) // Segunda etapa de pulido, TIENE ALUMINA BLANCA
+        else if (haveAluminaGris & haveAluminaBlanca) // Segunda etapa de pulido, TIENE ALUMINA BLANCA y ya tuvo gris
         {
-            probetaShader.SetActive(false);
-            probetaMirror.SetActive(true);
+            if (caraTrabajada == 1)
+            {
+                probetaShader1.SetActive(false);
+                probetaMirror1.SetActive(true);
+            }
+
+            else if (caraTrabajada == 2)
+            {
+                probetaShader2.SetActive(false);
+                probetaMirror2.SetActive(true);
+            }
             Debug.Log("Mirror active");
-
         }
-    }
 
+    }
+    
     private void OnParticleCollision(GameObject other)
     {
+        Debug.Log("Juan");
         string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
 
         Debug.Log(tipo);
 
         if (tipo == "AGris")
         {
-            hasAluminaGris = true;
-            hasAluminaBlanca = false;
-
+            haveAluminaGris = true;
             Debug.Log("Alumina Gris");
         }
         else if (tipo == "ABlanca")
         {
-            hasAluminaGris = false;
-            hasAluminaBlanca = true;
+            haveAluminaBlanca = true;
             Debug.Log("Alumina Blanca");
         }
     }
