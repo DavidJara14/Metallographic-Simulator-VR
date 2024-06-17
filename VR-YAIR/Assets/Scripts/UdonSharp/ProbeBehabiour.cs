@@ -62,6 +62,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     void UpdateMaterial()
     {
+        if (LijaRotationActiva == null)
+            return;
         Desgaste = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
         EsteMaterial.SetFloat("_GranoLija", Desgaste);
         EsteMaterial.SetVector("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).ToVector4());

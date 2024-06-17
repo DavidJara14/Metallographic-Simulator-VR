@@ -21,6 +21,8 @@ public class EventCallerOnHoldOnDrop : UdonSharpBehaviour
         DataList list = new DataList();
         for (int i = 0; i < GOListeners.Length; i++)
         {
+            if (GOListeners[i] == null)
+            {  continue; }
             foreach (var item in GOListeners[i].GetComponents<UdonBehaviour>())
             {
                 list.Add(item);

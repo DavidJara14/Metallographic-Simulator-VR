@@ -24,7 +24,7 @@ public class BotellaLab : UdonSharpBehaviour
     {
         WaterMaterial = InfillGO.GetComponent<MeshRenderer>().material;
         var main = _particleSystem.main;
-        main.startColor = WaterMaterial.GetColor("_ColorSuperficie");
+        main.startColor = WaterMaterial.GetColor("_ColorAguaSuperficie");
     }
 
     private void Update()
