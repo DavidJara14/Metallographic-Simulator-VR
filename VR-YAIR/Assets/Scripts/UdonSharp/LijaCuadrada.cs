@@ -11,6 +11,7 @@ public class LijaCuadrada : UdonSharpBehaviour
     public GameObject[] Lijas;
     public int TamañoDeGrano;
 
+    [SerializeField] private GameObject[] Placers;
     private DataDictionary LijaDict = new DataDictionary()
     {
         {120, 0},
@@ -29,9 +30,11 @@ public class LijaCuadrada : UdonSharpBehaviour
         if (other.GetComponentInParent<TijerasBehabiour>())
         {
             DataToken index;
-            if(LijaDict.TryGetValue(TamañoDeGrano, TokenType.Int, out index))
+            if (LijaDict.TryGetValue(TamañoDeGrano, TokenType.Int, out index))
             {
-                Instantiate(Lijas[index.Int], gameObject.transform.position, gameObject.transform.rotation);
+                var go = Instantiate(Lijas[index.Int], gameObject.transform.position, gameObject.transform.rotation);
+                if(Placers.Length != 0) 
+                    go.gameObject.gameObject.gameObject.GetComponent<EventCallerOnHoldOnDrop>().SetPlacers(Placers);
                 gameObject.SetActive(false);
             }
             else

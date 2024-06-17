@@ -58,4 +58,13 @@ public class EventCallerOnHoldOnDrop : UdonSharpBehaviour
             }
         }
     }
+
+    public void SetPlacers(GameObject[] Objects)
+    {
+        if(GOListeners.Length != 0)
+        {
+            Debug.Log("Deleted " + GOListeners.Length + " elements");
+        }
+        GOListeners = Objects;
+    }
 }
