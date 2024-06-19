@@ -80,7 +80,7 @@ public class LijaRotation : UdonSharpBehaviour
         if(other.gameObject.GetComponent<VRC_Pickup>().currentPlayer != null) { return; }
         if(!Stayed)
         {
-            Debug.Log("es lija");
+            //Debug.Log("es lija");
             OnLijaSnap(other.gameObject.transform);
             Stayed = true;
         }
