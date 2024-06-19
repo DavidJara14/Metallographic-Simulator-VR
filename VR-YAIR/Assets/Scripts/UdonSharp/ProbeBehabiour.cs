@@ -25,6 +25,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [SerializeField] ParticleSystem EsteParticleSystem;
     [SerializeField] GameObject LijaRotationActivaGO;
     [SerializeField] LijaRotation LijaRotationActiva;
+    [SerializeField] ActivateMirror Mirror;
 
     private void Update()
     { 
@@ -64,6 +65,15 @@ public class ProbeBehabiour : UdonSharpBehaviour
     {
         if (LijaRotationActiva == null)
             return;
+        if (Mirror.caraTrabajada == 1)
+        {
+            EsteMaterial = Mirror.probetaShader1.GetComponent<Renderer>().material;
+        }
+        else if (Mirror.caraTrabajada == 2)
+        {
+            EsteMaterial = Mirror.probetaShader2.GetComponent<Renderer>().material;
+        }
+
         Desgaste = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
         EsteMaterial.SetFloat("_GranoLija", Desgaste);
         EsteMaterial.SetVector("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).ToVector4());
