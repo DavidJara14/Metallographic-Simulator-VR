@@ -61,6 +61,7 @@ public class EventCallerOnHoldOnDrop : UdonSharpBehaviour
 
     public void SetPlacers(GameObject[] Objects)
     {
+        Debug.Log("Creada lija con Placers" + Objects.Length);
         if(GOListeners.Length != 0)
         {
             Debug.Log("Deleted " + GOListeners.Length + " elements");
