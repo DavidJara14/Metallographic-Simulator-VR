@@ -23,6 +23,10 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
 
     [SerializeField] Collider[] GameObjectsNear;
 
+    [SerializeField] GameObject objectToSnap;
+    [SerializeField] GameObject objectToIgnoreSnap;
+
+
     private void Start()
     {
         DataList list = new DataList();
@@ -51,15 +55,32 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
         {
             if(null == item) continue;
             if(item.gameObject.GetComponent<placeable>() == null) continue;
+            if (objectToSnap != null)
+            {
+                if(item.gameObject != objectToSnap)
+                {
+                    Debug.Log(item + " no es");
+                    continue;
+                }
+            }
+            if (objectToIgnoreSnap != null)
+            {
+                if (item.gameObject == objectToIgnoreSnap)
+                {
+                    Debug.Log(item + " Ingnorado");
+                    continue;
+                }
+            }
             GrabablesNear += item.name + " ";
             var dist = Vector3.Distance(transform.position, item.transform.position);
             if (Distance >= dist && item != gameObject)
             {
                 Distance = dist;
                 GOToSnap = item.gameObject;
+                Debug.Log(this + gameObject.name + " : " + GOToSnap + " Seleccionado");
             }
         }
-
+        Debug.Log(gameObject.name+": = "+GrabablesNear);
         if(GOToSnap == null)
         {
             Debug.LogWarning("No hay objetos cercanos, ¿hace falta asignar 'placeable'?");
