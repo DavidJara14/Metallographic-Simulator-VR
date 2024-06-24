@@ -19,9 +19,11 @@ public class LijaRotation : UdonSharpBehaviour
     [SerializeField] public GameObject LijaGO = null;
     [SerializeField] public VRC_Pickup Lija = null;
 
+    [SerializeField] public bool isEnergized = false;
+
     private void Update()
     {
-        if(Rotating)
+        if(Rotating && isEnergized)
         {
             gameObject.transform.Rotate(Vector3.forward * RotationVelocity * Time.deltaTime);
         }
@@ -55,7 +57,7 @@ public class LijaRotation : UdonSharpBehaviour
         LijaGO = null;
         Lija = null;
     }
-
+    
     public void StartMachine()
     {
         if (LijaLoaded)
@@ -88,6 +90,18 @@ public class LijaRotation : UdonSharpBehaviour
         {
             Rotating = false;
         }
+    }
+
+    public void MachineEnergy_On()
+    {
+        isEnergized = true;
+        Rotating = false;
+    }
+
+    public void MachineEnergy_Off()
+    {
+        isEnergized = false;
+        Rotating = false;
     }
 
     private void OnTriggerStay(Collider other)
