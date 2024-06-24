@@ -3,7 +3,37 @@ guid: c328f6806e352d94f8945ae21372870d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlueMaterial
+    second: {fileID: 2100000, guid: ab3319297fa7aae48b9b22021c6398b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoneMaterial
+    second: {fileID: 2100000, guid: 49a9dda49767c57498056f07ae4c4dc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DiskMaterial
+    second: {fileID: 2100000, guid: bcd6d975d4405aa4a90f53fdfaa27343, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GrayMaterial
+    second: {fileID: 2100000, guid: 40427986220e0614799fe374ac47790a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GreenMaterial
+    second: {fileID: 2100000, guid: ffa11721e169a5c458fac310dd1680c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedMaterial
+    second: {fileID: 2100000, guid: 13e2431c4e1d9b741a44a5ec7bd354ec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
