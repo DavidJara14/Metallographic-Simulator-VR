@@ -1,9 +1,44 @@
 fileFormatVersion: 2
-guid: f6c8073ff1687444e8ee3528f89f08c1
+guid: 106c8ae8f15e7e549b1e50110ee718a6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlackMaterial
+    second: {fileID: 2100000, guid: dd18aaa4a851c4f419bcd9ed64512404, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlueMaterial
+    second: {fileID: 2100000, guid: d3df7d56b59ca9049b7f9d4ff78ba7e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoneMaterial
+    second: {fileID: 2100000, guid: 67b06bb3e7645494a844b70d73424959, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GrayMaterial
+    second: {fileID: 2100000, guid: 794180e85b31d654fa4225f6da1acc12, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GreenMaterial
+    second: {fileID: 2100000, guid: c3219186bf626454088fcdd3a5ef56ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 8867e1dd4d594144da08ca0477f018de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedMaterial
+    second: {fileID: 2100000, guid: f6c2e88fb7ce3eb4e8ca1feadf11906a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +70,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.05
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +125,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0254
+    globalScale: 0.05
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
