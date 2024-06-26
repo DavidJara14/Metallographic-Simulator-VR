@@ -1,9 +1,34 @@
 fileFormatVersion: 2
-guid: f6c8073ff1687444e8ee3528f89f08c1
+guid: 85d71f461c2eca2499730246888f6fce
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialGlass
+    second: {fileID: 2100000, guid: 1eaefcfba15592946a665c57649407d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialParedesExternas
+    second: {fileID: 2100000, guid: 492ba009ff27c814c972a773eba45eda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialParedesInternas
+    second: {fileID: 2100000, guid: ffee074209c0b174db46b5a7a8194835, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialPiso
+    second: {fileID: 2100000, guid: 94bb92fbac2a919429b8212eaef1a01b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialTecho
+    second: {fileID: 2100000, guid: 16226fa1765bd814faae5940bd637906, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +60,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.5
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +115,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0254
+    globalScale: 0.5
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
