@@ -8,14 +8,14 @@ using VRC.Udon;
 public class ProbeBehabiour : UdonSharpBehaviour
 {
 
-    public float VarCount = 0f;
-    private float timer = 0f;
-    public string First = "";
-    public string Last = "";
+    //public float VarCount = 0f;
+    private float UpdateMatTimer = 0f;
+    //public string First = "";
+    //public string Last = "";
 
     const float DesgasteMin = 0f;
     const float DesgasteMax = 1f;
-    [SerializeField][Range(DesgasteMin, DesgasteMax)] private float Desgaste; //0 a 1
+    [SerializeField][Range(DesgasteMin, DesgasteMax)] private float Desgaste; //0 a Lija
 
     [SerializeField] public Vector3 LijaToObjSize;
     [SerializeField] public Vector3 Up;
@@ -42,7 +42,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         {
             LijaRotationActiva = LijaRotationActivaGO.GetComponent<LijaRotation>();
         }
-        if(First != "" && LijaRotationActiva != null)
+        if(/*First != "" && */LijaRotationActiva != null)
         {
             if(LijaRotationActiva.Rotating)
             {
@@ -54,11 +54,11 @@ public class ProbeBehabiour : UdonSharpBehaviour
         {
             EsteParticleSystem.Stop();
         }
-        if (timer >= .1)
+        if (UpdateMatTimer >= .1)
         {
             UpdateMaterial();
         }
-        timer += Time.deltaTime;
+        UpdateMatTimer += Time.deltaTime;
     }
 
     void UpdateMaterial()
@@ -101,12 +101,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
     //    }
     //}
 
-    public void ResetVariables()
-    {
-        VarCount = 0f;
-        First = "";
-        Last = "";
-    }
+    //public void ResetVariables()
+    //{
+    //    VarCount = 0f;
+    //    First = "";
+    //    Last = "";
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -123,7 +123,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     {
         if(other.GetComponent<LijaRotation>())
         {
-            ResetVariables();
+            //ResetVariables();
             LijaRotationActivaGO = null;
             LijaRotationActiva = null;
         }
