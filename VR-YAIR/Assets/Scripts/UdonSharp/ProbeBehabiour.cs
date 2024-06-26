@@ -1,6 +1,8 @@
-﻿using UdonSharp;
+﻿using System;
+using UdonSharp;
 using UnityEditor;
 using UnityEngine;
+using VRC.SDK3.Data;
 using VRC.SDKBase;
 using VRC.Udon;
 
@@ -8,10 +10,7 @@ using VRC.Udon;
 public class ProbeBehabiour : UdonSharpBehaviour
 {
 
-    //public float VarCount = 0f;
     private float UpdateMatTimer = 0f;
-    //public string First = "";
-    //public string Last = "";
 
     const float DesgasteMin = 0f;
     const float DesgasteMax = 1f;
@@ -26,6 +25,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [SerializeField] GameObject LijaRotationActivaGO;
     [SerializeField] LijaRotation LijaRotationActiva;
     [SerializeField] ActivateMirror Mirror;
+
+    public string ProbeType = "";
 
     private void Update()
     { 
@@ -77,6 +78,11 @@ public class ProbeBehabiour : UdonSharpBehaviour
         Desgaste = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
         EsteMaterial.SetFloat("_GranoLija", Desgaste);
         EsteMaterial.SetVector("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).ToVector4());
+    }
+
+    public string getProbeType()
+    {
+        return ProbeType;
     }
 
     //public void SetVar(string name, bool value)
