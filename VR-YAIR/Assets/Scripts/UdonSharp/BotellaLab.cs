@@ -109,4 +109,25 @@ public class BotellaLab : UdonSharpBehaviour
         }
     }
 
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.GetComponentInParent<IsLiquidSource>() != null)
+        {
+            fill();
+        }
+    }
+
+    private void fill()
+    {
+        if(isInfinite)
+        {
+            Debug.Log($"no se puede llenar un recurso infinito: {Tipo}");
+            return;
+        }
+        LiquidFill += 5;
+        if (LiquidFill > Max)
+            LiquidFill = Max;
+    }
+
+
 }
