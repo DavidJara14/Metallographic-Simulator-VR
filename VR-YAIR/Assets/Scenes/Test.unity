@@ -3436,6 +3436,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1151494931297454577, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
+      propertyPath: LiquidFill
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151494931297454577, guid: bf2c9332192ae324a89dbab7c53c39e1,
+        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1151494931297454577, guid: bf2c9332192ae324a89dbab7c53c39e1,
