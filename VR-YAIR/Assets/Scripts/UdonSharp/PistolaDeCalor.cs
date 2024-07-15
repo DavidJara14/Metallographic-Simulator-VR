@@ -9,8 +9,18 @@ public class PistolaDeCalor : UdonSharpBehaviour
     [SerializeField] private bool Used;
     [SerializeField] private Animator _animator;
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private ParticleSystem _particleSystem;
     public override void OnPickupUseDown()
     {
+        Used = !Used;
+        if(Used)
+        {
+            _particleSystem.Play();
+        }
+        else
+        {
+            _particleSystem.Stop();
+        }
         TriggerGO.SetActive(Used);
         _animator.SetBool("Used", Used);
         if(Used)
@@ -21,7 +31,6 @@ public class PistolaDeCalor : UdonSharpBehaviour
         {
             _audioSource.Stop();
         }
-        Used = !Used;
     }
 
 }

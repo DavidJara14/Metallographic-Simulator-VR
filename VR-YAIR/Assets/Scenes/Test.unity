@@ -2953,6 +2953,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1209570330557177296, guid: 2e55508886a9cc548a23c1d2b41bfed8,
         type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 197518863862867124}
+    - target: {fileID: 1209570330557177296, guid: 2e55508886a9cc548a23c1d2b41bfed8,
+        type: 3}
       propertyPath: Placers.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -3033,6 +3038,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e55508886a9cc548a23c1d2b41bfed8, type: 3}
+--- !u!114 &197518863862867124 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6603555477436667456, guid: 2e55508886a9cc548a23c1d2b41bfed8,
+    type: 3}
+  m_PrefabInstance: {fileID: 197518863862867123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &348865290744553554
 PrefabInstance:
   m_ObjectHideFlags: 0

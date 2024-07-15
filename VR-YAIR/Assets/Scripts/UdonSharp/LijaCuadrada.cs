@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDK3.Data;
@@ -11,6 +12,7 @@ public class LijaCuadrada : UdonSharpBehaviour
     public GameObject[] Lijas;
     public int TamañoDeGrano;
 
+    public TextMeshProUGUI text;
     [SerializeField] private GameObject[] Placers;
     private DataDictionary LijaDict = new DataDictionary()
     {
@@ -23,6 +25,11 @@ public class LijaCuadrada : UdonSharpBehaviour
         {600, 6},
         {800, 7},
     };
+
+    private void Start()
+    {
+        text.text = TamañoDeGrano.ToString();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
