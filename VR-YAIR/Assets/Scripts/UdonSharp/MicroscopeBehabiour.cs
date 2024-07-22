@@ -61,7 +61,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         //TryChangeImage(PBcomponent.getProbeType(), Augment);
     }
 
-    [Obsolete] void TryChangeImage(string type, int augment, int index = 0)
+   /* [Obsolete] void TryChangeImage(string type, int augment, int index = 0)
     {
         Sprite imagenAUsar = ReferenceGOComponent.placeHolder;
         bool Success = false;
@@ -84,7 +84,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         }
 
         UpdateImage(ref imagenAUsar);
-    }
+    }*/
 
     private void TryChangeImageNew(string type, int augment, int index = 0)
     {

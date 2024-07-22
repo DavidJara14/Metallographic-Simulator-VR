@@ -11,12 +11,6 @@ public class ElementType : UdonSharpBehaviour
     public string type;
     IUdonEventReceiver _udonEventReceiver;
 
-    [Header("Predecapted")]
-    [Obsolete] public Sprite[] x100;
-    [Obsolete] public Sprite[] x200;
-    [Obsolete] public Sprite[] x500;
-    [Obsolete] public Sprite[] x1000;
-
     [Header("Links")]
     public VRCUrl[] LinkX100;
     public VRCUrl[] LinkX200;
@@ -56,7 +50,7 @@ public class ElementType : UdonSharpBehaviour
         }
 }
 
-    [Obsolete] public Sprite[] GetAumentImages(int aumento)
+  /*  [Obsolete] public Sprite[] GetAumentImages(int aumento)
     {
         Sprite[] images = null;
         
@@ -80,7 +74,7 @@ public class ElementType : UdonSharpBehaviour
         }
 
         return images;
-    }
+    }*/
 
     public IVRCImageDownload[] GetAumentTextures(int aumento)
     {
