@@ -4534,10 +4534,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2600568532762130216, guid: 16d3f3b70164b9743a3875d9811a0776,
         type: 3}
+      propertyPath: LinkX100.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600568532762130216, guid: 16d3f3b70164b9743a3875d9811a0776,
+        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 2600568532762130216, guid: 16d3f3b70164b9743a3875d9811a0776,
         type: 3}
+    - target: {fileID: 2600568532762130216, guid: 16d3f3b70164b9743a3875d9811a0776,
+        type: 3}
+      propertyPath: LinkX100.Array.data[0].url
+      value: https://cdn.discordapp.com/attachments/594341734218072088/1263273723096731681/VRChat_2024-04-18_15-45-00.969_1920x1080.png?ex=6699a2d6&is=66985156&hm=4ff4ceefe9e60316e7b997b6e15bd8741c37bbc17c49622dadf31b3bde5d14f7&
+      objectReference: {fileID: 0}
     - target: {fileID: 3212460762715999293, guid: 16d3f3b70164b9743a3875d9811a0776,
         type: 3}
       propertyPath: serializationData.Prefab

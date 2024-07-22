@@ -1,10 +1,13 @@
-﻿using UdonSharp;
+﻿using System;
+using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.Core;
 using VRC.SDK3.Data;
+using VRC.SDK3.Image;
 using VRC.SDKBase;
 using VRC.Udon;
+using static UnityEngine.Rendering.HableCurve;
 
 public class MicroscopeBehabiour : UdonSharpBehaviour
 {
@@ -32,11 +35,12 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         Augment = Aumentos[count].Int;
         if (ReferenceGOComponent == null)
             Debug.LogError($"No Reference gameobject reference found, add a GameObject with a MicroscopeElements component to your scene or assign it");
-        PositionImage();
-        TryChangeImage("Acero 1018", Augment, 50);
+        PositionImageViewer();
+        //TryChangeImage("Acero 1018", Augment, 50);
+        //TryChangeImageNew("Acero 1018", Augment, 50);
         CanvasGO.SetActive(false);
     }
-    private void PositionImage()
+    private void PositionImageViewer()
     {
         if (IsRight)
         {
@@ -53,10 +57,11 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         Augment = Aumentos[count].Int;
         if (PBcomponent == null)
             return;
-        TryChangeImage(PBcomponent.getProbeType(), Augment);
+        TryChangeImageNew(PBcomponent.getProbeType(), Augment);
+        //TryChangeImage(PBcomponent.getProbeType(), Augment);
     }
 
-    void TryChangeImage(string type, int augment, int index = 0) //arreglar index y tipo con scriptableObject
+    [Obsolete] void TryChangeImage(string type, int augment, int index = 0)
     {
         Sprite imagenAUsar = ReferenceGOComponent.placeHolder;
         bool Success = false;
@@ -68,12 +73,45 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
             {
                 Success = true;
                 Sprite[] imagenes = ReferenceGOComponent.elementos[i].GetAumentImages(augment);
-                imagenAUsar = imagenes[Random.Range(0, imagenes.Length)];
+                imagenAUsar = imagenes[UnityEngine.Random.Range(0, imagenes.Length)];
                 break;
             }
         }
 
         if (!Success)
+        {
+            Debug.LogWarning($"{this}:no image detected with type {type}");
+        }
+
+        UpdateImage(ref imagenAUsar);
+    }
+
+    private void TryChangeImageNew(string type, int augment, int index = 0)
+    {
+        Sprite imagenAUsar = ReferenceGOComponent.placeHolder;
+        bool ValidProveType = false;
+
+        for (int i = 0; i < ReferenceGOComponent.elementos.Length; i++)
+        {
+            ElementType elementType = ReferenceGOComponent.elementos[i];
+            if (type == elementType.type)
+            {
+                ValidProveType = true;
+                IVRCImageDownload[] Textures = ReferenceGOComponent.elementos[i].GetAumentTextures(augment);
+                if (Textures[0].State == VRCImageDownloadState.Complete)
+                {
+                    Texture2D texture = Textures[0].Result;
+                    imagenAUsar = Sprite.Create(texture,new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+                }
+                else
+                {
+                    Debug.LogWarning($"{this}:image not finished download, {Textures[0].State}");
+                }
+                break;
+            }
+        }
+
+        if (!ValidProveType)
         {
             Debug.LogWarning($"{this}:no image detected with type {type}");
         }
@@ -109,7 +147,8 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         PBcomponent = other.gameObject.GetComponent<ProbeBehabiour>();
         if (PBcomponent != null)
         {
-            TryChangeImage(PBcomponent.getProbeType(), Augment);
+            TryChangeImageNew(PBcomponent.getProbeType(), Augment);
+            //TryChangeImage(PBcomponent.getProbeType(), Augment);
         }
     }
 
