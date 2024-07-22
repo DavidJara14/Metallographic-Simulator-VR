@@ -4540,6 +4540,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2600568532762130216, guid: 16d3f3b70164b9743a3875d9811a0776,
         type: 3}
+      propertyPath: x200.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600568532762130216, guid: 16d3f3b70164b9743a3875d9811a0776,
+        type: 3}
       propertyPath: LinkX100.Array.size
       value: 1
       objectReference: {fileID: 0}
