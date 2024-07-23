@@ -9,25 +9,18 @@ using VRC.Udon;
 public class LijaCuadrada : UdonSharpBehaviour
 {
 
+    public LijaDataholder ReferenceGOComponent;
+
     public GameObject[] Lijas;
     public int TamañoDeGrano;
 
     public TextMeshProUGUI text;
     [SerializeField] private GameObject[] Placers;
-    private DataDictionary LijaDict = new DataDictionary()
-    {
-        {120, 0},
-        {180, 1},
-        {240, 2},
-        {360, 3},
-        {400, 4},
-        {500, 5},
-        {600, 6},
-        {800, 7},
-    };
 
     private void Start()
     {
+        if (ReferenceGOComponent == null)
+            Debug.LogError($"{this}: No ReferenceGOComponent found, add one to the scene and assign it");
         text.text = TamañoDeGrano.ToString();
     }
 
@@ -36,18 +29,28 @@ public class LijaCuadrada : UdonSharpBehaviour
         Debug.Log("trigger " + other);
         if (other.GetComponentInParent<TijerasBehabiour>())
         {
-            DataToken index;
-            if (LijaDict.TryGetValue(TamañoDeGrano, TokenType.Int, out index))
-            {
-                var go = Instantiate(Lijas[index.Int], gameObject.transform.position, gameObject.transform.rotation);
-                if(Placers.Length != 0) 
-                    go.gameObject.gameObject.gameObject.GetComponent<EventCallerOnHoldOnDrop>().SetPlacers(Placers);
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                Debug.LogWarning(string.Format("No lija de tamaño {0} en el diccionario", TamañoDeGrano));
-            }
+            OnTijeraTrigger();
+            //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "OnTijeraTrigger");
+        }
+    }
+
+    public void OnTijeraTrigger()
+    {
+        DataToken index;
+        if (ReferenceGOComponent.LijaDict.TryGetValue(TamañoDeGrano, TokenType.Int, out index))
+        {
+            Networking.SetOwner(Networking.LocalPlayer, ReferenceGOComponent.LijaPool.gameObject);
+            var go = ReferenceGOComponent.LijaPool.TryToSpawn();
+            go.transform.SetPositionAndRotation(transform.position, transform.rotation);
+            go.GetComponent<LijaCircularBehabiour>().OnPoolSpawn(ref ReferenceGOComponent, TamañoDeGrano);
+            //var go = Instantiate(Lijas[index.Int], gameObject.transform.position, gameObject.transform.rotation);
+            if (Placers.Length != 0)
+                go.gameObject.gameObject.gameObject.GetComponent<EventCallerOnHoldOnDrop>().SetPlacers(Placers);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning(string.Format("No lija de tamaño {0} en el diccionario", TamañoDeGrano));
         }
     }
 }
