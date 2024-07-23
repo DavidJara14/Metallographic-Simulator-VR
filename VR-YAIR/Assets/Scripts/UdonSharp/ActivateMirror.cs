@@ -17,6 +17,11 @@ public class ActivateMirror : UdonSharpBehaviour
 
     public int caraTrabajada = 2;
 
+    public GameObject probeBehaviour;
+    public float Desgaste = 0;
+    public int _IsFirstSanding = 1;
+
+
     private void Start()
     {
         probetaShader1.SetActive(true);
@@ -70,9 +75,19 @@ public class ActivateMirror : UdonSharpBehaviour
             }
             Debug.Log("Mirror active");
         }
+        Desgaste = probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija");
+        Debug.Log("Desgaste en la Probeta = "+Desgaste);
+
+        if (Desgaste == 120) 
+        {
+            _IsFirstSanding = 0;
+            probetaShader1.GetComponent<Renderer>().material.SetInt("_IsFirstSanding",_IsFirstSanding);
+            probetaShader2.GetComponent<Renderer>().material.SetInt("_IsFirstSanding",_IsFirstSanding);
+        }
+        Debug.Log("Bool Primer Lijado = " + _IsFirstSanding);
 
     }
-    
+
     private void OnParticleCollision(GameObject other)
     {
         Debug.Log("Juan");
