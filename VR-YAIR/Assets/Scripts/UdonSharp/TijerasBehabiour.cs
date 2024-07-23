@@ -7,19 +7,30 @@ public class TijerasBehabiour : UdonSharpBehaviour
 {
     public Animator animator;
 
+    public void SetAnimTrue()
+    {
+        animator.SetBool("Used", true);
+    }
+
+    public void SetAnimFalse()
+    {
+        animator.SetBool("Used", false);
+    }
+
     public override void OnPickupUseDown()
     {
-        animator.SetBool("Used",true);
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "SetAnimTrue");
+        //animator.SetBool("Used", true);
     }
 
     public override void OnPickupUseUp()
     {
-        animator.SetBool("Used", false);
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "SetAnimFalse");
     }
 
     public override void OnDrop()
     {
-        animator.SetBool("Used", false);
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "SetAnimFalse");
     }
 
 }
