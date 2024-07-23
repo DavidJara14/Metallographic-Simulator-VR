@@ -26,6 +26,10 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [SerializeField] LijaRotation LijaRotationActiva;
     [SerializeField] ActivateMirror Mirror;
 
+    public GameObject probetaShader1;
+    public GameObject probetaShader2;
+
+
     public string ProbeType = "";
 
     private void Update()
@@ -77,6 +81,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
         Desgaste = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
         EsteMaterial.SetFloat("_GranoLija", Desgaste);
+
+        probetaShader1.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
+        probetaShader2.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
+
+
+        Debug.Log("TamanioLija "+Desgaste);
         EsteMaterial.SetVector("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).ToVector4());
     }
 

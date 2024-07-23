@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 3177834736012368456, guid: 4dfe88636418ace44b9d8d983b4dfc3d,
         type: 3}
       propertyPath: m_Name
-      value: Lija Circular 120 Variant
+      value: Lija 120 Circular Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3909298991623613169, guid: 4dfe88636418ace44b9d8d983b4dfc3d,
         type: 3}
@@ -91,6 +91,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6461292952700977694, guid: 4dfe88636418ace44b9d8d983b4dfc3d,
         type: 3}
+    - target: {fileID: 6726456548169790597, guid: 4dfe88636418ace44b9d8d983b4dfc3d,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
