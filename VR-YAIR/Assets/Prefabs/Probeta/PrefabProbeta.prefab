@@ -5450,6 +5450,9 @@ MonoBehaviour:
   haveAluminaGris: 0
   haveAluminaBlanca: 0
   caraTrabajada: 2
+  probeBehaviour: {fileID: 0}
+  Desgaste: 0
+  _IsFirstSanding: 1
 --- !u!114 &7789323974390255625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5586,6 +5589,8 @@ MonoBehaviour:
   LijaRotationActivaGO: {fileID: 0}
   LijaRotationActiva: {fileID: 0}
   Mirror: {fileID: 5882891172789384244}
+  probetaShader1: {fileID: 2353158759232025275}
+  probetaShader2: {fileID: 4844091889528000280}
   ProbeType: Acero 1018
 --- !u!114 &5853918693664680236
 MonoBehaviour:
