@@ -63,7 +63,10 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: imageDownloader
+      Entry: 6
+      Data: 
   _udonSharpBackingUdonBehaviour: {fileID: 4711613177270044577}
   elementos:
   - {fileID: 2600568532762130216}
@@ -118,31 +121,29 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: TextureX100
+      Entry: 6
+      Data: 
+    - Name: TextureX200
+      Entry: 6
+      Data: 
+    - Name: TextureX500
+      Entry: 6
+      Data: 
+    - Name: TextureX1000
+      Entry: 6
+      Data: 
   _udonSharpBackingUdonBehaviour: {fileID: 5158540652819436330}
   type: Acero 1018
-  x100:
-  - {fileID: 21300000, guid: e35ec3d7caae86f498aad30117937f5f, type: 3}
-  - {fileID: 21300000, guid: fe948d2ccd5c07d4ea7ed066a3a5056e, type: 3}
-  - {fileID: 21300000, guid: a1e3e8cf80b511f49a424e5ecc1a1ed6, type: 3}
-  - {fileID: 21300000, guid: a6dcf3467e7dbe4439f453d092daebf9, type: 3}
-  - {fileID: 21300000, guid: 448881fdc73d52c49afd1ff1533b0d1a, type: 3}
-  x200:
-  - {fileID: 21300000, guid: f289b57b961abb04aa49740ef70cfdb3, type: 3}
-  - {fileID: 21300000, guid: 6d861c53e425ecd49ae0747d4cc98762, type: 3}
-  - {fileID: 21300000, guid: ce163318c051daf44b222085b8fea5f8, type: 3}
-  x500:
-  - {fileID: 21300000, guid: 9b31b78eb7bee2648ade743ce02e0a13, type: 3}
-  - {fileID: 21300000, guid: c51a90ee7b5c05a428e158af68cca9df, type: 3}
-  - {fileID: 21300000, guid: b07e610a708ae534ab6206317cc1c621, type: 3}
-  - {fileID: 21300000, guid: 58fe3a41ce8bc5d46b66b10e670919e5, type: 3}
-  - {fileID: 21300000, guid: dc543776d43845e45a68660c3a8a412b, type: 3}
-  x1000:
-  - {fileID: 21300000, guid: 654b8f479bdbfeb49a26b7697487cab1, type: 3}
-  - {fileID: 21300000, guid: 320af87811d0da3459fcd8c42ff622fd, type: 3}
-  - {fileID: 21300000, guid: 4d5f5b43fcf0b044d80ce06775062bed, type: 3}
-  - {fileID: 21300000, guid: 5b0c27b7d64670441a8d35e83069451b, type: 3}
-  - {fileID: 21300000, guid: e261e3c1702576346b23880dea569403, type: 3}
+  LinkX100:
+  - url: https://cdn.discordapp.com/attachments/1263279862471331850/1264999133287026819/IMG_20240313_145537030_2048.jpg?ex=669fe9bf&is=669e983f&hm=4ec6b8ed7a8b88b556c7c4d300ec8a2ec712f7d8045563c814a718b1869765e0&
+  LinkX200:
+  - url: https://cdn.discordapp.com/attachments/1263279862471331850/1264999183354433726/IMG_20240307_174738429_2048.jpg?ex=669fe9cb&is=669e984b&hm=3b9480750e6780d73aaf07e62b4d5ad36f173745d1b5ce59511e31e7dc3f1824&
+  LinkX500:
+  - url: https://cdn.discordapp.com/attachments/1263279862471331850/1264999229663875254/IMG_20240307_155852654_2048.jpg?ex=669fe9d6&is=669e9856&hm=949453dbac3e4880fab3e1deb1e35cac9db70f58b0077dafb5a8d0f1cd501287&
+  LinkX1000:
+  - url: https://cdn.discordapp.com/attachments/1263279862471331850/1264999327084843150/IMG_20240307_160141755_2048.jpg?ex=669fe9ee&is=669e986e&hm=80ae6e11c21f7355f8680a335792b4279d9651556fb5bd808320ec4f61f2356d&
 --- !u!114 &5158540652819436330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,35 +190,25 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: TextureX100
+      Entry: 6
+      Data: 
+    - Name: TextureX200
+      Entry: 6
+      Data: 
+    - Name: TextureX500
+      Entry: 6
+      Data: 
+    - Name: TextureX1000
+      Entry: 6
+      Data: 
   _udonSharpBackingUdonBehaviour: {fileID: 2374048021825233121}
   type: Acero 1045
-  x100:
-  - {fileID: 21300000, guid: 9703d7c1bdcbe1d4fac83f35ae08dbd8, type: 3}
-  - {fileID: 21300000, guid: 14c397cb09afe694f8a6d4360187acae, type: 3}
-  - {fileID: 21300000, guid: d24f61209e974b9418d793a9e4772e5e, type: 3}
-  - {fileID: 21300000, guid: f4152d2caff799d49a0e721f28b2a391, type: 3}
-  - {fileID: 21300000, guid: 8b3821ea53a4bb74f949179ab41ad7e1, type: 3}
-  x200:
-  - {fileID: 21300000, guid: 23aab7779ac08d94b8f8292dbe8c9798, type: 3}
-  - {fileID: 21300000, guid: c49bc627115a8854392abde87fee1583, type: 3}
-  - {fileID: 21300000, guid: 78a83b848c3a24342bc1c6f3b8d2623a, type: 3}
-  - {fileID: 21300000, guid: 80fca25dee1c930479af36ce74dcbf67, type: 3}
-  - {fileID: 21300000, guid: 95e55e7688eea0b439bb66cca3beee7c, type: 3}
-  - {fileID: 21300000, guid: 036955b6a22a85949a1ff4e8816980ee, type: 3}
-  x500:
-  - {fileID: 21300000, guid: e86c7f5090f513144880c57264c03a7f, type: 3}
-  - {fileID: 21300000, guid: 4e1bb948d6c3b9f42b74be54fd9208d6, type: 3}
-  - {fileID: 21300000, guid: 1b1fe21c4d5584b408af8ca7f934097c, type: 3}
-  - {fileID: 21300000, guid: 2fc12f9958aee1448b9a63214e591e9b, type: 3}
-  - {fileID: 21300000, guid: c22850f1cc054ed4390ef0509d1c1b0c, type: 3}
-  - {fileID: 21300000, guid: ab79b994a6989d94b87b9723e0d00405, type: 3}
-  x1000:
-  - {fileID: 21300000, guid: e384b627ce6a8cc4082dd1e6455ea9d7, type: 3}
-  - {fileID: 21300000, guid: 288f4c1356eeaca4ca894d3e68be85a3, type: 3}
-  - {fileID: 21300000, guid: 48b0d3f6458468642bd0b425be547c89, type: 3}
-  - {fileID: 21300000, guid: 03dd948c8ebd870459699677f4a7e535, type: 3}
-  - {fileID: 21300000, guid: 29fe012ff2320bc43b614fdc22c5f57a, type: 3}
+  LinkX100: []
+  LinkX200: []
+  LinkX500: []
+  LinkX1000: []
 --- !u!114 &2374048021825233121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,30 +255,25 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: TextureX100
+      Entry: 6
+      Data: 
+    - Name: TextureX200
+      Entry: 6
+      Data: 
+    - Name: TextureX500
+      Entry: 6
+      Data: 
+    - Name: TextureX1000
+      Entry: 6
+      Data: 
   _udonSharpBackingUdonBehaviour: {fileID: 3085438153357761460}
   type: Acero 1060
-  x100:
-  - {fileID: 21300000, guid: f6429bb48721cfd4e896c4032ad7acd4, type: 3}
-  - {fileID: 21300000, guid: 68c2216041a3e974b8ad42317a2c9d88, type: 3}
-  - {fileID: 21300000, guid: 366e5438f89b7ee44bbe4d276fe702e7, type: 3}
-  x200:
-  - {fileID: 21300000, guid: 2cd6a5c1fb9602e428783c1de7b73d17, type: 3}
-  - {fileID: 21300000, guid: b41f27dcb37178a439af1d2d3f9d3abc, type: 3}
-  - {fileID: 21300000, guid: 926cd01d30fb0304b9f16ad7e31b7a1d, type: 3}
-  - {fileID: 21300000, guid: 3580345bd77326849b79727d9b4b8771, type: 3}
-  - {fileID: 21300000, guid: aa729e6950ca8e440b7889da0aad680d, type: 3}
-  x500:
-  - {fileID: 21300000, guid: a78b1c91e3c0ac34395699030bba8048, type: 3}
-  - {fileID: 21300000, guid: 44958ad28ca977345b07f8ebd41deea4, type: 3}
-  - {fileID: 21300000, guid: 7ce1aab99b84ac74090f99a373348287, type: 3}
-  - {fileID: 21300000, guid: 3fa8478f03972a84183c3fc647a0ab87, type: 3}
-  x1000:
-  - {fileID: 21300000, guid: 67c1e7875aeb9814bb8246263db9b0d4, type: 3}
-  - {fileID: 21300000, guid: 7cf313cbee601574b960f2c2198e22e0, type: 3}
-  - {fileID: 21300000, guid: 86541b33781cf8e49bd329fd1f9d6ba2, type: 3}
-  - {fileID: 21300000, guid: 400e791ce890c5741a58f8082eff3f2c, type: 3}
-  - {fileID: 21300000, guid: 3732f2ecbe205a740b676d8a7d87a58b, type: 3}
+  LinkX100: []
+  LinkX200: []
+  LinkX500: []
+  LinkX1000: []
 --- !u!114 &3085438153357761460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,27 +320,25 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: TextureX100
+      Entry: 6
+      Data: 
+    - Name: TextureX200
+      Entry: 6
+      Data: 
+    - Name: TextureX500
+      Entry: 6
+      Data: 
+    - Name: TextureX1000
+      Entry: 6
+      Data: 
   _udonSharpBackingUdonBehaviour: {fileID: 942776926562737843}
   type: Aluminio
-  x100:
-  - {fileID: 21300000, guid: 9c7a46c144b1bd14c81b51445da7676c, type: 3}
-  - {fileID: 21300000, guid: 352a65cacc2a7ba469c2da1d95f1e1b4, type: 3}
-  - {fileID: 21300000, guid: 75429bff7017917418d4c4907d19508d, type: 3}
-  - {fileID: 21300000, guid: bf1d566828a4dfa4db8686e3619ca0cc, type: 3}
-  x200:
-  - {fileID: 21300000, guid: 8aa44c281dcd23142b733711573230a6, type: 3}
-  - {fileID: 21300000, guid: 4a8bf31885e3a144dadb4481f42d4911, type: 3}
-  - {fileID: 21300000, guid: b1d83a67edc176644a2ed0e3962e227b, type: 3}
-  - {fileID: 21300000, guid: dc6349bf4f325b948b66d017c870d762, type: 3}
-  - {fileID: 21300000, guid: 135ec13f53a69cc4ba4de7e321dd2ff2, type: 3}
-  x500:
-  - {fileID: 21300000, guid: a61b0e389d06ef04cafe4d7220c919c5, type: 3}
-  - {fileID: 21300000, guid: ff0f6cddfd086514aa07bdc100a6be26, type: 3}
-  - {fileID: 21300000, guid: b851b682990483e4aad92cc9e33f1628, type: 3}
-  - {fileID: 21300000, guid: 159dc10297576194bb7b37d8091cc61e, type: 3}
-  x1000:
-  - {fileID: 21300000, guid: 325eb8234356d644b922b8ad40ef8847, type: 3}
+  LinkX100: []
+  LinkX200: []
+  LinkX500: []
+  LinkX1000: []
 --- !u!114 &942776926562737843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,41 +385,25 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: TextureX100
+      Entry: 6
+      Data: 
+    - Name: TextureX200
+      Entry: 6
+      Data: 
+    - Name: TextureX500
+      Entry: 6
+      Data: 
+    - Name: TextureX1000
+      Entry: 6
+      Data: 
   _udonSharpBackingUdonBehaviour: {fileID: 336933907283349754}
   type: Laton
-  x100:
-  - {fileID: 21300000, guid: 0f9eaac1061ce3a4e951038e817dd796, type: 3}
-  - {fileID: 21300000, guid: ae9a69d7fea8c7845a1d656d2885eee0, type: 3}
-  - {fileID: 21300000, guid: 686a00aa9f7ba654f871e5e91e09f584, type: 3}
-  - {fileID: 21300000, guid: 57e4ce0a6bfdacb48a1cf1f2be558bee, type: 3}
-  - {fileID: 21300000, guid: 614d5613176dbc844bebbb642d92d142, type: 3}
-  x200:
-  - {fileID: 21300000, guid: 372d3c440280dd44ab892c98de9c7ada, type: 3}
-  - {fileID: 21300000, guid: cfa36688eacd4ad4abe7108e1a242125, type: 3}
-  - {fileID: 21300000, guid: 037f048743c72274ea48f208fa857aec, type: 3}
-  - {fileID: 21300000, guid: 2004e76bd4893c74793b88ca060ea007, type: 3}
-  - {fileID: 21300000, guid: 19cc2e38d2571484c870d62fb8fa2050, type: 3}
-  - {fileID: 21300000, guid: 13191f6a8d33d6c488a1612e1d86b0f3, type: 3}
-  - {fileID: 21300000, guid: 57d405305a8272044ab1c8cb88a0142c, type: 3}
-  - {fileID: 21300000, guid: f367c58bca25d974681bdd041a687625, type: 3}
-  - {fileID: 21300000, guid: 85eef0dfaa15ae84a9d6a29706c53f34, type: 3}
-  x500:
-  - {fileID: 21300000, guid: 0d32ef7fbc59a914a83ed3504e488f83, type: 3}
-  - {fileID: 21300000, guid: c3b3b7d280dd5e541b49e816e8325ef8, type: 3}
-  - {fileID: 21300000, guid: 65b5c16e68e174943b0cc73db918ea99, type: 3}
-  - {fileID: 21300000, guid: a9f82227df8e7284ebbeac7f37efd1eb, type: 3}
-  - {fileID: 21300000, guid: 5fd025c27fe57b14e8becb5d2adb3d63, type: 3}
-  - {fileID: 21300000, guid: 82bc48c0bdb964f43a2eb692566c239c, type: 3}
-  - {fileID: 21300000, guid: 4d4740af8daada8419f92ba8a52dd14c, type: 3}
-  - {fileID: 21300000, guid: 370bce61557bab84f87e5c4f82a59a32, type: 3}
-  x1000:
-  - {fileID: 21300000, guid: eca636f3e99196a4ab428a122e5f8330, type: 3}
-  - {fileID: 21300000, guid: bb0bdb3966338a5498bea715b4ef889f, type: 3}
-  - {fileID: 21300000, guid: ea5bd5f1e96739c499477883a2ed8456, type: 3}
-  - {fileID: 21300000, guid: 50fbce8da99238b4daa694a08d397caf, type: 3}
-  - {fileID: 21300000, guid: 1ebd1da80b774a848943c00ddd067c75, type: 3}
-  - {fileID: 21300000, guid: 899107021e193784f8b48a44d95a9591, type: 3}
+  LinkX100: []
+  LinkX200: []
+  LinkX500: []
+  LinkX1000: []
 --- !u!114 &336933907283349754
 MonoBehaviour:
   m_ObjectHideFlags: 0
