@@ -285,7 +285,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -425,6 +425,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 7849855068724358125}
   "Tama\xF1oDeGrano": 0
   text: {fileID: 3603772883513323541}
+  meshRenderer: {fileID: 4308555670073831590}
 --- !u!114 &7849855068724358125
 MonoBehaviour:
   m_ObjectHideFlags: 0
