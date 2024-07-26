@@ -5,7 +5,8 @@ using VRC.Udon;
 
 public class PistolaDeCalor : UdonSharpBehaviour
 {
-    public GameObject TriggerGO;
+    //public GameObject TriggerGO;
+    public CapsuleCollider collisionPistol;
     [SerializeField] private bool Used;
     [SerializeField] private Animator _animator;
     [SerializeField] private AudioSource _audioSource;
@@ -21,8 +22,9 @@ public class PistolaDeCalor : UdonSharpBehaviour
         {
             _particleSystem.Stop();
         }
-        TriggerGO.SetActive(Used);
-        _animator.SetBool("Used", Used);
+        //TriggerGO.SetActive(Used);
+        collisionPistol.enabled = Used;
+       _animator.SetBool("Used", Used);
         if(Used)
         {
             _audioSource.Play();
