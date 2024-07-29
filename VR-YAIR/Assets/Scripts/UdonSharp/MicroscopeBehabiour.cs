@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
 {
 
     [SerializeField] private Image[] CompImage;
+    [SerializeField] private TextMeshProUGUI CompText;
     [SerializeField] private MicroscopeElements ReferenceGOComponent;
     [SerializeField] private GameObject CanvasGO;
     private ProbeBehabiour PBcomponent;
@@ -40,6 +42,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         //TryChangeImageNew("Acero 1018", Augment, 50);
         CanvasGO.SetActive(false);
     }
+
     private void PositionImageViewer()
     {
         if (IsRight)
@@ -58,6 +61,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         if (PBcomponent == null)
             return;
         TryChangeImageNew(PBcomponent.getProbeType(), Augment);
+        CompText.text = $"x{Augment}";
         //TryChangeImage(PBcomponent.getProbeType(), Augment);
     }
 
@@ -148,7 +152,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         if (PBcomponent != null)
         {
             TryChangeImageNew(PBcomponent.getProbeType(), Augment);
-            //TryChangeImage(PBcomponent.getProbeType(), Augment);
+            CompText.text = $"x{Augment}";
         }
     }
 

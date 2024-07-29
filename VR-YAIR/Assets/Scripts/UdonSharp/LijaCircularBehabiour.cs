@@ -17,6 +17,7 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
     public TextMeshProUGUI text;
     public MeshRenderer meshRenderer;
 
+
     internal void OnPoolSpawn(ref LijaDataholder referenceGOComponent, int tamañoDeGrano)
     {
         TamañoDeGrano = tamañoDeGrano;
@@ -30,6 +31,12 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
 
     public override void OnDeserialization()
     {
+        if (referenceDataholder == null)
+        {
+            Debug.Log($"No referenceDataholder assigned to {gameObject}, disabling GO.");
+            gameObject.SetActive(false);
+            return;
+        }
         text.text = TamañoDeGrano.ToString();
         Debug.Log($"Tamaño de grano TEXT set to {TamañoDeGrano}");
         meshRenderer.material = referenceDataholder.MaterialesSegunTamañosDeLija[referenceDataholder.LijaDict[TamañoDeGrano].Int];

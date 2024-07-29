@@ -26,6 +26,11 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
     [SerializeField] GameObject objectToSnap;
     [SerializeField] GameObject objectToIgnoreSnap;
 
+    [Header("Audio Config")]
+    [SerializeField] private bool _AudioOnSnap;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
+
 
     private void Start()
     {
@@ -97,6 +102,11 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
         if(SnapRotation)
         {
             GOToSnap.transform.rotation = Quaternion.Euler(GOrot.eulerAngles + RotationOffset);
+        }
+
+        if(_AudioOnSnap)
+        {
+            _audioSource.PlayOneShot(_audioClip);
         }
 
         CallEvent();

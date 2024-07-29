@@ -1,4 +1,5 @@
-﻿using UdonSharp;
+﻿using TMPro;
+using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -18,8 +19,19 @@ public class LijaRotation : UdonSharpBehaviour
 
     [SerializeField] public GameObject LijaGO = null;
     [SerializeField] public VRC_Pickup Lija = null;
+    [SerializeField] private TextMeshProUGUI RPMText;
 
     [SerializeField] public bool isEnergized = false;
+
+    [Header("Audio Config")]
+    [SerializeField] private AudioSource _StartStopAudioSource;
+    [SerializeField] private AudioSource _LoopAudioSource;
+    [SerializeField] private AudioClip _StartAudioClip;
+    [SerializeField] private AudioClip _LoopAudioClip;
+    [SerializeField] private AudioClip _StopAudioClip;
+    [SerializeField] private bool AudioStart;
+    [SerializeField] private float StartTimer;
+    [SerializeField] private bool AudioLoop;
 
     private void Update()
     {
@@ -34,6 +46,38 @@ public class LijaRotation : UdonSharpBehaviour
                 Lija = LijaGO.GetComponent<VRC_Pickup>();
             }
         }
+
+        if (Rotating & !AudioStart && !AudioLoop)
+        {
+            AudioStart = true;
+            _StartStopAudioSource.Stop();
+            _StartStopAudioSource.clip = _StartAudioClip;
+            _StartStopAudioSource.Play();
+            StartTimer = 0f;
+        }
+
+        if (StartTimer > 0.9 * _StartAudioClip.length && !AudioLoop)
+        {
+            AudioStart = false;
+            AudioLoop = true;
+            _StartStopAudioSource.Stop();
+            _LoopAudioSource.clip = _LoopAudioClip;
+            _LoopAudioSource.Play();
+        }
+
+        if(!Rotating && (AudioStart || AudioLoop))
+        {
+            AudioStart = false;
+            AudioLoop =false;
+            StartTimer = 0f;
+            _LoopAudioSource.Stop();
+            _StartStopAudioSource.Stop();
+            _StartStopAudioSource.clip = _StopAudioClip;
+            _StartStopAudioSource.Play();
+        }
+
+        if(AudioStart)
+            StartTimer += Time.deltaTime;
     }
 
     public void OnLijaSnap(Transform go)
@@ -96,12 +140,16 @@ public class LijaRotation : UdonSharpBehaviour
     {
         isEnergized = true;
         Rotating = false;
+        RPMText.text = "0900";
+        RPMText.color = Color.red;
     }
 
     public void MachineEnergy_Off()
     {
         isEnergized = false;
         Rotating = false;
+        RPMText.text = "8888";
+        RPMText.color = Color.gray;
     }
 
     private void OnTriggerStay(Collider other)

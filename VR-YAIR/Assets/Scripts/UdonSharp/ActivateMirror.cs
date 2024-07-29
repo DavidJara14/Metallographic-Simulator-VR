@@ -76,7 +76,7 @@ public class ActivateMirror : UdonSharpBehaviour
             Debug.Log("Mirror active");
         }
         Desgaste = probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija");
-        Debug.Log("Desgaste en la Probeta = "+Desgaste);
+        //Debug.Log("Desgaste en la Probeta = "+Desgaste);
 
         if (Desgaste == 120) 
         {

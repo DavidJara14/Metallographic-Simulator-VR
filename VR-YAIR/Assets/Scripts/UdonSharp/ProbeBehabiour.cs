@@ -32,6 +32,15 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     public string ProbeType = "";
 
+    [Header("Audio Config")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
+
+    private void Start()
+    {
+        _audioSource.clip = _audioClip;
+    }
+
     private void Update()
     { 
         if(LijaRotationActiva != null)
@@ -53,11 +62,16 @@ public class ProbeBehabiour : UdonSharpBehaviour
             {
                 EsteParticleSystem.Play();
                 EsteParticleSystem.gameObject.transform.rotation = Quaternion.FromToRotation(EsteParticleSystem.transform.rotation.eulerAngles, VectorDeDireccionDeDesgasteActual);
+                if (!_audioSource.isPlaying)
+                {
+                    _audioSource.Play();
+                }
             }
         }
         else if(EsteParticleSystem.isEmitting)
         {
             EsteParticleSystem.Stop();
+            _audioSource.Stop();
         }
         if (UpdateMatTimer >= .1)
         {
@@ -71,6 +85,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
         if (LijaRotationActiva == null)
             return;
         Debug.Log(LijaRotationActiva.name);
+        if (LijaRotationActiva.Lija == null)
+            return;
         Desgaste = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
         //EsteMaterial.SetFloat("_GranoLija", Desgaste);
         if (Mirror.caraTrabajada == 1)
