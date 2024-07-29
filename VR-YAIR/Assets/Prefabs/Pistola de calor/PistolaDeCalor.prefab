@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 1620252993293144062}
   - component: {fileID: 4262847283365507274}
   - component: {fileID: 4265872989213087180}
+  - component: {fileID: 7025236715426404834}
   m_Layer: 13
   m_Name: PistolaDeCalor
   m_TagString: Untagged
@@ -229,7 +230,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1620252993293144062}
-  TriggerGO: {fileID: 9050776413729090681}
+  collisionPistol: {fileID: 7750698325450885024}
   Used: 0
   _animator: {fileID: 3189676747035253880}
   _audioSource: {fileID: 4262847283365507274}
@@ -374,6 +375,19 @@ MonoBehaviour:
   VolumetricRadius: 0
   EnableSpatialization: 1
   UseAudioSourceVolumeCurve: 0
+--- !u!114 &7025236715426404834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918712680890017444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1783056023, guid: 661092b4961be7145bfbe56e1e62337b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowCollisionOwnershipTransfer: 1
 --- !u!1 &8270268680256239924
 GameObject:
   m_ObjectHideFlags: 0
@@ -4129,7 +4143,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -4304,7 +4318,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -5379,13 +5393,14 @@ GameObject:
   m_Component:
   - component: {fileID: 980096490605662562}
   - component: {fileID: 7750698325450885024}
+  - component: {fileID: 5780766115164670503}
   m_Layer: 24
   m_Name: Colision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &980096490605662562
 Transform:
   m_ObjectHideFlags: 0
@@ -5418,12 +5433,25 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.05
   m_Height: 0.2
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.05}
+--- !u!114 &5780766115164670503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050776413729090681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1783056023, guid: 661092b4961be7145bfbe56e1e62337b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowCollisionOwnershipTransfer: 1
 --- !u!1001 &1404159469962915776
 PrefabInstance:
   m_ObjectHideFlags: 0

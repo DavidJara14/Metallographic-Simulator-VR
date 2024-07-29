@@ -13,7 +13,13 @@ public class PistolaDeCalor : UdonSharpBehaviour
     [SerializeField] private ParticleSystem _particleSystem;
     public override void OnPickupUseDown()
     {
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "usePistol");
+    }
+
+    public void usePistol()
+    {
         Used = !Used;
+        collisionPistol.enabled = Used;
         if(Used)
         {
             _particleSystem.Play();
@@ -23,8 +29,7 @@ public class PistolaDeCalor : UdonSharpBehaviour
             _particleSystem.Stop();
         }
         //TriggerGO.SetActive(Used);
-        collisionPistol.enabled = Used;
-       _animator.SetBool("Used", Used);
+        _animator.SetBool("Used", Used);
         if(Used)
         {
             _audioSource.Play();

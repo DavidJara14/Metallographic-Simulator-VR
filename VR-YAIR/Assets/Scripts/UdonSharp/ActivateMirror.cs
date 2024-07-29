@@ -75,7 +75,7 @@ public class ActivateMirror : UdonSharpBehaviour
                 probetaShader2.SetActive(false);
                 probetaMirror2.SetActive(true);
             }
-            Debug.Log("Mirror active");
+            //Debug.Log("Mirror active");
         }
         else if (haveAluminaGris & haveAluminaBlanca & haveNital & calor) // Segunda etapa de pulido, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris
         {
@@ -92,11 +92,11 @@ public class ActivateMirror : UdonSharpBehaviour
                 probetaMirror2.SetActive(false);
                 probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
             }
-            Debug.Log("Mirror unactive");
+           // Debug.Log("Mirror unactive");
         }
 
         Desgaste = probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija");
-        Debug.Log("Desgaste en la Probeta = "+Desgaste);
+        //Debug.Log("Desgaste en la Probeta = "+Desgaste);
 
         if (Desgaste > 0) 
         {
@@ -110,40 +110,49 @@ public class ActivateMirror : UdonSharpBehaviour
                 probetaShader2.GetComponent<Renderer>().material.SetInt("_IsFirstSanding", _IsFirstSanding);
             }
         }
-        Debug.Log("Bool Primer Lijado = " + _IsFirstSanding);
+        //Debug.Log("Bool Primer Lijado = " + _IsFirstSanding);
 
     }
 
     private void OnParticleCollision(GameObject other)
     {
-        Debug.Log("Juan");
+        //Debug.Log("Juan");
         string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
-        Debug.Log(tipo);
+        //Debug.Log(tipo);
 
         if (tipo == "AGris")
         {
             haveAluminaGris = true;
-            Debug.Log("Alumina Gris");
+            //Debug.Log("Alumina Gris");
         }
         else if (tipo == "ABlanca")
         {
             haveAluminaBlanca = true;
-            Debug.Log("Alumina Blanca");
+            //Debug.Log("Alumina Blanca");
         }
         else if(tipo == "Nital")
         {
             haveNital = true;
-            Debug.Log("Nital");
+            //Debug.Log("Nital");
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        /*Debug.Log($"{other.gameObject.name}: Layer: {other.gameObject.layer}");
+        Debug.Log(other.gameObject.layer == LayerMask.NameToLayer("ProbeLayer"));
+        Debug.Log($"{other.gameObject.layer} == {LayerMask.NameToLayer("ProbeLayer")}");
         if (other.gameObject.layer == LayerMask.NameToLayer("ProbeLayer"))
         {
             calor = true;
             Debug.Log("Probeta Caliente");
+        }*/
+        if(other.gameObject.name == "Colision")
+        {
+            Debug.Log("Colision");
+            calor = true;
         }
+
     }
 }
 

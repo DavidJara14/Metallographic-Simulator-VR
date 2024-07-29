@@ -65,6 +65,16 @@ public class ProbeBehabiour : UdonSharpBehaviour
         }
         UpdateMatTimer += Time.deltaTime;
     }
+    /*
+    public override void OnPickupUseDown()
+    {
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "RotateProbeta");
+    }
+
+    public void RotateProbeta()
+    {
+        gameObject.transform.Rotate(90.0f, 0.0f, 0.0f, Space.World);
+    }*/
 
     void UpdateMaterial()
     {
@@ -89,8 +99,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
         
 
-        Debug.Log("TamanioLija "+Desgaste);
-        Debug.Log("Desgaste en la Probeta (ProbeBehaviour) = " + probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija"));
+        //Debug.Log("TamanioLija "+Desgaste);
+        //Debug.Log("Desgaste en la Probeta (ProbeBehaviour) = " + probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija"));
 
         //EsteMaterial.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).eulerAngles.z);
     }
