@@ -120,7 +120,7 @@ public class ActivateMirror : UdonSharpBehaviour
         string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
         //Debug.Log(tipo);
 
-        if (tipo == "AGris")
+        /*if (tipo == "AGris")
         {
             haveAluminaGris = true;
             //Debug.Log("Alumina Gris");
@@ -130,7 +130,7 @@ public class ActivateMirror : UdonSharpBehaviour
             haveAluminaBlanca = true;
             //Debug.Log("Alumina Blanca");
         }
-        else if(tipo == "Nital")
+        else */if(tipo == "Nital")
         {
             haveNital = true;
             //Debug.Log("Nital");
@@ -139,6 +139,9 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //calor = false;
+        //haveAluminaBlanca = false;
+        //haveAluminaGris = false;
         /*Debug.Log($"{other.gameObject.name}: Layer: {other.gameObject.layer}");
         Debug.Log(other.gameObject.layer == LayerMask.NameToLayer("ProbeLayer"));
         Debug.Log($"{other.gameObject.layer} == {LayerMask.NameToLayer("ProbeLayer")}");
@@ -151,6 +154,18 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             Debug.Log("Colision");
             calor = true;
+        }
+
+        if (other.gameObject.name == "ColisionPañoGris")
+        {
+            Debug.Log("ColisionGris");
+            haveAluminaGris = true;
+        }
+
+        if (other.gameObject.name == "ColisionPañoBlanco")
+        {
+            Debug.Log("ColisionBlanca");
+            haveAluminaBlanca = true;
         }
 
     }
