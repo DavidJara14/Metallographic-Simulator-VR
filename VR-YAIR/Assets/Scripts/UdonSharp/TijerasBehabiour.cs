@@ -6,10 +6,14 @@ using VRC.Udon;
 public class TijerasBehabiour : UdonSharpBehaviour
 {
     public Animator animator;
+    [Header("Audio Config")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
 
     public void SetAnimTrue()
     {
         animator.SetBool("Used", true);
+        _audioSource.PlayOneShot(_audioClip);
     }
 
     public void SetAnimFalse()
