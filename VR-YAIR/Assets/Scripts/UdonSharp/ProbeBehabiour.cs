@@ -79,6 +79,16 @@ public class ProbeBehabiour : UdonSharpBehaviour
         }
         UpdateMatTimer += Time.deltaTime;
     }
+    /*
+    public override void OnPickupUseDown()
+    {
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "RotateProbeta");
+    }
+
+    public void RotateProbeta()
+    {
+        gameObject.transform.Rotate(90.0f, 0.0f, 0.0f, Space.World);
+    }*/
 
     void UpdateMaterial()
     {
@@ -91,14 +101,14 @@ public class ProbeBehabiour : UdonSharpBehaviour
         //EsteMaterial.SetFloat("_GranoLija", Desgaste);
         if (Mirror.caraTrabajada == 1)
         {
-            EsteMaterial = Mirror.probetaShader1.GetComponent<Renderer>().material;
+            //EsteMaterial = Mirror.probetaShader1.GetComponent<Renderer>().material;
             probetaShader1.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
             probetaShader1.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
 
         }
         else if (Mirror.caraTrabajada == 2)
         {
-            EsteMaterial = Mirror.probetaShader2.GetComponent<Renderer>().material;
+            //EsteMaterial = Mirror.probetaShader2.GetComponent<Renderer>().material;
             probetaShader2.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
             probetaShader2.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
         }
@@ -106,6 +116,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
         
 
         Debug.Log("TamanioLija "+Desgaste);
+        //Debug.Log("Desgaste en la Probeta (ProbeBehaviour) = " + probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija"));
+
         //EsteMaterial.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).eulerAngles.z);
     }
 
