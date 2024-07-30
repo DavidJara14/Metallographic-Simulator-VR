@@ -23,6 +23,8 @@ public class InteractProbe : UdonSharpBehaviour
     public Camera targetCamera; // Asigna la cámara que deseas capturar
     public RenderTexture renderTexture; // Crea una RenderTexture para almacenar la imagen
 
+    public VRC_Pickup pickup;
+    public bool isUserVR;
 
     private void Start()
     {
@@ -30,6 +32,7 @@ public class InteractProbe : UdonSharpBehaviour
         //renderTexture = new RenderTexture(targetCamera.pixelWidth, targetCamera.pixelHeight, 24);
         //targetCamera.targetTexture = renderTexture;
         canva.SetActive(false);
+        isUserVR = false;
     }
     /*private void Update()
     {
@@ -38,6 +41,12 @@ public class InteractProbe : UdonSharpBehaviour
         miSprite = Sprite.Create(miTexture, new Rect(0, 0, miTexture.width, miTexture.height), Vector2.zero);
         miImage.sprite = miSprite;
     }*/
+
+    private void Update()
+    {
+       // isUserVR = pickup.currentPlayer.IsUserInVR();
+    }
+
 
     public override void Interact()
     {

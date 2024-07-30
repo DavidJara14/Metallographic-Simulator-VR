@@ -99,7 +99,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
         
 
-        //Debug.Log("TamanioLija "+Desgaste);
+        Debug.Log("TamanioLija "+Desgaste);
         //Debug.Log("Desgaste en la Probeta (ProbeBehaviour) = " + probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija"));
 
         //EsteMaterial.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).eulerAngles.z);
