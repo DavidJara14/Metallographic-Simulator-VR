@@ -6,6 +6,9 @@ using VRC.Udon;
 
 public class Cheto : UdonSharpBehaviour
 {
+
+    [SerializeField] private bool HideOnUse;
+
     [SerializeField] private Transform _ref;
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private AudioSource _audioSource;
@@ -14,6 +17,9 @@ public class Cheto : UdonSharpBehaviour
     {
         _particleSystem.Emit(1);
         _audioSource.Play();
-        gameObject.transform.position = _ref.position;
+        if(HideOnUse)
+            gameObject.SetActive(false);
+        else
+            gameObject.transform.position = _ref.position;
     }
 }
