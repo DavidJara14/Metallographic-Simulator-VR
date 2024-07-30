@@ -157,7 +157,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other + "in Probebehabiour");
+        //Debug.Log(other + "in Probebehabiour");
         if (other.GetComponent<LijaRotation>() != null)
         {
             Debug.Log("Lijarotation in Provebehabiour");
