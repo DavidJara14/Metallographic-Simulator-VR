@@ -7,6 +7,10 @@ public class AugmentsBehabiour : UdonSharpBehaviour
 {
     int count = 0;
     MicroscopeBehabiour microscopeBehabiour;
+    [Header("Audio Config")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
+
 
     private void Start()
     {
@@ -15,9 +19,15 @@ public class AugmentsBehabiour : UdonSharpBehaviour
 
     public override void Interact()
     {
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "OnInteract");
+    }
+
+    public void OnInteract()
+    {
         count++;
-        if(count == 4)
+        if (count == 4)
             count = 0;
         microscopeBehabiour.OnAugmentChange(count);
+        _audioSource.PlayOneShot(_audioClip);
     }
 }
