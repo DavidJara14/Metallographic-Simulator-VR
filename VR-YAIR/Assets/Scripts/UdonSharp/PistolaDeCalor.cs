@@ -5,14 +5,21 @@ using VRC.Udon;
 
 public class PistolaDeCalor : UdonSharpBehaviour
 {
-    public GameObject TriggerGO;
+    //public GameObject TriggerGO;
+    public CapsuleCollider collisionPistol;
     [SerializeField] private bool Used;
     [SerializeField] private Animator _animator;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private ParticleSystem _particleSystem;
     public override void OnPickupUseDown()
     {
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "usePistol");
+    }
+
+    public void usePistol()
+    {
         Used = !Used;
+        collisionPistol.enabled = Used;
         if(Used)
         {
             _particleSystem.Play();
@@ -21,7 +28,7 @@ public class PistolaDeCalor : UdonSharpBehaviour
         {
             _particleSystem.Stop();
         }
-        TriggerGO.SetActive(Used);
+        //TriggerGO.SetActive(Used);
         _animator.SetBool("Used", Used);
         if(Used)
         {
