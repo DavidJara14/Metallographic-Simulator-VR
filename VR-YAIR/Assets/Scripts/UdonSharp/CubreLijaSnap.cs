@@ -6,7 +6,7 @@ using VRC.Udon;
 
 public class CubreLijaSnap : UdonSharpBehaviour
 {
-    [SerializeField] bool CubreLijaLoaded;
+    [SerializeField] public bool CubreLijaLoaded;
     [SerializeField] bool Stayed;
 
     [SerializeField] public GameObject CubreLijaGo = null;
