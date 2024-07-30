@@ -300,6 +300,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 754344193462847508}
+  cubrelijaReference: {fileID: 0}
 --- !u!114 &3475585720321907908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2563,7 +2564,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c1e0556a8136abd44aeab7c6dca1d752, type: 2}
+  - {fileID: 2100000, guid: ef2b618265e03174cbc1ff5795aaccaf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
