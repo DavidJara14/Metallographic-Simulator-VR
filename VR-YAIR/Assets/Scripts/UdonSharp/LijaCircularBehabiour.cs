@@ -11,17 +11,22 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
     //Etiqueta, no eliminar
 
     [SerializeField][UdonSynced] public int TamañoDeGrano;
-    LijaDataholder referenceDataholder;
+    [SerializeField] LijaDataholder referenceDataholder;
     //private Material _materialLija;
 
     public TextMeshProUGUI text;
     public MeshRenderer meshRenderer;
 
+    private void Start()
+    {
+        
+    }
 
-    internal void OnPoolSpawn(ref LijaDataholder referenceGOComponent, int tamañoDeGrano)
+    public void OnPoolSpawn(ref LijaDataholder referenceGOComponent, int tamañoDeGrano)
     {
         TamañoDeGrano = tamañoDeGrano;
-        referenceDataholder = referenceGOComponent;
+        if(referenceGOComponent != null && referenceGOComponent != null) 
+            referenceDataholder = referenceGOComponent;
         //_materialLija = referenceGOComponent.MaterialesSegunTamañosDeLija[referenceGOComponent.LijaDict[tamañoDeGrano].Int];
         Debug.Log($"Tamaño de grano set to {TamañoDeGrano}");
         text.text = TamañoDeGrano.ToString();
