@@ -169,4 +169,10 @@ haveAluminaGris = true;
         }
 
     }
+
+    public bool IsReady()
+    {
+        return haveAluminaBlanca && haveNital && haveAluminaGris;
+    }
+
 }

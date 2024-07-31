@@ -136,6 +136,12 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         }
     }
 
+    private void RemoveImage()
+    {
+        Sprite sprite = null;
+        UpdateImage(ref sprite);
+    }
+
     public void Canvas_On()
     {
         CanvasGO.SetActive(true);
@@ -151,8 +157,11 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         PBcomponent = other.gameObject.GetComponent<ProbeBehabiour>();
         if (PBcomponent != null)
         {
-            TryChangeImageNew(PBcomponent.getProbeType(), Augment);
-            CompText.text = $"x{Augment}";
+            if (PBcomponent.GetComponent<ActivateMirror>().IsReady())
+            {
+                TryChangeImageNew(PBcomponent.getProbeType(), Augment);
+                CompText.text = $"x{Augment}";
+            }
         }
     }
 
@@ -161,6 +170,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         PBcomponent = other.gameObject.GetComponent<ProbeBehabiour>();
         if (PBcomponent != null)
         {
+            RemoveImage();
         }
     }
 
