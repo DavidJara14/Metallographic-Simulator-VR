@@ -18,7 +18,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
     public int caraTrabajada = 1;
 
-    public GameObject probeBehaviour;
+    public ProbeBehabiour probeBehaviour;
     public float Desgaste = 0;
     public bool _IsFirstSanding = true;
     public bool calor = false;
@@ -172,7 +172,7 @@ haveAluminaGris = true;
 
     public bool IsReady()
     {
-        return haveAluminaBlanca && haveNital && haveAluminaGris;
+        return haveAluminaBlanca && haveNital && haveAluminaGris && probeBehaviour.IsLijadoMaximo();
     }
 
 }
