@@ -61,6 +61,11 @@ public class InteractProbe : UdonSharpBehaviour
         }
     }
 
+    public void DisableCanva()
+    {
+        canva.SetActive(false);
+    }
+
     /*Texture2D RTImage(Camera camera)
     {
         // The Render Texture in RenderTexture.active is the one

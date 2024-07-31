@@ -104,7 +104,7 @@ public class LijaRotation : UdonSharpBehaviour
     
     public void StartMachine()
     {
-        if (LijaLoaded)
+        if (LijaLoaded && isEnergized)
         {
             Rotating = true;
             Lija.pickupable = !Rotating;
@@ -121,18 +121,14 @@ public class LijaRotation : UdonSharpBehaviour
 
     public void StopMachine()
     {
+        Rotating = false;
         if (LijaLoaded)
         {
-            Rotating = false;
             Lija.pickupable = !Rotating;
             if (Lija.pickupable)
                 Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             else
                 Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-        }
-        else
-        {
-            Rotating = false;
         }
     }
 

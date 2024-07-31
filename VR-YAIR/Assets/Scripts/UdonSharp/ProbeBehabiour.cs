@@ -13,7 +13,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     private float UpdateMatTimer = 0f;
 
     const float DesgasteMin = 0f;
-    const float DesgasteMax = 1f;
+    const float DesgasteMax = 800f;
     [SerializeField][Range(DesgasteMin, DesgasteMax)] private float Desgaste; //0 a Lija
 
     [SerializeField] public Vector3 LijaToObjSize;
@@ -26,6 +26,22 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [SerializeField] LijaRotation LijaRotationActiva;
     [SerializeField] ActivateMirror Mirror;
 
+    [SerializeField] private VRC_Pickup pickup;
+    [SerializeField] private InteractProbe interactProbe;
+    private DataList TamañosDeLija = new DataList()
+    {
+        { 120 },
+        { 180 },
+        { 240 },
+        { 360 },
+        { 400 },
+        { 500 },
+        { 600 },
+        { 800 },
+        { 9001 },
+    };
+
+
     public GameObject probetaShader1;
     public GameObject probetaShader2;
 
@@ -35,6 +51,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [Header("Audio Config")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
+    private bool LastUserWasVR = false;
 
     private void Start()
     {
@@ -67,6 +84,14 @@ public class ProbeBehabiour : UdonSharpBehaviour
                     _audioSource.Play();
                 }
             }
+            else
+            {
+                EsteParticleSystem.Stop();
+                if (_audioSource.isPlaying)
+                {
+                    _audioSource.Stop();
+                }
+            }
         }
         else if(EsteParticleSystem.isEmitting)
         {
@@ -97,7 +122,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         Debug.Log(LijaRotationActiva.name);
         if (LijaRotationActiva.Lija == null)
             return;
-        Desgaste = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
+        TryChangeDesgaste();
         //EsteMaterial.SetFloat("_GranoLija", Desgaste);
         if (Mirror.caraTrabajada == 1)
         {
@@ -113,12 +138,41 @@ public class ProbeBehabiour : UdonSharpBehaviour
             probetaShader2.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
         }
 
-        
 
-        Debug.Log("TamanioLija "+Desgaste);
+
+        //Debug.Log("TamanioLija " + Desgaste);
         //Debug.Log("Desgaste en la Probeta (ProbeBehaviour) = " + probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija"));
 
         //EsteMaterial.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).eulerAngles.z);
+    }
+
+    private void TryChangeDesgaste()// 120 a 800
+    {
+        var TamañoDeGranoEnLija = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
+        if (LijaRotationActiva == null)
+            return;
+        if (!LijaRotationActiva.Rotating)
+            return;
+        if (Desgaste == TamañoDeGranoEnLija)
+            return;
+        if (Desgaste > TamañoDeGranoEnLija)
+        {
+            Debug.Log($"Cambio por bajar: {Desgaste} a {TamañoDeGranoEnLija}");
+            Desgaste = TamañoDeGranoEnLija;
+        }
+        else
+        {
+            if (TamañosDeLija.BinarySearch(new DataToken(Desgaste)) < TamañosDeLija.BinarySearch(new DataToken(TamañoDeGranoEnLija))
+                && TamañosDeLija.BinarySearch(new DataToken(Desgaste)) + 1 == TamañosDeLija.BinarySearch(new DataToken(TamañoDeGranoEnLija)))
+            {
+                Debug.Log($"Cambio por seguir: {Desgaste} a {TamañoDeGranoEnLija}");
+                Desgaste = TamañoDeGranoEnLija;
+            }
+            else
+            {
+                Debug.Log($"Intento de salto de lija: {Desgaste} a {TamañoDeGranoEnLija}");
+            }
+        }
     }
 
     public string getProbeType()
@@ -155,14 +209,35 @@ public class ProbeBehabiour : UdonSharpBehaviour
     //    Last = "";
     //}
 
+    public override void OnPickup()
+    {
+        LastUserWasVR = pickup.currentPlayer.IsUserInVR();
+        CheckInteractProve();
+    }
+
+    private void CheckInteractProve()
+    {
+        if (!LastUserWasVR)
+        {
+            interactProbe.gameObject.SetActive(true);
+        }
+        else
+        {
+            interactProbe.gameObject.SetActive(false);
+            interactProbe.DisableCanva();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log(other + "in Probebehabiour");
         if (other.GetComponent<LijaRotation>() != null)
         {
-            Debug.Log("Lijarotation in Provebehabiour");
+            //Debug.Log("Lijarotation in Provebehabiour");
             LijaRotationActivaGO = other.gameObject;
             LijaRotationActiva = LijaRotationActivaGO.GetComponent<LijaRotation>();
+            interactProbe.DisableCanva();
+            interactProbe.gameObject.SetActive(false);
         }
     }
 
@@ -173,6 +248,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             //ResetVariables();
             LijaRotationActivaGO = null;
             LijaRotationActiva = null;
+            CheckInteractProve();
         }
     }
 
@@ -194,5 +270,9 @@ public class ProbeBehabiour : UdonSharpBehaviour
         //Gizmos.DrawLine();
     }
 
+    public bool IsLijadoMaximo()
+    { 
+        return (int)Desgaste == (int)DesgasteMax;
+    }
 }
 
