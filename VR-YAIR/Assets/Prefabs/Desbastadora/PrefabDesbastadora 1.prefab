@@ -1505,6 +1505,9 @@ MonoBehaviour:
   - {fileID: 2407495167113638053}
   - {fileID: 3429769716681045887}
   - {fileID: 989010437356454115}
+  - {fileID: 0}
+  - {fileID: 8293681213281635230}
+  - {fileID: 2394884400354164156}
   isToggleSwitch: 1
   startToggledOn: 0
   maxRotation: 30
@@ -1516,7 +1519,7 @@ MonoBehaviour:
   networkSync: 1
   masterOnly: 0
   transferReceiverOwnership: 1
-  disableWhenNetworkClogged: 1
+  disableWhenNetworkClogged: 0
   playAudio: 1
   buttonSource: {fileID: 2951384551691596579}
   pressClip: {fileID: 8300000, guid: e507470ed6091e54a8737f3fd7a04441, type: 3}
@@ -2268,6 +2271,11 @@ MonoBehaviour:
   - {fileID: 3429769716681045887}
   - {fileID: 989010437356454115}
   - {fileID: 2394884400354164156}
+  - {fileID: 0}
+  - {fileID: 2407495167113638053}
+  - {fileID: 3966987908981051545}
+  - {fileID: 2880409804353439650}
+  - {fileID: 1363355081677521969}
   isToggleButton: 0
   startToggledOn: 0
   buttonAxis: {x: 0, y: 0, z: -1}
@@ -2282,7 +2290,7 @@ MonoBehaviour:
   networkSync: 1
   masterOnly: 0
   transferReceiverOwnership: 1
-  disableWhenNetworkClogged: 1
+  disableWhenNetworkClogged: 0
   playAudio: 1
   buttonSource: {fileID: 0}
   pressClip: {fileID: 8300000, guid: e507470ed6091e54a8737f3fd7a04441, type: 3}
@@ -2662,6 +2670,11 @@ MonoBehaviour:
   - {fileID: 3429769716681045887}
   - {fileID: 989010437356454115}
   - {fileID: 8293681213281635230}
+  - {fileID: 0}
+  - {fileID: 2407495167113638053}
+  - {fileID: 3966987908981051545}
+  - {fileID: 2880409804353439650}
+  - {fileID: 1363355081677521969}
   isToggleButton: 0
   startToggledOn: 0
   buttonAxis: {x: 0, y: 0, z: -1}
@@ -2676,7 +2689,7 @@ MonoBehaviour:
   networkSync: 1
   masterOnly: 0
   transferReceiverOwnership: 1
-  disableWhenNetworkClogged: 1
+  disableWhenNetworkClogged: 0
   playAudio: 1
   buttonSource: {fileID: 0}
   pressClip: {fileID: 8300000, guid: e507470ed6091e54a8737f3fd7a04441, type: 3}

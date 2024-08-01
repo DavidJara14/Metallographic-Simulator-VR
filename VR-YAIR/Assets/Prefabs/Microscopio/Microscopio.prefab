@@ -165,7 +165,7 @@ MonoBehaviour:
   networkSync: 1
   masterOnly: 0
   transferReceiverOwnership: 1
-  disableWhenNetworkClogged: 1
+  disableWhenNetworkClogged: 0
   playAudio: 1
   buttonSource: {fileID: 4158947962192745155}
   pressClip: {fileID: 8300000, guid: e507470ed6091e54a8737f3fd7a04441, type: 3}
