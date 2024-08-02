@@ -60,8 +60,11 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         Augment = Aumentos[count].Int;
         if (PBcomponent == null)
             return;
-        TryChangeImageNew(PBcomponent.getProbeType(), Augment);
-        CompText.text = $"x{Augment}";
+        if(PBcomponent.GetComponent<ActivateMirror>().IsReady())
+        {
+            TryChangeImageNew(PBcomponent.getProbeType(), Augment);
+            CompText.text = $"x{Augment}";
+        }
         //TryChangeImage(PBcomponent.getProbeType(), Augment);
     }
 

@@ -7,6 +7,7 @@ public class AugmentsBehabiour : UdonSharpBehaviour
 {
     int count = 0;
     MicroscopeBehabiour microscopeBehabiour;
+    [SerializeField] GameObject Revolver;
     [Header("Audio Config")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
@@ -29,5 +30,6 @@ public class AugmentsBehabiour : UdonSharpBehaviour
             count = 0;
         microscopeBehabiour.OnAugmentChange(count);
         _audioSource.PlayOneShot(_audioClip);
+        Revolver.transform.rotation = Quaternion.Euler(90f, 0, count * 90);
     }
 }

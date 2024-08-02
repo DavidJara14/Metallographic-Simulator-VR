@@ -9,6 +9,7 @@ public class LijaRotation : UdonSharpBehaviour
 
     [SerializeField] bool LijaLoaded;
     [SerializeField] public bool Rotating;
+    [UdonSynced][SerializeField] public bool enableMeshCL;
 
     [SerializeField] bool Stayed;
 
@@ -33,15 +34,16 @@ public class LijaRotation : UdonSharpBehaviour
     [SerializeField] private float StartTimer;
     [SerializeField] private bool AudioLoop;
 
+
     private void Update()
     {
-        if(Rotating && isEnergized)
+        if (Rotating && isEnergized)
         {
             gameObject.transform.Rotate(Vector3.forward * RotationVelocity * Time.deltaTime);
         }
-        if(Lija == null)
+        if (Lija == null)
         {
-            if(LijaGO != null)
+            if (LijaGO != null)
             {
                 Lija = LijaGO.GetComponent<VRC_Pickup>();
             }
@@ -65,10 +67,10 @@ public class LijaRotation : UdonSharpBehaviour
             _LoopAudioSource.Play();
         }
 
-        if(!Rotating && (AudioStart || AudioLoop))
+        if (!Rotating && (AudioStart || AudioLoop))
         {
             AudioStart = false;
-            AudioLoop =false;
+            AudioLoop = false;
             StartTimer = 0f;
             _LoopAudioSource.Stop();
             _StartStopAudioSource.Stop();
@@ -76,7 +78,7 @@ public class LijaRotation : UdonSharpBehaviour
             _StartStopAudioSource.Play();
         }
 
-        if(AudioStart)
+        if (AudioStart)
             StartTimer += Time.deltaTime;
     }
 
@@ -101,14 +103,15 @@ public class LijaRotation : UdonSharpBehaviour
         LijaGO = null;
         Lija = null;
     }
-    
+
     public void StartMachine()
     {
+        enableMeshCL = false;
         if (LijaLoaded && isEnergized)
         {
             Rotating = true;
             Lija.pickupable = !Rotating;
-            if(Lija.pickupable)
+            if (Lija.pickupable)
                 Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             else
                 Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
@@ -121,6 +124,7 @@ public class LijaRotation : UdonSharpBehaviour
 
     public void StopMachine()
     {
+        enableMeshCL = true;
         Rotating = false;
         if (LijaLoaded)
         {

@@ -20,9 +20,11 @@ MonoBehaviour:
     this\r\n    __target_1: %VRCUdonCommonInterfacesNetworkEventTarget, null\r\n   
     __eventName_1: %SystemString, null\r\n    __Boolean_0: %SystemBoolean, null\r\n   
     __instance_2: %UnityEngineParticleSystem, null\r\n    __instance_3: %UnityEngineParticleSystem,
-    null\r\n    __instance_4: %UnityEngineParticleSystem, null\r\n    __instance_5:
-    %UnityEngineParticleSystem, null\r\n    __instance_6: %UnityEngineRigidbody,
-    null\r\n    __value_0: %SystemBoolean, null\r\n    __instance_7: %UnityEngineGameObject,
+    null\r\n    __message_0: %SystemObject, null\r\n    __instance_4: %SystemString,
+    null\r\n    __instance_5: %UnityEngineParticleSystem, null\r\n    __message_1:
+    %SystemObject, null\r\n    __instance_6: %SystemString, null\r\n    __instance_7:
+    %UnityEngineParticleSystem, null\r\n    __instance_8: %UnityEngineRigidbody,
+    null\r\n    __value_0: %SystemBoolean, null\r\n    __instance_9: %UnityEngineGameObject,
     this\r\n    __type_0: %SystemType, null\r\n    __GameObject_0: %UnityEngineGameObject,
     this\r\n    __Type_0: %SystemType, null\r\n    PartSyst: %UnityEngineGameObject,
     this\r\n    PartycleSystemComp: %UnityEngineParticleSystem, null\r\n\r\n.data_end\r\n\r\n.code_start\r\n\r\n   
@@ -36,19 +38,23 @@ MonoBehaviour:
     \r\n        PUSH, PartycleSystemComp\r\n        PUSH, __instance_2\r\n       
     COPY\r\n        PUSH, __instance_2\r\n        PUSH, __Boolean_0\r\n        EXTERN,
     \"UnityEngineParticleSystem.__get_isEmitting__SystemBoolean\"\r\n        PUSH,
-    __Boolean_0\r\n        JUMP_IF_FALSE, 0x000000B8\r\n        PUSH, PartycleSystemComp\r\n       
+    __Boolean_0\r\n        JUMP_IF_FALSE, 0x000000E0\r\n        PUSH, PartycleSystemComp\r\n       
     PUSH, __instance_3\r\n        COPY\r\n        PUSH, __instance_3\r\n        EXTERN,
-    \"UnityEngineParticleSystem.__Stop__SystemVoid\"\r\n        JUMP, 0x000000DC\r\n       
-    PUSH, PartycleSystemComp\r\n        PUSH, __instance_4\r\n        COPY\r\n       
-    PUSH, __instance_4\r\n        EXTERN, \"UnityEngineParticleSystem.__Play__SystemVoid\"\r\n       
+    \"UnityEngineParticleSystem.__Stop__SystemVoid\"\r\n        PUSH, __instance_4\r\n       
+    PUSH, __message_0\r\n        EXTERN, \"SystemString.__Clone__SystemObject\"\r\n       
+    PUSH, __message_0\r\n        EXTERN, \"UnityEngineDebug.__Log__SystemObject__SystemVoid\"\r\n       
+    JUMP, 0x0000012C\r\n        PUSH, PartycleSystemComp\r\n        PUSH, __instance_5\r\n       
+    COPY\r\n        PUSH, __instance_5\r\n        EXTERN, \"UnityEngineParticleSystem.__Play__SystemVoid\"\r\n       
+    PUSH, __instance_6\r\n        PUSH, __message_1\r\n        EXTERN, \"SystemString.__Clone__SystemObject\"\r\n       
+    PUSH, __message_1\r\n        EXTERN, \"UnityEngineDebug.__Log__SystemObject__SystemVoid\"\r\n       
     JUMP, 0xFFFFFFFC\r\n    \r\n    .export Deactivate\r\n    \r\n    Deactivate:\r\n   
-    \r\n        PUSH, PartycleSystemComp\r\n        PUSH, __instance_5\r\n       
-    COPY\r\n        PUSH, __instance_5\r\n        EXTERN, \"UnityEngineParticleSystem.__Stop__SystemVoid\"\r\n       
+    \r\n        PUSH, PartycleSystemComp\r\n        PUSH, __instance_7\r\n       
+    COPY\r\n        PUSH, __instance_7\r\n        EXTERN, \"UnityEngineParticleSystem.__Stop__SystemVoid\"\r\n       
     JUMP, 0xFFFFFFFC\r\n    \r\n    .export _onPickup\r\n    \r\n    _onPickup:\r\n   
-    \r\n        PUSH, __GameObject_0\r\n        PUSH, __instance_7\r\n        COPY\r\n       
-    PUSH, __Type_0\r\n        PUSH, __type_0\r\n        COPY\r\n        PUSH, __instance_7\r\n       
-    PUSH, __type_0\r\n        PUSH, __instance_6\r\n        EXTERN, \"UnityEngineGameObject.__GetComponent__SystemType__UnityEngineComponent\"\r\n       
-    PUSH, __instance_6\r\n        PUSH, __value_0\r\n        EXTERN, \"UnityEngineRigidbody.__set_isKinematic__SystemBoolean__SystemVoid\"\r\n       
+    \r\n        PUSH, __GameObject_0\r\n        PUSH, __instance_9\r\n        COPY\r\n       
+    PUSH, __Type_0\r\n        PUSH, __type_0\r\n        COPY\r\n        PUSH, __instance_9\r\n       
+    PUSH, __type_0\r\n        PUSH, __instance_8\r\n        EXTERN, \"UnityEngineGameObject.__GetComponent__SystemType__UnityEngineComponent\"\r\n       
+    PUSH, __instance_8\r\n        PUSH, __value_0\r\n        EXTERN, \"UnityEngineRigidbody.__set_isKinematic__SystemBoolean__SystemVoid\"\r\n       
     JUMP, 0xFFFFFFFC\r\n    \r\n\r\n.code_end\r\n"
   assemblyError: 
   graphData:
@@ -165,7 +171,7 @@ MonoBehaviour:
         stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|UseThisThing
     - fullName: Event_Custom
       uid: 7d12f606-9883-430f-9bb0-6fc930c4633c
-      position: {x: 180, y: -212.00002}
+      position: {x: 178.39996, y: -322.71967}
       nodeUIDs:
       - 
       flowUIDs:
@@ -175,7 +181,7 @@ MonoBehaviour:
         stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Deactivate
     - fullName: VRCUdonCommonInterfacesIUdonEventReceiver.__SendCustomNetworkEvent__VRCUdonCommonInterfacesNetworkEventTarget_SystemString__SystemVoid
       uid: ac0b32ca-d7ad-4969-b0cd-241ed21bba5b
-      position: {x: -317.96008, y: -176.80006}
+      position: {x: -309.19992, y: -182.4}
       nodeUIDs:
       - 
       - 
@@ -254,7 +260,7 @@ MonoBehaviour:
         stringValue: 
     - fullName: Get_Variable
       uid: 6a6ee06e-b7d3-4e5c-8966-ee9940cc52aa
-      position: {x: 113.72001, y: -128.00003}
+      position: {x: 112, y: -238.7197}
       nodeUIDs:
       - 
       flowUIDs: []
@@ -265,10 +271,11 @@ MonoBehaviour:
         stringValue: 
     - fullName: UnityEngineParticleSystem.__Stop__SystemVoid
       uid: 197503c8-eac7-4d0f-8f36-48d3d1079c89
-      position: {x: 408.0001, y: -170.4}
+      position: {x: 406.39996, y: -281.1197}
       nodeUIDs:
       - 6a6ee06e-b7d3-4e5c-8966-ee9940cc52aa|0
-      flowUIDs: []
+      flowUIDs:
+      - 
       nodeValues:
       - unityObjectValue: {fileID: 0}
         stringValue: 
@@ -311,7 +318,8 @@ MonoBehaviour:
       position: {x: 760.3999, y: 28.800003}
       nodeUIDs:
       - 03d54077-3a1b-4c26-a6eb-072c938b9224|0
-      flowUIDs: []
+      flowUIDs:
+      - e6a1b586-edc5-4fe2-878a-67189f44c73f
       nodeValues:
       - unityObjectValue: {fileID: 0}
         stringValue: 
@@ -331,7 +339,8 @@ MonoBehaviour:
       position: {x: 760.3999, y: 164.80002}
       nodeUIDs:
       - 1c220a1e-7cc1-4fe7-a044-5e6fc6727087|0
-      flowUIDs: []
+      flowUIDs:
+      - cff0f657-fb35-4e3a-8823-821ecc0c3457
       nodeValues:
       - unityObjectValue: {fileID: 0}
         stringValue: 
@@ -369,7 +378,8 @@ MonoBehaviour:
       nodeUIDs:
       - f19efd8d-99cc-48fb-8692-933220fe1d8d|0
       - 
-      flowUIDs: []
+      flowUIDs:
+      - 
       nodeValues:
       - unityObjectValue: {fileID: 0}
         stringValue: 
@@ -391,6 +401,48 @@ MonoBehaviour:
       nodeUIDs: []
       flowUIDs: []
       nodeValues: []
+    - fullName: UnityEngineDebug.__Log__SystemObject__SystemVoid
+      uid: cff0f657-fb35-4e3a-8823-821ecc0c3457
+      position: {x: 934.52014, y: 237.60004}
+      nodeUIDs:
+      - bc00c266-e892-41df-b27a-1a55a9dcf1af|0
+      - 
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+    - fullName: SystemString.__Clone__SystemObject
+      uid: bc00c266-e892-41df-b27a-1a55a9dcf1af
+      position: {x: 621.72015, y: 299.2}
+      nodeUIDs:
+      - 
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Play
+    - fullName: UnityEngineDebug.__Log__SystemObject__SystemVoid
+      uid: e6a1b586-edc5-4fe2-878a-67189f44c73f
+      position: {x: 1111.5513, y: 39.200012}
+      nodeUIDs:
+      - ee2465aa-0e66-4857-96d0-952fbccb1ba0
+      - 
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+      - unityObjectValue: {fileID: 0}
+        stringValue: 
+    - fullName: SystemString.__Clone__SystemObject
+      uid: ee2465aa-0e66-4857-96d0-952fbccb1ba0
+      position: {x: 777.60016, y: -99.19998}
+      nodeUIDs:
+      - 
+      flowUIDs: []
+      nodeValues:
+      - unityObjectValue: {fileID: 0}
+        stringValue: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Stop
     updateOrder: 0
   graphElementData:
   - type: 2

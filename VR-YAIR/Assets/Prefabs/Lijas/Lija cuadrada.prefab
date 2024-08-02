@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 2f883fe9d0e71304e9148e10ea4add01, type: 3}
+  - {fileID: 2100000, guid: b26e210924ce96543a385d9ed7baddd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -545,6 +545,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5171470293185973213}
+  ReferenceGOComponent: {fileID: 0}
   Lijas:
   - {fileID: 5154110576598398889, guid: ab79e39dbbcfe884bad14f43c647278a, type: 3}
   - {fileID: 1538168538660217259, guid: 0c7f6bf078de9b24faeff9da7def6b11, type: 3}
