@@ -9,7 +9,7 @@ public class BotellaLab : UdonSharpBehaviour
     private const float Max = 250f;
     public bool isInfinite = false;
     public string Tipo = "";
-    [SerializeField][Range(0f, Max)] private float LiquidFill;
+    [UdonSynced][SerializeField][Range(0f, Max)] private float LiquidFill;
     [SerializeField] private float LiquidPourVel;
 
     [SerializeField] private GameObject InfillGO;

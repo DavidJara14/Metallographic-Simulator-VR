@@ -38,6 +38,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         { 500 },
         { 600 },
         { 800 },
+        { 9000 },
         { 9001 },
     };
 
@@ -162,8 +163,10 @@ public class ProbeBehabiour : UdonSharpBehaviour
         }
         else
         {
-            if (TamañosDeLija.BinarySearch(new DataToken(Desgaste)) < TamañosDeLija.BinarySearch(new DataToken(TamañoDeGranoEnLija))
-                && TamañosDeLija.BinarySearch(new DataToken(Desgaste)) + 1 == TamañosDeLija.BinarySearch(new DataToken(TamañoDeGranoEnLija)))
+            var IndexDesgasteEnProbeta = TamañosDeLija.BinarySearch(new DataToken(Desgaste));
+            var IndexTamañoDeGranoEnLija = TamañosDeLija.BinarySearch(new DataToken(TamañoDeGranoEnLija));
+            if (IndexDesgasteEnProbeta < IndexTamañoDeGranoEnLija
+                && (IndexDesgasteEnProbeta + 1 == IndexTamañoDeGranoEnLija || IndexDesgasteEnProbeta + 2 == IndexTamañoDeGranoEnLija))
             {
                 Debug.Log($"Cambio por seguir: {Desgaste} a {TamañoDeGranoEnLija}");
                 Desgaste = TamañoDeGranoEnLija;
