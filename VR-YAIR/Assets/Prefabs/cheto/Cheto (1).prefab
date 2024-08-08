@@ -4841,7 +4841,6 @@ GameObject:
   - component: {fileID: 1203786432867256070}
   - component: {fileID: 2457172151966312867}
   - component: {fileID: 19595230380240443}
-  - component: {fileID: 8495466460872407186}
   - component: {fileID: 1516686048265357184}
   - component: {fileID: 880314078136509953}
   - component: {fileID: -4159626807808449153}
@@ -4922,19 +4921,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8495466460872407186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1236785958776073472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1783056023, guid: 661092b4961be7145bfbe56e1e62337b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AllowCollisionOwnershipTransfer: 1
 --- !u!54 &1516686048265357184
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5037,6 +5023,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6301855715895654556}
+  HideOnUse: 0
   _ref: {fileID: 0}
   _particleSystem: {fileID: 2611238214876626378}
   _audioSource: {fileID: 4632351332629686702}
@@ -5155,7 +5142,7 @@ MonoBehaviour:
   SynchronizePosition: 0
   AllowCollisionOwnershipTransfer: 0
   Reliable: 0
-  _syncMethod: 2
+  _syncMethod: 1
   serializedProgramAsset: {fileID: 11400000, guid: d6909a4a61ed31247a561f5231f946d8,
     type: 2}
   programSource: {fileID: 11400000, guid: e6ac7df0dafe0d541b4f9eb51c9b5c08, type: 2}

@@ -23,11 +23,8 @@ MonoBehaviour:
     null\r\n    __message_0: %SystemObject, null\r\n    __instance_4: %SystemString,
     null\r\n    __instance_5: %UnityEngineParticleSystem, null\r\n    __message_1:
     %SystemObject, null\r\n    __instance_6: %SystemString, null\r\n    __instance_7:
-    %UnityEngineParticleSystem, null\r\n    __instance_8: %UnityEngineRigidbody,
-    null\r\n    __value_0: %SystemBoolean, null\r\n    __instance_9: %UnityEngineGameObject,
-    this\r\n    __type_0: %SystemType, null\r\n    __GameObject_0: %UnityEngineGameObject,
-    this\r\n    __Type_0: %SystemType, null\r\n    PartSyst: %UnityEngineGameObject,
-    this\r\n    PartycleSystemComp: %UnityEngineParticleSystem, null\r\n\r\n.data_end\r\n\r\n.code_start\r\n\r\n   
+    %UnityEngineParticleSystem, null\r\n    PartSyst: %UnityEngineGameObject, this\r\n   
+    PartycleSystemComp: %UnityEngineParticleSystem, null\r\n\r\n.data_end\r\n\r\n.code_start\r\n\r\n   
     .export _onPickupUseDown\r\n    \r\n    _onPickupUseDown:\r\n    \r\n       
     PUSH, __instance_0\r\n        PUSH, __target_0\r\n        PUSH, __eventName_0\r\n       
     EXTERN, \"VRCUdonCommonInterfacesIUdonEventReceiver.__SendCustomNetworkEvent__VRCUdonCommonInterfacesNetworkEventTarget_SystemString__SystemVoid\"\r\n       
@@ -50,11 +47,6 @@ MonoBehaviour:
     JUMP, 0xFFFFFFFC\r\n    \r\n    .export Deactivate\r\n    \r\n    Deactivate:\r\n   
     \r\n        PUSH, PartycleSystemComp\r\n        PUSH, __instance_7\r\n       
     COPY\r\n        PUSH, __instance_7\r\n        EXTERN, \"UnityEngineParticleSystem.__Stop__SystemVoid\"\r\n       
-    JUMP, 0xFFFFFFFC\r\n    \r\n    .export _onPickup\r\n    \r\n    _onPickup:\r\n   
-    \r\n        PUSH, __GameObject_0\r\n        PUSH, __instance_9\r\n        COPY\r\n       
-    PUSH, __Type_0\r\n        PUSH, __type_0\r\n        COPY\r\n        PUSH, __instance_9\r\n       
-    PUSH, __type_0\r\n        PUSH, __instance_8\r\n        EXTERN, \"UnityEngineGameObject.__GetComponent__SystemType__UnityEngineComponent\"\r\n       
-    PUSH, __instance_8\r\n        PUSH, __value_0\r\n        EXTERN, \"UnityEngineRigidbody.__set_isKinematic__SystemBoolean__SystemVoid\"\r\n       
     JUMP, 0xFFFFFFFC\r\n    \r\n\r\n.code_end\r\n"
   assemblyError: 
   graphData:
@@ -358,14 +350,14 @@ MonoBehaviour:
       position: {x: -166.42331, y: -646.5132}
       nodeUIDs: []
       flowUIDs:
-      - 0ceb9736-de39-4931-a138-8c8c2acdc492
+      - 
       nodeValues: []
     - fullName: UnityEngineGameObject.__GetComponent__SystemType__UnityEngineComponent
       uid: f19efd8d-99cc-48fb-8692-933220fe1d8d
       position: {x: -184.82329, y: -563.3131}
       nodeUIDs:
-      - c0e34783-aec8-4e78-8260-2cc29253bb40|0
-      - 283dba28-030a-4648-89de-16f7912faa19|0
+      - 
+      - 
       flowUIDs: []
       nodeValues:
       - unityObjectValue: {fileID: 0}
@@ -376,7 +368,7 @@ MonoBehaviour:
       uid: 0ceb9736-de39-4931-a138-8c8c2acdc492
       position: {x: 26.376705, y: -631.3131}
       nodeUIDs:
-      - f19efd8d-99cc-48fb-8692-933220fe1d8d|0
+      - 
       - 
       flowUIDs:
       - 

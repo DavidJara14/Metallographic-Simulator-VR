@@ -12,7 +12,6 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
 
     [SerializeField][UdonSynced] public int TamañoDeGrano;
     [SerializeField] LijaDataholder referenceDataholder;
-    private bool WasPicked;
 
     public TextMeshProUGUI text;
     public MeshRenderer meshRenderer;
@@ -25,14 +24,7 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
         Debug.Log($"Tamaño de grano set to {TamañoDeGrano}");
         text.text = TamañoDeGrano.ToString();
         meshRenderer.material = referenceDataholder.MaterialesSegunTamañosDeLija[referenceDataholder.LijaDict[tamañoDeGrano].Int];
-        GetComponent<Rigidbody>().isKinematic = true;
         RequestSerialization();
-    }
-
-    public override void OnPickup()
-    {
-        GetComponent<Rigidbody>().isKinematic = false;
-        WasPicked = true;
     }
 
     public override void OnDeserialization()
