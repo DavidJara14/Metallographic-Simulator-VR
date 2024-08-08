@@ -1424,14 +1424,14 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 1
+  Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1520,7 +1520,7 @@ MonoBehaviour:
   Far: 40
   Near: 0
   VolumetricRadius: 0
-  EnableSpatialization: 1
+  EnableSpatialization: 0
   UseAudioSourceVolumeCurve: 0
 --- !u!82 &1917382154688199006
 AudioSource:
@@ -1536,16 +1536,16 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1646,7 +1646,7 @@ MonoBehaviour:
   RPMText: {fileID: 5063441828768436383}
   isEnergized: 0
   _StartStopAudioSource: {fileID: 1770969022971872159}
-  _LoopAudioSource: {fileID: 1770969022971872159}
+  _LoopAudioSource: {fileID: 1917382154688199006}
   _StartAudioClip: {fileID: 8300000, guid: e5dabfeee49465b4fa7cda237babcdd7, type: 3}
   _LoopAudioClip: {fileID: 8300000, guid: 4d02fb1ad6ad48840b5bc7773988ed07, type: 3}
   _StopAudioClip: {fileID: 8300000, guid: 0a569c947f7df734fb9d65912c7aa93c, type: 3}
