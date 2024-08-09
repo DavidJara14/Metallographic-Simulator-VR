@@ -44,7 +44,7 @@ public class CubreLijaBehabiour : UdonSharpBehaviour
         else if (!cubrelijaReference.GetComponent<CubreLijaSnap>().CubreLijaLoaded)
         {
             gameObject.GetComponent<MeshCollider>().enabled = true;
-
+            
         }
 
     }
