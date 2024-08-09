@@ -388,10 +388,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5599603651206037240, guid: 880ecdbb00aba5a4f984e9b5358eb3ab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 880ecdbb00aba5a4f984e9b5358eb3ab,
         type: 3}
       propertyPath: m_Name
       value: tijerasVisual
+      objectReference: {fileID: 0}
+    - target: {fileID: 3443655957598955656, guid: 880ecdbb00aba5a4f984e9b5358eb3ab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705409182545051154, guid: 880ecdbb00aba5a4f984e9b5358eb3ab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125131872813613792, guid: 880ecdbb00aba5a4f984e9b5358eb3ab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
