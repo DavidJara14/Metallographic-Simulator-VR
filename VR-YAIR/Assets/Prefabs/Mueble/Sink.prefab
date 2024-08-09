@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8005078178462751370}
   - component: {fileID: 4934581967097630997}
+  - component: {fileID: 8149726890476311438}
   m_Layer: 0
   m_Name: Sink
   m_TagString: Untagged
@@ -54,8 +55,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7212086, y: 0.16376495, z: 2.7466154}
-  m_Center: {x: -0.40432358, y: -0.021167755, z: 0.50735044}
+  m_Size: {x: 0.7963006, y: 0.15564728, z: 2.6772497}
+  m_Center: {x: -0.4033075, y: -0.025226593, z: 0.5420333}
+--- !u!65 &8149726890476311438
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199191465661939419}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5988535, y: 0.20308685, z: 0.79491585}
+  m_Center: {x: -0.006883353, y: -0.0026626587, z: -0.39508742}
 --- !u!1001 &4806484390118928649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123,6 +145,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sink_1_FBX
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f6c8073ff1687444e8ee3528f89f08c1,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8602101118960347331, guid: f6c8073ff1687444e8ee3528f89f08c1,
         type: 3}
