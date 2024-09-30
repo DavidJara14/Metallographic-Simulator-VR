@@ -15,7 +15,7 @@ public class LijaCuadrada : UdonSharpBehaviour
     public GameObject[] Lijas;
     public int TamañoDeGrano;
 
-    [UdonSynced] private bool isActive = true;
+    //[UdonSynced] private bool isActive = true;
 
     public TextMeshProUGUI text;
     [SerializeField] private GameObject[] Placers;
@@ -29,9 +29,9 @@ public class LijaCuadrada : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trigger " + other);
         if (other.GetComponentInParent<TijerasBehabiour>())
         {
+            Debug.Log("trigger " + other);  
             //OnTijeraTrigger();
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "OnTijeraTriggerNE");
         }
@@ -45,6 +45,7 @@ public class LijaCuadrada : UdonSharpBehaviour
         {
             Networking.SetOwner(Networking.LocalPlayer, ReferenceGOComponent.LijaPool.gameObject);
             var go = ReferenceGOComponent.LijaPool.TryToSpawn();
+            Debug.Log(go.name);
             go.transform.SetPositionAndRotation(transform.position, transform.rotation);
             go.GetComponent<LijaCircularBehabiour>().OnPoolSpawn(ref ReferenceGOComponent, TamañoDeGrano);
             //var go = Instantiate(Lijas[index.Int], gameObject.transform.position, gameObject.transform.rotation);
@@ -90,8 +91,8 @@ public class LijaCuadrada : UdonSharpBehaviour
 
     public override void OnDeserialization()
     {
-        if(!isActive)
-            gameObject.SetActive(false);
+        //if(!isActive)
+        //    gameObject.SetActive(false);
     }
 
 }

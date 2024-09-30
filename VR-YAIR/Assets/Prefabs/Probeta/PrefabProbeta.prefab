@@ -1533,7 +1533,7 @@ ParticleSystem:
     enabled: 1
     type: 8
     angle: 30
-    length: 0.25
+    length: 0.074682504
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
@@ -1737,7 +1737,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -3552,7 +3552,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 1
+    enabled: 0
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -4041,7 +4041,7 @@ ParticleSystem:
     sizeAmount:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.23
       minScalar: 0
       maxCurve:
         serializedVersion: 2
