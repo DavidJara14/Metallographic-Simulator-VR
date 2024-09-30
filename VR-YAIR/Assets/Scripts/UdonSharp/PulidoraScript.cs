@@ -110,22 +110,27 @@ public class PulidoraScript : UdonSharpBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        GrisLoaded = false;
-        BlancaLoaded = false;
 
+        var elemento = other.GetComponentInParent<BotellaLab>();
 
-        string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
-        //Debug.Log(tipo);
-
-        if (tipo == "AGris")
+        if (elemento != null)
         {
-            GrisLoaded = true;
-            Debug.Log("Alumina Gris");
-        }
-        else if (tipo == "ABlanca")
-        {
-            BlancaLoaded = true;
-            Debug.Log("Alumina Blanca");
+            GrisLoaded = false;
+            BlancaLoaded = false;
+
+            string tipo = elemento.Tipo;
+            //Debug.Log(tipo);
+
+            if (tipo == "AGris")
+            {
+                GrisLoaded = true;
+                Debug.Log("Alumina Gris");
+            }
+            else if (tipo == "ABlanca")
+            {
+                BlancaLoaded = true;
+                Debug.Log("Alumina Blanca");
+            }
         }
     }
 }

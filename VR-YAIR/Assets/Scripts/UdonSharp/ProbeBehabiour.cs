@@ -14,6 +14,10 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     const float DesgasteMin = 0f;
     const float DesgasteMax = 800f;
+
+    const int ParticleRateMin = 10;
+    const int ParticleRateMax = 50;
+
     [SerializeField][Range(DesgasteMin, DesgasteMax)] private float Desgaste; //0 a Lija
 
     [SerializeField] public Vector3 LijaToObjSize;
@@ -78,8 +82,14 @@ public class ProbeBehabiour : UdonSharpBehaviour
         {
             if(LijaRotationActiva.Rotating)
             {
-                EsteParticleSystem.Play();
+                SetParticleRateOverTime();
+
+                if(!EsteParticleSystem.isEmitting || !EsteParticleSystem.isPlaying)
+                {
+                    EsteParticleSystem.Play();
+                }
                 EsteParticleSystem.gameObject.transform.rotation = Quaternion.FromToRotation(EsteParticleSystem.transform.rotation.eulerAngles, VectorDeDireccionDeDesgasteActual);
+
                 if (!_audioSource.isPlaying)
                 {
                     _audioSource.Play();
@@ -145,6 +155,13 @@ public class ProbeBehabiour : UdonSharpBehaviour
         //Debug.Log("Desgaste en la Probeta (ProbeBehaviour) = " + probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija"));
 
         //EsteMaterial.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).eulerAngles.z);
+    }
+
+    private void SetParticleRateOverTime()
+    {
+        var emisionModule = EsteParticleSystem.emission;
+        var waterValue = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().GetHumedad();
+        emisionModule.rateOverTimeMultiplier = Mathf.Clamp(Mathf.Exp(-(waterValue / 3.03f)+7) + 10f, ParticleRateMin, ParticleRateMax);
     }
 
     private void TryChangeDesgaste()// 120 a 800

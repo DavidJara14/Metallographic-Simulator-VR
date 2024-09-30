@@ -13,8 +13,33 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
     [SerializeField][UdonSynced] public int TamañoDeGrano;
     [SerializeField] LijaDataholder referenceDataholder;
 
+    [SerializeField] float humedad = 0;
+
     public TextMeshProUGUI text;
     public MeshRenderer meshRenderer;
+
+    public float GetHumedad()
+    {
+        if(humedad <= 0)
+            return 0;
+        humedad = Mathf.Clamp(humedad, 0, 50);
+        return humedad;
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+
+        var elemento = other.GetComponentInParent<BotellaLab>();
+
+        if (elemento != null)
+        {
+            string tipo = elemento.Tipo;
+            if (tipo == "Agua")
+            {
+                humedad += 2;
+            }
+        }
+    }
 
     public void OnPoolSpawn(ref LijaDataholder referenceGOComponent, int tamañoDeGrano)
     {
