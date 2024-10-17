@@ -54,6 +54,9 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
+    - _ColorBaseMultiplier: 1.14
+    - _ColorEffectMultiplier: 2.51
+    - _ColorMultiplier: 1.29
     - _ColorMultiplyer: 1.9
     - _CullMode: 2
     - _DstBlend: 0
@@ -64,8 +67,12 @@ Material:
     - _MoonExponent: 0.63
     - _MoonRadiusA: 0.5
     - _MoonRadiusB: 0.55
+    - _PlanetExponent: 0.87
+    - _PlanetRadiusA: 0.6
+    - _PlanetRadiusB: 0.45
     - _QueueControl: 1
     - _QueueOffset: 0
+    - _RotationIntensity: 0.02
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StarsIntensity: 0.6
@@ -75,8 +82,14 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Fog1VelocityMult: {r: 0.04, g: 0.01, b: 0, a: 0}
+    - _Fog2VelocityMult: {r: 0.05, g: 0.01, b: 0, a: 0}
+    - _FogVelocityMult: {r: 0.04, g: 0.01, b: 0, a: 0}
     - _GalaxyColor: {r: 0.040120948, g: 0.35455453, b: 0.6075471, a: 0}
     - _GalaxyStarsColor: {r: 1, g: 1, b: 0, a: 0}
-    - _PlanetViewDirection: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _PlanetColor: {r: 0.7132075, g: 0.53137624, b: 0.21934488, a: 0}
+    - _PlanetColor2: {r: 0.7075472, g: 0.7135771, b: 1, a: 0}
+    - _PlanetColorBase: {r: 0.72735494, g: 0.94138527, b: 0.94716984, a: 1}
+    - _PlanetViewDirection: {r: 0, g: 0.5, b: 0.5, a: 0}
     - _StarsOffset: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
