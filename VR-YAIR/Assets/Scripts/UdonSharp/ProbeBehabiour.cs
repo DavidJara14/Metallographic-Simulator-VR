@@ -49,7 +49,14 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     public GameObject probetaShader1;
     public GameObject probetaShader2;
+    public float _insideColliderTimer = 0f;
+    public bool _isInsideCollider = false;
+    public GameObject bodyMaterial;
+    //  private Color currentColor = Color.clear;
 
+    private float colorTimer = 0.0f;
+    private bool isClear = true;
+    private bool isHumedo = true;
 
     public string ProbeType = "";
 
@@ -61,11 +68,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
     private void Start()
     {
         _audioSource.clip = _audioClip;
+        //bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
     }
 
     private void Update()
-    { 
-        if(LijaRotationActiva != null)
+    {
+        if (LijaRotationActiva != null)
         { 
             if(LijaRotationActiva.Rotating == true) 
             {
@@ -114,6 +122,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
             UpdateMaterial();
         }
         UpdateMatTimer += Time.deltaTime;
+        if(!_isInsideCollider)
+            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
     }
     /*
     public override void OnPickupUseDown()
@@ -130,26 +140,92 @@ public class ProbeBehabiour : UdonSharpBehaviour
     {
         if (LijaRotationActiva == null)
             return;
-        Debug.Log(LijaRotationActiva.name);
+        //Debug.Log(LijaRotationActiva.name);
         if (LijaRotationActiva.Lija == null)
             return;
-        TryChangeDesgaste();
-        //EsteMaterial.SetFloat("_GranoLija", Desgaste);
-        if (Mirror.caraTrabajada == 1)
+
+        if (_isInsideCollider && isHumedo && !IsLijadoMaximo())
         {
-            //EsteMaterial = Mirror.probetaShader1.GetComponent<Renderer>().material;
-            probetaShader1.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
-            probetaShader1.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
+            _insideColliderTimer += Time.deltaTime;
+            Debug.Log("Time lija: " + _insideColliderTimer);
+            if (_insideColliderTimer >= 10f || probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste || probetaShader2.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste)
+            {
+                //EsteMaterial.SetFloat("_GranoLija", Desgaste);
+                if (Mirror.caraTrabajada == 1)
+                {
+                    //EsteMaterial = Mirror.probetaShader1.GetComponent<Renderer>().material;
+                    probetaShader1.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
+                    probetaShader1.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
 
+                }
+                else if (Mirror.caraTrabajada == 2)
+                {
+                    //EsteMaterial = Mirror.probetaShader2.GetComponent<Renderer>().material;
+                    probetaShader2.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
+                    probetaShader2.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
+                }
+                TryChangeDesgaste();
+
+                //              float hue = Mathf.Repeat(Time.time , 1.0f); 
+                //            Color newColor = Color.HSVToRGB(hue, 1.0f, 1.0f); 
+
+                //          currentColor = Color.Lerp(currentColor, newColor, Time.deltaTime);
+
+                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
+
+
+                colorTimer += Time.deltaTime;
+
+                if (colorTimer >= 0.1F)
+                {
+                    if (isClear)
+                    {
+                        bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                        isClear = false;
+                    }
+                    else
+                    {
+                        bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                        isClear = true;
+                    }
+                    colorTimer = 0f;
+                }
+
+
+                Debug.Log("Desgaste set to: " + Desgaste);
+            }
+            else if(_insideColliderTimer<10.0f && _isInsideCollider)
+            {
+                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+            }
         }
-        else if (Mirror.caraTrabajada == 2)
+        else if (!isHumedo && _isInsideCollider)
         {
-            //EsteMaterial = Mirror.probetaShader2.GetComponent<Renderer>().material;
-            probetaShader2.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
-            probetaShader2.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
+            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
+            colorTimer += Time.deltaTime;
+
+            if (colorTimer >= 0.1F)
+            {
+                if (isClear)
+                {
+                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                    isClear = false;
+                }
+                else
+                {
+                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                    isClear = true;
+                }
+                colorTimer = 0f;
+            }
+            Debug.Log("Ponme agua");
         }
-
-
+        else
+        {
+            _insideColliderTimer = 0f;
+            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+            //bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
+        }
 
         //Debug.Log("TamanioLija " + Desgaste);
         //Debug.Log("Desgaste en la Probeta (ProbeBehaviour) = " + probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija"));
@@ -259,6 +335,24 @@ public class ProbeBehabiour : UdonSharpBehaviour
             interactProbe.DisableCanva();
             interactProbe.gameObject.SetActive(false);
         }
+
+  //      if (other.GetComponent<LijaCircularBehabiour>() != null /*&& other.GetComponent<LijaRotation>().Lija != null*/)
+        //{
+    //        _isInsideCollider = true;
+      //      if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
+        //    {
+          //      isHumedo = true;
+ //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+//                bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
+            //}
+           // else
+           // {
+            //    isHumedo = false;
+//                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
+            //}
+          //  Debug.Log("Probeta Enter, humedo is: "+isHumedo);
+        //}
+        //rotorRotating = other.GetComponent<LijaRotation>().Rotating;
     }
 
     private void OnTriggerExit(Collider other)
@@ -269,6 +363,59 @@ public class ProbeBehabiour : UdonSharpBehaviour
             LijaRotationActivaGO = null;
             LijaRotationActiva = null;
             CheckInteractProve();
+        }
+
+        if (other.GetComponent<LijaCircularBehabiour>() != null)
+        {
+            //_isInsideCollider = false;
+            //Debug.Log("Inside lija: "+_isInsideCollider);
+//            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+//            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
+        }
+
+        /*if (other.gameObject.name == "colliderRotor")
+        {
+            _isInsideCollider = false;
+            Debug.Log("Inside lija: " + _isInsideCollider);
+        }*/
+        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+
+        if(other.GetComponent<colliderRotorBehabiour>())
+            _insideColliderTimer = 0f;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("collider: "+other.gameObject.name);
+
+        /*else if(other.gameObject.name == "colliderRotor")
+        {
+            _isInsideCollider = false;
+            Debug.Log("Detecte collider rotor false");
+        }*/
+
+        if (other.GetComponent<LijaCircularBehabiour>() != null)
+        {
+
+            if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
+            {
+                isHumedo = true;
+                //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+                //                bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
+            }
+            else
+            {
+                isHumedo = false;
+                //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
+            }
+            Debug.Log("Probeta Enter, humedo is: " + isHumedo);
+        }
+
+        if(/*other.gameObject.name == "colliderRotor"*/ other.GetComponent<colliderRotorBehabiour>())
+        {
+        //    _isInsideCollider = other.GetComponent<LijaRotation>().GetComponentInChildren<BoxCollider>().enabled;
+            _isInsideCollider = other.GetComponent<colliderRotorBehabiour>().colliderRotor();
+            Debug.Log("Detecte collider rotor :"+_isInsideCollider);
         }
     }
 
@@ -294,5 +441,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
     { 
         return (int)Desgaste == (int)DesgasteMax;
     }
+
 }
 
