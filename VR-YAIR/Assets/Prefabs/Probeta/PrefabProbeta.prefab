@@ -175,6 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: f84a3e6914121b94089d750e2410f2c2, type: 2}
   - {fileID: 2100000, guid: f52c997e90d86c140b4032ce0db00871, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -6279,6 +6280,8 @@ MonoBehaviour:
   Desgaste: 0
   _IsFirstSanding: 1
   calor: 0
+  bodyMaterial: {fileID: 1301254321874595927}
+  isInPulidora: 0
 --- !u!114 &7789323974390255625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6419,6 +6422,9 @@ MonoBehaviour:
   interactProbe: {fileID: 3013077665994513111}
   probetaShader1: {fileID: 2353158759232025275}
   probetaShader2: {fileID: 4844091889528000280}
+  _insideColliderTimer: 0
+  _isInsideCollider: 0
+  bodyMaterial: {fileID: 1301254321874595927}
   ProbeType: Acero 1018
   _audioSource: {fileID: 910740562937144408}
   _audioClip: {fileID: 8300000, guid: 2cdaeda8196160c4fae585d2768449fa, type: 3}

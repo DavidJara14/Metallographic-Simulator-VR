@@ -2362,6 +2362,12 @@ PrefabInstance:
       propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
       value: 0.66
       objectReference: {fileID: 0}
+    - target: {fileID: 1137481586317383450, guid: e3f08489fcaa2664fb2f2c4061010c85,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1137481586317383450, guid: e3f08489fcaa2664fb2f2c4061010c85,
+        type: 3}
     - target: {fileID: 3813929796964714098, guid: e3f08489fcaa2664fb2f2c4061010c85,
         type: 3}
       propertyPath: m_LocalPosition.x

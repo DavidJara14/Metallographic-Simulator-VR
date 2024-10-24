@@ -7,6 +7,7 @@ public class CubreLijaBehabiour : UdonSharpBehaviour
 {
     public GameObject cubrelijaReference;
     public GameObject rotor;
+    public GameObject collisionRotor;
     public bool isPulidora;
     public bool isDesbastadora;
 
@@ -26,13 +27,21 @@ public class CubreLijaBehabiour : UdonSharpBehaviour
             gameObject.GetComponent<MeshCollider>().enabled = true;
         }
         */
-        if (isDesbastadora && rotor.GetComponent<LijaRotation>().isEnergized && cubrelijaReference.GetComponent<CubreLijaSnap>().CubreLijaLoaded)
+
+        /*if (isDesbastadora && cubrelijaReference.GetComponent<CubreLijaSnap>().CubreLijaLoaded && !rotor.GetComponent<LijaRotation>().enableMeshCL)
         {
             gameObject.GetComponent<MeshCollider>().enabled = rotor.GetComponent<LijaRotation>().enableMeshCL;
             if (rotor.GetComponent<LijaRotation>().Rotating)
                 gameObject.GetComponent<MeshCollider>().enabled = false;
-
         }
+
+        if (isDesbastadora && !rotor.GetComponent<LijaRotation>().Rotating)
+            gameObject.GetComponent<MeshCollider>().enabled = true;*/
+
+        if(isDesbastadora)
+            gameObject.GetComponent<MeshCollider>().enabled = !rotor.GetComponent<LijaRotation>().Rotating;
+
+
 
 
         if (!isPulidora)
@@ -45,6 +54,12 @@ public class CubreLijaBehabiour : UdonSharpBehaviour
         {
             gameObject.GetComponent<MeshCollider>().enabled = true;
             
+        }
+
+        if (isPulidora)
+        {
+            if(collisionRotor != null)
+                collisionRotor.GetComponent<BoxCollider>().enabled = rotor.GetComponent<PulidoraScript>().Rotating;
         }
 
     }

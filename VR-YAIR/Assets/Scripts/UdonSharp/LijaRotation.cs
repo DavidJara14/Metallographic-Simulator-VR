@@ -34,6 +34,8 @@ public class LijaRotation : UdonSharpBehaviour
     [SerializeField] private float StartTimer;
     [SerializeField] private bool AudioLoop;
 
+    public GameObject rotorChildren;
+
 
     private void Update()
     {
@@ -80,6 +82,11 @@ public class LijaRotation : UdonSharpBehaviour
 
         if (AudioStart)
             StartTimer += Time.deltaTime;
+
+        if(rotorChildren != null)
+//            rotorChildren.gameObject.SetActive(Rotating);
+            //rotorChildren.GetComponent<BoxCollider>().enabled = Rotating;
+            rotorChildren.GetComponent<colliderRotorBehabiour>().isRotating = Rotating;
     }
 
     public void OnLijaSnap(Transform go)

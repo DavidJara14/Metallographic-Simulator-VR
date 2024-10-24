@@ -1335,6 +1335,7 @@ Transform:
   m_Children:
   - {fileID: 1491133088994263886}
   - {fileID: 8663650470568404909}
+  - {fileID: 8964079673644878891}
   m_Father: {fileID: 4442186392243629655}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &856236529224481001
@@ -1406,7 +1407,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.27603483, y: 0.27752227, z: 0.11355393}
+  m_Size: {x: 0.27603483, y: 0.24, z: 0.11355393}
   m_Center: {x: -0.00005669892, y: 0.00000005960465, z: 0.1567061}
 --- !u!82 &1770969022971872159
 AudioSource:
@@ -1538,7 +1539,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 0
-  Spatialize: 0
+  Spatialize: 1
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
@@ -1657,6 +1658,7 @@ MonoBehaviour:
   BlancaLoaded: 0
   colliderGris: {fileID: 5386012989232110157}
   colliderBlanco: {fileID: 5426680280105538850}
+  colliderRotor: {fileID: 7631269532090960493}
 --- !u!114 &1456042696789584591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1702,8 +1704,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.15, y: 0.15, z: 0.018878818}
-  m_Center: {x: 9.492783e-15, y: -0.0000000030964953, z: 0.14609909}
+  m_Size: {x: 0.21577865, y: 0.19100416, z: 0.018878814}
+  m_Center: {x: 1.0838329e-14, y: -0.0000000030964933, z: 0.14609909}
 --- !u!1 &3258011013293878179
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,8 +2412,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -2596,7 +2598,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6465968295503697981}
   cubrelijaReference: {fileID: 322677853414044517}
-  rotor: {fileID: 0}
+  rotor: {fileID: 3040824203453826797}
+  collisionRotor: {fileID: 7631269532090960493}
   isPulidora: 1
   isDesbastadora: 0
 --- !u!114 &4135848448304996470
@@ -3039,6 +3042,59 @@ MonoBehaviour:
   VolumetricRadius: 0
   EnableSpatialization: 1
   UseAudioSourceVolumeCurve: 0
+--- !u!1 &7631269532090960493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8964079673644878891}
+  - component: {fileID: 8749729630537182623}
+  m_Layer: 0
+  m_Name: CollisionRotorPulidora
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8964079673644878891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7631269532090960493}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7372299495390679850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8749729630537182623
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7631269532090960493}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.37772897, y: 0.36658543, z: 0.09764848}
+  m_Center: {x: -0.002786591, y: 0.0009275593, z: 0.16325767}
 --- !u!1 &8331956017307862655
 GameObject:
   m_ObjectHideFlags: 0

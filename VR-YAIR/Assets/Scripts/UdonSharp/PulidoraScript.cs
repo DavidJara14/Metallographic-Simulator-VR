@@ -32,14 +32,30 @@ public class PulidoraScript : UdonSharpBehaviour
     public bool BlancaLoaded = false;
     public GameObject colliderGris;
     public GameObject colliderBlanco;
+    public GameObject colliderRotor;
+
+    float timer = 0f;
 
     private void Update()
     {
-        if (Rotating && isEnergized)
+        if(GrisLoaded || BlancaLoaded)
+        {
+            timer += Time.deltaTime;
+        }
+
+        if (timer > 15)
+        {
+            timer = 0;
+            BlancaLoaded = false;
+            GrisLoaded = false;
+        }
+
+        if (Rotating && isEnergized && timer<15)
         {
             gameObject.transform.Rotate(Vector3.forward * RotationVelocity * Time.deltaTime);
             colliderGris.SetActive(GrisLoaded);
             colliderBlanco.SetActive(BlancaLoaded);
+            colliderRotor.SetActive(Rotating);
         }
 
         if (Rotating & !AudioStart && !AudioLoop)
