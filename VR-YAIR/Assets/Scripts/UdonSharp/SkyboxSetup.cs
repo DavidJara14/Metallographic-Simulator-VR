@@ -10,7 +10,7 @@ public class SkyboxSetup : UdonSharpBehaviour
     [SerializeField] private Material SkyboxMaterial;
     private DataDictionary StarsIntensity = new DataDictionary()
     {
-        {"PC", 3f},
+        {"PC", 1.5f},
         {"VR", 0.6f}
     };
 
