@@ -1476,6 +1476,7 @@ GameObject:
   - component: {fileID: 2631882139088842992}
   - component: {fileID: 4312532571076125842}
   - component: {fileID: 6615171391715489452}
+  - component: {fileID: 8028562746321447977}
   m_Layer: 0
   m_Name: MuebleHitBox
   m_TagString: Untagged
@@ -1646,6 +1647,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.06738973, y: 1.0168605, z: 0.05169034}
   m_Center: {x: 0.72, y: -0.0023722649, z: 1.1491548}
+--- !u!65 &8028562746321447977
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6495895620054337592}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.07209015, y: 0.9787517, z: 2.329773}
+  m_Center: {x: 0.00049972534, y: -0.016980201, z: 1.1604767}
 --- !u!1 &6707006518104914322
 GameObject:
   m_ObjectHideFlags: 0
