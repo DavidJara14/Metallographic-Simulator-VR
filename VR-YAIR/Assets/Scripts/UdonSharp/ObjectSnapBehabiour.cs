@@ -1,4 +1,5 @@
 ﻿using UdonSharp;
+using Unity.Collections;
 using UnityEngine;
 using VRC.SDK3.Data;
 using VRC.Udon;
@@ -13,6 +14,7 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
 
     [Header("Snap ref")]
     [SerializeField] float DetectionRadius;
+    [SerializeField] float MinActivationDistance;
 
     [Header("OnSnap References")]
     [SerializeField] GameObject[] GOListeners;
@@ -85,6 +87,13 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
                 Debug.Log(this + gameObject.name + " : " + GOToSnap + " Seleccionado");
             }
         }
+
+        if (Distance < MinActivationDistance)
+        {
+            Debug.Log("already have a element, exiting function");
+            return;
+        }
+
         Debug.Log(gameObject.name+": = "+GrabablesNear);
         if(GOToSnap == null)
         {
