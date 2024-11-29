@@ -130,7 +130,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -502,7 +502,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -747,7 +747,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -907,6 +907,7 @@ GameObject:
   - component: {fileID: 523306802143445496}
   - component: {fileID: 7040617332090625233}
   - component: {fileID: 4081226589986269848}
+  - component: {fileID: 5637865726972503963}
   m_Layer: 0
   m_Name: Puerta1
   m_TagString: Untagged
@@ -1061,6 +1062,27 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!65 &5637865726972503963
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4144935963677310338}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 9728
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0003900001, y: 0.0098805595, z: 0.011310492}
+  m_Center: {x: 0.000046279125, y: 0.00002169516, z: 0.005655243}
 --- !u!1 &4960943185929091314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,6 +1129,7 @@ GameObject:
   - component: {fileID: 5283411649415896367}
   - component: {fileID: 4652793555777559711}
   - component: {fileID: 4271276228426652795}
+  - component: {fileID: 2322903439914262403}
   m_Layer: 0
   m_Name: Puerta1.001
   m_TagString: Untagged
@@ -1261,6 +1284,27 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!65 &2322903439914262403
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5637184442365489265}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 9728
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.00038999968, y: 0.009888734, z: 0.011317632}
+  m_Center: {x: 0.000029969466, y: 0.0001167017, z: 0.0056554596}
 --- !u!1 &5706508503888021600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1350,7 @@ GameObject:
   - component: {fileID: 616718184668335148}
   - component: {fileID: 8377757620394667277}
   - component: {fileID: 5882497732118998513}
+  - component: {fileID: 4481779650735135194}
   m_Layer: 0
   m_Name: Puerta2.001
   m_TagString: Untagged
@@ -1460,6 +1505,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllowCollisionOwnershipTransfer: 1
+--- !u!65 &4481779650735135194
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6241337348192174996}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 9728
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0004090465, y: 0.00990627, z: 0.011333583}
+  m_Center: {x: 0.000040689996, y: 0.0010100985, z: 0.0056530787}
 --- !u!1 &6495895620054337592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,7 +1864,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1958,6 +2024,7 @@ GameObject:
   - component: {fileID: 8765150517853897864}
   - component: {fileID: 4333351763648504842}
   - component: {fileID: 1614109104711718637}
+  - component: {fileID: 3191084952647684022}
   m_Layer: 0
   m_Name: Puerta2
   m_TagString: Untagged
@@ -2112,6 +2179,27 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!65 &3191084952647684022
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7637264342182585392}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 9728
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.00046533046, y: 0.0098836925, z: 0.011315574}
+  m_Center: {x: -0.00012268386, y: 0.00060968776, z: 0.005654222}
 --- !u!1 &8151623472403572505
 GameObject:
   m_ObjectHideFlags: 0
