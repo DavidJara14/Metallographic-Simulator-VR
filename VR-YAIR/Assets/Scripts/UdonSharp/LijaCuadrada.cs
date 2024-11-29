@@ -25,6 +25,7 @@ public class LijaCuadrada : UdonSharpBehaviour
         if (ReferenceGOComponent == null)
             Debug.LogError($"{this}: No ReferenceGOComponent found, add one to the scene and assign it");
         text.text = TamañoDeGrano.ToString();
+        gameObject.GetComponent<MeshRenderer>().material.SetFloat("_TamanioDeLija", TamañoDeGrano);
     }
 
     private void OnTriggerEnter(Collider other)
