@@ -48,6 +48,7 @@ public class SetKinematicFalseOnPickup : UdonSharpBehaviour
         Debug.Log($"RB set to {_rigidbody.isKinematic}, expected false");
         Debug.Log($"Deactivating");
         this.enabled = false;
+        //Destroy( this );
     }
 
     public override void OnDeserialization()
@@ -62,10 +63,11 @@ public class SetKinematicFalseOnPickup : UdonSharpBehaviour
             if (_rigidbody == null)
                 _rigidbody = GetComponent<Rigidbody>();
             _rigidbody.isKinematic = false;
-            Debug.Log($"WasPicked set to {WasPicked}, expected true to work");
-            Debug.Log($"enable set to {_rigidbody.isKinematic}, expected false");
-            Debug.Log($"Deactivating");
+            //Debug.Log($"WasPicked set to {WasPicked}, expected true to work");
+            //Debug.Log($"enable set to {_rigidbody.isKinematic}, expected false");
+            //Debug.Log($"Deactivating");
             enabled = false;
+            //Destroy(this);
         }
     }
 

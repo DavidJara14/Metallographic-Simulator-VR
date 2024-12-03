@@ -66,7 +66,7 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
             return;
         }
         text.text = TamañoDeGrano.ToString();
-        Debug.Log($"Tamaño de grano TEXT set to {TamañoDeGrano}");
+        Debug.Log($"Deserialization: Tamaño de grano TEXT set to {TamañoDeGrano}");
         meshRenderer.material = referenceDataholder.MaterialesSegunTamañosDeLija[referenceDataholder.LijaDict[TamañoDeGrano].Int];
     }
 }
