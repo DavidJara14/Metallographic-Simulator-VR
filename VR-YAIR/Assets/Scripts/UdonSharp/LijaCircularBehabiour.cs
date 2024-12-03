@@ -41,15 +41,20 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
         }
     }
 
-    public void OnPoolSpawn(ref LijaDataholder referenceGOComponent, int tamañoDeGrano)
+    public void OnPoolSpawn(ref LijaDataholder LijaDataholderRef, int tamañoDeGrano)
     {
         TamañoDeGrano = tamañoDeGrano;
-        if(referenceGOComponent != null && referenceGOComponent != null) 
-            referenceDataholder = referenceGOComponent;
+        if(LijaDataholderRef != null && LijaDataholderRef != null) 
+            referenceDataholder = LijaDataholderRef;
         Debug.Log($"Tamaño de grano set to {TamañoDeGrano}");
         text.text = TamañoDeGrano.ToString();
         meshRenderer.material = referenceDataholder.MaterialesSegunTamañosDeLija[referenceDataholder.LijaDict[tamañoDeGrano].Int];
         RequestSerialization();
+    }
+
+    public void ReturnToPool()
+    {
+        referenceDataholder.LijaPool.Return(gameObject);
     }
 
     public override void OnDeserialization()

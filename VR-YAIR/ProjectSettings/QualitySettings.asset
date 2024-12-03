@@ -207,8 +207,4 @@ QualitySettings:
     excludedTargetPlatforms:
     - Standalone
   m_TextureMipmapLimitGroupNames: []
-  m_PerPlatformDefaultQuality:
-    Android: 0
-    Server: 0
-    Standalone: 0
-    Windows Store Apps: 0
+  m_PerPlatformDefaultQuality: {}

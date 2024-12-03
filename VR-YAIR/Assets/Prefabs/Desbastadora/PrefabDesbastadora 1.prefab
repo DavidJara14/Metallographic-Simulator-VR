@@ -720,6 +720,7 @@ MonoBehaviour:
   PositionOffset: {x: 0, y: -0.35, z: 0}
   RotationOffset: {x: 180, y: 0, z: 0}
   DetectionRadius: 0.125
+  MinActivationDistance: 0
   GOListeners:
   - {fileID: 8644875322041640266}
   UdonBehabiourListenersRef: []
@@ -2177,6 +2178,7 @@ MonoBehaviour:
   PositionOffset: {x: 0, y: 0, z: 0}
   RotationOffset: {x: 90, y: -90, z: 0}
   DetectionRadius: 0.125
+  MinActivationDistance: 0.08
   GOListeners:
   - {fileID: 1885387243375919198}
   UdonBehabiourListenersRef: []

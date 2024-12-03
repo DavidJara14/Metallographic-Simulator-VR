@@ -80,7 +80,8 @@ public class DoorHandleInteraction : UdonSharpBehaviour
         }
         Debug.Log("IsClossed: " + IsClosedLenght + ", IsOppened: " + IsOpenedLenght + ", EstaAbierto: " + IsDoorOpened);
         VRUserHold = false;
-        GrabbableHandle.transform.position = HandleDefaultPosition.transform.position;
+        //GrabbableHandle.transform.position = HandleDefaultPosition.transform.position;
+        GrabbableHandle.transform.SetPositionAndRotation(HandleDefaultPosition.transform.position, HandleDefaultPosition.transform.rotation);
     }
 
 }
