@@ -13,7 +13,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     private float UpdateMatTimer = 0f;
 
     const float DesgasteMin = 0f;
-    const float DesgasteMax = 800f;
+    const float DesgasteMax = 801f;
 
     const int ParticleRateMin = 10;
     const int ParticleRateMax = 50;
@@ -52,6 +52,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     public float _insideColliderTimer = 0f;
     public bool _isInsideCollider = false;
     public GameObject bodyMaterial;
+    public bool canLijar = false;
     //  private Color currentColor = Color.clear;
 
     private float colorTimer = 0.0f;
@@ -144,13 +145,16 @@ public class ProbeBehabiour : UdonSharpBehaviour
         if (LijaRotationActiva.Lija == null)
             return;
 
-        if (_isInsideCollider && isHumedo && !IsLijadoMaximo())
+        TryChangeDesgaste();
+
+        if (_isInsideCollider && isHumedo && !IsLijadoMaximo() && canLijar)
         {
             _insideColliderTimer += Time.deltaTime;
             Debug.Log("Time lija: " + _insideColliderTimer);
             if (_insideColliderTimer >= 10f || probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste || probetaShader2.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste)
             {
                 //EsteMaterial.SetFloat("_GranoLija", Desgaste);
+
                 if (Mirror.caraTrabajada == 1)
                 {
                     //EsteMaterial = Mirror.probetaShader1.GetComponent<Renderer>().material;
@@ -164,7 +168,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
                     probetaShader2.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
                     probetaShader2.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
                 }
-                TryChangeDesgaste();
 
                 //              float hue = Mathf.Repeat(Time.time , 1.0f); 
                 //            Color newColor = Color.HSVToRGB(hue, 1.0f, 1.0f); 
@@ -199,7 +202,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
             }
         }
-        else if (!isHumedo && _isInsideCollider)
+        else if ((!isHumedo || !canLijar) && _isInsideCollider)
         {
             bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
             colorTimer += Time.deltaTime;
@@ -253,6 +256,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         {
             Debug.Log($"Cambio por bajar: {Desgaste} a {TamañoDeGranoEnLija}");
             Desgaste = TamañoDeGranoEnLija;
+            canLijar = false;
         }
         else
         {
@@ -263,12 +267,15 @@ public class ProbeBehabiour : UdonSharpBehaviour
             {
                 Debug.Log($"Cambio por seguir: {Desgaste} a {TamañoDeGranoEnLija}");
                 Desgaste = TamañoDeGranoEnLija;
+                canLijar = true;
             }
             else
             {
                 Debug.Log($"Intento de salto de lija: {Desgaste} a {TamañoDeGranoEnLija}");
+                canLijar = false;
             }
         }
+        Debug.Log("Puedo lijar?: " + canLijar);
     }
 
     public string getProbeType()
@@ -390,7 +397,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         }*/
         bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
 
-        if(other.GetComponent<colliderRotorBehabiour>())
+        if(other.gameObject.name == "Rotor")
         {
             if (pickup.currentPlayer == null)
             {
@@ -445,11 +452,16 @@ public class ProbeBehabiour : UdonSharpBehaviour
             //Debug.Log("Probeta Enter, humedo is: " + isHumedo);
         }
 
-        if(/*other.gameObject.name == "colliderRotor"*/ other.GetComponent<colliderRotorBehabiour>())
-        {
+        //if(/*other.gameObject.name == "colliderRotor"*/ other.GetComponent<colliderRotorBehabiour>())
+        //{
         //    _isInsideCollider = other.GetComponent<LijaRotation>().GetComponentInChildren<BoxCollider>().enabled;
-            _isInsideCollider = other.GetComponent<colliderRotorBehabiour>().colliderRotor();
+          //  _isInsideCollider = other.GetComponent<colliderRotorBehabiour>().colliderRotor();
             //Debug.Log("Detecte collider rotor :"+_isInsideCollider);
+        //}
+
+        if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
+        {
+            _isInsideCollider = true;
         }
     }
 

@@ -288,16 +288,22 @@ haveAluminaGris = true;
             haveAluminaBlanca = true;
         }
 
-        if (other.gameObject.name == "CollisionRotorPulidora")
-        {
-            isInPulidora = true;
-            Debug.Log("Is in pulidora: " + isInPulidora);    
-        }
+//        if (other.gameObject.name == "CollisionRotorPulidora")
+//        {
+//            isInPulidora = true;
+//            Debug.Log("Is in pulidora: " + isInPulidora);    
+//        }
         /*if(other.GetComponent<PulidoraScript>().colliderRotor.SetActive())
         {
             isInPulidora = true;
             bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
         }*/
+
+        if (other.gameObject.name == "RotorPulidora")
+        {
+            isInPulidora = true;
+            Debug.Log("Is in pulidora: " + isInPulidora);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -319,12 +325,17 @@ haveAluminaGris = true;
            // Debug.Log("ColisionBlanca");
             //haveAluminaBlanca = false;
         }
-        if (other.gameObject.name == "CollisionRotorPulidora")
-        {
-            isInPulidora = false;
+      //  if (other.gameObject.name == "CollisionRotorPulidora")
+        //{
+          //  isInPulidora = false;
             //haveAluminaGris = false ;
             //haveAluminaBlanca = false ;
             //bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1f);
+        //}
+
+        if (other.gameObject.name == "RotorPulidora") 
+        {
+            isInPulidora = false;
         }
 
     }

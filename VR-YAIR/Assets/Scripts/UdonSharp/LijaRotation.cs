@@ -155,6 +155,7 @@ public class LijaRotation : UdonSharpBehaviour
     {
         isEnergized = false;
         Rotating = false;
+        Lija.pickupable = true;
         RPMText.text = "8888";
         RPMText.color = Color.gray;
     }
