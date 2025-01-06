@@ -34,7 +34,8 @@ public class LijaRotation : UdonSharpBehaviour
     [SerializeField] private float StartTimer;
     [SerializeField] private bool AudioLoop;
 
-    public GameObject rotorChildren;
+    //public GameObject rotorChildren;
+    public GameObject thisCubreLijaSnap;
 
 
     private void Update()
@@ -83,10 +84,10 @@ public class LijaRotation : UdonSharpBehaviour
         if (AudioStart)
             StartTimer += Time.deltaTime;
 
-        if(rotorChildren != null)
+        //if(rotorChildren != null)
 //            rotorChildren.gameObject.SetActive(Rotating);
             //rotorChildren.GetComponent<BoxCollider>().enabled = Rotating;
-            rotorChildren.GetComponent<colliderRotorBehabiour>().isRotating = Rotating;
+           // rotorChildren.GetComponent<colliderRotorBehabiour>().isRotating = Rotating;
     }
 
     public void OnLijaSnap(Transform go)
@@ -113,19 +114,22 @@ public class LijaRotation : UdonSharpBehaviour
 
     public void StartMachine()
     {
-        enableMeshCL = false;
-        if (LijaLoaded && isEnergized)
+        if (thisCubreLijaSnap.GetComponent<CubreLijaSnap>().CubreLijaLoaded)
         {
-            Rotating = true;
-            Lija.pickupable = !Rotating;
-            if (Lija.pickupable)
-                Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            enableMeshCL = false;
+            if (LijaLoaded && isEnergized)
+            {
+                Rotating = true;
+                Lija.pickupable = !Rotating;
+                if (Lija.pickupable)
+                    Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                else
+                    Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+            }
             else
-                Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-        }
-        else
-        {
-            Rotating = false;
+            {
+                Rotating = false;
+            }
         }
     }
 
@@ -155,7 +159,7 @@ public class LijaRotation : UdonSharpBehaviour
     {
         isEnergized = false;
         Rotating = false;
-        Lija.pickupable = true;
+        //Lija.pickupable = true;
         RPMText.text = "8888";
         RPMText.color = Color.gray;
     }
