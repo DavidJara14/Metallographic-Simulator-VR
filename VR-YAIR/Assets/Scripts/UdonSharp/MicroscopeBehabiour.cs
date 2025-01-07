@@ -174,6 +174,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         if (PBcomponent != null)
         {
             RemoveImage();
+            PBcomponent = null;
         }
     }
 
