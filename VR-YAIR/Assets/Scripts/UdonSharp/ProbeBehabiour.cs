@@ -124,7 +124,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         }
         UpdateMatTimer += Time.deltaTime;
         if(!_isInsideCollider)
-            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
     }
     /*
     public override void OnPickupUseDown()
@@ -199,7 +199,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             }
             else if(_insideColliderTimer<10.0f && _isInsideCollider)
             {
-                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
             }
         }
         else if ((!isHumedo || !canLijar) && _isInsideCollider)
@@ -226,7 +226,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         else
         {
             //StopTimer();
-            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
             //bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
         }
 
@@ -356,7 +356,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         //      if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
         //    {
         //      isHumedo = true;
-        //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+        //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
         //                bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
         //}
         // else
@@ -386,7 +386,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         {
             //_isInsideCollider = false;
             //Debug.Log("Inside lija: "+_isInsideCollider);
-//            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+//            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
 //            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
         }
 
@@ -395,7 +395,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             _isInsideCollider = false;
             Debug.Log("Inside lija: " + _isInsideCollider);
         }*/
-        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
 
         if(other.gameObject.name == "Rotor")
         {
@@ -441,7 +441,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
             {
                 isHumedo = true;
-                //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.0f);
+                //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
                 //                bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
             }
             else

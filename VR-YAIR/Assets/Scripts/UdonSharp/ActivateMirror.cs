@@ -107,7 +107,6 @@ public class ActivateMirror : UdonSharpBehaviour
                     colorTimer = 0f;
                 }
             }
-
         }
         
         if (isInPulidora && haveAluminaGris && haveAluminaBlanca && probeBehaviour.IsLijadoMax() && !haveNital) // Segunda etapa de pulido, TIENE ALUMINA BLANCA y ya tuvo gris, sin nital 
@@ -150,42 +149,45 @@ public class ActivateMirror : UdonSharpBehaviour
             }
         }
         
-        if (haveAluminaGris && haveAluminaBlanca && haveNital && calor) // Segunda etapa de pulido, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
+        if (haveAluminaGris && haveAluminaBlanca && haveNital /*&& calor*/) // Segunda etapa de pulido, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
         {
-            generalTimer3 += Time.deltaTime;
-            Debug.Log("Tiempo de ABlanca: " + generalTimer3);
-            if (generalTimer3 > 10)
+            if (calor)
             {
-                if (caraTrabajada == 1)
+                generalTimer3 += Time.deltaTime;
+                Debug.Log("Tiempo de calor: " + generalTimer3);
+                if (generalTimer3 > 10)
                 {
-                    probetaShader1.SetActive(true);
-                    probetaMirror1.SetActive(false);
-                    probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
-                }
-
-                else if (caraTrabajada == 2)
-                {
-                    probetaShader2.SetActive(true);
-                    probetaMirror2.SetActive(false);
-                    probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
-                }
-                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-
-                // Debug.Log("Mirror unactive");
-                colorTimer += Time.deltaTime;
-                if (colorTimer >= 0.1f)
-                {
-                    if (isClear)
+                    if (caraTrabajada == 1)
                     {
-                        bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                        isClear = false;
+                        probetaShader1.SetActive(true);
+                        probetaMirror1.SetActive(false);
+                        probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
                     }
-                    else
+
+                    else if (caraTrabajada == 2)
                     {
-                        bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                        isClear = true;
+                        probetaShader2.SetActive(true);
+                        probetaMirror2.SetActive(false);
+                        probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
                     }
-                    colorTimer = 0f;
+                    bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
+
+                    // Debug.Log("Mirror unactive");
+                    colorTimer += Time.deltaTime;
+                    if (colorTimer >= 0.1f)
+                    {
+                        if (isClear)
+                        {
+                            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                            isClear = false;
+                        }
+                        else
+                        {
+                            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                            isClear = true;
+                        }
+                        colorTimer = 0f;
+                    }
                 }
             }
         }
@@ -272,7 +274,7 @@ haveAluminaGris = true;
     {
         if (other.gameObject.name == "Colision")
         {
-            Debug.Log("Colision");
+            Debug.Log("ColisionCalor");
             calor = true;
         }
 
@@ -282,7 +284,7 @@ haveAluminaGris = true;
             haveAluminaGris = true;
         }
 
-        if (other.gameObject.name == "ColisionPañoBlanco")
+        if (other.gameObject.name == "ColisionPañoBlanco" && haveAluminaGris)
         {
             Debug.Log("ColisionBlanca");
             haveAluminaBlanca = true;
