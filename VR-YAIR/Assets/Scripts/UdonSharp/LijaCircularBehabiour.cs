@@ -49,6 +49,7 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
         Debug.Log($"Tamaño de grano set to {TamañoDeGrano}");
         text.text = TamañoDeGrano.ToString();
         meshRenderer.material = referenceDataholder.MaterialesSegunTamañosDeLija[referenceDataholder.LijaDict[tamañoDeGrano].Int];
+        gameObject.GetComponent<VRC_Pickup>().InteractionText = text.text;
         RequestSerialization();
     }
 
@@ -61,12 +62,13 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
     {
         if (referenceDataholder == null)
         {
-            Debug.Log($"No referenceDataholder assigned to {gameObject}, disabling GO.");
+            Debug.LogWarning($"No referenceDataholder assigned to {gameObject}, disabling GO.");
             gameObject.SetActive(false);
             return;
         }
         text.text = TamañoDeGrano.ToString();
-        Debug.Log($"Deserialization: Tamaño de grano TEXT set to {TamañoDeGrano}");
+        gameObject.GetComponent<VRC_Pickup>().InteractionText = text.text;
+        //Debug.Log($"Deserialization: Tamaño de grano TEXT set to {TamañoDeGrano}");
         meshRenderer.material = referenceDataholder.MaterialesSegunTamañosDeLija[referenceDataholder.LijaDict[TamañoDeGrano].Int];
     }
 }
