@@ -670,9 +670,9 @@ MonoBehaviour:
   TurnOffMirrorOcclusion: 1
   m_ReflectLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
-  mirrorResolution: 0
-  maximumAntialiasing: 4
+    m_Bits: 132120343
+  mirrorResolution: 256
+  maximumAntialiasing: 1
   customShader: {fileID: 0}
   cameraClearFlags: 0
   customSkybox: {fileID: 0}
@@ -6425,6 +6425,7 @@ MonoBehaviour:
   _insideColliderTimer: 0
   _isInsideCollider: 0
   bodyMaterial: {fileID: 1301254321874595927}
+  canLijar: 0
   ProbeType: Acero 1018
   _audioSource: {fileID: 910740562937144408}
   _audioClip: {fileID: 8300000, guid: 2cdaeda8196160c4fae585d2768449fa, type: 3}
