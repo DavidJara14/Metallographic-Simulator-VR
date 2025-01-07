@@ -57,9 +57,9 @@ public class ActivateMirror : UdonSharpBehaviour
 
         }
 
-        if (isInPulidora && probeBehaviour.IsLijadoMaximo() && !haveNital && !haveAluminaGris && !haveAluminaBlanca)
+        if (isInPulidora && probeBehaviour.IsLijadoMax() && !haveNital && !haveAluminaGris && !haveAluminaBlanca)
         {
-            Debug.Log("ISLIJADOMAXIMO: " + probeBehaviour.IsLijadoMaximo());
+            Debug.Log("ISLIJADOMAXIMO: " + probeBehaviour.IsLijadoMax());
             bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
             colorTimer += Time.deltaTime;
             if (colorTimer >= 0.1f)
@@ -78,7 +78,7 @@ public class ActivateMirror : UdonSharpBehaviour
             }
         }
         
-        if (isInPulidora && haveAluminaGris && !haveAluminaBlanca && probeBehaviour.IsLijadoMaximo() && !haveNital) // Primera etapa de pulido, TIENE ALUMINA GRIS 
+        if (isInPulidora && haveAluminaGris && !haveAluminaBlanca && probeBehaviour.IsLijadoMax() && !haveNital) // Primera etapa de pulido, TIENE ALUMINA GRIS 
         {
             generalTimer += Time.deltaTime;
             Debug.Log("Tiempo de AGris: "+generalTimer);
@@ -110,7 +110,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
         }
         
-        if (isInPulidora && haveAluminaGris && haveAluminaBlanca && probeBehaviour.IsLijadoMaximo() && !haveNital) // Segunda etapa de pulido, TIENE ALUMINA BLANCA y ya tuvo gris, sin nital 
+        if (isInPulidora && haveAluminaGris && haveAluminaBlanca && probeBehaviour.IsLijadoMax() && !haveNital) // Segunda etapa de pulido, TIENE ALUMINA BLANCA y ya tuvo gris, sin nital 
         {
             //generalTimer = 0;
             generalTimer2 += Time.deltaTime;
@@ -342,7 +342,7 @@ haveAluminaGris = true;
 
     public bool IsReady()
     {
-        return haveAluminaBlanca && haveNital && haveAluminaGris && probeBehaviour.IsLijadoMaximo();
+        return haveAluminaBlanca && haveNital && haveAluminaGris && probeBehaviour.IsLijadoMax();
     }
 
 }

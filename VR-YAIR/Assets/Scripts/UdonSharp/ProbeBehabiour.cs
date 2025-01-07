@@ -483,10 +483,14 @@ public class ProbeBehabiour : UdonSharpBehaviour
         //Gizmos.DrawLine();
     }
 
-    public bool IsLijadoMaximo()
+    private bool IsLijadoMaximo()
     { 
         return (int)Desgaste == (int)DesgasteMax;
     }
 
+    public bool IsLijadoMax()
+    {
+        return (int)Desgaste == 800;
+    }
 }
 

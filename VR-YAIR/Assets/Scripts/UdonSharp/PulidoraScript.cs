@@ -55,7 +55,9 @@ public class PulidoraScript : UdonSharpBehaviour
             gameObject.transform.Rotate(Vector3.forward * RotationVelocity * Time.deltaTime);
             colliderGris.SetActive(GrisLoaded);
             colliderBlanco.SetActive(BlancaLoaded);
-            colliderRotor.SetActive(Rotating);
+
+            if (colliderRotor != null)
+                colliderRotor.SetActive(Rotating);
         }
 
         if (Rotating & !AudioStart && !AudioLoop)
