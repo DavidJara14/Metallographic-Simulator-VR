@@ -11,6 +11,12 @@ public class ActivateMirror : UdonSharpBehaviour
     public GameObject probetaShader2;
     public GameObject probetaMirror2;
 
+    [SerializeField] public Vector3 PañoToObjSize;
+    [SerializeField] public Vector3 Up;
+    [SerializeField] public Vector3 VectorDeDireccionDePuilidoActual;
+    [SerializeField] private GameObject rotorPulidora;
+    [SerializeField] private PulidoraScript PulidoraScript;
+
     public bool haveAluminaGris = false;
     public bool haveAluminaBlanca = false;
     public bool haveNital = false;
@@ -33,6 +39,8 @@ public class ActivateMirror : UdonSharpBehaviour
     private float colorTimer = 0f;
     private bool isClear = false;
 
+    [SerializeField] private VRC_Pickup pickup;
+
     private void Start()
     {
         probetaShader1.SetActive(true);
@@ -46,6 +54,18 @@ public class ActivateMirror : UdonSharpBehaviour
     {
         // Alumina gris -> Para efectos practicos le dara brillo 
         // Alumina blanca ->´Para efectos practicos le dara acabado espejo 
+
+        if(PulidoraScript != null && PulidoraScript.Rotating)
+        {
+            PañoToObjSize = new Vector3(gameObject.transform.position.x - PulidoraScript.transform.position.x, 0f, gameObject.transform.position.z - PulidoraScript.transform.position.z);
+            Up = gameObject.transform.up;
+            VectorDeDireccionDePuilidoActual = Vector3.Cross(PañoToObjSize, Up);
+
+            if (pickup.currentPlayer == null && isInPulidora )
+            {
+                GetComponent<Rigidbody>().AddForce(VectorDeDireccionDePuilidoActual.normalized * 250f);
+            }
+        }
 
         if (!haveAluminaBlanca && !haveAluminaGris && !haveNital) // Hasta esta etapa solo se ha lijado 
         {
@@ -209,6 +229,7 @@ public class ActivateMirror : UdonSharpBehaviour
         }
         //Debug.Log("Bool Primer Lijado = " + _IsFirstSanding); 
 
+
     }
 
     private void OnParticleCollision(GameObject other)
@@ -268,6 +289,11 @@ haveAluminaGris = true;
             haveAluminaBlanca = true;
         }*/
 
+        if(other.GetComponent<PulidoraScript>() != null)
+        {
+            rotorPulidora = other.gameObject;
+            PulidoraScript = rotorPulidora.GetComponent<PulidoraScript>();
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -339,6 +365,12 @@ haveAluminaGris = true;
         if (other.gameObject.name == "RotorPulidora") 
         {
             isInPulidora = false;
+        }
+
+        if (other.GetComponent<PulidoraScript>())
+        {
+            rotorPulidora = null;
+            PulidoraScript = null;
         }
 
     }

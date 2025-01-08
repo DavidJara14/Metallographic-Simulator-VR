@@ -552,7 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 35630e38b4e5ffb40b44ec5348b4333f, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -895,7 +895,7 @@ Transform:
   m_GameObject: {fileID: 3678257767952500167}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.043352485, z: 0}
+  m_LocalPosition: {x: 0.05, y: -0.043352485, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6272,6 +6272,11 @@ MonoBehaviour:
   probetaMirror1: {fileID: 2524360316999131298}
   probetaShader2: {fileID: 4844091889528000280}
   probetaMirror2: {fileID: 3642593258989108886}
+  "Pa\xF1oToObjSize": {x: 0, y: 0, z: 0}
+  Up: {x: 0, y: 0, z: 0}
+  VectorDeDireccionDePuilidoActual: {x: 0, y: 0, z: 0}
+  rotorPulidora: {fileID: 0}
+  PulidoraScript: {fileID: 0}
   haveAluminaGris: 0
   haveAluminaBlanca: 0
   haveNital: 0
@@ -6282,6 +6287,7 @@ MonoBehaviour:
   calor: 0
   bodyMaterial: {fileID: 1301254321874595927}
   isInPulidora: 0
+  pickup: {fileID: 0}
 --- !u!114 &7789323974390255625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6426,6 +6432,9 @@ MonoBehaviour:
   _isInsideCollider: 0
   bodyMaterial: {fileID: 1301254321874595927}
   canLijar: 0
+  rotorIsRotating: 0
+  dropProbeta: 0
+  elapsedtime: 0
   ProbeType: Acero 1018
   _audioSource: {fileID: 910740562937144408}
   _audioClip: {fileID: 8300000, guid: 2cdaeda8196160c4fae585d2768449fa, type: 3}
@@ -6808,7 +6817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 35630e38b4e5ffb40b44ec5348b4333f, type: 2}
   m_Color: {r: 0.6150943, g: 0.6150943, b: 0.6150943, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
