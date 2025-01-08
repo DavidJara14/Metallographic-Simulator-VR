@@ -98,6 +98,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         {
             LijaRotationActiva = LijaRotationActivaGO.GetComponent<LijaRotation>();
         }
+
         if(/*First != "" && */LijaRotationActiva != null)
         {
             if(LijaRotationActiva.Rotating)
@@ -126,9 +127,11 @@ public class ProbeBehabiour : UdonSharpBehaviour
         }
         else if(EsteParticleSystem.isEmitting)
         {
+            Debug.Log("StopEmitting!!!");
             EsteParticleSystem.Stop();
             _audioSource.Stop();
         }
+
         UpdateMaterial();
         if (UpdateMatTimer >= .1)
         {
@@ -236,7 +239,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 }
                 colorTimer = 0f;
             }
-            Debug.Log("Ponme agua");
+            //Debug.Log("Ponme agua");
         }
         else
         {
@@ -351,10 +354,16 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+        if(other.GetComponent<InteractProbe>() != null)
+        {
+            return;
+        }
+
         //Debug.Log(other + "in Probebehabiour");
         if (other.GetComponent<LijaRotation>() != null)
         {
-            //Debug.Log("Lijarotation in Provebehabiour");
+            Debug.Log("Lijarotation in Provebehabiour");
             LijaRotationActivaGO = other.gameObject;
             LijaRotationActiva = LijaRotationActivaGO.GetComponent<LijaRotation>();
             interactProbe.DisableCanva();
@@ -432,7 +441,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             {
                 rotorIsRotating = false;
                 _isInsideCollider = false;
-                Debug.Log("Change _isInsideCollider to: " + _isInsideCollider + "Rontating change to: " + other.GetComponent<LijaRotation>().Rotating);
+                //Debug.Log("Change _isInsideCollider to: " + _isInsideCollider + "Rontating change to: " + other.GetComponent<LijaRotation>().Rotating);
             }
         }
     }
@@ -487,7 +496,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         {
             rotorIsRotating = other.GetComponent<LijaRotation>().Rotating;
             _isInsideCollider = true;
-            Debug.Log("Change _isInsideCollider to: " + _isInsideCollider + "Rotating = " + rotorIsRotating);
+            //Debug.Log("Change _isInsideCollider to: " + _isInsideCollider + "Rotating = " + rotorIsRotating);
         }
 
         if(other.GetComponent<LijaRotation>() != null)
