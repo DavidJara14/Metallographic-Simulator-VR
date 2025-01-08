@@ -55,6 +55,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
     public bool canLijar = false;
     //  private Color currentColor = Color.clear;
     public bool rotorIsRotating = false;
+    public bool dropProbeta = false;
+    public float elapsedtime = 0f;
 
     private float colorTimer = 0.0f;
     private bool isClear = true;
@@ -75,6 +77,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void Update()
     {
+
         if (LijaRotationActiva != null)
         { 
             if(LijaRotationActiva.Rotating == true) 
@@ -82,6 +85,13 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 LijaToObjSize = new Vector3(gameObject.transform.position.x - LijaRotationActiva.Lija.transform.position.x, 0f, gameObject.transform.position.z - LijaRotationActiva.Lija.transform.position.z);
                 Up = gameObject.transform.up;
                 VectorDeDireccionDeDesgasteActual = Vector3.Cross(LijaToObjSize, Up);
+                
+                if (pickup.currentPlayer == null && _isInsideCollider)
+                {
+                    GetComponent<Rigidbody>().AddForce(VectorDeDireccionDeDesgasteActual.normalized * 200f);
+                    Debug.Log("Probe droped, addForce");
+                    
+                }
             }
         }
         else if(LijaRotationActivaGO != null)
@@ -321,6 +331,9 @@ public class ProbeBehabiour : UdonSharpBehaviour
     {
         LastUserWasVR = pickup.currentPlayer.IsUserInVR();
         CheckInteractProve();
+        dropProbeta = false;
+        Debug.Log("Probeta drop is: " + dropProbeta);
+
     }
 
     private void CheckInteractProve()
@@ -508,5 +521,13 @@ public class ProbeBehabiour : UdonSharpBehaviour
     {
         return (int)Desgaste == 800;
     }
+
+    public override void OnDrop()
+    {
+        dropProbeta = true;
+        Debug.Log("Probeta drop is: " + dropProbeta);
+
+    }
+
 }
 
