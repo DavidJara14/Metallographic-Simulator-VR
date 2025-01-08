@@ -1,5 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
+using VRC.SDK3.Data;
 using VRC.SDKBase;
 using VRC.Udon;
 
@@ -11,6 +12,11 @@ public class PistolaDeCalor : UdonSharpBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private ParticleSystem _particleSystem;
+    private DataDictionary ActivePositionZ = new DataDictionary()
+    {
+        {false, new DataList(){ -0.2f, 0.01f} },
+        {true, new DataList(){0.05f , 0.05f} },
+    };
 
     [Header("Audio Config")]
     [SerializeField] private AudioSource _StartStopAudioSource;
@@ -21,6 +27,13 @@ public class PistolaDeCalor : UdonSharpBehaviour
     [SerializeField] private bool AudioStart;
     [SerializeField] private float StartTimer;
     [SerializeField] private bool AudioLoop;
+
+    private void Start()
+    {
+        ActivePositionZ.TryGetValue(Used, out DataToken var);
+        collisionPistol.center = new Vector3(0, 0, var.DataList[0].Float);
+        collisionPistol.radius = var.DataList[1].Float;
+    }
 
     private void Update()
     {
@@ -65,8 +78,11 @@ public class PistolaDeCalor : UdonSharpBehaviour
     public void usePistol()
     {
         Used = !Used;
-        collisionPistol.enabled = Used;
-        if(Used)
+        ActivePositionZ.TryGetValue(Used, out DataToken var);
+        collisionPistol.center = new Vector3 (0, 0, var.DataList[0].Float);
+        collisionPistol.radius = var.DataList[1].Float;
+        //collisionPistol.enabled = Used;
+        if (Used)
         {
             _particleSystem.Play();
         }
