@@ -149,7 +149,7 @@ public class ActivateMirror : UdonSharpBehaviour
             }
         }
         
-        if (haveAluminaGris && haveAluminaBlanca && haveNital /*&& calor*/) // Segunda etapa de pulido, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
+        if (haveAluminaGris && haveAluminaBlanca && haveNital /*&& calor*/) // Ataque, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
         {
             if (calor)
             {
@@ -303,7 +303,8 @@ haveAluminaGris = true;
 
         if (other.gameObject.name == "RotorPulidora")
         {
-            isInPulidora = true;
+
+            isInPulidora = other.GetComponent<PulidoraScript>().Rotating;
             Debug.Log("Is in pulidora: " + isInPulidora);
         }
     }

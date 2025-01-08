@@ -54,6 +54,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     public GameObject bodyMaterial;
     public bool canLijar = false;
     //  private Color currentColor = Color.clear;
+    public bool rotorIsRotating = false;
 
     private float colorTimer = 0.0f;
     private bool isClear = true;
@@ -149,57 +150,61 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
         if (_isInsideCollider && isHumedo && !IsLijadoMaximo() && canLijar)
         {
-            _insideColliderTimer += Time.deltaTime;
-            Debug.Log("Time lija: " + _insideColliderTimer);
-            if (_insideColliderTimer >= 10f || probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste || probetaShader2.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste)
+            if (LijaRotationActiva.Rotating)
             {
-                //EsteMaterial.SetFloat("_GranoLija", Desgaste);
-
-                if (Mirror.caraTrabajada == 1)
+                _insideColliderTimer += Time.deltaTime;
+                Debug.Log("Time lija: " + _insideColliderTimer);
+                if (_insideColliderTimer >= 10f || probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste || probetaShader2.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste)
                 {
-                    //EsteMaterial = Mirror.probetaShader1.GetComponent<Renderer>().material;
-                    probetaShader1.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
-                    probetaShader1.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
+                    //EsteMaterial.SetFloat("_GranoLija", Desgaste);
 
-                }
-                else if (Mirror.caraTrabajada == 2)
-                {
-                    //EsteMaterial = Mirror.probetaShader2.GetComponent<Renderer>().material;
-                    probetaShader2.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
-                    probetaShader2.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
-                }
-
-                //              float hue = Mathf.Repeat(Time.time , 1.0f); 
-                //            Color newColor = Color.HSVToRGB(hue, 1.0f, 1.0f); 
-
-                //          currentColor = Color.Lerp(currentColor, newColor, Time.deltaTime);
-
-                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-
-
-                colorTimer += Time.deltaTime;
-
-                if (colorTimer >= 0.1F)
-                {
-                    if (isClear)
+                    if (Mirror.caraTrabajada == 1)
                     {
-                        bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                        isClear = false;
-                        Debug.Log("Desgaste set to: " + Desgaste);
+                        //EsteMaterial = Mirror.probetaShader1.GetComponent<Renderer>().material;
+                        probetaShader1.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
+                        probetaShader1.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
+
                     }
-                    else
+                    else if (Mirror.caraTrabajada == 2)
                     {
-                        bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                        isClear = true;
+                        //EsteMaterial = Mirror.probetaShader2.GetComponent<Renderer>().material;
+                        probetaShader2.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
+                        probetaShader2.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
                     }
-                    colorTimer = 0f;
+
+                    //              float hue = Mathf.Repeat(Time.time , 1.0f); 
+                    //            Color newColor = Color.HSVToRGB(hue, 1.0f, 1.0f); 
+
+                    //          currentColor = Color.Lerp(currentColor, newColor, Time.deltaTime);
+
+                    bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
+
+
+                    colorTimer += Time.deltaTime;
+
+                    if (colorTimer >= 0.1F)
+                    {
+                        if (isClear)
+                        {
+                            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                            isClear = false;
+                            Debug.Log("Desgaste set to: " + Desgaste);
+                        }
+                        else
+                        {
+                            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                            isClear = true;
+                        }
+                        colorTimer = 0f;
+                    }
+
+
+                }
+                else if(_insideColliderTimer<10.0f && _isInsideCollider)
+                {
+                    bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
                 }
 
-
-            }
-            else if(_insideColliderTimer<10.0f && _isInsideCollider)
-            {
-                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
             }
         }
         else if ((!isHumedo || !canLijar) && _isInsideCollider)
@@ -343,12 +348,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
             interactProbe.gameObject.SetActive(false);
         }
 
-        if (/*other.gameObject.name == "colliderRotor"*/ other.GetComponent<colliderRotorBehabiour>())
+        /*if (other.gameObject.name == "colliderRotor" other.GetComponent<colliderRotorBehabiour>())
         {
-            //    _isInsideCollider = other.GetComponent<LijaRotation>().GetComponentInChildren<BoxCollider>().enabled;
+             _isInsideCollider = other.GetComponent<LijaRotation>().GetComponentInChildren<BoxCollider>().enabled;
             _isInsideCollider = other.GetComponent<colliderRotorBehabiour>().colliderRotor();
-            //Debug.Log("Detecte collider rotor :"+_isInsideCollider);
-        }
+            Debug.Log("Detecte collider rotor :"+_isInsideCollider);
+        }*/
 
         //      if (other.GetComponent<LijaCircularBehabiour>() != null /*&& other.GetComponent<LijaRotation>().Lija != null*/)
         //{
@@ -410,6 +415,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "StopTimer");
                 //StopTimer();
             }
+            if (!other.GetComponent<LijaRotation>().Rotating)
+            {
+                rotorIsRotating = false;
+                _isInsideCollider = false;
+                Debug.Log("Change _isInsideCollider to: " + _isInsideCollider + "Rontating change to: " + other.GetComponent<LijaRotation>().Rotating);
+            }
         }
     }
 
@@ -461,8 +472,13 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
         if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
         {
+            rotorIsRotating = other.GetComponent<LijaRotation>().Rotating;
             _isInsideCollider = true;
+            Debug.Log("Change _isInsideCollider to: " + _isInsideCollider + "Rotating = " + rotorIsRotating);
         }
+
+        if(other.GetComponent<LijaRotation>() != null)
+            rotorIsRotating = other.GetComponent<LijaRotation>().Rotating;
     }
 
     private void OnDrawGizmosSelected()
