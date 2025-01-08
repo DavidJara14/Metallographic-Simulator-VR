@@ -41,6 +41,10 @@ public class ActivateMirror : UdonSharpBehaviour
 
     [SerializeField] private VRC_Pickup pickup;
 
+    public bool finishedPulido1 = false;
+    public bool finishedPulido2 = false;
+    public bool finishedAQ = false;
+
     private void Start()
     {
         probetaShader1.SetActive(true);
@@ -126,6 +130,7 @@ public class ActivateMirror : UdonSharpBehaviour
                     }
                     colorTimer = 0f;
                 }
+                finishedPulido1 = true;
             }
         }
         
@@ -166,10 +171,11 @@ public class ActivateMirror : UdonSharpBehaviour
                     }
                     colorTimer = 0f;
                 }
+                finishedPulido2 = true;
             }
         }
         
-        if (haveAluminaGris && haveAluminaBlanca && haveNital /*&& calor*/) // Ataque, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
+        if (haveAluminaGris && haveAluminaBlanca && haveNital) // Ataque, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
         {
             if (calor)
             {
@@ -209,11 +215,11 @@ public class ActivateMirror : UdonSharpBehaviour
                         colorTimer = 0f;
                     }
                 }
+                finishedAQ = true;
             }
         }
 
         Desgaste = probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija");
-        //Debug.Log("Desgaste en la Probeta = "+Desgaste); 
 
         if (Desgaste > 80)
         {
@@ -227,68 +233,22 @@ public class ActivateMirror : UdonSharpBehaviour
                 probetaShader2.GetComponent<Renderer>().material.SetInt("_IsFirstSanding", 0);
             }
         }
-        //Debug.Log("Bool Primer Lijado = " + _IsFirstSanding); 
 
 
     }
 
     private void OnParticleCollision(GameObject other)
     {
-        //Debug.Log("Juan"); 
         string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
-        //Debug.Log(tipo); 
 
-        /*if (tipo == "AGris") 
-        {
-haveAluminaGris = true; 
-            //Debug.Log("Alumina Gris"); 
-        } 
-        else if (tipo == "ABlanca") 
-        { 
-            haveAluminaBlanca = true; 
-            //Debug.Log("Alumina Blanca"); 
-        } 
-        else */
-        if (tipo == "Nital")
+        if (tipo == "Nital" && finishedPulido1 && finishedPulido2)
         {
             haveNital = true;
-            //Debug.Log("Nital"); 
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //calor = false; 
-        //haveAluminaBlanca = false; 
-        //haveAluminaGris = false; 
-        /*Debug.Log($"{other.gameObject.name}: Layer: {other.gameObject.layer}"); 
-        Debug.Log(other.gameObject.layer == LayerMask.NameToLayer("ProbeLayer")); 
-        Debug.Log($"{other.gameObject.layer} == {LayerMask.NameToLayer("ProbeLayer")}"); 
-        if (other.gameObject.layer == LayerMask.NameToLayer("ProbeLayer")) 
-        { 
-            calor = true; 
-            Debug.Log("Probeta Caliente"); 
-        }*/
-
-        /*
-        if (other.gameObject.name == "Colision")
-        {
-            Debug.Log("Colision");
-            calor = true;
-        }
-
-        if (other.gameObject.name == "ColisionPañoGris")
-        {
-            Debug.Log("ColisionGris");
-            haveAluminaGris = true;
-        }
-
-        if (other.gameObject.name == "ColisionPañoBlanco")
-        {
-            Debug.Log("ColisionBlanca");
-            haveAluminaBlanca = true;
-        }*/
-
         if(other.GetComponent<PulidoraScript>() != null)
         {
             rotorPulidora = other.gameObject;
@@ -298,7 +258,7 @@ haveAluminaGris = true;
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.name == "Colision")
+        if (other.gameObject.name == "Colision" && finishedPulido1 && finishedPulido2)
         {
             Debug.Log("ColisionCalor");
             calor = true;
@@ -310,26 +270,14 @@ haveAluminaGris = true;
             haveAluminaGris = true;
         }
 
-        if (other.gameObject.name == "ColisionPañoBlanco" && haveAluminaGris)
+        if (other.gameObject.name == "ColisionPañoBlanco" && haveAluminaGris && finishedPulido1)
         {
             Debug.Log("ColisionBlanca");
             haveAluminaBlanca = true;
         }
 
-//        if (other.gameObject.name == "CollisionRotorPulidora")
-//        {
-//            isInPulidora = true;
-//            Debug.Log("Is in pulidora: " + isInPulidora);    
-//        }
-        /*if(other.GetComponent<PulidoraScript>().colliderRotor.SetActive())
-        {
-            isInPulidora = true;
-            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-        }*/
-
         if (other.gameObject.name == "RotorPulidora")
         {
-
             isInPulidora = other.GetComponent<PulidoraScript>().Rotating;
             Debug.Log("Is in pulidora: " + isInPulidora);
         }
@@ -339,32 +287,14 @@ haveAluminaGris = true;
     {
         if (other.gameObject.name == "Colision")
         {
-            //Debug.Log("Colision");
             calor = false;
         }
-
-        if (other.gameObject.name == "ColisionPañoGris")
-        {
-           // Debug.Log("ColisionGris");
-            //haveAluminaGris = false;
-        }
-
-        if (other.gameObject.name == "ColisionPañoBlanco")
-        {
-           // Debug.Log("ColisionBlanca");
-            //haveAluminaBlanca = false;
-        }
-      //  if (other.gameObject.name == "CollisionRotorPulidora")
-        //{
-          //  isInPulidora = false;
-            //haveAluminaGris = false ;
-            //haveAluminaBlanca = false ;
-            //bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1f);
-        //}
 
         if (other.gameObject.name == "RotorPulidora") 
         {
             isInPulidora = false;
+            generalTimer = 0f;
+            generalTimer2 = 0f;
         }
 
         if (other.GetComponent<PulidoraScript>())
@@ -372,12 +302,11 @@ haveAluminaGris = true;
             rotorPulidora = null;
             PulidoraScript = null;
         }
-
     }
 
     public bool IsReady()
     {
-        return haveAluminaBlanca && haveNital && haveAluminaGris && probeBehaviour.IsLijadoMax();
+        return finishedPulido1 && finishedPulido2 && finishedAQ && probeBehaviour.IsLijadoMax();
     }
 
 }
