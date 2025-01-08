@@ -13,7 +13,8 @@ using static UnityEngine.Rendering.HableCurve;
 public class MicroscopeBehabiour : UdonSharpBehaviour
 {
 
-    [SerializeField] private Image[] CompImage;
+    [Obsolete()][SerializeField] private Image[] CompImage;
+    [SerializeField] private RawImage[] CompRawImage;
     [SerializeField] private TextMeshProUGUI CompText;
     [SerializeField] private MicroscopeElements ReferenceGOComponent;
     [SerializeField] private GameObject CanvasGO;
@@ -65,37 +66,11 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
             TryChangeImageNew(PBcomponent.getProbeType(), Augment);
             CompText.text = $"x{Augment}";
         }
-        //TryChangeImage(PBcomponent.getProbeType(), Augment);
     }
-
-   /* [Obsolete] void TryChangeImage(string type, int augment, int index = 0)
-    {
-        Sprite imagenAUsar = ReferenceGOComponent.placeHolder;
-        bool Success = false;
-
-        for (int i = 0; i < ReferenceGOComponent.elementos.Length; i++)
-        {
-            ElementType elementType = ReferenceGOComponent.elementos[i];
-            if (type == elementType.type)
-            {
-                Success = true;
-                Sprite[] imagenes = ReferenceGOComponent.elementos[i].GetAumentImages(augment);
-                imagenAUsar = imagenes[UnityEngine.Random.Range(0, imagenes.Length)];
-                break;
-            }
-        }
-
-        if (!Success)
-        {
-            Debug.LogWarning($"{this}:no image detected with type {type}");
-        }
-
-        UpdateImage(ref imagenAUsar);
-    }*/
 
     private void TryChangeImageNew(string type, int augment, int index = 0)
     {
-        Sprite imagenAUsar = ReferenceGOComponent.placeHolder;
+        Texture2D rawImagenAUsar = ReferenceGOComponent.placeHolderT2D;
         bool ValidProveType = false;
 
         for (int i = 0; i < ReferenceGOComponent.elementos.Length; i++)
@@ -103,12 +78,12 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
             ElementType elementType = ReferenceGOComponent.elementos[i];
             if (type == elementType.type)
             {
+                
                 ValidProveType = true;
                 IVRCImageDownload[] Textures = ReferenceGOComponent.elementos[i].GetAumentTextures(augment);
                 if (Textures[0].State == VRCImageDownloadState.Complete)
                 {
-                    Texture2D texture = Textures[0].Result;
-                    imagenAUsar = Sprite.Create(texture,new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+                    rawImagenAUsar = Textures[0].Result;
                 }
                 else
                 {
@@ -122,27 +97,26 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         {
             Debug.LogWarning($"{this}:no image detected with type {type}");
         }
-
-        UpdateImage(ref imagenAUsar);
+        UpdateRawImage(ref rawImagenAUsar);
     }
 
-    private void UpdateImage(ref Sprite imagenAUsar)
+    private void UpdateRawImage(ref Texture2D imagenAUsar)
     {
-        foreach (var comp in CompImage)
+        foreach (var comp in CompRawImage)
         {
             if (comp == null)
             {
                 continue;
             }
 
-            comp.sprite = imagenAUsar;
+            comp.texture = imagenAUsar;
         }
     }
 
     private void RemoveImage()
     {
-        Sprite sprite = null;
-        UpdateImage(ref sprite);
+        Texture2D sprite = null;
+        UpdateRawImage(ref sprite);
     }
 
     public void Canvas_On()

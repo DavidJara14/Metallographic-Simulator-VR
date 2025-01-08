@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UdonSharp;
 using UnityEditor;
 using UnityEngine;
@@ -49,32 +50,6 @@ public class ElementType : UdonSharpBehaviour
             TextureX1000[i] = imageDownloader.DownloadImage(LinkX1000[i], default, _udonEventReceiver);
         }
 }
-
-  /*  [Obsolete] public Sprite[] GetAumentImages(int aumento)
-    {
-        Sprite[] images = null;
-        
-        switch (aumento)
-        {
-            case 100:
-                images = x100;
-                break;
-            case 200:
-                images = x200;
-                break;
-            case 500:
-                images = x500;
-                break;
-            case 1000:
-                images = x1000;
-                break;
-            default:
-                Debug.LogWarning($"Aumento x{aumento} no encontrado");
-                break;
-        }
-
-        return images;
-    }*/
 
     public IVRCImageDownload[] GetAumentTextures(int aumento)
     {

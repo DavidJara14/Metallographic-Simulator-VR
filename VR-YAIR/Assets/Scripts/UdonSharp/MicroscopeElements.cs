@@ -9,7 +9,8 @@ using VRC.Udon;
 public class MicroscopeElements : UdonSharpBehaviour
 {
     [SerializeField] public ElementType[] elementos;
-    public Sprite placeHolder;
+    //public Sprite placeHolder;
+    public Texture2D placeHolderT2D;
     public VRCImageDownloader imageDownloader;
 
     private void Start()
