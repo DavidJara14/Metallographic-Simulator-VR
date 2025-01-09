@@ -36,7 +36,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
     public GameObject bodyMaterial;
     public bool isInPulidora = false;
-    private float colorTimer = 0f;
+    [UdonSynced] private float colorTimer = 0f;
     private bool isClear = false;
 
     [SerializeField] private VRC_Pickup pickup;
