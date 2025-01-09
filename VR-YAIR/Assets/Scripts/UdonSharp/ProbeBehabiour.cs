@@ -58,7 +58,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     public bool dropProbeta = false;
     public float elapsedtime = 0f;
 
-    private float colorTimer = 0.0f;
+    [UdonSynced] private float colorTimer = 0.0f;
     private bool isClear = true;
     private bool isHumedo = true;
 
