@@ -29,9 +29,9 @@ public class ActivateMirror : UdonSharpBehaviour
     public bool _IsFirstSanding = true;
     public bool calor = false;
 
-    private float generalTimer = 0f;
-    private float generalTimer2 = 0f;
-    private float generalTimer3 = 0f;
+    [UdonSynced] private float generalTimer = 0f;
+    [UdonSynced] private float generalTimer2 = 0f;
+    [UdonSynced] private float generalTimer3 = 0f;
 
 
     public GameObject bodyMaterial;
