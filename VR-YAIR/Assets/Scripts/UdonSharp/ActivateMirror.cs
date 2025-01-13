@@ -78,145 +78,89 @@ public class ActivateMirror : UdonSharpBehaviour
 
             else if (caraTrabajada == 2)
                 probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0);
-
         }
 
-        if (isInPulidora && probeBehaviour.IsLijadoMax() && !haveNital && !haveAluminaGris && !haveAluminaBlanca)
+        if(isInPulidora)
         {
-            Debug.Log("ISLIJADOMAXIMO: " + probeBehaviour.IsLijadoMax());
-            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-            colorTimer += Time.deltaTime;
-            if (colorTimer >= 0.1f)
+            if (!probeBehaviour.IsLijadoMax())
             {
-                if (isClear)
-                {
-                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-                    isClear = false;
-                }
-                else
-                {
-                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                    isClear = true;
-                }
-                colorTimer = 0f;
+                changeColor(false);
+                Debug.Log("Termina de lijar");
             }
-        }
-        
-        if (isInPulidora && haveAluminaGris && !haveAluminaBlanca && probeBehaviour.IsLijadoMax() && !haveNital) // Primera etapa de pulido, TIENE ALUMINA GRIS 
-        {
-            generalTimer += Time.deltaTime;
-            Debug.Log("Tiempo de AGris: "+generalTimer);
-            if(generalTimer > 10)
+
+            if (probeBehaviour.IsLijadoMax())
             {
-                if (caraTrabajada == 1)
-                    probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
-                else if (caraTrabajada == 2)
-                    probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
-
-                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-                
-                colorTimer += Time.deltaTime;
-                if (colorTimer >= 0.1f)
+                if(!haveNital && !haveAluminaGris && !haveAluminaBlanca)
                 {
-                    if (isClear)
-                    {
-                        bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                        isClear = false;
-                    }
-                    else
-                    {
-                        bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                        isClear = true;
-                    }
-                    colorTimer = 0f;
+                    Debug.Log("ISLIJADOMAXIMO: " + probeBehaviour.IsLijadoMax());
+                    changeColor(false);
                 }
-                finishedPulido1 = true;
-            }
-        }
-        
-        if (isInPulidora && haveAluminaGris && haveAluminaBlanca && probeBehaviour.IsLijadoMax() && !haveNital) // Segunda etapa de pulido, TIENE ALUMINA BLANCA y ya tuvo gris, sin nital 
-        {
-            //generalTimer = 0;
-            generalTimer2 += Time.deltaTime;
-            Debug.Log("Tiempo de ABlanca: " + generalTimer2);
-            if (generalTimer2 > 10)
-            {
-                if (caraTrabajada == 1)
+                else if (haveAluminaGris && !haveAluminaBlanca && !haveNital) // Primera etapa de pulido, TIENE ALUMINA GRIS 
                 {
-                    probetaShader1.SetActive(false);
-                    probetaMirror1.SetActive(true);
+                    generalTimer += Time.deltaTime;
+                    Debug.Log("Tiempo de AGris: " + generalTimer);
+                    if (generalTimer > 10 || finishedPulido1)
+                    {
+                        if (caraTrabajada == 1)
+                            probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
+                        else if (caraTrabajada == 2)
+                            probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
+
+                        changeColor(true);
+                        finishedPulido1 = true;
+                    }
                 }
-
-                else if (caraTrabajada == 2)
+                else if (haveAluminaGris && haveAluminaBlanca && !haveNital) // Segunda etapa de pulido, TIENE ALUMINA BLANCA y ya tuvo gris, sin nital 
                 {
-                    probetaShader2.SetActive(false);
-                    probetaMirror2.SetActive(true);
-                }
-                //Debug.Log("Mirror active"); 
-                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-
-
-                colorTimer += Time.deltaTime;
-                if (colorTimer >= 0.1f)
-                {
-                    if (isClear)
+                    generalTimer2 += Time.deltaTime;
+                    Debug.Log("Tiempo de ABlanca: " + generalTimer2);
+                    if (generalTimer2 > 10 || finishedPulido2)
                     {
-                        bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                        isClear = false;
-                    }
-                    else
-                    {
-                        bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                        isClear = true;
-                    }
-                    colorTimer = 0f;
-                }
-                finishedPulido2 = true;
-            }
-        }
-        
-        if (haveAluminaGris && haveAluminaBlanca && haveNital) // Ataque, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
-        {
-            if (calor)
-            {
-                generalTimer3 += Time.deltaTime;
-                Debug.Log("Tiempo de calor: " + generalTimer3);
-                if (generalTimer3 > 10)
-                {
-                    if (caraTrabajada == 1)
-                    {
-                        probetaShader1.SetActive(true);
-                        probetaMirror1.SetActive(false);
-                        probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
-                    }
-
-                    else if (caraTrabajada == 2)
-                    {
-                        probetaShader2.SetActive(true);
-                        probetaMirror2.SetActive(false);
-                        probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
-                    }
-                    bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-
-                    // Debug.Log("Mirror unactive");
-                    colorTimer += Time.deltaTime;
-                    if (colorTimer >= 0.1f)
-                    {
-                        if (isClear)
+                        if (caraTrabajada == 1)
                         {
-                            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                            isClear = false;
+                            probetaShader1.SetActive(false);
+                            probetaMirror1.SetActive(true);
                         }
-                        else
+
+                        else if (caraTrabajada == 2)
                         {
-                            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                            isClear = true;
+                            probetaShader2.SetActive(false);
+                            probetaMirror2.SetActive(true);
                         }
-                        colorTimer = 0f;
+                        //Debug.Log("Mirror active"); 
+                        changeColor(true);
+                        finishedPulido2 = true;
                     }
                 }
-                finishedAQ = true;
+                else if (haveAluminaGris && haveAluminaBlanca && haveNital) // Ataque, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
+                {
+                    if (calor)
+                    {
+                        generalTimer3 += Time.deltaTime;
+                        Debug.Log("Tiempo de calor: " + generalTimer3);
+                        if (generalTimer3 > 10 || finishedAQ)
+                        {
+                            if (caraTrabajada == 1)
+                            {
+                                probetaShader1.SetActive(true);
+                                probetaMirror1.SetActive(false);
+                                probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
+                            }
+
+                            else if (caraTrabajada == 2)
+                            {
+                                probetaShader2.SetActive(true);
+                                probetaMirror2.SetActive(false);
+                                probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
+                            }
+                            // Debug.Log("Mirror unactive");
+                            changeColor(true);
+                        }
+                        finishedAQ = true;
+                    }
+                }
             }
+
         }
 
         Desgaste = probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija");
@@ -233,8 +177,6 @@ public class ActivateMirror : UdonSharpBehaviour
                 probetaShader2.GetComponent<Renderer>().material.SetInt("_IsFirstSanding", 0);
             }
         }
-
-
     }
 
     private void OnParticleCollision(GameObject other)
@@ -307,6 +249,30 @@ public class ActivateMirror : UdonSharpBehaviour
     public bool IsReady()
     {
         return finishedPulido1 && finishedPulido2 && finishedAQ && probeBehaviour.IsLijadoMax();
+    }
+    private void changeColor(bool isGreen)
+    {
+        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
+        colorTimer += Time.deltaTime;
+        if (colorTimer >= 0.1f)
+        {
+            if (isClear)
+            {
+                if (isGreen)
+                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                else
+                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+
+                isClear = false;
+                Debug.Log("Desgaste set to: " + Desgaste);
+            }
+            else
+            {
+                bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                isClear = true;
+            }
+            colorTimer = 0f;
+        }
     }
 
 }
