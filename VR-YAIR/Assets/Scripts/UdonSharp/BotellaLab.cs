@@ -42,7 +42,7 @@ public class BotellaLab : UdonSharpBehaviour
             _particleSystem.Stop();
             if (!LastUserWasVr)
             {
-                _Visual.transform.localRotation = Quaternion.Euler(0, 0, 00);
+                //_Visual.transform.localRotation = Quaternion.Euler(0, 0, 00);
             }
         }
     }
@@ -53,7 +53,7 @@ public class BotellaLab : UdonSharpBehaviour
         LastUserWasVr = _pickupComp.currentPlayer.IsUserInVR();
         if (!LastUserWasVr)
         {
-            _Visual.rotation = Quaternion.Euler(0, -50f, 0);
+            //_Visual.rotation = Quaternion.Euler(0, -50f, 0);
         }
     }
 
@@ -62,8 +62,8 @@ public class BotellaLab : UdonSharpBehaviour
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "UnUseThisThing");
         if (!LastUserWasVr)
         {
-            gameObject.transform.rotation = Quaternion.identity;
-            _Visual.rotation = Quaternion.identity; gameObject.transform.rotation = Quaternion.Euler(0, -50f, 0);
+            //gameObject.transform.rotation = Quaternion.identity;
+            //_Visual.rotation = Quaternion.identity; gameObject.transform.rotation = Quaternion.Euler(0, -50f, 0);
         }
     }
 
@@ -93,7 +93,7 @@ public class BotellaLab : UdonSharpBehaviour
         {
             if(LiquidFill > 0)
             {
-                _Visual.transform.localRotation = Quaternion.Euler(-15f, 0, 0);
+                _Visual.transform.localRotation = Quaternion.Euler(-15f, 90, 0);
                 _particleSystem.gameObject.SetActive(true);
                 _particleSystem.Play();
             }
@@ -105,7 +105,7 @@ public class BotellaLab : UdonSharpBehaviour
         _particleSystem.Stop();
         if (!LastUserWasVr)
         {
-            _Visual.transform.localRotation = Quaternion.Euler(0, 0, 00);
+            _Visual.transform.localRotation = Quaternion.Euler(0, 90, 00);
         }
     }
 
