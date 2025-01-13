@@ -66,6 +66,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Alumina  Blanca
       objectReference: {fileID: 0}
+    - target: {fileID: 7138950635121727210, guid: bf2c9332192ae324a89dbab7c53c39e1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2af87790f8a6aba4994695fedcd3887d, type: 2}
     - target: {fileID: 7445433830029709110, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -116,6 +121,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7481706219052371347, guid: bf2c9332192ae324a89dbab7c53c39e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 7481706219052371347, guid: bf2c9332192ae324a89dbab7c53c39e1,
+        type: 3}
     - target: {fileID: 8295964132348466544, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
       propertyPath: m_text
