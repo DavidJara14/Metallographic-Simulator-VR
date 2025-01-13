@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
+  m_Name: Alumina-Gris
   m_Shader: {fileID: -6465566751694194690, guid: 65d6705c57f1d1b4a9411acf8d2c6278,
     type: 3}
   m_Parent: {fileID: 0}
@@ -95,14 +95,14 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorAgua: {r: 0.5424528, g: 0.9642299, b: 1, a: 0.6588235}
+    - _ColorAgua: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0.6588235}
     - _ColorAguaFresnel: {r: 0, g: 0.9012346, b: 1, a: 1}
-    - _ColorAguaSuperficie: {r: 0.46213073, g: 0.40650588, b: 0.990566, a: 0.6470588}
+    - _ColorAguaSuperficie: {r: 0.58462805, g: 0.5924529, b: 0.5921631, a: 0.6470588}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MinMaxFill: {r: -1, g: 1, b: 0, a: 0}
     - _MinMaxFill_100: {r: -1, g: 1, b: 0, a: 0}
     - _MinMaxFillx100: {r: -15, g: 15, b: 0, a: 0}
-    - _Multiply_Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - _Multiply_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3660044871808107225
 MonoBehaviour:
