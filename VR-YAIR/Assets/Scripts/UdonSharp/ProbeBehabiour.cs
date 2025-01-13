@@ -1,7 +1,6 @@
 ﻿using System;
 using UdonSharp;
 using UnityEditor;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using VRC.SDK3.Data;
 using VRC.SDKBase;
@@ -47,14 +46,14 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     public GameObject probetaShader1;
     public GameObject probetaShader2;
-    [UdonSynced] public float _insideColliderTimer = 0f;
-    [UdonSynced] public bool _isInsideCollider = false;
+    public float _insideColliderTimer = 0f;
+    public bool _isInsideCollider = false;
     public GameObject bodyMaterial;
-    [UdonSynced] public bool canLijar = false;
+    public bool canLijar = false;
 
-    [UdonSynced] private float colorTimer = 0.0f;
-    [UdonSynced] private bool isClear = true;
-    [UdonSynced] private bool isHumedo = true;
+    private float colorTimer = 0.0f;
+    private bool isClear = true;
+    private bool isHumedo = true;
 
     public string ProbeType = "";
 
@@ -243,8 +242,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if(other.GetComponent<InteractProbe>() != null)
+        if (other.GetComponent<InteractProbe>() != null)
         {
             return;
         }
@@ -271,10 +269,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
             CheckInteractProve();
         }
 
-        if (other.GetComponent<LijaCircularBehabiour>() != null)
-        {
-        }
-
         bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
 
         if(other.gameObject.name == "Rotor")
@@ -292,6 +286,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
             if (!other.GetComponent<LijaRotation>().Rotating)
             {
                 _isInsideCollider = false;
+                Debug.Log("_isInsideCollider  = " + _isInsideCollider);
+
             }
         }
     }
@@ -310,6 +306,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        Debug.Log("OnTriggerStayCall: " + other.name);
 
         if (other.GetComponent<LijaCircularBehabiour>() != null)
         {
@@ -324,10 +321,15 @@ public class ProbeBehabiour : UdonSharpBehaviour
             }
         }
 
-        if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
+        if(pickup.currentPlayer != null)
         {
-            _isInsideCollider = true;
+            if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
+            {
+                _isInsideCollider = true;
+                Debug.Log("_isInsideCollider  = " + _isInsideCollider);
+            }
         }
+
     }
 
     private void OnDrawGizmosSelected()

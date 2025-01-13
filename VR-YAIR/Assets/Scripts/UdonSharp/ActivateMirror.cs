@@ -29,14 +29,14 @@ public class ActivateMirror : UdonSharpBehaviour
     public bool _IsFirstSanding = true;
     public bool calor = false;
 
-    [UdonSynced] private float generalTimer = 0f;
-    [UdonSynced] private float generalTimer2 = 0f;
-    [UdonSynced] private float generalTimer3 = 0f;
+    private float generalTimer = 0f;
+    private float generalTimer2 = 0f;
+    private float generalTimer3 = 0f;
 
 
     public GameObject bodyMaterial;
     public bool isInPulidora = false;
-    [UdonSynced] private float colorTimer = 0f;
+    private float colorTimer = 0f;
     private bool isClear = false;
 
     [SerializeField] private VRC_Pickup pickup;
