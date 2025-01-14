@@ -306,7 +306,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("OnTriggerStayCall: " + other.name);
+        //Debug.Log("OnTriggerStayCall: " + other.name);
 
         if (other.GetComponent<LijaCircularBehabiour>() != null)
         {
@@ -326,7 +326,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
             {
                 _isInsideCollider = true;
-                Debug.Log("_isInsideCollider  = " + _isInsideCollider);
+                //Debug.Log("_isInsideCollider  = " + _isInsideCollider);
             }
         }
 

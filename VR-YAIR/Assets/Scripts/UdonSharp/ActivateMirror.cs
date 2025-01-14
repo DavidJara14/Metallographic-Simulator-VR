@@ -59,13 +59,13 @@ public class ActivateMirror : UdonSharpBehaviour
         // Alumina gris -> Para efectos practicos le dara brillo 
         // Alumina blanca ->´Para efectos practicos le dara acabado espejo 
 
-        if(PulidoraScript != null && PulidoraScript.Rotating)
+        if (PulidoraScript != null && PulidoraScript.Rotating)
         {
             PañoToObjSize = new Vector3(gameObject.transform.position.x - PulidoraScript.transform.position.x, 0f, gameObject.transform.position.z - PulidoraScript.transform.position.z);
             Up = gameObject.transform.up;
             VectorDeDireccionDePuilidoActual = Vector3.Cross(PañoToObjSize, Up);
 
-            if (pickup.currentPlayer == null && isInPulidora )
+            if (pickup.currentPlayer == null && isInPulidora)
             {
                 GetComponent<Rigidbody>().AddForce(VectorDeDireccionDePuilidoActual.normalized * 250f);
             }
@@ -80,7 +80,7 @@ public class ActivateMirror : UdonSharpBehaviour
                 probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0);
         }
 
-        if(isInPulidora)
+        if (isInPulidora)
         {
             if (!probeBehaviour.IsLijadoMax())
             {
@@ -90,7 +90,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
             if (probeBehaviour.IsLijadoMax())
             {
-                if(!haveNital && !haveAluminaGris && !haveAluminaBlanca)
+                if (!haveNital && !haveAluminaGris && !haveAluminaBlanca)
                 {
                     Debug.Log("ISLIJADOMAXIMO: " + probeBehaviour.IsLijadoMax());
                     changeColor(false);
@@ -191,7 +191,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<PulidoraScript>() != null)
+        if (other.GetComponent<PulidoraScript>() != null)
         {
             rotorPulidora = other.gameObject;
             PulidoraScript = rotorPulidora.GetComponent<PulidoraScript>();
@@ -227,23 +227,63 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        //si persona agarra que objeto es local
+        //llamar funcion en multi
+        //si no persona agarrando
+        //llamar funcion en multi
+        //de otra forma
+        //Nada
+
+        //Debug.Log("Exit");
+        if (pickup.currentPlayer != null)
+        {
+            //Debug.Log("Hay Player Agarrando");
+            if (!pickup.currentPlayer.isLocal)
+            {
+                //Debug.Log("el player no es local, regresando");
+                return;
+            }
+            //Debug.Log("LocalPlayer");
+        }
+        Debug.Log("Prosiguiendo con las calls");
         if (other.gameObject.name == "Colision")
         {
-            calor = false;
+            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "SetCalorFalse");
+            SetCalorFalse();
         }
 
-        if (other.gameObject.name == "RotorPulidora") 
+        if (other.gameObject.name == "RotorPulidora")
         {
-            isInPulidora = false;
-            generalTimer = 0f;
-            generalTimer2 = 0f;
+            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimersYBoolxd");
+            ResetTimersYBoolxd();
         }
 
         if (other.GetComponent<PulidoraScript>())
         {
-            rotorPulidora = null;
-            PulidoraScript = null;
+            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
+            ResetVars();
         }
+    }
+
+    private void ResetVars()
+    {
+        Debug.Log("ResetRefs");
+        rotorPulidora = null;
+        PulidoraScript = null;
+    }
+
+    private void ResetTimersYBoolxd()
+    {
+        Debug.Log("TimersPulidora e IsInPulidora");
+        isInPulidora = false;
+        generalTimer = 0f;
+        generalTimer2 = 0f;
+    }
+
+    private void SetCalorFalse()
+    {
+        Debug.Log("SecCalor");
+        calor = false;
     }
 
     public bool IsReady()
