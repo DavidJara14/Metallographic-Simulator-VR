@@ -45,6 +45,10 @@ public class ActivateMirror : UdonSharpBehaviour
     public bool finishedPulido2 = false;
     public bool finishedAQ = false;
 
+    private float hapticDuration = 0.05f;
+    private float hapticAmplitude = 0.2f;
+    private float hapticFrequency = 50f;
+
     private void Start()
     {
         probetaShader1.SetActive(true);
@@ -65,9 +69,19 @@ public class ActivateMirror : UdonSharpBehaviour
             Up = gameObject.transform.up;
             VectorDeDireccionDePuilidoActual = Vector3.Cross(PañoToObjSize, Up);
 
-            if (pickup.currentPlayer == null && isInPulidora )
+
+            if (isInPulidora)
             {
-                GetComponent<Rigidbody>().AddForce(VectorDeDireccionDePuilidoActual.normalized * 250f);
+                if (pickup.currentPlayer == null)
+                {
+                    GetComponent<Rigidbody>().AddForce(VectorDeDireccionDePuilidoActual.normalized * 250f);
+                }
+
+                if (pickup.currentPlayer != null)
+                {
+                    Networking.LocalPlayer.PlayHapticEventInHand(pickup.currentHand, hapticDuration, hapticAmplitude, hapticFrequency);
+                    Debug.Log("Haptic Feedback!!!!!!!!!!!!");
+                }
             }
         }
 
