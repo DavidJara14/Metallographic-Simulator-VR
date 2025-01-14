@@ -92,7 +92,7 @@ public class ActivateMirror : UdonSharpBehaviour
             {
                 if (!haveNital && !haveAluminaGris && !haveAluminaBlanca)
                 {
-                    Debug.Log("ISLIJADOMAXIMO: " + probeBehaviour.IsLijadoMax());
+                    //Debug.Log("ISLIJADOMAXIMO: " + probeBehaviour.IsLijadoMax());
                     changeColor(false);
                 }
                 else if (haveAluminaGris && !haveAluminaBlanca && !haveNital) // Primera etapa de pulido, TIENE ALUMINA GRIS 
@@ -220,7 +220,8 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if (other.gameObject.name == "RotorPulidora")
         {
-            isInPulidora = other.GetComponent<PulidoraScript>().Rotating;
+            if(rotorPulidora != null || PulidoraScript != null)
+                isInPulidora = PulidoraScript.Rotating;
             Debug.Log("Is in pulidora: " + isInPulidora);
         }
     }
@@ -238,41 +239,41 @@ public class ActivateMirror : UdonSharpBehaviour
         if (pickup.currentPlayer != null)
         {
             //Debug.Log("Hay Player Agarrando");
-            if (!pickup.currentPlayer.isLocal)
+            if (!Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
             {
-                //Debug.Log("el player no es local, regresando");
+                Debug.Log("el player no es local, regresando");
                 return;
             }
             //Debug.Log("LocalPlayer");
         }
-        Debug.Log("Prosiguiendo con las calls");
+        Debug.Log("Prosiguiendo con las calls, objeto: " + other.gameObject.name);
         if (other.gameObject.name == "Colision")
         {
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "SetCalorFalse");
-            SetCalorFalse();
+            //SetCalorFalse();
         }
 
         if (other.gameObject.name == "RotorPulidora")
         {
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimersYBoolxd");
-            ResetTimersYBoolxd();
+            //ResetTimersYBoolxd();
         }
 
-        if (other.GetComponent<PulidoraScript>())
+        if (other.GetComponent<PulidoraScript>() != null)
         {
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
-            ResetVars();
+            //ResetVars();
         }
     }
 
-    private void ResetVars()
+    public void ResetVars()
     {
         Debug.Log("ResetRefs");
         rotorPulidora = null;
         PulidoraScript = null;
     }
 
-    private void ResetTimersYBoolxd()
+    public void ResetTimersYBoolxd()
     {
         Debug.Log("TimersPulidora e IsInPulidora");
         isInPulidora = false;
@@ -280,7 +281,7 @@ public class ActivateMirror : UdonSharpBehaviour
         generalTimer2 = 0f;
     }
 
-    private void SetCalorFalse()
+    public void SetCalorFalse()
     {
         Debug.Log("SecCalor");
         calor = false;
@@ -304,7 +305,7 @@ public class ActivateMirror : UdonSharpBehaviour
                     bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
                 isClear = false;
-                Debug.Log("Desgaste set to: " + Desgaste);
+                //Debug.Log("Desgaste set to: " + Desgaste);
             }
             else
             {
