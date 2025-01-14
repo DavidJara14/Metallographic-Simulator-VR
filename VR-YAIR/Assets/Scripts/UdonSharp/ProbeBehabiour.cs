@@ -260,7 +260,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     private void OnTriggerExit(Collider other)
     {
 
-        Debug.Log("OnTriggerExitCall: " + other.name);
+        //Debug.Log("OnTriggerExitCall: " + other.name);
 
         if(other.GetComponent<LijaRotation>())
         {

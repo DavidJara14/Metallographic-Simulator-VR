@@ -85,7 +85,7 @@ public class ActivateMirror : UdonSharpBehaviour
             if (!probeBehaviour.IsLijadoMax())
             {
                 changeColor(false);
-                Debug.Log("Termina de lijar");
+                //Debug.Log("Termina de lijar");
             }
 
             if (probeBehaviour.IsLijadoMax())
@@ -275,7 +275,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
     public void ResetTimersYBoolxd()
     {
-        Debug.Log("TimersPulidora e IsInPulidora");
+        Debug.Log("ResetTimersPulidora e IsInPulidoraFalse");
         isInPulidora = false;
         generalTimer = 0f;
         generalTimer2 = 0f;
