@@ -62,6 +62,11 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [SerializeField] private AudioClip _audioClip;
     private bool LastUserWasVR = false;
 
+    private float hapticDuration = 0.05f;
+    private float hapticAmplitude = 0.5f;
+    private float hapticFrequency = 200f;
+
+
     private void Start()
     {
         _audioSource.clip = _audioClip;
@@ -77,11 +82,20 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 LijaToObjSize = new Vector3(gameObject.transform.position.x - LijaRotationActiva.Lija.transform.position.x, 0f, gameObject.transform.position.z - LijaRotationActiva.Lija.transform.position.z);
                 Up = gameObject.transform.up;
                 VectorDeDireccionDeDesgasteActual = Vector3.Cross(LijaToObjSize, Up);
-                
-                if (pickup.currentPlayer == null && _isInsideCollider)
+
+                if (_isInsideCollider)
                 {
-                    GetComponent<Rigidbody>().AddForce(VectorDeDireccionDeDesgasteActual.normalized * 200f);
-                    Debug.Log("Probe droped, addForce");
+                    if (pickup.currentPlayer == null)
+                    {
+                        GetComponent<Rigidbody>().AddForce(VectorDeDireccionDeDesgasteActual.normalized * 200f);
+                        Debug.Log("Probe droped, addForce");
+                    }
+
+                    if (pickup.currentPlayer != null)
+                    {
+                        Networking.LocalPlayer.PlayHapticEventInHand(pickup.currentHand, hapticDuration, hapticAmplitude * (800f / Desgaste)*2, hapticFrequency);
+                        Debug.Log("Haptic Feedback!!!!!!!!!!!!");
+                    }
                 }
 
                 SetParticleRateOverTime();
