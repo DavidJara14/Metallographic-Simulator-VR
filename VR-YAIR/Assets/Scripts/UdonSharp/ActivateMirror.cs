@@ -191,9 +191,9 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PulidoraScript>() != null)
+        if (other.GetComponent<TriggerPulidora>() != null)
         {
-            rotorPulidora = other.gameObject;
+            rotorPulidora = other.GetComponentInParent<PulidoraScript>().gameObject;
             PulidoraScript = rotorPulidora.GetComponent<PulidoraScript>();
             Debug.Log("EnterTrigger, variables set");
         }
@@ -219,7 +219,7 @@ public class ActivateMirror : UdonSharpBehaviour
             haveAluminaBlanca = true;
         }
 
-        if (other.gameObject.name == "RotorPulidora")
+        if (other.gameObject.name == "TriggerPulidora")
         {
             if(rotorPulidora != null && PulidoraScript != null)
             {
@@ -256,13 +256,13 @@ public class ActivateMirror : UdonSharpBehaviour
             //SetCalorFalse();
         }
 
-        if (other.gameObject.name == "RotorPulidora")
+        if (other.gameObject.name == "TriggerPulidora")
         {
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimersYBoolxd");
             //ResetTimersYBoolxd();
         }
 
-        if (other.GetComponent<PulidoraScript>() != null)
+        if (other.GetComponent<TriggerPulidora>() != null)
         {
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
             //ResetVars();

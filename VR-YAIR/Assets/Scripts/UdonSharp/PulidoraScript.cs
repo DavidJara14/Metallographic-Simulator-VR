@@ -104,7 +104,7 @@ public class PulidoraScript : UdonSharpBehaviour
         if (isEnergized)
         {
             Rotating = true;
-            gameObject.GetComponent<BoxCollider>().isTrigger = true;
+            //gameObject.GetComponent<BoxCollider>().isTrigger = true;
         }
     }
 
