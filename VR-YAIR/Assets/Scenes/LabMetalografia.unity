@@ -29269,6 +29269,37 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1836718679}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &505809398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 505809399}
+  m_Layer: 0
+  m_Name: xd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &505809399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505809398}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.041538, y: 37.38212, z: -15.033469}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &507629350 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8542189785119859853, guid: b5d2633a323b01543ac546a824a5645a,
@@ -160214,3 +160245,4 @@ SceneRoots:
   - {fileID: 441368166}
   - {fileID: 2147186875}
   - {fileID: 209341697}
+  - {fileID: 505809399}
