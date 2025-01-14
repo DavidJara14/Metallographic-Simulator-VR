@@ -195,6 +195,7 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             rotorPulidora = other.gameObject;
             PulidoraScript = rotorPulidora.GetComponent<PulidoraScript>();
+            Debug.Log("EnterTrigger, variables set");
         }
     }
 
@@ -220,9 +221,11 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if (other.gameObject.name == "RotorPulidora")
         {
-            if(rotorPulidora != null || PulidoraScript != null)
+            if(rotorPulidora != null && PulidoraScript != null)
+            {
                 isInPulidora = PulidoraScript.Rotating;
-            Debug.Log("Is in pulidora: " + isInPulidora);
+                Debug.Log("Is in pulidora: " + isInPulidora);
+            }
         }
     }
 
