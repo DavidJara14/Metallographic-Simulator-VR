@@ -42,9 +42,9 @@ public class ActivateMirror : UdonSharpBehaviour
 
     [SerializeField] private VRC_Pickup pickup;
 
-    public bool finishedPulido1 = false;
-    public bool finishedPulido2 = false;
-    public bool finishedAQ = false;
+    [UdonSynced] public bool finishedPulido1 = false;
+    [UdonSynced] public bool finishedPulido2 = false;
+    [UdonSynced] public bool finishedAQ = false;
 
     private float hapticDuration = 0.05f;
     private float hapticAmplitude = 0.2f;
