@@ -1,7 +1,9 @@
 ﻿
+using System.Collections.Generic;
 using System.Threading;
 using UdonSharp;
 using UnityEngine;
+using VRC.SDK3.Data;
 using VRC.SDKBase;
 using VRC.Udon;
 
@@ -54,7 +56,7 @@ public class TriggerPulidora : UdonSharpBehaviour
         //Shrink();
     }
 
-    private void Shrink()
+    public void Shrink()
     {
         startTimer = true;
         coliderToShrink.transform.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);

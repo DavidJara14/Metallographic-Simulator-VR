@@ -1,4 +1,5 @@
-﻿using UdonSharp;
+﻿using System.Threading;
+using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -32,7 +33,7 @@ public class ActivateMirror : UdonSharpBehaviour
     private float generalTimer = 0f;
     private float generalTimer2 = 0f;
     private float generalTimer3 = 0f;
-
+    private int count = 0;
 
     public GameObject bodyMaterial;
     public bool isInPulidora = false;
@@ -189,6 +190,24 @@ public class ActivateMirror : UdonSharpBehaviour
                 probetaShader2.GetComponent<Renderer>().material.SetInt("_IsFirstSanding", 0);
             }
         }
+
+        if (generalTimer - (0.5f * count) > 0)
+        {
+            if (PulidoraScript == null)
+            {
+                count = 0;
+                return;
+            }
+            count++;
+            if (Vector3.Distance(this.gameObject.transform.position, PulidoraScript.gameObject.transform.position) > 0.3)
+            {
+                PulidoraScript = null;
+                rotorPulidora = null;
+                isInPulidora = false;
+                count = 0;
+            }
+        }
+
     }
 
     private void OnParticleCollision(GameObject other)
@@ -213,32 +232,68 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+
+        if (pickup.currentPlayer != null)
+        {
+            //Debug.Log("Hay Player Agarrando");
+            if (!Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+            {
+                Debug.Log("el player no es local, regresando");
+                //return;
+            }
+            //Debug.Log("LocalPlayer");
+        }
+
         if (other.gameObject.name == "Colision" && finishedPulido1 && finishedPulido2)
         {
-            Debug.Log("ColisionCalor");
-            calor = true;
+            //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "CollisionCalor");
+            CollisionCalor();
         }
 
         if (other.gameObject.name == "ColisionPañoGris")
         {
-            Debug.Log("ColisionGris");
-            haveAluminaGris = true;
+            //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "CollisionGris");
+            CollisionGris();
         }
 
         if (other.gameObject.name == "ColisionPañoBlanco" && haveAluminaGris && finishedPulido1)
         {
-            Debug.Log("ColisionBlanca");
-            haveAluminaBlanca = true;
+            //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "CollisionBlanca");
+            CollisionBlanca();
         }
 
         if (other.gameObject.name == "TriggerPulidora")
         {
-            if(rotorPulidora != null && PulidoraScript != null)
-            {
-                isInPulidora = PulidoraScript.Rotating;
-                Debug.Log("Is in pulidora: " + isInPulidora);
-            }
+            //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "TrigPulidora");
+            TrigPulidora();
         }
+    }
+
+    public void TrigPulidora()
+    {
+        if (rotorPulidora != null && PulidoraScript != null)
+        {
+            isInPulidora = PulidoraScript.Rotating;
+            Debug.Log("Is in pulidora: " + isInPulidora);
+        }
+    }
+
+    public void CollisionBlanca()
+    {
+        Debug.Log("ColisionBlanca");
+        haveAluminaBlanca = true;
+    }
+
+    public void CollisionGris()
+    {
+        Debug.Log("ColisionGris");
+        haveAluminaGris = true;
+    }
+
+    public void CollisionCalor()
+    {
+        Debug.Log("ColisionCalor");
+        calor = true;
     }
 
     private void OnTriggerExit(Collider other)
