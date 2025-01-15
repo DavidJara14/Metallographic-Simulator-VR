@@ -91,7 +91,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
                         Debug.Log("Probe droped, addForce");
                     }
 
-                    if (pickup.currentPlayer != null)
+                    if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
                     {
                         Networking.LocalPlayer.PlayHapticEventInHand(pickup.currentHand, hapticDuration, hapticAmplitude * (800f / Desgaste)*2, hapticFrequency);
                         Debug.Log("Haptic Feedback!!!!!!!!!!!!");

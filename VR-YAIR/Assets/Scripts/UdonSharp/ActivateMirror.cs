@@ -79,7 +79,7 @@ public class ActivateMirror : UdonSharpBehaviour
                     GetComponent<Rigidbody>().AddForce(VectorDeDireccionDePuilidoActual.normalized * 250f);
                 }
 
-                if (pickup.currentPlayer != null)
+                if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
                 {
                     Networking.LocalPlayer.PlayHapticEventInHand(pickup.currentHand, hapticDuration, hapticAmplitude, hapticFrequency);
                     Debug.Log("Haptic Feedback!!!!!!!!!!!!");
