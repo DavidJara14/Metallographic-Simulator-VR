@@ -30,34 +30,13 @@ public class PulidoraScript : UdonSharpBehaviour
 
     public bool GrisLoaded = false;
     public bool BlancaLoaded = false;
-    public GameObject colliderGris;
-    public GameObject colliderBlanco;
-    public GameObject colliderRotor;
-
-    float timer = 0f;
 
     private void Update()
     {
-        if(GrisLoaded || BlancaLoaded)
-        {
-            timer += Time.deltaTime;
-        }
 
-        if (timer > 15)
-        {
-            timer = 0;
-            BlancaLoaded = false;
-            GrisLoaded = false;
-        }
-
-        if (Rotating && isEnergized && timer<15)
+        if (Rotating && isEnergized)
         {
             gameObject.transform.Rotate(Vector3.forward * RotationVelocity * Time.deltaTime);
-            colliderGris.SetActive(GrisLoaded);
-            colliderBlanco.SetActive(BlancaLoaded);
-
-            if (colliderRotor != null)
-                colliderRotor.SetActive(Rotating);
         }
 
         if (Rotating & !AudioStart && !AudioLoop)
@@ -91,12 +70,6 @@ public class PulidoraScript : UdonSharpBehaviour
 
         if (AudioStart)
             StartTimer += Time.deltaTime;
-
-        if (!Rotating || !isEnergized)
-        {
-            colliderGris.SetActive(false);
-            colliderBlanco.SetActive(false);
-        }
     }
 
     public void StartMachine()
@@ -104,7 +77,6 @@ public class PulidoraScript : UdonSharpBehaviour
         if (isEnergized)
         {
             Rotating = true;
-            //gameObject.GetComponent<BoxCollider>().isTrigger = true;
         }
     }
 
@@ -136,9 +108,6 @@ public class PulidoraScript : UdonSharpBehaviour
 
         if (elemento != null)
         {
-            GrisLoaded = false;
-            BlancaLoaded = false;
-
             string tipo = elemento.Tipo;
             //Debug.Log(tipo);
 

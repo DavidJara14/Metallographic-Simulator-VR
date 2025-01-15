@@ -52,7 +52,7 @@ public class TriggerPulidora : UdonSharpBehaviour
             //Debug.Log("LocalPlayer");
         }
 
-        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Shrink");
+        //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Shrink");
         //Shrink();
     }
 
