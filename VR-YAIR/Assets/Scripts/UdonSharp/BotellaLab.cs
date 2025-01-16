@@ -55,6 +55,8 @@ public class BotellaLab : UdonSharpBehaviour
         {
             //_Visual.rotation = Quaternion.Euler(0, -50f, 0);
         }
+        //update Ownership of particle system
+        Networking.SetOwner(_pickupComp.currentPlayer, _particleSystem.gameObject);
     }
 
     public override void OnDrop()
