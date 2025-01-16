@@ -9,9 +9,6 @@ using VRC.Udon;
 
 public class ProbeBehabiour : UdonSharpBehaviour
 {
-
-    private float UpdateMatTimer = 0f;
-
     const float DesgasteMin = 0f;
     const float DesgasteMax = 801f;
 
@@ -53,12 +50,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
     public bool _isInsideCollider = false;
     public GameObject bodyMaterial;
     public bool canLijar = false;
-    //  private Color currentColor = Color.clear;
-    public bool rotorIsRotating = false;
-    public bool dropProbeta = false;
-    public float elapsedtime = 0f;
 
-    [UdonSynced] private float colorTimer = 0.0f;
+    private float colorTimer = 0.0f;
     private bool isClear = true;
     private bool isHumedo = true;
 
@@ -69,10 +62,14 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [SerializeField] private AudioClip _audioClip;
     private bool LastUserWasVR = false;
 
+    private float hapticDuration = 0.05f;
+    private float hapticAmplitude = 0.5f;
+    private float hapticFrequency = 200f;
+
+
     private void Start()
     {
         _audioSource.clip = _audioClip;
-        //bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
     }
 
     private void Update()
@@ -80,32 +77,30 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
         if (LijaRotationActiva != null)
         { 
-            if(LijaRotationActiva.Rotating == true) 
+            if(LijaRotationActiva.Rotating) 
             {
                 LijaToObjSize = new Vector3(gameObject.transform.position.x - LijaRotationActiva.Lija.transform.position.x, 0f, gameObject.transform.position.z - LijaRotationActiva.Lija.transform.position.z);
                 Up = gameObject.transform.up;
                 VectorDeDireccionDeDesgasteActual = Vector3.Cross(LijaToObjSize, Up);
-                
-                if (pickup.currentPlayer == null && _isInsideCollider)
-                {
-                    GetComponent<Rigidbody>().AddForce(VectorDeDireccionDeDesgasteActual.normalized * 200f);
-                    Debug.Log("Probe droped, addForce");
-                    
-                }
-            }
-        }
-        else if(LijaRotationActivaGO != null)
-        {
-            LijaRotationActiva = LijaRotationActivaGO.GetComponent<LijaRotation>();
-        }
 
-        if(/*First != "" && */LijaRotationActiva != null)
-        {
-            if(LijaRotationActiva.Rotating)
-            {
+                if (_isInsideCollider)
+                {
+                    if (pickup.currentPlayer == null)
+                    {
+                        GetComponent<Rigidbody>().AddForce(VectorDeDireccionDeDesgasteActual.normalized * 200f);
+                        Debug.Log("Probe droped, addForce");
+                    }
+
+                    if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+                    {
+                        Networking.LocalPlayer.PlayHapticEventInHand(pickup.currentHand, hapticDuration, hapticAmplitude * (800f / Desgaste)*2, hapticFrequency);
+                        Debug.Log("Haptic Feedback!!!!!!!!!!!!");
+                    }
+                }
+
                 SetParticleRateOverTime();
 
-                if(!EsteParticleSystem.isEmitting || !EsteParticleSystem.isPlaying)
+                if (!EsteParticleSystem.isEmitting || !EsteParticleSystem.isPlaying)
                 {
                     EsteParticleSystem.Play();
                 }
@@ -125,6 +120,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 }
             }
         }
+
+        else if(LijaRotationActivaGO != null)
+        {
+            LijaRotationActiva = LijaRotationActivaGO.GetComponent<LijaRotation>();
+        }
+
         else if(EsteParticleSystem.isEmitting)
         {
             Debug.Log("StopEmitting!!!");
@@ -133,29 +134,15 @@ public class ProbeBehabiour : UdonSharpBehaviour
         }
 
         UpdateMaterial();
-        if (UpdateMatTimer >= .1)
-        {
-        }
-        UpdateMatTimer += Time.deltaTime;
+
         if(!_isInsideCollider)
             bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
     }
-    /*
-    public override void OnPickupUseDown()
-    {
-        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "RotateProbeta");
-    }
-
-    public void RotateProbeta()
-    {
-        gameObject.transform.Rotate(90.0f, 0.0f, 0.0f, Space.World);
-    }*/
 
     void UpdateMaterial()
     {
         if (LijaRotationActiva == null)
             return;
-        //Debug.Log(LijaRotationActiva.name);
         if (LijaRotationActiva.Lija == null)
             return;
 
@@ -169,48 +156,19 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 Debug.Log("Time lija: " + _insideColliderTimer);
                 if (_insideColliderTimer >= 10f || probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste || probetaShader2.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste)
                 {
-                    //EsteMaterial.SetFloat("_GranoLija", Desgaste);
-
                     if (Mirror.caraTrabajada == 1)
                     {
-                        //EsteMaterial = Mirror.probetaShader1.GetComponent<Renderer>().material;
                         probetaShader1.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
                         probetaShader1.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
 
                     }
                     else if (Mirror.caraTrabajada == 2)
                     {
-                        //EsteMaterial = Mirror.probetaShader2.GetComponent<Renderer>().material;
                         probetaShader2.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
                         probetaShader2.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
                     }
 
-                    //              float hue = Mathf.Repeat(Time.time , 1.0f); 
-                    //            Color newColor = Color.HSVToRGB(hue, 1.0f, 1.0f); 
-
-                    //          currentColor = Color.Lerp(currentColor, newColor, Time.deltaTime);
-
-                    bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-
-
-                    colorTimer += Time.deltaTime;
-
-                    if (colorTimer >= 0.1F)
-                    {
-                        if (isClear)
-                        {
-                            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                            isClear = false;
-                            Debug.Log("Desgaste set to: " + Desgaste);
-                        }
-                        else
-                        {
-                            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                            isClear = true;
-                        }
-                        colorTimer = 0f;
-                    }
-
+                    changeColor(true);
 
                 }
                 else if(_insideColliderTimer<10.0f && _isInsideCollider)
@@ -222,37 +180,13 @@ public class ProbeBehabiour : UdonSharpBehaviour
         }
         else if ((!isHumedo || !canLijar) && _isInsideCollider)
         {
-            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-            colorTimer += Time.deltaTime;
-
-            if (colorTimer >= 0.1F)
-            {
-                if (isClear)
-                {
-                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-                    isClear = false;
-                }
-                else
-                {
-                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                    isClear = true;
-                }
-                colorTimer = 0f;
-            }
-            //Debug.Log("Ponme agua");
+            changeColor(false);
         }
         else
         {
-            //StopTimer();
             bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
-            //bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
         }
-
-        //Debug.Log("TamanioLija " + Desgaste);
-        //Debug.Log("Desgaste en la Probeta (ProbeBehaviour) = " + probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija"));
-
-        //EsteMaterial.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual),gameObject.transform.forward).eulerAngles.z);
-    }
+   }
 
     private void SetParticleRateOverTime()
     {
@@ -301,42 +235,10 @@ public class ProbeBehabiour : UdonSharpBehaviour
         return ProbeType;
     }
 
-    //public void SetVar(string name, bool value)
-    //{
-    //    switch (name)
-    //    {
-    //        case "UpTouched":
-    //            //UpTouched = value;
-    //            break;
-    //        case "DownTouched":
-    //            //DownTouched = value;
-    //            break;
-    //        case "LeftTouched":
-    //            //LeftTouched = value;
-    //            break;
-    //        case "RightTouched":
-    //            //RightTouched = value;
-    //            break;
-    //        default:
-    //            Debug.Log(string.Format("error in direction, {0} not identified", First));
-    //            break;
-    //    }
-    //}
-
-    //public void ResetVariables()
-    //{
-    //    VarCount = 0f;
-    //    First = "";
-    //    Last = "";
-    //}
-
     public override void OnPickup()
     {
         LastUserWasVR = pickup.currentPlayer.IsUserInVR();
         CheckInteractProve();
-        dropProbeta = false;
-        Debug.Log("Probeta drop is: " + dropProbeta);
-
     }
 
     private void CheckInteractProve()
@@ -354,13 +256,11 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if(other.GetComponent<InteractProbe>() != null)
+        if (other.GetComponent<InteractProbe>() != null)
         {
             return;
         }
 
-        //Debug.Log(other + "in Probebehabiour");
         if (other.GetComponent<LijaRotation>() != null)
         {
             Debug.Log("Lijarotation in Provebehabiour");
@@ -369,59 +269,20 @@ public class ProbeBehabiour : UdonSharpBehaviour
             interactProbe.DisableCanva();
             interactProbe.gameObject.SetActive(false);
         }
-
-        /*if (other.gameObject.name == "colliderRotor" other.GetComponent<colliderRotorBehabiour>())
-        {
-             _isInsideCollider = other.GetComponent<LijaRotation>().GetComponentInChildren<BoxCollider>().enabled;
-            _isInsideCollider = other.GetComponent<colliderRotorBehabiour>().colliderRotor();
-            Debug.Log("Detecte collider rotor :"+_isInsideCollider);
-        }*/
-
-        //      if (other.GetComponent<LijaCircularBehabiour>() != null /*&& other.GetComponent<LijaRotation>().Lija != null*/)
-        //{
-        //        _isInsideCollider = true;
-        //      if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
-        //    {
-        //      isHumedo = true;
-        //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
-        //                bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
-        //}
-        // else
-        // {
-        //    isHumedo = false;
-        //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-        //}
-        //  Debug.Log("Probeta Enter, humedo is: "+isHumedo);
-        //}
-        //rotorRotating = other.GetComponent<LijaRotation>().Rotating;
     }
 
     private void OnTriggerExit(Collider other)
     {
 
-        Debug.Log("OnTriggerExitCall: " + other.name);
+        //Debug.Log("OnTriggerExitCall: " + other.name);
 
         if(other.GetComponent<LijaRotation>())
         {
-            //ResetVariables();
             LijaRotationActivaGO = null;
             LijaRotationActiva = null;
             CheckInteractProve();
         }
 
-        if (other.GetComponent<LijaCircularBehabiour>() != null)
-        {
-            //_isInsideCollider = false;
-            //Debug.Log("Inside lija: "+_isInsideCollider);
-//            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
-//            bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
-        }
-
-        /*if (other.gameObject.name == "colliderRotor")
-        {
-            _isInsideCollider = false;
-            Debug.Log("Inside lija: " + _isInsideCollider);
-        }*/
         bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
 
         if(other.gameObject.name == "Rotor")
@@ -435,13 +296,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
             {
                 Debug.Log("Stop Owner");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "StopTimer");
-                //StopTimer();
             }
             if (!other.GetComponent<LijaRotation>().Rotating)
             {
-                rotorIsRotating = false;
                 _isInsideCollider = false;
-                //Debug.Log("Change _isInsideCollider to: " + _isInsideCollider + "Rontating change to: " + other.GetComponent<LijaRotation>().Rotating);
+                Debug.Log("_isInsideCollider  = " + _isInsideCollider);
+
             }
         }
     }
@@ -460,13 +320,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        //Debug.Log("collider: "+other.gameObject.name);
-
-        /*else if(other.gameObject.name == "colliderRotor")
-        {
-            _isInsideCollider = false;
-            Debug.Log("Detecte collider rotor false");
-        }*/
+        //Debug.Log("OnTriggerStayCall: " + other.name);
 
         if (other.GetComponent<LijaCircularBehabiour>() != null)
         {
@@ -474,33 +328,22 @@ public class ProbeBehabiour : UdonSharpBehaviour
             if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
             {
                 isHumedo = true;
-                //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
-                //                bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
             }
             else
             {
                 isHumedo = false;
-                //                bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
             }
-            //Debug.Log("Probeta Enter, humedo is: " + isHumedo);
         }
 
-        //if(/*other.gameObject.name == "colliderRotor"*/ other.GetComponent<colliderRotorBehabiour>())
-        //{
-        //    _isInsideCollider = other.GetComponent<LijaRotation>().GetComponentInChildren<BoxCollider>().enabled;
-          //  _isInsideCollider = other.GetComponent<colliderRotorBehabiour>().colliderRotor();
-            //Debug.Log("Detecte collider rotor :"+_isInsideCollider);
-        //}
-
-        if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
+        if(pickup.currentPlayer != null)
         {
-            rotorIsRotating = other.GetComponent<LijaRotation>().Rotating;
-            _isInsideCollider = true;
-            //Debug.Log("Change _isInsideCollider to: " + _isInsideCollider + "Rotating = " + rotorIsRotating);
+            if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
+            {
+                _isInsideCollider = true;
+                //Debug.Log("_isInsideCollider  = " + _isInsideCollider);
+            }
         }
 
-        if(other.GetComponent<LijaRotation>() != null)
-            rotorIsRotating = other.GetComponent<LijaRotation>().Rotating;
     }
 
     private void OnDrawGizmosSelected()
@@ -518,7 +361,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
             }
         }
         Gizmos.color = Color.white;
-        //Gizmos.DrawLine();
     }
 
     private bool IsLijadoMaximo()
@@ -531,11 +373,29 @@ public class ProbeBehabiour : UdonSharpBehaviour
         return (int)Desgaste == 800;
     }
 
-    public override void OnDrop()
+    private void changeColor(bool isGreen)
     {
-        dropProbeta = true;
-        Debug.Log("Probeta drop is: " + dropProbeta);
+        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
+        colorTimer += Time.deltaTime;
+        if (colorTimer >= 0.1f)
+        {
+            if (isClear)
+            {
+                if(isGreen)
+                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                else
+                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
+                isClear = false;
+                Debug.Log("Desgaste set to: " + Desgaste);
+            }
+            else
+            {
+                bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                isClear = true;
+            }
+            colorTimer = 0f;
+        }
     }
 
 }
