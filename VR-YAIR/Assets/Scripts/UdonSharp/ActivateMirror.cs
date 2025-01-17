@@ -139,7 +139,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void AtaqueConNital()
     {
-        if (calor)
+        if (newcalor)
         {
             TimerPistolaDeCalor += Time.deltaTime;
             Debug.Log("Tiempo de calor: " + TimerPistolaDeCalor);
@@ -329,14 +329,14 @@ public class ActivateMirror : UdonSharpBehaviour
 
     public void ResetVars()
     {
-        Debug.Log("ResetRefs");
+        //Debug.Log("ResetRefs");
         rotorPulidora = null;
         PulidoraScript = null;
     }
 
     public void ResetTimersYBoolxd()
     {
-        Debug.Log("ResetTimersPulidora e IsInPulidoraFalse");
+        //Debug.Log("ResetTimersPulidora e IsInPulidoraFalse");
         isInPulidora = false;
         generalTimer = 0f;
         generalTimer2 = 0f;
@@ -344,8 +344,8 @@ public class ActivateMirror : UdonSharpBehaviour
 
     public void SetCalorFalse()
     {
-        Debug.Log("SecCalor");
-        calor = false;
+        //Debug.Log("SecCalor");
+        //calor = false;
     }
 
     public bool IsReady()

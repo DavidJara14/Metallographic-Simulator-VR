@@ -18,7 +18,7 @@ public class Heatable : UdonSharpBehaviour
 
     public void ActivateCalor()
     {
-        Debug.LogWarning("Sending Activation event to " + UdonBehabiourListenersRef.Length + " scripts");
+        Debug.LogWarning("[<color=green>Activate</color>]Sending Activation event to " + UdonBehabiourListenersRef.Length + " scripts");
         for (int i = 0; i < UdonBehabiourListenersRef.Length; i++)
         {
             UdonBehabiourListenersRef[i].SetProgramVariable(VAR_NAME, true);
@@ -28,7 +28,7 @@ public class Heatable : UdonSharpBehaviour
 
     public void DeactivateCalor()
     {
-        Debug.LogWarning("Sending Deactivation event to " + UdonBehabiourListenersRef.Length + " scripts");
+        Debug.LogWarning("[<color=red>Deactivate</color>]Sending Deactivation event to " + UdonBehabiourListenersRef.Length + " scripts");
         for (int i = 0; i < UdonBehabiourListenersRef.Length; i++)
         {
             UdonBehabiourListenersRef[i].SetProgramVariable(VAR_NAME, false);
