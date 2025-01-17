@@ -116,13 +116,16 @@ public class PistolaDeCalor : UdonSharpBehaviour
     {
         if(other.GetComponent<Heatable>() != null)
         {
+            Debug.Log("Heatable element found, trying send message");
             if(_pickup.currentPlayer == null) //esta suelto
             {
-                other.gameObject.GetComponent<UdonBehaviour>().SendCustomEvent("ActivateCalor");
+                other.gameObject.GetComponent<Heatable>().SendCustomEvent("ActivateCalor");
+                Debug.Log("SCE");
             }
             else if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
             {
-                other.gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ActivateCalor");
+                Debug.Log("SCNE");
+                other.gameObject.GetComponent<Heatable>().SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ActivateCalor");
             }
         }
     }
@@ -133,11 +136,11 @@ public class PistolaDeCalor : UdonSharpBehaviour
         {
             if (_pickup.currentPlayer == null) //esta suelto
             {
-                other.gameObject.GetComponent<UdonBehaviour>().SendCustomEvent("DeactivateCalor");
+                other.gameObject.GetComponent<Heatable>().SendCustomEvent("DeactivateCalor");
             }
             else if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
             {
-                other.gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "DeactivateCalor");
+                other.gameObject.GetComponent<Heatable>().SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "DeactivateCalor");
             }
         }
     }

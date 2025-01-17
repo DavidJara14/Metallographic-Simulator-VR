@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -9,6 +10,11 @@ public class Heatable : UdonSharpBehaviour
 
     [SerializeField] private UdonBehaviour[] UdonBehabiourListenersRef;
     const string VAR_NAME = "newcalor";
+
+    private void Start()
+    {
+        UdonBehabiourListenersRef = gameObject.GetComponents<UdonBehaviour>();
+    }
 
     public void ActivateCalor()
     {

@@ -81,6 +81,9 @@ public class ActivateMirror : UdonSharpBehaviour
             AtaqueConNital();
         }
 
+        if (newcalor)
+            Debug.LogWarning("NewCalor Active");
+
     }
 
     private void RetroalimentacionYProbetaVoladora()
