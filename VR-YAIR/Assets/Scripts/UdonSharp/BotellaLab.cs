@@ -17,6 +17,7 @@ public class BotellaLab : UdonSharpBehaviour
     [SerializeField] private VRC_Pickup _pickupComp;
     [SerializeField] private MeshRenderer m_Renderer;
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private Vector3 _PSOriginalPos;
     [SerializeField] private Transform _Visual;
     bool LastUserWasVr = false;
 
@@ -25,6 +26,7 @@ public class BotellaLab : UdonSharpBehaviour
         WaterMaterial = InfillGO.GetComponent<MeshRenderer>().material;
         var main = _particleSystem.main;
         main.startColor = WaterMaterial.GetColor("_ColorAguaSuperficie");
+        _PSOriginalPos = _particleSystem.transform.localPosition;
     }
 
     private void Update()
@@ -83,8 +85,10 @@ public class BotellaLab : UdonSharpBehaviour
     {
         var Mainn = _particleSystem.main;
         Mainn.startColor = WaterMaterial.GetColor("_ColorAgua");
+        _particleSystem.transform.localPosition = _PSOriginalPos;
         if (_pickupComp.currentPlayer.IsUserInVR())
         {
+            Debug.Log("Object holder is VR user");
             if (LiquidFill > 0)
             {
                 _particleSystem.gameObject.SetActive(true);
@@ -93,6 +97,7 @@ public class BotellaLab : UdonSharpBehaviour
         }
         else
         {
+            Debug.Log("Object holder is PC user");
             if(LiquidFill > 0)
             {
                 _Visual.transform.localRotation = Quaternion.Euler(-15f, 90, 0);

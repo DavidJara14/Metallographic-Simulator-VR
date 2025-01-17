@@ -9,12 +9,13 @@ public class DirSelectorScript : UdonSharpBehaviour
     [SerializeField] private Transform GripDirVr;
     [SerializeField] private Transform GripDirPC;
 
-    public override void OnPickup()
-    {
-        if(_pickupComp.currentPlayer.IsUserInVR())
+    private void Start()
+    {        
+        if(Networking.LocalPlayer.IsUserInVR())
         {
+            _pickupComp.orientation = VRC_Pickup.PickupOrientation.Any;
             Debug.Log("IsVrUser");
-            _pickupComp.ExactGrip = GripDirVr;
+            //_pickupComp.ExactGrip = GripDirVr;
         }
         else
         {
