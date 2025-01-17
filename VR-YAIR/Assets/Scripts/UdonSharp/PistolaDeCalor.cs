@@ -1,5 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
+using VRC.SDK3.Components;
 using VRC.SDK3.Data;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -12,6 +13,7 @@ public class PistolaDeCalor : UdonSharpBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private VRCPickup _pickup;
     private DataDictionary ActivePositionZ = new DataDictionary()
     {
         {false, new DataList(){ -0.2f, 0.01f} },
@@ -33,9 +35,15 @@ public class PistolaDeCalor : UdonSharpBehaviour
         ActivePositionZ.TryGetValue(Used, out DataToken var);
         collisionPistol.center = new Vector3(0, 0, var.DataList[0].Float);
         collisionPistol.radius = var.DataList[1].Float;
+        _pickup = gameObject.GetComponent<VRCPickup>();
     }
 
     private void Update()
+    {
+        AudioSystem();
+    }
+
+    private void AudioSystem()
     {
         if (Used & !AudioStart && !AudioLoop)
         {
@@ -100,6 +108,38 @@ public class PistolaDeCalor : UdonSharpBehaviour
         //{
         //    _audioSource.Stop();
         //}
+    }
+
+    //OnTriggerEnter para una bandera de entrada y on trigger exit para una de salida, y un funcion de timer en el objeto original
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<Heatable>() != null)
+        {
+            if(_pickup.currentPlayer == null) //esta suelto
+            {
+                other.gameObject.GetComponent<UdonBehaviour>().SendCustomEvent("ActivateCalor");
+            }
+            else if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
+            {
+                other.gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ActivateCalor");
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Heatable>() != null)
+        {
+            if (_pickup.currentPlayer == null) //esta suelto
+            {
+                other.gameObject.GetComponent<UdonBehaviour>().SendCustomEvent("DeactivateCalor");
+            }
+            else if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
+            {
+                other.gameObject.GetComponent<UdonBehaviour>().SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "DeactivateCalor");
+            }
+        }
     }
 
 }
