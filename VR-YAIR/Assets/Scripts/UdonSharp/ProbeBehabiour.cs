@@ -15,7 +15,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     const int ParticleRateMin = 10;
     const int ParticleRateMax = 50;
 
-    [SerializeField][Range(DesgasteMin, DesgasteMax)] private float Desgaste; //0 a Lija
+    [SerializeField][Range(DesgasteMin, DesgasteMax)] public float Desgaste; //0 a Lija
 
     [SerializeField] public Vector3 LijaToObjSize;
     [SerializeField] public Vector3 Up;
@@ -47,13 +47,10 @@ public class ProbeBehabiour : UdonSharpBehaviour
     public GameObject probetaShader1;
     public GameObject probetaShader2;
     public float _insideColliderTimer = 0f;
-    public bool _isInsideCollider = false;
+    [UdonSynced] public bool _isInsideCollider = false;
     public GameObject bodyMaterial;
-    public bool canLijar = false;
-
-    private float colorTimer = 0.0f;
-    private bool isClear = true;
-    private bool isHumedo = true;
+    [UdonSynced] public bool canLijar = false;
+    [UdonSynced] private bool isHumedo = true;
 
     public string ProbeType = "";
 
@@ -61,11 +58,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
     private bool LastUserWasVR = false;
-
-    private float hapticDuration = 0.05f;
-    private float hapticAmplitude = 0.5f;
-    private float hapticFrequency = 200f;
-
 
     private void Start()
     {
@@ -93,8 +85,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
                     if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
                     {
-                        Networking.LocalPlayer.PlayHapticEventInHand(pickup.currentHand, hapticDuration, hapticAmplitude * (800f / Desgaste)*2, hapticFrequency);
-                        Debug.Log("Haptic Feedback!!!!!!!!!!!!");
+                        gameObject.GetComponent<HapticFeedback>().SendCustomEvent("hapticFeedbackDesbaste");
                     }
                 }
 
@@ -162,31 +153,26 @@ public class ProbeBehabiour : UdonSharpBehaviour
                         probetaShader1.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
 
                     }
+
                     else if (Mirror.caraTrabajada == 2)
                     {
                         probetaShader2.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
                         probetaShader2.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
                     }
-
-                    changeColor(true);
-
+                    gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
                 }
+
                 else if(_insideColliderTimer<10.0f && _isInsideCollider)
-                {
                     bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
-                }
-
             }
         }
+
         else if ((!isHumedo || !canLijar) && _isInsideCollider)
-        {
-            changeColor(false);
-        }
+            gameObject.GetComponent<BorderColor>().SendCustomEvent("colorRed");
+
         else
-        {
             bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
-        }
-   }
+    }
 
     private void SetParticleRateOverTime()
     {
@@ -273,9 +259,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-
-        //Debug.Log("OnTriggerExitCall: " + other.name);
-
         if(other.GetComponent<LijaRotation>())
         {
             LijaRotationActivaGO = null;
@@ -320,19 +303,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        //Debug.Log("OnTriggerStayCall: " + other.name);
-
         if (other.GetComponent<LijaCircularBehabiour>() != null)
         {
-
             if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
-            {
                 isHumedo = true;
-            }
             else
-            {
                 isHumedo = false;
-            }
         }
 
         if(pickup.currentPlayer != null)
@@ -340,7 +316,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
             if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
             {
                 _isInsideCollider = true;
-                //Debug.Log("_isInsideCollider  = " + _isInsideCollider);
             }
         }
 
@@ -372,31 +347,5 @@ public class ProbeBehabiour : UdonSharpBehaviour
     {
         return (int)Desgaste == 800;
     }
-
-    private void changeColor(bool isGreen)
-    {
-        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-        colorTimer += Time.deltaTime;
-        if (colorTimer >= 0.1f)
-        {
-            if (isClear)
-            {
-                if(isGreen)
-                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                else
-                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-
-                isClear = false;
-                Debug.Log("Desgaste set to: " + Desgaste);
-            }
-            else
-            {
-                bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                isClear = true;
-            }
-            colorTimer = 0f;
-        }
-    }
-
 }
 

@@ -29,30 +29,20 @@ public class ActivateMirror : UdonSharpBehaviour
     public ProbeBehabiour probeBehaviour;
     public float Desgaste = 0;
     public bool _IsFirstSanding = true;
-    public bool calor = false;
     public bool newcalor = false;
 
     private float generalTimer = 0f;
-    private float generalTimer2 = 0f;
     private float TimerPistolaDeCalor = 0f;
-    //private int count = 0;
-
     public GameObject bodyMaterial;
     public bool isInPulidora = false;
-    private float colorTimer = 0f;
-    private bool isClear = false;
 
     [SerializeField] private VRC_Pickup pickup;
 
     [UdonSynced] public bool finishedPulido1 = false;
     [UdonSynced] public bool finishedPulido2 = false;
     [UdonSynced] public bool finishedAQ = false;
-
-    private float hapticDuration = 0.05f;
-    private float hapticAmplitude = 0.2f;
-    private float hapticFrequency = 50f;
-
     [UdonSynced] private bool ownerSays = false;
+
     private void Start()
     {
         probetaShader1.SetActive(true);
@@ -96,15 +86,10 @@ public class ActivateMirror : UdonSharpBehaviour
             if (isInPulidora)
             {
                 if (pickup.currentPlayer == null)
-                {
                     GetComponent<Rigidbody>().AddForce(VectorDeDireccionDePuilidoActual.normalized * LAUNCH_FORCE);
-                }
 
                 if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
-                {
-                    Networking.LocalPlayer.PlayHapticEventInHand(pickup.currentHand, hapticDuration, hapticAmplitude, hapticFrequency);
-                    Debug.Log("Haptic Feedback!!!!!!!!!!!!");
-                }
+                    gameObject.GetComponent<HapticFeedback>().SendCustomEvent("hapticFeedbackPulido");
             }
         }
     }
@@ -159,7 +144,7 @@ public class ActivateMirror : UdonSharpBehaviour
                     probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
                 }
                 // Debug.Log("Mirror unactive");
-                changeColor(true);
+                gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
                 finishedAQ = true;
             }
         }
@@ -170,49 +155,44 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if (!probeBehaviour.IsLijadoMax())
         {
-            changeColor(false);
+            gameObject.GetComponent<BorderColor>().SendCustomEvent("colorRed");
             //Debug.Log("Termina de lijar");
         }
 
         if (ownerSays)
         {
-            Debug.LogError("is in trigger by error, but owner player exit, exit");
-            SetCalorFalse();
+            Debug.LogWarning("[<color=green>OwnerSay</color>]is in trigger by error, but owner player exit, exit");
             ResetTimersYBoolxd();
             ResetVars();
-            //ownerSays = false;
-            Debug.Log("now, owner say: " + ownerSays + " Return");
         }
 
         if (probeBehaviour.IsLijadoMax())
         {
             if (!haveNital && !haveAluminaGris && !haveAluminaBlanca)
             {
-                //Debug.Log("ISLIJADOMAXIMO: " + probeBehaviour.IsLijadoMax());
-                changeColor(false);
+                gameObject.GetComponent<BorderColor>().SendCustomEvent("colorRed");
             }
+
             else if (haveAluminaGris && !haveAluminaBlanca && !haveNital) // Primera etapa de pulido, TIENE ALUMINA GRIS 
             {
                 generalTimer += Time.deltaTime;
                 Debug.Log("Tiempo de AGris: " + generalTimer);
-
-
                 if (generalTimer > 10 || finishedPulido1)
                 {
                     if (caraTrabajada == 1)
                         probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
                     else if (caraTrabajada == 2)
                         probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
-
-                    changeColor(true);
+                    gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
                     finishedPulido1 = true;
                 }
             }
+
             else if (haveAluminaGris && haveAluminaBlanca && !haveNital) // Segunda etapa de pulido, TIENE ALUMINA BLANCA y ya tuvo gris, sin nital 
             {
-                generalTimer2 += Time.deltaTime;
-                Debug.Log("Tiempo de ABlanca: " + generalTimer2);
-                if (generalTimer2 > 10 || finishedPulido2)
+                generalTimer += Time.deltaTime;
+                Debug.Log("Tiempo de ABlanca: " + generalTimer);
+                if (generalTimer > 10 || finishedPulido2)
                 {
                     if (caraTrabajada == 1)
                     {
@@ -226,7 +206,7 @@ public class ActivateMirror : UdonSharpBehaviour
                         probetaMirror2.SetActive(true);
                     }
                     //Debug.Log("Mirror active"); 
-                    changeColor(true);
+                    gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
                     finishedPulido2 = true;
                 }
             }
@@ -244,15 +224,15 @@ public class ActivateMirror : UdonSharpBehaviour
         }
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "TriggerPulidora")
         {
-
             if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
             {
                 ownerSays = false;
-                Debug.LogError("Owner say in Enter: " + ownerSays.ToString());
+                Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Enter: " + ownerSays.ToString());
             }
 
             rotorPulidora = other.GetComponentInParent<PulidoraScript>().gameObject;
@@ -264,65 +244,28 @@ public class ActivateMirror : UdonSharpBehaviour
             }
             isInPulidora = PulidoraScript.Rotating;
             Debug.LogWarning("EnterTrigger, variables set");
-
-        }
-
-
-        if (other.gameObject.name == "Colision" && finishedPulido1 && finishedPulido2)
-        {
-            //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "CollisionCalor");
-            CollisionCalor();
         }
     }
                                                 
-    public void CollisionCalor()
-    {
-        Debug.Log("ColisionCalor");
-        if(haveNital)
-            calor = true;
-    }
 
     private void OnTriggerExit(Collider other)
     {
-        /*if(!Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
-        {
-            Debug.LogWarning("Player no owner, return");
-            return;
-            if(other.gameObject.name == "TriggerPulidora" )
-            {
-                ResetTimersYBoolxd();
-                ResetVars();
-            }
-        }*/
-
         if(pickup.currentPlayer == null)
         {
             Debug.Log("No current player");
-            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "SetCalorFalse");
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimersYBoolxd");
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
-        }
-
-        if (other.gameObject.name == "Colision")
-        {
-            //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "SetCalorFalse");
-            SetCalorFalse();
         }
 
         if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
         {
             Debug.LogWarning("This player is owner, objeto: " + other.gameObject.name);
-
-
-
             if (other.gameObject.name == "TriggerPulidora")
             {
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimersYBoolxd");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
                 ownerSays = true;
-                Debug.LogError("Owner say in Exit: " + ownerSays.ToString());
-
-                //ResetTimersYBoolxd();
+                Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Exit: " + ownerSays.ToString());
             }
         }
     }
@@ -339,42 +282,11 @@ public class ActivateMirror : UdonSharpBehaviour
         //Debug.Log("ResetTimersPulidora e IsInPulidoraFalse");
         isInPulidora = false;
         generalTimer = 0f;
-        generalTimer2 = 0f;
-    }
-
-    public void SetCalorFalse()
-    {
-        //Debug.Log("SecCalor");
-        //calor = false;
     }
 
     public bool IsReady()
     {
         return finishedPulido1 && finishedPulido2 && finishedAQ && probeBehaviour.IsLijadoMax();
-    }
-
-    private void changeColor(bool isGreen)
-    {
-        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 1.1f);
-        colorTimer += Time.deltaTime;
-        if (colorTimer >= 0.1f)
-        {
-            if (isClear)
-            {
-                if (isGreen)
-                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                else
-                    bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-
-                isClear = false;
-            }
-            else
-            {
-                bodyMaterial.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                isClear = true;
-            }
-            colorTimer = 0f;
-        }
     }
 
 }
