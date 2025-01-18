@@ -231,11 +231,14 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
-
-        if (tipo == "Nital" && finishedPulido1 && finishedPulido2)
+        if(other.GetComponentInParent<BotellaLab>() != null)
         {
-            haveNital = true;
+            string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
+
+            if (tipo == "Nital" && finishedPulido1 && finishedPulido2)
+            {
+                haveNital = true;
+            }
         }
     }
 
