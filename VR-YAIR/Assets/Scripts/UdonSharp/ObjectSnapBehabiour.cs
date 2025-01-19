@@ -8,6 +8,7 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
     [Header("Snap config")]
     [SerializeField] bool SnapPosition;
     [SerializeField] bool SnapRotation;
+    [SerializeField] bool freezePosition;
 
     [SerializeField] Vector3 PositionOffset;
     [SerializeField] Vector3 RotationOffset;
@@ -107,6 +108,8 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
         if(SnapPosition)
         {
             GOToSnap.transform.position = GOpos + PositionOffset;
+            if(freezePosition)
+                GOToSnap.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         }
         if(SnapRotation)
         {
