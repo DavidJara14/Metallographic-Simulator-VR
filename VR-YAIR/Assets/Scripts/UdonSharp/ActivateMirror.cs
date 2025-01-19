@@ -40,8 +40,20 @@ public class ActivateMirror : UdonSharpBehaviour
 
     [UdonSynced] public bool finishedPulido1 = false;
     [UdonSynced] public bool finishedPulido2 = false;
-    [UdonSynced] public bool finishedAQ = false;
     [UdonSynced] private bool ownerSays = false;
+
+    //[SerializeField] private bool water;
+    [SerializeField] ParticleSystem waterPS;
+    [SerializeField]  ParticleSystem residuosAlumina;
+
+    [UdonSynced][SerializeField] private bool finishedEnjuagado = false;
+    [UdonSynced][SerializeField] private bool finishedWater = false;
+    [UdonSynced][SerializeField] private bool finishedLimpieza = false;
+    [UdonSynced] public bool finishedAQ = false;
+
+    [SerializeField] public GameObject placersWater = null;
+    [SerializeField] public GameObject placersNital = null;
+
 
     private void Start()
     {
@@ -50,6 +62,13 @@ public class ActivateMirror : UdonSharpBehaviour
 
         probetaShader2.SetActive(true);
         probetaMirror2.SetActive(false);
+
+        placersWater.SetActive(false);
+        placersNital.SetActive(false);
+
+        if(residuosAlumina != null)
+            residuosAlumina.Stop();
+
     }
 
     private void Update()
@@ -64,6 +83,17 @@ public class ActivateMirror : UdonSharpBehaviour
         if (isInPulidora)
         {
             Pulido();
+        }
+
+        if (finishedPulido1 && finishedPulido2)
+        {
+            placersWater.SetActive(true);
+            ChorroDeAguaYSecado();
+        }
+
+        if (finishedEnjuagado)
+        {
+            limpieza();
         }
 
         if (finishedPulido1 && finishedPulido2 && haveNital) // Ataque, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
@@ -118,34 +148,6 @@ public class ActivateMirror : UdonSharpBehaviour
             else if (caraTrabajada == 2)
             {
                 probetaShader2.GetComponent<Renderer>().material.SetInt("_IsFirstSanding", 0);
-            }
-        }
-    }
-
-    private void AtaqueConNital()
-    {
-        if (newcalor)
-        {
-            TimerPistolaDeCalor += Time.deltaTime;
-            Debug.Log("Tiempo de calor: " + TimerPistolaDeCalor);
-            if (TimerPistolaDeCalor > 10 || finishedAQ)
-            {
-                if (caraTrabajada == 1)
-                {
-                    probetaShader1.SetActive(true);
-                    probetaMirror1.SetActive(false);
-                    probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
-                }
-
-                else if (caraTrabajada == 2)
-                {
-                    probetaShader2.SetActive(true);
-                    probetaMirror2.SetActive(false);
-                    probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
-                }
-                // Debug.Log("Mirror unactive");
-                gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
-                finishedAQ = true;
             }
         }
     }
@@ -214,16 +216,91 @@ public class ActivateMirror : UdonSharpBehaviour
 
     }
 
-    private void OnParticleCollision(GameObject other)
+    private void ChorroDeAguaYSecado()
     {
-        string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
-
-        if (tipo == "Nital" && finishedPulido1 && finishedPulido2)
+        if (waterPS != null)
         {
-            haveNital = true;
+            if(waterPS.isEmitting && residuosAlumina != null && !finishedWater)
+            {
+                if (!residuosAlumina.isEmitting)
+                {
+                    residuosAlumina.Play();
+                }
+                Debug.Log("Chorro de agua fria");
+                generalTimer += Time.deltaTime;
+                Debug.Log("time agua: " + generalTimer);
+                if(generalTimer > 5f)
+                {
+                    residuosAlumina.Stop();
+                    finishedWater = true;
+                    generalTimer = 0;
+                    placersNital.SetActive(true);
+                }
+            }
+            else
+            {
+                residuosAlumina.Stop();
+            }
+        }
+
+        if (newcalor && finishedWater)
+        {
+            finishedEnjuagado = true;
+            Debug.LogWarning("[<color=blue>FinishedEnjuagado: </color>]" + finishedEnjuagado);
         }
     }
 
+    private void limpieza()
+    {
+
+    }
+
+    private void AtaqueConNital()
+    {
+        if (newcalor)
+        {
+            TimerPistolaDeCalor += Time.deltaTime;
+            Debug.Log("Tiempo de calor: " + TimerPistolaDeCalor);
+            if (TimerPistolaDeCalor > 10 || finishedAQ)
+            {
+                if (caraTrabajada == 1)
+                {
+                    probetaShader1.SetActive(true);
+                    probetaMirror1.SetActive(false);
+                    probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
+                }
+
+                else if (caraTrabajada == 2)
+                {
+                    probetaShader2.SetActive(true);
+                    probetaMirror2.SetActive(false);
+                    probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.5f);
+                }
+                // Debug.Log("Mirror unactive");
+                gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
+                finishedAQ = true;
+            }
+        }
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        //waterGO = other.gameObject;
+        if (other.GetComponentInParent<IsLiquidSource>() != null)
+        {
+            waterPS = other.GetComponent<ParticleSystem>();
+        }
+
+
+        if (other.GetComponentInParent<BotellaLab>() != null)
+        {
+            string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
+            if (tipo == "Nital" && finishedPulido1 && finishedPulido2)
+            {
+                haveNital = true;
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
