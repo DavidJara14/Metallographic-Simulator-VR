@@ -136117,6 +136117,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PistolaDeCalor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7750698325450885024, guid: e96ae06b2afee634581bf8be7a3d5fa3,
+        type: 3}
+      propertyPath: m_Height
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750698325450885024, guid: e96ae06b2afee634581bf8be7a3d5fa3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750698325450885024, guid: e96ae06b2afee634581bf8be7a3d5fa3,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

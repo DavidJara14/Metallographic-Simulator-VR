@@ -15,9 +15,9 @@ public class PistolaDeCalor : UdonSharpBehaviour
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private VRCPickup _pickup;
     private DataDictionary ActivePositionZ = new DataDictionary()
-    {
-        {false, new DataList(){ -0.2f, 0.01f} },
-        {true, new DataList(){0.05f , 0.05f} },
+    {//centerDistanceZ, radius, Height
+        {false, new DataList(){ -0.2f, 0.01f, 0.15f} },
+        {true, new DataList(){0.1f , 0.05f, 0.25f } },
     };
 
     [Header("Audio Config")]
@@ -35,6 +35,7 @@ public class PistolaDeCalor : UdonSharpBehaviour
         ActivePositionZ.TryGetValue(Used, out DataToken var);
         collisionPistol.center = new Vector3(0, 0, var.DataList[0].Float);
         collisionPistol.radius = var.DataList[1].Float;
+        collisionPistol.height = var.DataList[2].Float;
         _pickup = gameObject.GetComponent<VRCPickup>();
     }
 
@@ -89,6 +90,7 @@ public class PistolaDeCalor : UdonSharpBehaviour
         ActivePositionZ.TryGetValue(Used, out DataToken var);
         collisionPistol.center = new Vector3 (0, 0, var.DataList[0].Float);
         collisionPistol.radius = var.DataList[1].Float;
+        collisionPistol.height = var.DataList[2].Float;
         //collisionPistol.enabled = Used;
         if (Used)
         {
