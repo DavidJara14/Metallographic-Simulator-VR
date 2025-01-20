@@ -8,8 +8,8 @@ using VRC.Udon;
 public class ProbetaSnap : UdonSharpBehaviour
 {
 
-    [SerializeField] bool ProbetaLoaded;
-    [SerializeField] bool Stayed;
+    public bool ProbetaLoaded;
+    public bool Stayed;
 
     [SerializeField] public GameObject ProbetaGO = null;
     [SerializeField] public VRC_Pickup Probeta = null;
@@ -34,6 +34,7 @@ public class ProbetaSnap : UdonSharpBehaviour
         Debug.Log(ProbetaGO);
         Probeta = ProbetaGO.GetComponent<VRC_Pickup>();
         Debug.Log(Probeta);
+        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public void RemoveProbeta(Transform go)
