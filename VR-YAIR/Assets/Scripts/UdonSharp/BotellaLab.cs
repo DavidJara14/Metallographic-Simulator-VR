@@ -17,6 +17,7 @@ public class BotellaLab : UdonSharpBehaviour
     [SerializeField] private VRC_Pickup _pickupComp;
     [SerializeField] private MeshRenderer m_Renderer;
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private Vector3 _PSOriginalPos;
     [SerializeField] private Transform _Visual;
     bool LastUserWasVr = false;
 
@@ -25,6 +26,7 @@ public class BotellaLab : UdonSharpBehaviour
         WaterMaterial = InfillGO.GetComponent<MeshRenderer>().material;
         var main = _particleSystem.main;
         main.startColor = WaterMaterial.GetColor("_ColorAguaSuperficie");
+        _PSOriginalPos = _particleSystem.transform.localPosition;
     }
 
     private void Update()
@@ -42,7 +44,7 @@ public class BotellaLab : UdonSharpBehaviour
             _particleSystem.Stop();
             if (!LastUserWasVr)
             {
-                _Visual.transform.localRotation = Quaternion.Euler(0, 0, 00);
+                //_Visual.transform.localRotation = Quaternion.Euler(0, 0, 00);
             }
         }
     }
@@ -53,8 +55,10 @@ public class BotellaLab : UdonSharpBehaviour
         LastUserWasVr = _pickupComp.currentPlayer.IsUserInVR();
         if (!LastUserWasVr)
         {
-            _Visual.rotation = Quaternion.Euler(0, -50f, 0);
+            //_Visual.rotation = Quaternion.Euler(0, -50f, 0);
         }
+        //update Ownership of particle system
+        Networking.SetOwner(_pickupComp.currentPlayer, _particleSystem.gameObject);
     }
 
     public override void OnDrop()
@@ -62,8 +66,8 @@ public class BotellaLab : UdonSharpBehaviour
         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "UnUseThisThing");
         if (!LastUserWasVr)
         {
-            gameObject.transform.rotation = Quaternion.identity;
-            _Visual.rotation = Quaternion.identity; gameObject.transform.rotation = Quaternion.Euler(0, -50f, 0);
+            //gameObject.transform.rotation = Quaternion.identity;
+            //_Visual.rotation = Quaternion.identity; gameObject.transform.rotation = Quaternion.Euler(0, -50f, 0);
         }
     }
 
@@ -81,8 +85,10 @@ public class BotellaLab : UdonSharpBehaviour
     {
         var Mainn = _particleSystem.main;
         Mainn.startColor = WaterMaterial.GetColor("_ColorAgua");
+        _particleSystem.transform.localPosition = _PSOriginalPos;
         if (_pickupComp.currentPlayer.IsUserInVR())
         {
+            Debug.Log("Object holder is VR user");
             if (LiquidFill > 0)
             {
                 _particleSystem.gameObject.SetActive(true);
@@ -91,9 +97,10 @@ public class BotellaLab : UdonSharpBehaviour
         }
         else
         {
+            Debug.Log("Object holder is PC user");
             if(LiquidFill > 0)
             {
-                _Visual.transform.localRotation = Quaternion.Euler(-15f, 0, 0);
+                _Visual.transform.localRotation = Quaternion.Euler(-15f, 90, 0);
                 _particleSystem.gameObject.SetActive(true);
                 _particleSystem.Play();
             }
@@ -105,7 +112,7 @@ public class BotellaLab : UdonSharpBehaviour
         _particleSystem.Stop();
         if (!LastUserWasVr)
         {
-            _Visual.transform.localRotation = Quaternion.Euler(0, 0, 00);
+            _Visual.transform.localRotation = Quaternion.Euler(0, 90, 00);
         }
     }
 
