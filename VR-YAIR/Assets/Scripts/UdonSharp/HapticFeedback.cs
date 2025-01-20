@@ -33,4 +33,10 @@ public class HapticFeedback : UdonSharpBehaviour
         Networking.LocalPlayer.PlayHapticEventInHand(pickup.currentHand, hapticDuration, hapticAmplitudePulido, hapticFrequencyPulido);
         Debug.Log("Haptic Feedback Pulido!!!!!!!!!!!!");
     }
+
+    public void hapticFeedbackCotton()
+    {
+        Networking.LocalPlayer.PlayHapticEventInHand(pickup.currentHand, hapticDuration, 0.1f, 10f);
+        Debug.Log("Haptic Feedback Cotton!!!!!!!!!!!!");
+    }
 }
