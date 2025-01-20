@@ -119,12 +119,12 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if (finishedEnjuagado && !finishedLimpieza)
         {
-            if (ownerSays)
+            limpieza();
+            /*if (ownerSays)
             {
                 Debug.LogWarning("[<color=green>OwnerSay</color>]is in trigger by error, but owner player exit, exit");
                 ResetVarCotton();
-            }
-            limpieza();
+            }*/
         }
 
         if (finishedLimpieza) // Ataque, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
@@ -304,16 +304,17 @@ public class ActivateMirror : UdonSharpBehaviour
 
             if (haveAlcohol || cottonGO.GetComponent<CottonBehabiour>().haveAlcohol)
             {
-                generalTimer += Time.deltaTime;
-                Debug.Log("time limpieza: " + generalTimer);
-                if(generalTimer > 3f)
-                {
-                    haveAlcohol = false;
-                    generalTimer = 0;
-                    finishCotton = true;
+                //generalTimer += Time.deltaTime;
+                //Debug.Log("time limpieza: " + generalTimer);
+                //if(generalTimer > 3f)
+                //{
+                haveAlcohol = false;
+                generalTimer = 0;
+                finishCotton = true;
 
-                    mainalcoholPS.startSize = new ParticleSystem.MinMaxCurve(0f, 0.005f);
-                }
+                mainalcoholPS.startSize = new ParticleSystem.MinMaxCurve(0f, 0.005f);
+                isCotton = false;
+                //}
             }
         }
 
@@ -345,7 +346,7 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             TimerPistolaDeCalor += Time.deltaTime;
             Debug.Log("Tiempo de calor: " + TimerPistolaDeCalor);
-            if (TimerPistolaDeCalor > 10 || finishedAQ)
+            if (TimerPistolaDeCalor > 5f || finishedAQ)
             {
                 if (caraTrabajada == 1)
                 {
@@ -382,15 +383,25 @@ public class ActivateMirror : UdonSharpBehaviour
         if (other.GetComponentInParent<BotellaLab>() != null)
         {
             string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
-            if (tipo == "Nital" && finishedPulido1 && finishedPulido2)
+            if (tipo == "Nital" && finishedPulido1 && finishedPulido2 && !haveNital)
             {
-                haveNital = true;
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "addedNital");
             }
-            if (tipo == "Alcohol" && finishedEnjuagado)
+            if (tipo == "Alcohol" && finishedEnjuagado && !haveAlcohol)
             {
-                haveAlcohol = true;
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "addedAlcohol");
             }
         }
+    }
+
+    public void addedAlcohol()
+    {
+        haveAlcohol = true;
+    }
+
+    public void addedNital()
+    {
+        haveNital = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -414,15 +425,15 @@ public class ActivateMirror : UdonSharpBehaviour
             Debug.LogWarning("EnterTrigger, variables set");
         }
 
-        if (other.gameObject.GetComponent<CottonBehabiour>() != null)
+        if (other.gameObject.GetComponent<CottonBehabiour>() != null && !isCotton)
         {
             if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
             {
-                ownerSays = false;
-                Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Enter: " + ownerSays.ToString());
+                //ownerSays = false;
+                //Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Enter: " + ownerSays.ToString());
             }
             cottonGO = other.gameObject;
-            isCotton = true;
+            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "cottonColission");
         }
     }
                                                 
@@ -447,13 +458,19 @@ public class ActivateMirror : UdonSharpBehaviour
                 Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Exit: " + ownerSays.ToString());
             }
 
-            if(other.gameObject.GetComponent<CottonBehabiour>() != null)
-            {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVarCotton");
-                ownerSays = true;
-                Debug.LogWarning("[<color=blue>OwnerSay</color>]Owner say in Exit: " + ownerSays.ToString());
-            }
         }
+
+        if(other.gameObject.GetComponent<CottonBehabiour>() != null && isCotton)
+        {
+            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVarCotton");
+            //ownerSays = true;
+            //Debug.LogWarning("[<color=blue>OwnerSay</color>]Owner say in Exit: " + ownerSays.ToString());
+        }
+    }
+
+    public void cottonColission()
+    {
+        isCotton = true;
     }
 
     public void ResetVarCotton()
