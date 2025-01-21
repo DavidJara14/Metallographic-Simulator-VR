@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MomentumTransferMethod: 0
-  DisallowTheft: 1
+  DisallowTheft: 0
   ExactGun: {fileID: 0}
   ExactGrip: {fileID: 4029805946084767048}
   allowManipulationWhenEquipped: 0
@@ -191,6 +191,7 @@ MonoBehaviour:
   _pickupComp: {fileID: 3921156564541836402}
   m_Renderer: {fileID: 7138950635121727210}
   _particleSystem: {fileID: 7939201719922400889}
+  _PSOriginalPos: {x: 0, y: 0, z: 0}
   _Visual: {fileID: 923164079556057693}
 --- !u!114 &7113807365561147418
 MonoBehaviour:

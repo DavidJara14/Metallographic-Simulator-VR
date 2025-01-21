@@ -1790,6 +1790,7 @@ GameObject:
   - component: {fileID: 4474953295690466864}
   - component: {fileID: 7560763677631895626}
   - component: {fileID: 6380913251968968268}
+  - component: {fileID: 4982774198236151154}
   m_Layer: 0
   m_Name: Microscopio
   m_TagString: Untagged
@@ -2106,6 +2107,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.29880977, y: 0.03246963, z: 0.25123224}
   m_Center: {x: -0.05875331, y: 0.3365175, z: 0}
+--- !u!65 &4982774198236151154
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8586292904846844347}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 24576
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.56881785, y: 0.03894192, z: 0.48514527}
+  m_Center: {x: 0.024024606, y: 0.3313732, z: 0.0013987422}
 --- !u!1001 &1334664914112387403
 PrefabInstance:
   m_ObjectHideFlags: 0

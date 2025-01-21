@@ -76,9 +76,13 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_5ddb323ad4244c9b9c507e1da80a3417_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 6a5ee82245d76c24bbab27956318ce7a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AditionalPower: 12
+    - _AditionalPower: 1.4
     - _AlphaClip: 1
     - _Blend: 0
     - _BumpScale: 1
@@ -87,7 +91,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _FloatFresnelPower: 0
-    - _FresnelPower: 2.03
+    - _FresnelPower: 1.86
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -102,16 +106,16 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 5
     - _Surface: 1
-    - _TimeMultiplyer: 0.01
+    - _TimeMultiplyer: 0
     - _UVSec: 0
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _AlcoholColorMult: {r: 0.89433956, g: 0.89433956, b: 0.89433956, a: 0}
+    - _AlcoholColorMult: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 0, b: 0, a: 0}
-    - _PrimaryColor: {r: 0.93333334, g: 0.93333334, b: 0.93333334, a: 0}
+    - _PrimaryColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 0}
     - _SecondaryColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
