@@ -8,8 +8,8 @@ public class LijaRotation : UdonSharpBehaviour
 {
 
     [SerializeField] bool LijaLoaded;
-    [SerializeField] public bool Rotating;
-    [UdonSynced][SerializeField] public bool enableMeshCL;
+    [UdonSynced][SerializeField] public bool Rotating;
+    //[UdonSynced][SerializeField] public bool enableMeshCL;
 
     [SerializeField] bool Stayed;
 
@@ -22,7 +22,7 @@ public class LijaRotation : UdonSharpBehaviour
     [SerializeField] public VRC_Pickup Lija = null;
     [SerializeField] private TextMeshProUGUI RPMText;
 
-    [SerializeField] public bool isEnergized = false;
+    [UdonSynced][SerializeField] public bool isEnergized = false;
 
     [Header("Audio Config")]
     [SerializeField] private AudioSource _StartStopAudioSource;
@@ -116,7 +116,7 @@ public class LijaRotation : UdonSharpBehaviour
     {
         if (thisCubreLijaSnap.GetComponent<CubreLijaSnap>().CubreLijaLoaded)
         {
-            enableMeshCL = false;
+            //enableMeshCL = false;
             if (LijaLoaded && isEnergized)
             {
                 Rotating = true;
@@ -135,7 +135,7 @@ public class LijaRotation : UdonSharpBehaviour
 
     public void StopMachine()
     {
-        enableMeshCL = true;
+        //enableMeshCL = true;
         Rotating = false;
         if (LijaLoaded)
         {

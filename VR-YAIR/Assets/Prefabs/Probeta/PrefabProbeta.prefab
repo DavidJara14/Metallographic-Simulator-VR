@@ -25614,7 +25614,7 @@ MonoBehaviour:
   probeBehaviour: {fileID: 5261806915195308647}
   pickup: {fileID: 7615690082077857907}
   caraTrabajada: 1
-  Desgaste: 800
+  Desgaste: 80
   _IsFirstSanding: 1
   newcalor: 0
   "Pa\xF1oToObjSize": {x: 0, y: 0, z: 0}
@@ -25629,7 +25629,6 @@ MonoBehaviour:
   finishedPulido2: 0
   finishedEnjuagado: 0
   finishedWater: 0
-  cottonGO: {fileID: 0}
   isCotton: 0
   haveAlcohol: 0
   finishCotton: 0
@@ -25773,7 +25772,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5853918693664680236}
-  Desgaste: 800
+  Desgaste: 80
   LijaToObjSize: {x: 0, y: 0, z: 0}
   Up: {x: 0, y: 1, z: 0}
   VectorDeDireccionDeDesgasteActual: {x: 0, y: 0, z: 0}
