@@ -11034,7 +11034,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -25644,6 +25644,7 @@ MonoBehaviour:
   probetaWaterPS: {fileID: 3911698438439073664}
   placersWater: {fileID: 0}
   placersNital: {fileID: 0}
+  placersMicro: {fileID: 0}
 --- !u!114 &7789323974390255625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26171,6 +26172,10 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 3104340816561012878}
   GOListeners:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

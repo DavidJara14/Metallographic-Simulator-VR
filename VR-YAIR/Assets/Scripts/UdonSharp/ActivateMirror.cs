@@ -46,13 +46,13 @@ public class ActivateMirror : UdonSharpBehaviour
 
     [Header("Limpieza variables")]
     [SerializeField] GameObject cottonGO = null;
-    [UdonSynced] public bool isCotton = false;
-    [UdonSynced] public bool haveAlcohol = false;
+    public bool isCotton = false;
+    public bool haveAlcohol = false;
     [UdonSynced] public bool finishCotton = false;
     [UdonSynced] public bool finishedLimpieza = false;
 
     [Header("Nital variables")]
-    [UdonSynced] public bool haveNital = false;
+    public bool haveNital = false;
     [UdonSynced] public bool nitalRemoved = false;
     [UdonSynced] public bool finishedAQ = false;
 
@@ -66,6 +66,7 @@ public class ActivateMirror : UdonSharpBehaviour
     [Header("Placers")]
     [SerializeField] public GameObject placersWater = null;
     [SerializeField] public GameObject placersNital = null;
+    [SerializeField] public GameObject placersMicro = null;
 
     private float generalTimer = 0f;
     private float TimerPistolaDeCalor = 0f;
@@ -81,8 +82,9 @@ public class ActivateMirror : UdonSharpBehaviour
         probetaShader2.SetActive(true);
         probetaMirror2.SetActive(false);
 
-        placersWater.SetActive(false);
-        placersNital.SetActive(false);
+        //placersWater.SetActive(false);
+        //placersNital.SetActive(false);
+        //placersMicro.SetActive(false);
 
         if(residuosAlumina != null)
             residuosAlumina.Stop();
@@ -113,28 +115,19 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if (finishedPulido1 && finishedPulido2 && !finishedEnjuagado)
         {
-            placersWater.SetActive(true);
+            //placersWater.SetActive(true);
             ChorroDeAguaYSecado();
         }
 
         if (finishedEnjuagado && !finishedLimpieza)
         {
             limpieza();
-            /*if (ownerSays)
-            {
-                Debug.LogWarning("[<color=green>OwnerSay</color>]is in trigger by error, but owner player exit, exit");
-                ResetVarCotton();
-            }*/
         }
 
         if (finishedLimpieza) // Ataque, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
         {
             AtaqueConNital();
         }
-
-        if (newcalor)
-            Debug.LogWarning("NewCalor Active");
-
     }
 
     private void RetroalimentacionYProbetaVoladora()
@@ -217,6 +210,7 @@ public class ActivateMirror : UdonSharpBehaviour
                     else if (caraTrabajada == 2)
                         probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
                     gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
+                    
                     finishedPulido1 = true;
                 }
             }
@@ -249,13 +243,18 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void ChorroDeAguaYSecado()
     {
+        Debug.LogWarning("Enter in ChorroDeAguaYSecado");
         if (waterPS != null)
         {
-            if(waterPS.isEmitting && residuosAlumina != null && !finishedWater)
+            //Debug.LogWarning("[<color=blue>waterPS is: </color>]" + waterPS);
+
+            if (waterPS.isEmitting && residuosAlumina != null && !finishedWater)
             {
                 if (!residuosAlumina.isEmitting)
                 {
                     residuosAlumina.Play();
+                    //Debug.LogWarning("[<color=gray>residuosAluminaPS play: </color>]");
+
                 }
                 Debug.Log("Chorro de agua fria");
                 generalTimer += Time.deltaTime;
@@ -265,10 +264,15 @@ public class ActivateMirror : UdonSharpBehaviour
                     residuosAlumina.Stop();
                     finishedWater = true;
                     generalTimer = 0;
-                    placersNital.SetActive(true);
+                    //placersNital.SetActive(true);
 
-                    if(probetaWaterPS != null)
+
+                    if (probetaWaterPS != null)
+                    {
                         probetaWaterPS.Play();
+                        Debug.LogWarning("[<color=blue>probetawaterPS play: </color>]");    
+                    }
+
                 }
             }
             else
@@ -281,45 +285,46 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             probetaWaterPS.Stop();
             finishedEnjuagado = true;
-//            probetaMirror1.GetComponent<VRC_MirrorReflection>().
             Debug.LogWarning("[<color=blue>FinishedEnjuagado: </color>]" + finishedEnjuagado);
         }
     }
 
     private void limpieza()
     {
+        Debug.LogWarning("Enter in lIMPIEZA");
+
         var mainalcoholPS = alcoholPS.main;
 
         if (alcoholPS != null && !alcoholPS.isEmitting && haveAlcohol)
         {
             alcoholPS.Play();
+            Debug.LogWarning("[<color=blue>ALCOHOLps play: </color>]");
+
         }
 
-        if (/*cottonGO != null*/ isCotton && !finishCotton) 
+        if (isCotton && !finishCotton) 
         {
+            //Debug.LogWarning("[<color=blue>is cotton: </color>]" + isCotton);
+
             if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
             {
                 gameObject.GetComponent<HapticFeedback>().SendCustomEvent("hapticFeedbackCotton");
             }
 
-            if (haveAlcohol || cottonGO.GetComponent<CottonBehabiour>().haveAlcohol)
+            if (haveAlcohol/* || cottonGO.GetComponent<CottonBehabiour>().haveAlcohol*/)
             {
-                //generalTimer += Time.deltaTime;
-                //Debug.Log("time limpieza: " + generalTimer);
-                //if(generalTimer > 3f)
-                //{
-                haveAlcohol = false;
-                generalTimer = 0;
-                finishCotton = true;
+                Debug.LogWarning("[<color=blue>Alcohol absorbed </color>]");
 
+                //haveAlcohol = false;
+                finishCotton = true;
                 mainalcoholPS.startSize = new ParticleSystem.MinMaxCurve(0f, 0.005f);
                 isCotton = false;
-                //}
             }
         }
 
         if(newcalor && finishCotton)
         {
+            haveAlcohol = false;
             finishedLimpieza = true;
             Debug.LogWarning("[<color=blue>FinishedLimpieza: </color>]" + finishedLimpieza);
             alcoholPS.Stop();
@@ -333,6 +338,8 @@ public class ActivateMirror : UdonSharpBehaviour
         if (nitalInProbePS != null && !nitalInProbePS.isEmitting && haveNital)
         {
             nitalInProbePS.Play();
+            Debug.LogWarning("[<color=blue>nitalInProbePS play: </color>]");
+
         }
 
         if (haveAlcohol && nitalInProbePS.isEmitting)
@@ -340,6 +347,8 @@ public class ActivateMirror : UdonSharpBehaviour
             mainnitalInProbePS.startSize = new ParticleSystem.MinMaxCurve(0f, 0.005f);
             haveNital = false;
             nitalRemoved = true;
+            Debug.LogWarning("[<color=blue>nitalRemoved: </color>]" + nitalRemoved);
+
         }
 
         if (newcalor && nitalRemoved)
@@ -374,9 +383,11 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
+        //Debug.LogWarning("[<color=green>OnParticleCollision, GO name: </color>]" + other.gameObject.name);
         if (other.GetComponentInParent<IsLiquidSource>() != null)
         {
             waterPS = other.GetComponent<ParticleSystem>();
+            Debug.LogWarning("[<color=blue>waterPS, assigned: </color>]" + waterPS.name);
         }
 
 
@@ -427,13 +438,10 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if (other.gameObject.GetComponent<CottonBehabiour>() != null && !isCotton)
         {
-            if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
-            {
-                //ownerSays = false;
-                //Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Enter: " + ownerSays.ToString());
-            }
+
             cottonGO = other.gameObject;
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "cottonColission");
+            Debug.LogWarning("Cotton enter");
         }
     }
                                                 
@@ -458,13 +466,6 @@ public class ActivateMirror : UdonSharpBehaviour
                 Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Exit: " + ownerSays.ToString());
             }
 
-        }
-
-        if(other.gameObject.GetComponent<CottonBehabiour>() != null && isCotton)
-        {
-            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVarCotton");
-            //ownerSays = true;
-            //Debug.LogWarning("[<color=blue>OwnerSay</color>]Owner say in Exit: " + ownerSays.ToString());
         }
     }
 
@@ -495,6 +496,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
     public bool IsReady()
     {
+        //placersMicro.SetActive(true);
         return finishedPulido1 && finishedPulido2 && finishedAQ && probeBehaviour.IsLijadoMax();
     }
 

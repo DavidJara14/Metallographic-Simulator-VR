@@ -35,6 +35,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1269453881064374311, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
+    - target: {fileID: 2962762732853209531, guid: bf2c9332192ae324a89dbab7c53c39e1,
+        type: 3}
+      propertyPath: m_text
+      value: 'Alcoh  ol  '
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077772400293427521, guid: bf2c9332192ae324a89dbab7c53c39e1,
+        type: 3}
+      propertyPath: m_text
+      value: 'Alcoh  ol  '
+      objectReference: {fileID: 0}
     - target: {fileID: 7138950635121727210, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -43,17 +53,17 @@ PrefabInstance:
     - target: {fileID: 7445433830029709110, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.169
+      value: 0.8438206
       objectReference: {fileID: 0}
     - target: {fileID: 7445433830029709110, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.361
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7445433830029709110, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.741
+      value: 0.1430602
       objectReference: {fileID: 0}
     - target: {fileID: 7445433830029709110, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
@@ -63,7 +73,7 @@ PrefabInstance:
     - target: {fileID: 7445433830029709110, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7445433830029709110, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
@@ -73,7 +83,7 @@ PrefabInstance:
     - target: {fileID: 7445433830029709110, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7445433830029709110, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
@@ -90,12 +100,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7461437189311534788, guid: bf2c9332192ae324a89dbab7c53c39e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 7461437189311534788, guid: bf2c9332192ae324a89dbab7c53c39e1,
+        type: 3}
     - target: {fileID: 7481706219052371347, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 7481706219052371347, guid: bf2c9332192ae324a89dbab7c53c39e1,
         type: 3}
+    - target: {fileID: 8659962481965082969, guid: bf2c9332192ae324a89dbab7c53c39e1,
+        type: 3}
+      propertyPath: m_text
+      value: 'Alcoh  ol  '
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

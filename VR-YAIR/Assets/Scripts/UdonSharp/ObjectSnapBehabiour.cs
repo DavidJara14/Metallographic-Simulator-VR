@@ -98,7 +98,7 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
         Debug.Log(gameObject.name+": = "+GrabablesNear);
         if(GOToSnap == null)
         {
-            Debug.LogWarning("No hay objetos cercanos, ¿hace falta asignar 'placeable'?");
+            //Debug.LogWarning("No hay objetos cercanos, ¿hace falta asignar 'placeable'?");
             return;
         }
 
