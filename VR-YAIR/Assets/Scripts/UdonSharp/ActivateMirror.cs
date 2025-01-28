@@ -211,7 +211,7 @@ public class ActivateMirror : UdonSharpBehaviour
                 }
             }
 
-            else if (haveAluminaGris && haveAluminaBlanca && !haveNital) // Segunda etapa de pulido, TIENE ALUMINA BLANCA y ya tuvo gris, sin nital 
+            else if (finishedPulido1 && haveAluminaBlanca && !haveNital) // Segunda etapa de pulido, TIENE ALUMINA BLANCA y ya tuvo gris, sin nital 
             {
                 generalTimer += Time.deltaTime;
                 Debug.Log("Tiempo de ABlanca: " + generalTimer);

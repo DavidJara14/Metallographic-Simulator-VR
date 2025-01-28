@@ -43385,6 +43385,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 1968925675430449522, guid: 6b487104954b6e84785eb1abdd879811,
         type: 3}
+      propertyPath: IsForGris
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968925675430449522, guid: 6b487104954b6e84785eb1abdd879811,
+        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1968925675430449522, guid: 6b487104954b6e84785eb1abdd879811,
@@ -110236,6 +110241,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d52fccebafbab1943bdea5b021b10083,
         type: 2}
+    - target: {fileID: 1968925675430449522, guid: 6b487104954b6e84785eb1abdd879811,
+        type: 3}
+      propertyPath: IsForBlanca
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1968925675430449522, guid: 6b487104954b6e84785eb1abdd879811,
         type: 3}
       propertyPath: serializationData.Prefab
