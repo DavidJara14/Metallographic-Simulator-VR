@@ -94,11 +94,9 @@ public class LijaRotation : UdonSharpBehaviour
     {
         LijaLoaded = true;
         go.SetParent(gameObject.transform);
-        Debug.Log(go);
         LijaGO = go.gameObject;
-        Debug.Log(LijaGO);
         Lija = LijaGO.GetComponent<VRC_Pickup>();
-        Debug.Log(Lija);
+        Debug.Log("<color=green>lija snapped on LijaRotation</color>");
     }
 
     public void RemoveLija(Transform go)
@@ -110,6 +108,7 @@ public class LijaRotation : UdonSharpBehaviour
         go.parent = null;
         LijaGO = null;
         Lija = null;
+        Debug.Log("<color=#ff9900>Removed lija</color>");
     }
 
     public void StartMachine()
