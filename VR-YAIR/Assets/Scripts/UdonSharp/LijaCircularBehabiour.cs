@@ -71,4 +71,12 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
         //Debug.Log($"Deserialization: Tamaño de grano TEXT set to {TamañoDeGrano}");
         meshRenderer.material = referenceDataholder.MaterialesSegunTamañosDeLija[referenceDataholder.LijaDict[TamañoDeGrano].Int];
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<LijaRotation>() != null)
+        {
+            gameObject.GetComponent<BoxCollider>().excludeLayers = LayerMask.GetMask("Nothing");
+        }
+    }
 }

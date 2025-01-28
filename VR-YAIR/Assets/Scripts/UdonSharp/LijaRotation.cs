@@ -7,9 +7,8 @@ using VRC.Udon;
 public class LijaRotation : UdonSharpBehaviour
 {
 
-    [SerializeField] bool LijaLoaded;
-    [UdonSynced][SerializeField] public bool Rotating;
-    //[UdonSynced][SerializeField] public bool enableMeshCL;
+    public bool LijaLoaded;
+    public bool Rotating;
 
     [SerializeField] bool Stayed;
 
@@ -34,9 +33,7 @@ public class LijaRotation : UdonSharpBehaviour
     [SerializeField] private float StartTimer;
     [SerializeField] private bool AudioLoop;
 
-    //public GameObject rotorChildren;
-    public GameObject thisCubreLijaSnap;
-
+    public CubreLijaSnap thisCubreLijaSnap;
 
     private void Update()
     {
@@ -84,10 +81,16 @@ public class LijaRotation : UdonSharpBehaviour
         if (AudioStart)
             StartTimer += Time.deltaTime;
 
-        //if(rotorChildren != null)
-//            rotorChildren.gameObject.SetActive(Rotating);
-            //rotorChildren.GetComponent<BoxCollider>().enabled = Rotating;
-           // rotorChildren.GetComponent<colliderRotorBehabiour>().isRotating = Rotating;
+        if(Lija != null)
+        {
+            Lija.pickupable = !thisCubreLijaSnap.CubreLijaLoaded;
+
+            if (LijaLoaded)
+            {
+                Lija.GetComponent<BoxCollider>().excludeLayers = LayerMask.GetMask("Pickup");
+            }
+        }
+
     }
 
     public void OnLijaSnap(Transform go)
@@ -104,9 +107,7 @@ public class LijaRotation : UdonSharpBehaviour
     public void RemoveLija(Transform go)
     {
         LijaLoaded = false;
-        Rotating = false;
         go.GetComponent<VRC_Pickup>().pickupable = true;
-        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         go.parent = null;
         LijaGO = null;
         Lija = null;
@@ -114,43 +115,26 @@ public class LijaRotation : UdonSharpBehaviour
 
     public void StartMachine()
     {
-        if (thisCubreLijaSnap.GetComponent<CubreLijaSnap>().CubreLijaLoaded)
+        if (thisCubreLijaSnap.CubreLijaLoaded)
         {
-            //enableMeshCL = false;
             if (LijaLoaded && isEnergized)
             {
                 Rotating = true;
-                Lija.pickupable = !Rotating;
-                if (Lija.pickupable)
-                    Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                else
-                    Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-            }
-            else
-            {
-                Rotating = false;
             }
         }
     }
 
     public void StopMachine()
     {
-        //enableMeshCL = true;
-        Rotating = false;
-        if (LijaLoaded)
+        if (Rotating)
         {
-            Lija.pickupable = !Rotating;
-            if (Lija.pickupable)
-                Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            else
-                Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+            Rotating = false;
         }
     }
 
     public void MachineEnergy_On()
     {
         isEnergized = true;
-        Rotating = false;
         RPMText.text = "0900";
         RPMText.color = Color.red;
     }
@@ -158,7 +142,7 @@ public class LijaRotation : UdonSharpBehaviour
     public void MachineEnergy_Off()
     {
         isEnergized = false;
-        Rotating = false;
+        if(Rotating) {Rotating = false;}
         if(Lija != null)
             Lija.pickupable = true;
         RPMText.text = "8888";

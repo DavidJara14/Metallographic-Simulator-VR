@@ -302,7 +302,6 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 754344193462847508}
   cubrelijaReference: {fileID: 8644875322041640266}
   rotor: {fileID: 1885387243375919198}
-  collisionRotor: {fileID: 0}
   isPulidora: 0
   isDesbastadora: 1
 --- !u!114 &3475585720321907908
@@ -613,6 +612,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 4641443682646313854}
   SnapPosition: 1
   SnapRotation: 1
+  freezePosition: 0
   PositionOffset: {x: 0, y: -0.35, z: 0}
   RotationOffset: {x: 180, y: 0, z: 0}
   DetectionRadius: 0.2
@@ -881,7 +881,6 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 3846004316650781162}
   LijaLoaded: 0
   Rotating: 0
-  enableMeshCL: 0
   Stayed: 0
   RotationVelocity: 500
   Temperature: 24
@@ -897,7 +896,7 @@ MonoBehaviour:
   AudioStart: 0
   StartTimer: 0
   AudioLoop: 0
-  thisCubreLijaSnap: {fileID: 8644875322041640266}
+  thisCubreLijaSnap: {fileID: 8550982222838797}
 --- !u!114 &3846004316650781162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2070,6 +2069,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 8075692708153721086}
   SnapPosition: 1
   SnapRotation: 1
+  freezePosition: 0
   PositionOffset: {x: 0, y: 0, z: 0}
   RotationOffset: {x: 90, y: -90, z: 0}
   DetectionRadius: 0.125
