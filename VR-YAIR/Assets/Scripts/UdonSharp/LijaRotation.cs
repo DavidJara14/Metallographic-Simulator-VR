@@ -167,10 +167,11 @@ public class LijaRotation : UdonSharpBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Lija != null) return;
-        if(!other.GetComponent<LijaCircularBehabiour>()) { return; }
-        if(other.gameObject.GetComponent<VRC_Pickup>().currentPlayer != null) { return; }
-        if(!Stayed)
+        if (Lija != null) return; //si ya existe una lija, regresa
+        if (!other.GetComponent<LijaCircularBehabiour>()) { return; } //si no es una lija, regresa
+        if (other.gameObject.GetComponent<VRC_Pickup>().currentPlayer != null) { return; } //si tiene a alguien agarrandolo, regresa
+        if (Stayed) { return; } //si estaba ya dentro del collider, regresa
+        if (!thisCubreLijaSnap.GetComponent<CubreLijaSnap>().CubreLijaLoaded) //si no tiene el cubrelija, puedes snapear
         {
             //Debug.Log("es lija");
             OnLijaSnap(other.gameObject.transform);
