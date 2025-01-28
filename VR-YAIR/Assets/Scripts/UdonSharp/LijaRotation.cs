@@ -97,11 +97,9 @@ public class LijaRotation : UdonSharpBehaviour
     {
         LijaLoaded = true;
         go.SetParent(gameObject.transform);
-        Debug.Log(go);
         LijaGO = go.gameObject;
-        Debug.Log(LijaGO);
         Lija = LijaGO.GetComponent<VRC_Pickup>();
-        Debug.Log(Lija);
+        Debug.Log("<color=green>lija snapped on LijaRotation</color>");
     }
 
     public void RemoveLija(Transform go)
@@ -111,6 +109,7 @@ public class LijaRotation : UdonSharpBehaviour
         go.parent = null;
         LijaGO = null;
         Lija = null;
+        Debug.Log("<color=#ff9900>Removed lija</color>");
     }
 
     public void StartMachine()
@@ -151,10 +150,11 @@ public class LijaRotation : UdonSharpBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Lija != null) return;
-        if(!other.GetComponent<LijaCircularBehabiour>()) { return; }
-        if(other.gameObject.GetComponent<VRC_Pickup>().currentPlayer != null) { return; }
-        if(!Stayed)
+        if (Lija != null) return; //si ya existe una lija, regresa
+        if (!other.GetComponent<LijaCircularBehabiour>()) { return; } //si no es una lija, regresa
+        if (other.gameObject.GetComponent<VRC_Pickup>().currentPlayer != null) { return; } //si tiene a alguien agarrandolo, regresa
+        if (Stayed) { return; } //si estaba ya dentro del collider, regresa
+        if (!thisCubreLijaSnap.GetComponent<CubreLijaSnap>().CubreLijaLoaded) //si no tiene el cubrelija, puedes snapear
         {
             //Debug.Log("es lija");
             OnLijaSnap(other.gameObject.transform);
