@@ -9,6 +9,7 @@ public class LijaRotation : UdonSharpBehaviour
 
     public bool LijaLoaded;
     public bool Rotating;
+    public bool isEnergized = false;
 
     [SerializeField] bool Stayed;
 
@@ -21,7 +22,6 @@ public class LijaRotation : UdonSharpBehaviour
     [SerializeField] public VRC_Pickup Lija = null;
     [SerializeField] private TextMeshProUGUI RPMText;
 
-    [UdonSynced][SerializeField] public bool isEnergized = false;
 
     [Header("Audio Config")]
     [SerializeField] private AudioSource _StartStopAudioSource;
@@ -40,7 +40,9 @@ public class LijaRotation : UdonSharpBehaviour
         if (Rotating && isEnergized)
         {
             gameObject.transform.Rotate(Vector3.forward * RotationVelocity * Time.deltaTime);
+            thisCubreLijaSnap.CubreLija.pickupable = false;
         }
+
         if (Lija == null)
         {
             if (LijaGO != null)
@@ -90,7 +92,6 @@ public class LijaRotation : UdonSharpBehaviour
                 Lija.GetComponent<BoxCollider>().excludeLayers = LayerMask.GetMask("Pickup");
             }
         }
-
     }
 
     public void OnLijaSnap(Transform go)
@@ -128,6 +129,8 @@ public class LijaRotation : UdonSharpBehaviour
         if (Rotating)
         {
             Rotating = false;
+            thisCubreLijaSnap.CubreLija.pickupable = true;
+
         }
     }
 
@@ -141,7 +144,11 @@ public class LijaRotation : UdonSharpBehaviour
     public void MachineEnergy_Off()
     {
         isEnergized = false;
-        if(Rotating) {Rotating = false;}
+        if(Rotating)
+        {
+            thisCubreLijaSnap.CubreLija.pickupable = true;
+            Rotating = false;
+        }
         if(Lija != null)
             Lija.pickupable = true;
         RPMText.text = "8888";
@@ -169,5 +176,4 @@ public class LijaRotation : UdonSharpBehaviour
         RemoveLija(other.gameObject.transform);
         Stayed = false;
     }
-
 }

@@ -7,7 +7,8 @@ using VRC.Udon;
 
 public class PulidoraScript : UdonSharpBehaviour
 {
-    [UdonSynced][SerializeField] public bool Rotating;
+    public bool Rotating;
+    public bool isEnergized = false;
 
     [SerializeField] float RotationVelocity = 1f;
 
@@ -15,8 +16,6 @@ public class PulidoraScript : UdonSharpBehaviour
     [SerializeField] float Temperature = 24f;
 
     [SerializeField] private TextMeshProUGUI RPMText;
-
-    [UdonSynced][SerializeField] public bool isEnergized = false;
 
     [Header("Audio Config")]
     [SerializeField] private AudioSource _StartStopAudioSource;
