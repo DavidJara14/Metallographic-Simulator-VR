@@ -6,20 +6,41 @@ using VRC.Udon;
 public class CubreLijaBehabiour : UdonSharpBehaviour
 {
     public GameObject cubrelijaReference;
-    public GameObject rotor;
+    public LijaRotation lijaRotation;
+    public PulidoraScript pulidoraScript;
+
     public bool isPulidora;
     public bool isDesbastadora;
 
-    void Start()
-    {
-
-    }
-
     private void Update()
     {
-        if (isDesbastadora)
+        if(lijaRotation != null)
         {
-            gameObject.GetComponent<MeshCollider>().enabled = !rotor.GetComponent<LijaRotation>().Rotating;
+            if (lijaRotation.Rotating)
+            {
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                gameObject.GetComponent<MeshCollider>().enabled = false;
+            }
+            if (!lijaRotation.Rotating)
+            {
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                gameObject.GetComponent<MeshCollider>().enabled = true;
+            }
+        }
+
+        if(pulidoraScript != null)
+        {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            gameObject.GetComponent<MeshCollider>().enabled = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.GetComponent<LijaRotation>() != null)
+        {
+            gameObject.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Nothing");
+
         }
     }
 }
