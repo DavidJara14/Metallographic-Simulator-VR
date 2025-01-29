@@ -34,14 +34,15 @@ public class ProbetaSnap : UdonSharpBehaviour
         Debug.Log(ProbetaGO);
         Probeta = ProbetaGO.GetComponent<VRC_Pickup>();
         Debug.Log(Probeta);
-        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        go.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("Pickup");
+        go.GetComponent<Rigidbody>().isKinematic = false;
     }
 
     public void RemoveProbeta(Transform go)
     {
         ProbetaLoaded = false;
-        go.GetComponent<VRC_Pickup>().pickupable = true;
-        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        go.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("Nothing");
+        go.GetComponent<Rigidbody>().isKinematic = true;
         go.parent = null;
         ProbetaGO = null;
         Probeta = null;
