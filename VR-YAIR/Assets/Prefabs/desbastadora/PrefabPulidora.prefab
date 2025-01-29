@@ -410,10 +410,12 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 3411708779906511580}
   SnapPosition: 1
   SnapRotation: 1
+  freezePosition: 0
   PositionOffset: {x: 0, y: 0, z: 0}
   RotationOffset: {x: 90, y: -90, z: 0}
   DetectionRadius: 0.125
   MinActivationDistance: 0
+  DetectionOffset: {x: 0, y: 0, z: 0}
   GOListeners:
   - {fileID: 3040824203453826797}
   UdonBehabiourListenersRef: []
@@ -1621,10 +1623,10 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1456042696789584591}
   Rotating: 0
+  isEnergized: 0
   RotationVelocity: 500
   Temperature: 24
   RPMText: {fileID: 5063441828768436383}
-  isEnergized: 0
   _StartStopAudioSource: {fileID: 1770969022971872159}
   _LoopAudioSource: {fileID: 1917382154688199006}
   _StartAudioClip: {fileID: 8300000, guid: e5dabfeee49465b4fa7cda237babcdd7, type: 3}
@@ -1635,9 +1637,6 @@ MonoBehaviour:
   AudioLoop: 0
   GrisLoaded: 0
   BlancaLoaded: 0
-  colliderGris: {fileID: 5386012989232110157}
-  colliderBlanco: {fileID: 5426680280105538850}
-  colliderRotor: {fileID: 0}
 --- !u!114 &1456042696789584591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2577,8 +2576,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6465968295503697981}
   cubrelijaReference: {fileID: 322677853414044517}
-  rotor: {fileID: 3040824203453826797}
-  collisionRotor: {fileID: 0}
+  lijaRotation: {fileID: 0}
+  pulidoraScript: {fileID: 0}
   isPulidora: 1
   isDesbastadora: 0
 --- !u!114 &4135848448304996470
@@ -2972,10 +2971,12 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 5776930921904877689}
   SnapPosition: 1
   SnapRotation: 1
+  freezePosition: 0
   PositionOffset: {x: 0, y: -0.35, z: 0}
   RotationOffset: {x: 180, y: 0, z: 0}
   DetectionRadius: 0.125
   MinActivationDistance: 0
+  DetectionOffset: {x: 0, y: 0, z: 0}
   GOListeners:
   - {fileID: 322677853414044517}
   UdonBehabiourListenersRef: []
