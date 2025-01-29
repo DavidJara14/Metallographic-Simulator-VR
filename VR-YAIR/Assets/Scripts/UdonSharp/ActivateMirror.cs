@@ -376,7 +376,7 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             TimerPistolaDeCalor += Time.deltaTime;
             Debug.Log("Tiempo de calor: " + TimerPistolaDeCalor);
-            if (TimerPistolaDeCalor > 5f || finishedAQ)
+            if (TimerPistolaDeCalor > 2f || finishedAQ)
             {
                 if (caraTrabajada == 1)
                 {
