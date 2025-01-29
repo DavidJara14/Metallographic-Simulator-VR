@@ -30,7 +30,7 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
     {
 
         var elemento = other.GetComponentInParent<BotellaLab>();
-
+        Debug.LogWarning("Lija collision with: " + other.gameObject.name);
         if (elemento != null)
         {
             string tipo = elemento.Tipo;
