@@ -301,7 +301,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 754344193462847508}
   cubrelijaReference: {fileID: 8644875322041640266}
-  rotor: {fileID: 1885387243375919198}
+  lijaRotation: {fileID: 8312200309195115076}
   isPulidora: 0
   isDesbastadora: 1
 --- !u!114 &3475585720321907908
@@ -882,13 +882,13 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 3846004316650781162}
   LijaLoaded: 0
   Rotating: 0
+  isEnergized: 0
   Stayed: 0
   RotationVelocity: 500
   Temperature: 24
   LijaGO: {fileID: 0}
   Lija: {fileID: 0}
   RPMText: {fileID: 6379064758029360333}
-  isEnergized: 0
   _StartStopAudioSource: {fileID: 9060803898344503063}
   _LoopAudioSource: {fileID: 3027784130269013767}
   _StartAudioClip: {fileID: 8300000, guid: e5dabfeee49465b4fa7cda237babcdd7, type: 3}
