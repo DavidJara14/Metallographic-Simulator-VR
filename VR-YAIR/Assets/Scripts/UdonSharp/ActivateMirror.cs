@@ -239,7 +239,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void ChorroDeAguaYSecado()
     {
-        Debug.LogWarning("Enter in ChorroDeAguaYSecado");
+        //Debug.LogWarning("Enter in ChorroDeAguaYSecado");
         if (waterPS != null)
         {
             //Debug.LogWarning("[<color=blue>waterPS is: </color>]" + waterPS);
@@ -419,8 +419,11 @@ public class ActivateMirror : UdonSharpBehaviour
         //Debug.LogWarning("[<color=green>OnParticleCollision, GO name: </color>]" + other.gameObject.name);
         if (other.GetComponentInParent<IsLiquidSource>() != null)
         {
-            waterPS = other.GetComponent<ParticleSystem>();
-            Debug.LogWarning("[<color=blue>waterPS, assigned: </color>]" + waterPS.name);
+            if(finishedPulido2)
+            {
+                waterPS = other.GetComponent<ParticleSystem>();
+                Debug.LogWarning("[<color=blue>waterPS, assigned: </color>]" + waterPS.name);
+            }
         }
 
 
@@ -481,6 +484,9 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.GetComponent<ProbetaSnap>() != null)
+            return;
+
         if(pickup.currentPlayer == null)
         {
             Debug.Log("No current player");
