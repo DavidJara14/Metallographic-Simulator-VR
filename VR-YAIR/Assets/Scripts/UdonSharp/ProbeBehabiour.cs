@@ -50,7 +50,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [UdonSynced] public bool _isInsideCollider = false;
     public GameObject bodyMaterial;
     [UdonSynced] public bool canLijar = false;
-    [UdonSynced] private bool isHumedo = true;
+    [UdonSynced] public bool isHumedo = true;
 
     public string ProbeType = "";
 
@@ -303,7 +303,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<LijaCircularBehabiour>() != null)
+        if (other.GetComponent<LijaCircularBehabiour>() != null && Networking.IsOwner(Networking.LocalPlayer,this.gameObject))
         {
             if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
                 isHumedo = true;
