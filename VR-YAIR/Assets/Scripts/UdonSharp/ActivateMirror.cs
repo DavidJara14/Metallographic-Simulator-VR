@@ -453,7 +453,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "TriggerPulidora")
+        if (other.gameObject.name == "RotorPulidora")
         {
             if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
             {
@@ -497,7 +497,7 @@ public class ActivateMirror : UdonSharpBehaviour
         if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
         {
             Debug.LogWarning("This player is owner, objeto: " + other.gameObject.name);
-            if (other.gameObject.name == "TriggerPulidora")
+            if (other.gameObject.name == "RotorPulidora")
             {
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimersYBoolxd");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");

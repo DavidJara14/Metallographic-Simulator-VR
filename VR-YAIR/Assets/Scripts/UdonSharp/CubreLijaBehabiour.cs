@@ -7,11 +7,7 @@ public class CubreLijaBehabiour : UdonSharpBehaviour
 {
     public GameObject cubrelijaReference;
     public LijaRotation lijaRotation;
-    public PulidoraScript pulidoraScript;
-
-    public bool isPulidora;
-    public bool isDesbastadora;
-
+  
     private void Update()
     {
         if(lijaRotation != null)
@@ -26,12 +22,6 @@ public class CubreLijaBehabiour : UdonSharpBehaviour
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 gameObject.GetComponent<MeshCollider>().enabled = true;
             }
-        }
-
-        if(pulidoraScript != null)
-        {
-            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            gameObject.GetComponent<MeshCollider>().enabled = false;
         }
     }
 
