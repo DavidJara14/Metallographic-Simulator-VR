@@ -7,9 +7,9 @@ using VRC.Udon;
 public class LijaRotation : UdonSharpBehaviour
 {
 
-    [SerializeField] bool LijaLoaded;
-    [SerializeField] public bool Rotating;
-    [UdonSynced][SerializeField] public bool enableMeshCL;
+    public bool LijaLoaded;
+    public bool Rotating;
+    public bool isEnergized = false;
 
     [SerializeField] bool Stayed;
 
@@ -22,7 +22,6 @@ public class LijaRotation : UdonSharpBehaviour
     [SerializeField] public VRC_Pickup Lija = null;
     [SerializeField] private TextMeshProUGUI RPMText;
 
-    [SerializeField] public bool isEnergized = false;
 
     [Header("Audio Config")]
     [SerializeField] private AudioSource _StartStopAudioSource;
@@ -34,16 +33,16 @@ public class LijaRotation : UdonSharpBehaviour
     [SerializeField] private float StartTimer;
     [SerializeField] private bool AudioLoop;
 
-    //public GameObject rotorChildren;
-    public GameObject thisCubreLijaSnap;
-
+    public CubreLijaSnap thisCubreLijaSnap;
 
     private void Update()
     {
         if (Rotating && isEnergized)
         {
             gameObject.transform.Rotate(Vector3.forward * RotationVelocity * Time.deltaTime);
+            thisCubreLijaSnap.CubreLija.pickupable = false;
         }
+
         if (Lija == null)
         {
             if (LijaGO != null)
@@ -84,73 +83,60 @@ public class LijaRotation : UdonSharpBehaviour
         if (AudioStart)
             StartTimer += Time.deltaTime;
 
-        //if(rotorChildren != null)
-//            rotorChildren.gameObject.SetActive(Rotating);
-            //rotorChildren.GetComponent<BoxCollider>().enabled = Rotating;
-           // rotorChildren.GetComponent<colliderRotorBehabiour>().isRotating = Rotating;
+        if(Lija != null)
+        {
+            Lija.pickupable = !thisCubreLijaSnap.CubreLijaLoaded;
+
+            if (LijaLoaded)
+            {
+                Lija.GetComponent<BoxCollider>().excludeLayers = LayerMask.GetMask("Pickup");
+            }
+        }
     }
 
     public void OnLijaSnap(Transform go)
     {
         LijaLoaded = true;
         go.SetParent(gameObject.transform);
-        Debug.Log(go);
         LijaGO = go.gameObject;
-        Debug.Log(LijaGO);
         Lija = LijaGO.GetComponent<VRC_Pickup>();
-        Debug.Log(Lija);
+        Debug.Log("<color=green>lija snapped on LijaRotation</color>");
     }
 
     public void RemoveLija(Transform go)
     {
         LijaLoaded = false;
-        Rotating = false;
         go.GetComponent<VRC_Pickup>().pickupable = true;
-        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         go.parent = null;
         LijaGO = null;
         Lija = null;
+        Debug.Log("<color=#ff9900>Removed lija</color>");
     }
 
     public void StartMachine()
     {
-        if (thisCubreLijaSnap.GetComponent<CubreLijaSnap>().CubreLijaLoaded)
+        if (thisCubreLijaSnap.CubreLijaLoaded)
         {
-            enableMeshCL = false;
             if (LijaLoaded && isEnergized)
             {
                 Rotating = true;
-                Lija.pickupable = !Rotating;
-                if (Lija.pickupable)
-                    Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                else
-                    Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-            }
-            else
-            {
-                Rotating = false;
             }
         }
     }
 
     public void StopMachine()
     {
-        enableMeshCL = true;
-        Rotating = false;
-        if (LijaLoaded)
+        if (Rotating)
         {
-            Lija.pickupable = !Rotating;
-            if (Lija.pickupable)
-                Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            else
-                Lija.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+            Rotating = false;
+            thisCubreLijaSnap.CubreLija.pickupable = true;
+
         }
     }
 
     public void MachineEnergy_On()
     {
         isEnergized = true;
-        Rotating = false;
         RPMText.text = "0900";
         RPMText.color = Color.red;
     }
@@ -158,7 +144,11 @@ public class LijaRotation : UdonSharpBehaviour
     public void MachineEnergy_Off()
     {
         isEnergized = false;
-        Rotating = false;
+        if(Rotating)
+        {
+            thisCubreLijaSnap.CubreLija.pickupable = true;
+            Rotating = false;
+        }
         if(Lija != null)
             Lija.pickupable = true;
         RPMText.text = "8888";
@@ -167,10 +157,11 @@ public class LijaRotation : UdonSharpBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Lija != null) return;
-        if(!other.GetComponent<LijaCircularBehabiour>()) { return; }
-        if(other.gameObject.GetComponent<VRC_Pickup>().currentPlayer != null) { return; }
-        if(!Stayed)
+        if (Lija != null) return; //si ya existe una lija, regresa
+        if (!other.GetComponent<LijaCircularBehabiour>()) { return; } //si no es una lija, regresa
+        if (other.gameObject.GetComponent<VRC_Pickup>().currentPlayer != null) { return; } //si tiene a alguien agarrandolo, regresa
+        if (Stayed) { return; } //si estaba ya dentro del collider, regresa
+        if (!thisCubreLijaSnap.GetComponent<CubreLijaSnap>().CubreLijaLoaded) //si no tiene el cubrelija, puedes snapear
         {
             //Debug.Log("es lija");
             OnLijaSnap(other.gameObject.transform);
@@ -185,5 +176,4 @@ public class LijaRotation : UdonSharpBehaviour
         RemoveLija(other.gameObject.transform);
         Stayed = false;
     }
-
 }

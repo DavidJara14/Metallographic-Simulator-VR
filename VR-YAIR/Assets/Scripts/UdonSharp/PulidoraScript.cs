@@ -7,7 +7,8 @@ using VRC.Udon;
 
 public class PulidoraScript : UdonSharpBehaviour
 {
-    [SerializeField] public bool Rotating;
+    public bool Rotating;
+    public bool isEnergized = false;
 
     [SerializeField] float RotationVelocity = 1f;
 
@@ -15,8 +16,10 @@ public class PulidoraScript : UdonSharpBehaviour
     [SerializeField] float Temperature = 24f;
 
     [SerializeField] private TextMeshProUGUI RPMText;
+    [SerializeField] private TextMeshProUGUI TypeOfElementText;
 
-    [SerializeField] public bool isEnergized = false;
+    [SerializeField] private bool IsForGris = false;
+    [SerializeField] private bool IsForBlanca = false;
 
     [Header("Audio Config")]
     [SerializeField] private AudioSource _StartStopAudioSource;
@@ -30,6 +33,26 @@ public class PulidoraScript : UdonSharpBehaviour
 
     public bool GrisLoaded = false;
     public bool BlancaLoaded = false;
+
+    private void Start()
+    {
+        if (IsForGris == IsForBlanca)
+        {
+            Debug.LogError("<color=red>PulidoraScript</color> no se definio un color para gris o blanca unicamente: " + gameObject.name);
+        }
+        if(IsForGris)
+        {
+            TypeOfElementText.text = "Alumina\nGris";
+        }
+        else if(IsForBlanca)
+        {
+            TypeOfElementText.text = "Alumina\nBlanca";
+        }
+        else
+        {
+            TypeOfElementText.text = "Alumina\n######";
+        }
+    }
 
     private void Update()
     {
@@ -111,12 +134,12 @@ public class PulidoraScript : UdonSharpBehaviour
             string tipo = elemento.Tipo;
             //Debug.Log(tipo);
 
-            if (tipo == "AGris")
+            if (tipo == "AGris" && IsForGris)
             {
                 GrisLoaded = true;
                 Debug.Log("Alumina Gris");
             }
-            else if (tipo == "ABlanca")
+            else if (tipo == "ABlanca"  && IsForBlanca)
             {
                 BlancaLoaded = true;
                 Debug.Log("Alumina Blanca");

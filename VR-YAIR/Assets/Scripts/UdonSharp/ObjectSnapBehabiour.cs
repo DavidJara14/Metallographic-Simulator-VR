@@ -8,6 +8,7 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
     [Header("Snap config")]
     [SerializeField] bool SnapPosition;
     [SerializeField] bool SnapRotation;
+    [SerializeField] bool freezePosition;
 
     [SerializeField] Vector3 PositionOffset;
     [SerializeField] Vector3 RotationOffset;
@@ -15,6 +16,8 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
     [Header("Snap ref")]
     [SerializeField] float DetectionRadius;
     [SerializeField] float MinActivationDistance;
+
+    [SerializeField] Vector3 DetectionOffset;
 
     [Header("OnSnap References")]
     [SerializeField] GameObject[] GOListeners;
@@ -79,7 +82,7 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
                 }
             }
             GrabablesNear += item.name + " ";
-            var dist = Vector3.Distance(transform.position, item.transform.position);
+            var dist = Vector3.Distance(transform.position + DetectionOffset, item.transform.position);
             if (Distance >= dist && item != gameObject)
             {
                 Distance = dist;
@@ -90,14 +93,14 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
 
         if (Distance < MinActivationDistance)
         {
-            Debug.Log("already have a element, exiting function");
+            Debug.Log("<color=#dd9900ff>ObjectSnapBehabiour</color> already have a element, exiting function");
             return;
         }
 
         Debug.Log(gameObject.name+": = "+GrabablesNear);
         if(GOToSnap == null)
         {
-            Debug.LogWarning("No hay objetos cercanos, ¿hace falta asignar 'placeable'?");
+            //Debug.LogWarning("No hay objetos cercanos, ¿hace falta asignar 'placeable'?");
             return;
         }
 
@@ -107,6 +110,8 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
         if(SnapPosition)
         {
             GOToSnap.transform.position = GOpos + PositionOffset;
+            if(freezePosition)
+                GOToSnap.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         }
         if(SnapRotation)
         {
@@ -134,4 +139,13 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
             
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(0f,1f,0f,0.7f);
+        Gizmos.DrawSphere(transform.position + DetectionOffset, DetectionRadius);
+        Gizmos.color = new Color(1f, 0f, 0f, 0.7f);
+        Gizmos.DrawSphere(transform.position + DetectionOffset, MinActivationDistance);
+    }
+
 }

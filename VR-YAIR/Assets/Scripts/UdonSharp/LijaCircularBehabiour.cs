@@ -30,7 +30,7 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
     {
 
         var elemento = other.GetComponentInParent<BotellaLab>();
-
+        Debug.LogWarning("Lija collision with: " + other.gameObject.name);
         if (elemento != null)
         {
             string tipo = elemento.Tipo;
@@ -70,5 +70,13 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
         gameObject.GetComponent<VRC_Pickup>().InteractionText = text.text;
         //Debug.Log($"Deserialization: Tamaño de grano TEXT set to {TamañoDeGrano}");
         meshRenderer.material = referenceDataholder.MaterialesSegunTamañosDeLija[referenceDataholder.LijaDict[TamañoDeGrano].Int];
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<LijaRotation>() != null)
+        {
+            gameObject.GetComponent<BoxCollider>().excludeLayers = LayerMask.GetMask("Nothing");
+        }
     }
 }

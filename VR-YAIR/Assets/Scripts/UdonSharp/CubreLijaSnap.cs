@@ -29,21 +29,16 @@ public class CubreLijaSnap : UdonSharpBehaviour
         go.SetParent(gameObject.transform);
         CubreLijaGo = go.gameObject;
         CubreLija = CubreLijaGo.GetComponent<VRC_Pickup>();
-        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        //go.GetComponent<Collider>().enabled = !go.GetComponent<Collider>().enabled;
-        //Debug.Log("CubreLija Sin Collider");
+        go.GetComponent<MeshCollider>().excludeLayers = LayerMask.GetMask("Pickup");
     }
 
     public void RemoveCubreLija(Transform go)
     {
         CubreLijaLoaded = false;
         go.GetComponent<VRC_Pickup>().pickupable = true;
-        go.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         go.parent = null;
         CubreLijaGo = null;
         CubreLija = null;
-        //go.GetComponent<Collider>().enabled = !go.GetComponent<Collider>().enabled;
-        //Debug.Log("CubreLija Con Collider");
     }
 
 
@@ -57,7 +52,6 @@ public class CubreLijaSnap : UdonSharpBehaviour
             OnCubreLijaSnap(other.gameObject.transform);
             Stayed = true;
         }
-       // Debug.Log(Stayed);
     }
 
     private void OnTriggerExit(Collider other)
