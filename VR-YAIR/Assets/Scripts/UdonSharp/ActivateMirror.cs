@@ -476,6 +476,7 @@ public class ActivateMirror : UdonSharpBehaviour
         {
 
             //cottonGO = other.gameObject;
+            other.GetComponent<CottonBehabiour>().SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "AddAlcohol");
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "cottonColission");
             Debug.LogWarning("Cotton enter");
         }
