@@ -12,11 +12,6 @@ public class UpdatePreview : UdonSharpBehaviour
     public GameObject probetaShaderChildren;
     public GameObject probetaMirrorChildren;
 
-    private void Start()
-    {
-            
-    }
-
     private void Update()
     {
         probetaShaderChildren.SetActive(probetaShaderParent.activeSelf);
