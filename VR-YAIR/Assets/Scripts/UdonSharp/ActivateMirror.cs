@@ -112,6 +112,11 @@ public class ActivateMirror : UdonSharpBehaviour
         if (finishedPulido1 && finishedPulido2 && !finishedEnjuagado)
         {
             //placersWater.SetActive(true);
+            if(waterPS != null && !waterPS.isEmitting)
+            {
+                waterPS = null;
+                residuosAlumina.Stop();
+            }
             ChorroDeAguaYSecado();
         }
 
@@ -255,7 +260,7 @@ public class ActivateMirror : UdonSharpBehaviour
                 Debug.Log("Chorro de agua fria");
                 generalTimer += Time.deltaTime;
                 Debug.Log("time agua: " + generalTimer);
-                if(generalTimer > 3f)
+                if(generalTimer > 1.5f)
                 {
                     residuosAlumina.Stop();
                     //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "waterFinished");
@@ -376,7 +381,7 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             TimerPistolaDeCalor += Time.deltaTime;
             Debug.Log("Tiempo de calor: " + TimerPistolaDeCalor);
-            if (TimerPistolaDeCalor > 2f || finishedAQ)
+            if (TimerPistolaDeCalor > 1.5f || finishedAQ)
             {
                 if (caraTrabajada == 1)
                 {
@@ -419,13 +424,12 @@ public class ActivateMirror : UdonSharpBehaviour
         //Debug.LogWarning("[<color=green>OnParticleCollision, GO name: </color>]" + other.gameObject.name);
         if (other.GetComponentInParent<IsLiquidSource>() != null)
         {
-            if(finishedPulido2)
+            if (finishedPulido2)
             {
                 waterPS = other.GetComponent<ParticleSystem>();
                 Debug.LogWarning("[<color=blue>waterPS, assigned: </color>]" + waterPS.name);
             }
         }
-
 
         if (other.GetComponentInParent<BotellaLab>() != null)
         {
