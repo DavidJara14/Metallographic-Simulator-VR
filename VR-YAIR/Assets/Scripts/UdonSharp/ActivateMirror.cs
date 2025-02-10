@@ -434,7 +434,7 @@ public class ActivateMirror : UdonSharpBehaviour
         if (other.GetComponentInParent<BotellaLab>() != null)
         {
             string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
-            if (tipo == "Nital" && finishedPulido1 && finishedPulido2 && !haveNital)
+            if (tipo == "Nital" && finishedPulido1 && finishedPulido2 && !haveNital && finishedLimpieza)
             {
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "addedNital");
             }
