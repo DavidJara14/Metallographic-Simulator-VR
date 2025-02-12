@@ -311,7 +311,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 isHumedo = false;
         }
 
-        if(pickup.currentPlayer != null)
+        if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
         {
             if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
             {
