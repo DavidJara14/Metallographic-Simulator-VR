@@ -77,12 +77,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
                 if (_isInsideCollider)
                 {
-                    if (pickup.currentPlayer == null)
-                    {
-                        GetComponent<Rigidbody>().AddForce(VectorDeDireccionDeDesgasteActual.normalized * 200f);
-                        Debug.Log("Probe droped, addForce");
-                    }
-
                     if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
                     {
                         gameObject.GetComponent<HapticFeedback>().SendCustomEvent("hapticFeedbackDesbaste");
@@ -311,7 +305,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 isHumedo = false;
         }
 
-        if(pickup.currentPlayer != null)
+        if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
         {
             if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
             {

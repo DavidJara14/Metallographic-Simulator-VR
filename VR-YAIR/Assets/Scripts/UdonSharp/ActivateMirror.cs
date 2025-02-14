@@ -23,12 +23,6 @@ public class ActivateMirror : UdonSharpBehaviour
     public bool _IsFirstSanding = true;
     public bool newcalor = false;
 
-    [Header("Vectores")]
-    [SerializeField] public Vector3 PañoToObjSize;
-    [SerializeField] public Vector3 Up;
-    [SerializeField] public Vector3 VectorDeDireccionDePuilidoActual;
-    
-
     [Header("Pulidora")]
     [SerializeField] private GameObject rotorPulidora;
     [SerializeField] private PulidoraScript PulidoraScript;
@@ -112,6 +106,11 @@ public class ActivateMirror : UdonSharpBehaviour
         if (finishedPulido1 && finishedPulido2 && !finishedEnjuagado)
         {
             //placersWater.SetActive(true);
+            if(waterPS != null && !waterPS.isEmitting)
+            {
+                waterPS = null;
+                residuosAlumina.Stop();
+            }
             ChorroDeAguaYSecado();
         }
 
@@ -130,14 +129,8 @@ public class ActivateMirror : UdonSharpBehaviour
     {
         if (PulidoraScript != null && PulidoraScript.Rotating)
         {
-            PañoToObjSize = new Vector3(gameObject.transform.position.x - PulidoraScript.transform.position.x, 0f, gameObject.transform.position.z - PulidoraScript.transform.position.z);
-            Up = gameObject.transform.up;
-            VectorDeDireccionDePuilidoActual = Vector3.Cross(PañoToObjSize, Up);
             if (isInPulidora)
             {
-                if (pickup.currentPlayer == null)
-                    GetComponent<Rigidbody>().AddForce(VectorDeDireccionDePuilidoActual.normalized * LAUNCH_FORCE);
-
                 if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
                     gameObject.GetComponent<HapticFeedback>().SendCustomEvent("hapticFeedbackPulido");
             }
@@ -255,7 +248,7 @@ public class ActivateMirror : UdonSharpBehaviour
                 Debug.Log("Chorro de agua fria");
                 generalTimer += Time.deltaTime;
                 Debug.Log("time agua: " + generalTimer);
-                if(generalTimer > 3f)
+                if(generalTimer > 1.5f)
                 {
                     residuosAlumina.Stop();
                     //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "waterFinished");
@@ -376,7 +369,7 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             TimerPistolaDeCalor += Time.deltaTime;
             Debug.Log("Tiempo de calor: " + TimerPistolaDeCalor);
-            if (TimerPistolaDeCalor > 2f || finishedAQ)
+            if (TimerPistolaDeCalor > 1.5f || finishedAQ)
             {
                 if (caraTrabajada == 1)
                 {
@@ -419,18 +412,17 @@ public class ActivateMirror : UdonSharpBehaviour
         //Debug.LogWarning("[<color=green>OnParticleCollision, GO name: </color>]" + other.gameObject.name);
         if (other.GetComponentInParent<IsLiquidSource>() != null)
         {
-            if(finishedPulido2)
+            if (finishedPulido2)
             {
                 waterPS = other.GetComponent<ParticleSystem>();
                 Debug.LogWarning("[<color=blue>waterPS, assigned: </color>]" + waterPS.name);
             }
         }
 
-
         if (other.GetComponentInParent<BotellaLab>() != null)
         {
             string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
-            if (tipo == "Nital" && finishedPulido1 && finishedPulido2 && !haveNital)
+            if (tipo == "Nital" && finishedPulido1 && finishedPulido2 && !haveNital && finishedLimpieza)
             {
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "addedNital");
             }

@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 1209570330557177296}
   - component: {fileID: 5171470293185973213}
   - component: {fileID: 2698963479598849128}
+  - component: {fileID: 9020027135979948341}
   m_Layer: 13
   m_Name: Lija cuadrada
   m_TagString: Untagged
@@ -604,3 +605,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllowCollisionOwnershipTransfer: 1
+--- !u!114 &9020027135979948341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3796472699362977656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdbdd903554619444b3bcc53517b4aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 0}
