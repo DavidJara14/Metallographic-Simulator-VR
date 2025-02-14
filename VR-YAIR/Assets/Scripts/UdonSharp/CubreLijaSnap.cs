@@ -44,6 +44,7 @@ public class CubreLijaSnap : UdonSharpBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if(CubreLijaLoaded) {return; }
         if (CubreLija != null) return;
         if (!other.GetComponent<CubreLijaBehabiour>()) { return; }
         if (other.gameObject.GetComponent<VRC_Pickup>().currentPlayer != null) { return; }
@@ -58,8 +59,11 @@ public class CubreLijaSnap : UdonSharpBehaviour
     {
         if (!other.GetComponent<CubreLijaBehabiour>())
             return;
-        RemoveCubreLija(other.gameObject.transform);
-        Stayed = false;
+        if(CubreLijaGo != null)
+        {
+            RemoveCubreLija(other.gameObject.transform);
+            Stayed = false;
+        }
     }
 
 }

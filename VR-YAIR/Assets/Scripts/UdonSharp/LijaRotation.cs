@@ -40,7 +40,8 @@ public class LijaRotation : UdonSharpBehaviour
         if (Rotating && isEnergized)
         {
             gameObject.transform.Rotate(Vector3.forward * RotationVelocity * Time.deltaTime);
-            thisCubreLijaSnap.CubreLija.pickupable = false;
+            if(thisCubreLijaSnap.CubreLija != null)
+                thisCubreLijaSnap.CubreLija.pickupable = false;
         }
 
         if (Lija == null)
@@ -92,6 +93,14 @@ public class LijaRotation : UdonSharpBehaviour
                 Lija.GetComponent<BoxCollider>().excludeLayers = LayerMask.GetMask("Pickup");
             }
         }
+
+        if(thisCubreLijaSnap.CubreLijaGo == null && Lija != null && Rotating)
+            Lija.pickupable = false;
+
+        if (!Rotating && thisCubreLijaSnap.CubreLija != null)
+        {
+            thisCubreLijaSnap.CubreLija.pickupable = true;
+        }
     }
 
     public void OnLijaSnap(Transform go)
@@ -129,7 +138,8 @@ public class LijaRotation : UdonSharpBehaviour
         if (Rotating)
         {
             Rotating = false;
-            thisCubreLijaSnap.CubreLija.pickupable = true;
+            if (thisCubreLijaSnap.CubreLija != null)
+                thisCubreLijaSnap.CubreLija.pickupable = true;
 
         }
     }
@@ -146,7 +156,8 @@ public class LijaRotation : UdonSharpBehaviour
         isEnergized = false;
         if(Rotating)
         {
-            thisCubreLijaSnap.CubreLija.pickupable = true;
+            if (thisCubreLijaSnap.CubreLija != null)
+                thisCubreLijaSnap.CubreLija.pickupable = true;
             Rotating = false;
         }
         if(Lija != null)

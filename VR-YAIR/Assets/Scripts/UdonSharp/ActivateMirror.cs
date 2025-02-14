@@ -23,12 +23,6 @@ public class ActivateMirror : UdonSharpBehaviour
     public bool _IsFirstSanding = true;
     public bool newcalor = false;
 
-    [Header("Vectores")]
-    [SerializeField] public Vector3 PañoToObjSize;
-    [SerializeField] public Vector3 Up;
-    [SerializeField] public Vector3 VectorDeDireccionDePuilidoActual;
-    
-
     [Header("Pulidora")]
     [SerializeField] private GameObject rotorPulidora;
     [SerializeField] private PulidoraScript PulidoraScript;
@@ -135,14 +129,8 @@ public class ActivateMirror : UdonSharpBehaviour
     {
         if (PulidoraScript != null && PulidoraScript.Rotating)
         {
-            PañoToObjSize = new Vector3(gameObject.transform.position.x - PulidoraScript.transform.position.x, 0f, gameObject.transform.position.z - PulidoraScript.transform.position.z);
-            Up = gameObject.transform.up;
-            VectorDeDireccionDePuilidoActual = Vector3.Cross(PañoToObjSize, Up);
             if (isInPulidora)
             {
-                if (pickup.currentPlayer == null)
-                    GetComponent<Rigidbody>().AddForce(VectorDeDireccionDePuilidoActual.normalized * LAUNCH_FORCE);
-
                 if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
                     gameObject.GetComponent<HapticFeedback>().SendCustomEvent("hapticFeedbackPulido");
             }
