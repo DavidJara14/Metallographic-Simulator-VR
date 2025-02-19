@@ -18,7 +18,7 @@ public class CottonBehabiour : UdonSharpBehaviour
     public void AddAlcohol()
     {
         cottonMat.SetFloat("_AditionalPower", 3.5f);
-        cottonMat.SetInteger("_HasAlcohol", 1);
+        cottonMat.SetFloat("_HasAlcohol", 1); // https://www.reddit.com/r/Unity3D/comments/wgmias/property_rect_already_exists_in_the_property/?rdt=53009
     }
 
 }

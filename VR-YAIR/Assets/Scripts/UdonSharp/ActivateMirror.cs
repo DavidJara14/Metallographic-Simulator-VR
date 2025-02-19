@@ -464,7 +464,7 @@ public class ActivateMirror : UdonSharpBehaviour
             Debug.LogWarning("EnterTrigger, variables set");
         }
 
-        if (other.gameObject.GetComponent<CottonBehabiour>() != null && !isCotton)
+        if (other.gameObject.GetComponent<CottonBehabiour>() != null && !isCotton && haveAlcohol && !finishCotton)
         {
 
             //cottonGO = other.gameObject;
