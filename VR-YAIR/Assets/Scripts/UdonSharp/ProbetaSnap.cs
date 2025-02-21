@@ -29,11 +29,11 @@ public class ProbetaSnap : UdonSharpBehaviour
     {
         ProbetaLoaded = true;
         go.SetParent(gameObject.transform);
-        Debug.Log(go);
+        //Debug.Log(go);
         ProbetaGO = go.gameObject;
-        Debug.Log(ProbetaGO);
+        //Debug.Log(ProbetaGO);
         Probeta = ProbetaGO.GetComponent<VRC_Pickup>();
-        Debug.Log(Probeta);
+        //Debug.Log(Probeta);
         go.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("Pickup");
         go.GetComponent<Rigidbody>().isKinematic = true;
         if(gameObject.GetComponentInChildren<InteractProbe>() == null)
