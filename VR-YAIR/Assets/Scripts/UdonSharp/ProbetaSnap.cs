@@ -35,7 +35,7 @@ public class ProbetaSnap : UdonSharpBehaviour
         Probeta = ProbetaGO.GetComponent<VRC_Pickup>();
         //Debug.Log(Probeta);
         go.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("Pickup");
-        go.GetComponent<Rigidbody>().isKinematic = true;
+        //go.GetComponent<Rigidbody>().isKinematic = true;
         if(gameObject.GetComponentInChildren<InteractProbe>() == null)
             return;
         gameObject.GetComponentInChildren<InteractProbe>().DisableCanva();
@@ -47,7 +47,7 @@ public class ProbetaSnap : UdonSharpBehaviour
         ProbetaLoaded = false;
         var RB = go.GetComponent<Rigidbody>();
         RB.excludeLayers = LayerMask.GetMask("Nothing");
-        RB.isKinematic = false;
+        //RB.isKinematic = false;
         RB.constraints = RigidbodyConstraints.None;
         go.parent = null;
         ProbetaGO = null;
