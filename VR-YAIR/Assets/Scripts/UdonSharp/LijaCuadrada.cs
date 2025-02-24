@@ -20,6 +20,10 @@ public class LijaCuadrada : UdonSharpBehaviour
     public TextMeshProUGUI text;
     [SerializeField] private GameObject[] Placers;
 
+    [Header("debug tools")]
+    public bool debug;
+    public Rigidbody rb;
+
     private void Start()
     {
         if (ReferenceGOComponent == null)
@@ -27,6 +31,16 @@ public class LijaCuadrada : UdonSharpBehaviour
         text.text = TamañoDeGrano.ToString();
         gameObject.GetComponent<MeshRenderer>().material.SetFloat("_TamanioDeLija", TamañoDeGrano);
         gameObject.GetComponent<VRC_Pickup>().InteractionText = text.text;
+    }
+
+    private void Update()
+    {
+        if (!debug)
+            return;
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
+        Debug.Log("velocity: " + rb.velocity);
+        Debug.Log("is sleeping: " + rb.IsSleeping());
     }
 
     private void OnTriggerEnter(Collider other)
