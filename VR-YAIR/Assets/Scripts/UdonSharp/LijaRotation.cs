@@ -109,6 +109,8 @@ public class LijaRotation : UdonSharpBehaviour
         go.SetParent(gameObject.transform);
         LijaGO = go.gameObject;
         Lija = LijaGO.GetComponent<VRC_Pickup>();
+        //esta esto puesto para que no se mueva la lija, se quita en el siguiente fixedupdate de LijaCircularBehabiour
+        LijaGO.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition; 
         Debug.Log("<color=green>lija snapped on LijaRotation</color>");
     }
 

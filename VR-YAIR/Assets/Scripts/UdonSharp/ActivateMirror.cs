@@ -290,7 +290,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void limpieza()
     {
-        Debug.LogWarning("Enter in lIMPIEZA");
+        //Debug.LogWarning("Enter in lIMPIEZA");
 
         var mainalcoholPS = alcoholPS.main;
 
@@ -325,9 +325,9 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if(newcalor && finishCotton)
         {
-            //SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "resetHaveAlcoholAndFinishedLimpiezaTrue");
+            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "resetHaveAlcoholAndFinishedLimpiezaTrue");
             finishedLimpieza = true;
-            resetHaveAlcoholAndFinishedLimpiezaTrue();
+            //resetHaveAlcoholAndFinishedLimpiezaTrue();
             Debug.LogWarning("[<color=blue>FinishedLimpieza: </color>]" + finishedLimpieza);
             alcoholPS.Stop();
             mainalcoholPS.startSize = new ParticleSystem.MinMaxCurve(0f, 0.02f);
@@ -386,7 +386,8 @@ public class ActivateMirror : UdonSharpBehaviour
                 }
                 // Debug.Log("Mirror unactive");
                 gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "finishedAtaqueQ");
+                if(!finishedAQ)
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "finishedAtaqueQ");
                 //finishedAtaqueQ();
                 nitalInProbePS.Stop();
                 mainnitalInProbePS.startSize = new ParticleSystem.MinMaxCurve(0f, 0.02f);
@@ -429,6 +430,7 @@ public class ActivateMirror : UdonSharpBehaviour
             if (tipo == "Alcohol" && finishedEnjuagado && !haveAlcohol)
             {
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "addedAlcohol");
+                Debug.LogWarning("[<color=red>Status haveAlcohol in particle collision: </color>]" + haveAlcohol);
             }
         }
     }
@@ -464,7 +466,7 @@ public class ActivateMirror : UdonSharpBehaviour
             Debug.LogWarning("EnterTrigger, variables set");
         }
 
-        if (other.gameObject.GetComponent<CottonBehabiour>() != null && !isCotton && haveAlcohol && !finishCotton)
+        if (other.gameObject.GetComponent<CottonBehabiour>() != null && !isCotton && haveAlcohol)
         {
 
             //cottonGO = other.gameObject;
@@ -483,8 +485,11 @@ public class ActivateMirror : UdonSharpBehaviour
         if(pickup.currentPlayer == null)
         {
             Debug.Log("No current player");
-            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimersYBoolxd");
-            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
+            if (isInPulidora)
+            {
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimersYBoolxd");
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
+            }
         }
 
         if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))

@@ -17,6 +17,26 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
 
     public TextMeshProUGUI text;
     public MeshRenderer meshRenderer;
+    [SerializeField] private Rigidbody rb;
+    private int PhysicsFrameDelay = 1;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    //fix for problem with lija moving after droping it, works in conjuction with lijaRotation
+    private void FixedUpdate()
+    {
+        if(rb.constraints == RigidbodyConstraints.FreezePosition)
+        {
+            PhysicsFrameDelay -= 1;
+            if(PhysicsFrameDelay <= 0)
+            {
+                rb.constraints = RigidbodyConstraints.None;
+            }
+        }
+    }
 
     public float GetHumedad()
     {
