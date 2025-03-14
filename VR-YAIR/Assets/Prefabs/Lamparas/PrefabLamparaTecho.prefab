@@ -300,13 +300,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3631572766531114152, guid: cf294fc4c31750946b5b9c76dbe5779f,
         type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 3631572766531114152, guid: cf294fc4c31750946b5b9c76dbe5779f,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5039319189357211848, guid: cf294fc4c31750946b5b9c76dbe5779f,
         type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039319189357211848, guid: cf294fc4c31750946b5b9c76dbe5779f,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982841821411369367, guid: cf294fc4c31750946b5b9c76dbe5779f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 5982841821411369367, guid: cf294fc4c31750946b5b9c76dbe5779f,
         type: 3}
