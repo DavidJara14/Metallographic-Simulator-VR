@@ -2,6 +2,7 @@
 using System.Threading;
 using UdonSharp;
 using UnityEngine;
+using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon;
 
@@ -68,6 +69,15 @@ public class ActivateMirror : UdonSharpBehaviour
     
     const float LAUNCH_FORCE = 250f;
 
+    [Header("Mirror")]
+    public VRCMirrorReflection mirror1;
+    public VRCMirrorReflection mirror2;
+    public VRCMirrorReflection mirrorCanva;
+
+    public LayerMask PCVRMask;
+    public LayerMask AndroidMask;
+
+
     private void Start()
     {
         probetaShader1.SetActive(true);
@@ -87,6 +97,17 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if(probetaWaterPS != null)
             probetaWaterPS.Stop();
+
+#if UNITY_ANDROID
+        mirror1.m_ReflectLayers = AndroidMask;  
+        mirror2.m_ReflectLayers = AndroidMask;
+        mirrorCanva.m_ReflectLayers = AndroidMask;
+        
+#else
+        mirror1.m_ReflectLayers = PCVRMask;
+        mirror2.m_ReflectLayers = PCVRMask;
+        mirrorCanva.m_ReflectLayers = PCVRMask;
+#endif
     }
 
     private void Update()
@@ -103,10 +124,11 @@ public class ActivateMirror : UdonSharpBehaviour
             Pulido();
         }
 
+
         if (finishedPulido1 && finishedPulido2 && !finishedEnjuagado)
         {
             //placersWater.SetActive(true);
-            if(waterPS != null && !waterPS.isEmitting)
+            if (waterPS != null && !waterPS.isEmitting)
             {
                 waterPS = null;
                 residuosAlumina.Stop();
@@ -411,6 +433,12 @@ public class ActivateMirror : UdonSharpBehaviour
     private void OnParticleCollision(GameObject other)
     {
         //Debug.LogWarning("[<color=green>OnParticleCollision, GO name: </color>]" + other.gameObject.name);
+
+        if (IsReady())
+        {
+            return;
+        }
+
         if (other.GetComponentInParent<IsLiquidSource>() != null)
         {
             if (finishedPulido2)
@@ -464,6 +492,11 @@ public class ActivateMirror : UdonSharpBehaviour
             }
             isInPulidora = PulidoraScript.Rotating;
             Debug.LogWarning("EnterTrigger, variables set");
+        }
+
+        if (IsReady())
+        {
+            return;
         }
 
         if (other.gameObject.GetComponent<CottonBehabiour>() != null && !isCotton && haveAlcohol)
