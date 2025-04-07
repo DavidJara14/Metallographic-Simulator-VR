@@ -77,6 +77,9 @@ public class ActivateMirror : UdonSharpBehaviour
     public LayerMask PCVRMask;
     public LayerMask AndroidMask;
 
+    [Header("TimerDebug")]
+    public float elapsedTime = 0.0f;
+
 
     private void Start()
     {
@@ -144,6 +147,36 @@ public class ActivateMirror : UdonSharpBehaviour
         if (finishedLimpieza) // Ataque, TIENE / TUVO NITAL, tuvo alumina blanca y ya tuvo gris 
         {
             AtaqueConNital();
+        }
+
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime > 1.0f) 
+        {
+
+            Debug.Log("[<color=green>BoolsEnjuague</color>]");
+            Debug.Log($"finishedEnjuagado -> {finishedEnjuagado}");
+            Debug.Log($"finishedWater -> {finishedWater}");
+
+            Debug.Log("[<color=cyan>BoolsLimpieza</color>]");
+            Debug.Log($"isCotton -> {isCotton}");
+            Debug.Log($"haveAlcohol -> {haveAlcohol}");
+            Debug.Log($"finishCotton -> {finishCotton}");
+            Debug.Log($"finishedLimpieza -> {finishedLimpieza}");
+
+            Debug.Log("[<color=orange>BoolsNital</color>]");
+            Debug.Log($"haveNital -> {haveNital}");
+            Debug.Log($"nitalRemoved -> {nitalRemoved}");
+            Debug.Log($"finishedAQ -> {finishedAQ}");
+
+            elapsedTime = 0;
+        }
+
+        if (IsReady())
+        {
+            residuosAlumina.Stop();
+            nitalInProbePS.Stop();
+            alcoholPS.Stop();
+            probetaWaterPS.Stop();
         }
     }
 
@@ -374,8 +407,8 @@ public class ActivateMirror : UdonSharpBehaviour
         if (nitalInProbePS != null && !nitalInProbePS.isEmitting && haveNital)
         {
             nitalInProbePS.Play();
+            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "resetHaveAlcoholAndFinishedLimpiezaTrue"); //Parche 
             Debug.LogWarning("[<color=blue>nitalInProbePS play: </color>]");
-
         }
 
         if (haveAlcohol && nitalInProbePS.isEmitting)
