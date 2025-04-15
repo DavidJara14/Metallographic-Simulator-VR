@@ -251,6 +251,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
             interactProbe.DisableCanva();
             interactProbe.gameObject.SetActive(false);
         }
+
+        if (other.GetComponent<PulidoraScript>() != null)
+        {
+            interactProbe.DisableCanva();
+            interactProbe.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -259,6 +265,11 @@ public class ProbeBehabiour : UdonSharpBehaviour
         {
             LijaRotationActivaGO = null;
             LijaRotationActiva = null;
+            CheckInteractProve();
+        }
+
+        if(other.GetComponent<PulidoraScript>() != null)
+        {
             CheckInteractProve();
         }
 
