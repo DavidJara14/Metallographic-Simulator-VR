@@ -10,14 +10,10 @@ public class ActivateMirror : UdonSharpBehaviour
 {
 
     [Header("Probeta references")]
-    public GameObject probetaShader1;
-    public GameObject probetaMirror1;
-    public GameObject probetaShader2;
-    public GameObject probetaMirror2;
-    public GameObject bodyMaterial;
+    public GameObject probetaShader;
+    public GameObject probetaMirror;
     public ProbeBehabiour probeBehaviour;
     [SerializeField] private VRC_Pickup pickup;
-    public int caraTrabajada = 1;
 
     [Header("Other variables")]
     public float Desgaste = 0;
@@ -40,7 +36,6 @@ public class ActivateMirror : UdonSharpBehaviour
     [UdonSynced] public bool finishedWater = false;
 
     [Header("Limpieza variables")]
-    //[SerializeField] GameObject cottonGO = null;
     public bool isCotton = false;
     public bool haveAlcohol = false;
     [UdonSynced] public bool finishCotton = false;
@@ -54,14 +49,9 @@ public class ActivateMirror : UdonSharpBehaviour
     [Header("Particle system")]
     [SerializeField] ParticleSystem waterPS;
     [SerializeField] ParticleSystem alcoholPS;
-    [SerializeField]  ParticleSystem residuosAlumina;
+    [SerializeField] ParticleSystem residuosAlumina;
     [SerializeField] ParticleSystem nitalInProbePS;
     [SerializeField] ParticleSystem probetaWaterPS;
-
-    [Header("Placers")]
-    [SerializeField] public GameObject placersWater = null;
-    [SerializeField] public GameObject placersNital = null;
-    [SerializeField] public GameObject placersMicro = null;
 
     private float generalTimer = 0f;
     private float TimerPistolaDeCalor = 0f;
@@ -70,8 +60,7 @@ public class ActivateMirror : UdonSharpBehaviour
     const float LAUNCH_FORCE = 250f;
 
     [Header("Mirror")]
-    public VRCMirrorReflection mirror1;
-    public VRCMirrorReflection mirror2;
+    public VRCMirrorReflection mirror;
     public VRCMirrorReflection mirrorCanva;
 
     public LayerMask PCVRMask;
@@ -80,11 +69,15 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void Start()
     {
-        probetaShader1.SetActive(true);
-        probetaMirror1.SetActive(false);
+        if(probetaShader != null)
+        {
+            probetaShader.SetActive(true);
+        }
 
-        probetaShader2.SetActive(true);
-        probetaMirror2.SetActive(false);
+        if(probetaMirror != null)
+        {
+            probetaMirror.SetActive(false);
+        }
 
         if(residuosAlumina != null)
             residuosAlumina.Stop();
@@ -99,13 +92,11 @@ public class ActivateMirror : UdonSharpBehaviour
             probetaWaterPS.Stop();
 
 #if UNITY_ANDROID
-        mirror1.m_ReflectLayers = AndroidMask;  
-        mirror2.m_ReflectLayers = AndroidMask;
+        mirror.m_ReflectLayers = AndroidMask;  
         mirrorCanva.m_ReflectLayers = AndroidMask;
         
 #else
-        mirror1.m_ReflectLayers = PCVRMask;
-        mirror2.m_ReflectLayers = PCVRMask;
+        mirror.m_ReflectLayers = PCVRMask;
         mirrorCanva.m_ReflectLayers = PCVRMask;
 #endif
     }
@@ -127,7 +118,6 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if (finishedPulido1 && finishedPulido2 && !finishedEnjuagado)
         {
-            //placersWater.SetActive(true);
             if (waterPS != null && !waterPS.isEmitting)
             {
                 waterPS = null;
@@ -154,7 +144,7 @@ public class ActivateMirror : UdonSharpBehaviour
             if (isInPulidora)
             {
                 if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
-                    gameObject.GetComponent<HapticFeedback>().SendCustomEvent("hapticFeedbackPulido");
+                    gameObject.GetComponentInParent<HapticFeedback>().SendCustomEvent("hapticFeedbackPulido");
             }
         }
     }
@@ -163,27 +153,16 @@ public class ActivateMirror : UdonSharpBehaviour
     {
         if (!haveAluminaBlanca && !haveAluminaGris && !haveNital) // Hasta esta etapa solo se ha lijado 
         {
-            if (caraTrabajada == 1)
-                probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0);
-
-            else if (caraTrabajada == 2)
-                probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0);
+            probetaShader.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0);
         }
 
 
-        Desgaste = probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija");
+        Desgaste = probetaShader.GetComponent<Renderer>().material.GetFloat("_GranoLija");
 
         if (Desgaste > 80)
         {
             _IsFirstSanding = false;
-            if (caraTrabajada == 1)
-            {
-                probetaShader1.GetComponent<Renderer>().material.SetInt("_IsFirstSanding", 0);
-            }
-            else if (caraTrabajada == 2)
-            {
-                probetaShader2.GetComponent<Renderer>().material.SetInt("_IsFirstSanding", 0);
-            }
+            probetaShader.GetComponent<Renderer>().material.SetInt("_IsFirstSanding", 0);
         }
     }
 
@@ -192,7 +171,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if (!probeBehaviour.IsLijadoMax())
         {
-            gameObject.GetComponent<BorderColor>().SendCustomEvent("colorRed");
+            gameObject.GetComponentInParent<BorderColor>().SendCustomEvent("colorRed");
             //Debug.Log("Termina de lijar");
         }
 
@@ -207,7 +186,7 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             if (!haveNital && !haveAluminaGris && !haveAluminaBlanca)
             {
-                gameObject.GetComponent<BorderColor>().SendCustomEvent("colorRed");
+                gameObject.GetComponentInParent<BorderColor>().SendCustomEvent("colorRed");
             }
 
             else if (haveAluminaGris && !haveAluminaBlanca && !haveNital) // Primera etapa de pulido, TIENE ALUMINA GRIS 
@@ -216,11 +195,8 @@ public class ActivateMirror : UdonSharpBehaviour
                 Debug.Log("Tiempo de AGris: " + generalTimer);
                 if (generalTimer > 10 || finishedPulido1)
                 {
-                    if (caraTrabajada == 1)
-                        probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
-                    else if (caraTrabajada == 2)
-                        probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
-                    gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
+                    probetaShader.GetComponent<Renderer>().material.SetFloat("_Reflexion", 1);
+                    gameObject.GetComponentInParent<BorderColor>().SendCustomEvent("colorGreen");
                     
                     finishedPulido1 = true;
                 }
@@ -232,19 +208,12 @@ public class ActivateMirror : UdonSharpBehaviour
                 Debug.Log("Tiempo de ABlanca: " + generalTimer);
                 if (generalTimer > 10 || finishedPulido2)
                 {
-                    if (caraTrabajada == 1)
-                    {
-                        probetaShader1.SetActive(false);
-                        probetaMirror1.SetActive(true);
-                    }
 
-                    else if (caraTrabajada == 2)
-                    {
-                        probetaShader2.SetActive(false);
-                        probetaMirror2.SetActive(true);
-                    }
+                    probetaShader.SetActive(false);
+                    probetaMirror.SetActive(true);
+
                     //Debug.Log("Mirror active"); 
-                    gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
+                    gameObject.GetComponentInParent<BorderColor>().SendCustomEvent("colorGreen");
                     finishedPulido2 = true;
                 }
             }
@@ -329,7 +298,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
             if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
             {
-                gameObject.GetComponent<HapticFeedback>().SendCustomEvent("hapticFeedbackCotton");
+                gameObject.GetComponentInParent<HapticFeedback>().SendCustomEvent("hapticFeedbackCotton");
             }
 
             if (haveAlcohol/* || cottonGO.GetComponent<CottonBehabiour>().haveAlcohol*/)
@@ -393,21 +362,12 @@ public class ActivateMirror : UdonSharpBehaviour
             Debug.Log("Tiempo de calor: " + TimerPistolaDeCalor);
             if (TimerPistolaDeCalor > 1.5f || finishedAQ)
             {
-                if (caraTrabajada == 1)
-                {
-                    probetaShader1.SetActive(true);
-                    probetaMirror1.SetActive(false);
-                    probetaShader1.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.6f);
-                }
-
-                else if (caraTrabajada == 2)
-                {
-                    probetaShader2.SetActive(true);
-                    probetaMirror2.SetActive(false);
-                    probetaShader2.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.6f);
-                }
+                probetaShader.SetActive(true);
+                probetaMirror.SetActive(false);
+                probetaShader.GetComponent<Renderer>().material.SetFloat("_Reflexion", 0.6f);
+               
                 // Debug.Log("Mirror unactive");
-                gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
+                gameObject.GetComponentInParent<BorderColor>().SendCustomEvent("colorGreen");
                 if(!finishedAQ)
                     SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "finishedAtaqueQ");
                 //finishedAtaqueQ();
@@ -432,7 +392,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        //Debug.LogWarning("[<color=green>OnParticleCollision, GO name: </color>]" + other.gameObject.name);
+        Debug.LogWarning("[<color=green>OnParticleCollision, GO name: </color>]" + other.gameObject.name);
 
         if (IsReady())
         {
@@ -492,6 +452,7 @@ public class ActivateMirror : UdonSharpBehaviour
             }
             isInPulidora = PulidoraScript.Rotating;
             Debug.LogWarning("EnterTrigger, variables set");
+            Debug.LogWarning("Face: " + gameObject.name);
         }
 
         if (IsReady())
