@@ -42,13 +42,13 @@ public class EjectObject : UdonSharpBehaviour
             RotorToObjSize = new Vector3(objectEjectable.transform.position.x - gameObject.transform.position.x, 0f, objectEjectable.transform.position.z - gameObject.transform.position.z);
             Up = objectEjectable.transform.up;
             VectorDeDireccion = Vector3.Cross(RotorToObjSize, Up);
-            Debug.Log("Vector asigned");
+            //Debug.Log("Vector asigned");
 
             if(objectPickup.currentPlayer == null)
             {
                 VectorDeDireccion.y = Mathf.Abs(VectorDeDireccion.y); 
                 objectEjectable.GetComponent<Rigidbody>().AddForce(VectorDeDireccion.normalized * 200f);
-                Debug.Log("Object Ejected");
+                //Debug.Log("Object Ejected");
             }
         }
     }
