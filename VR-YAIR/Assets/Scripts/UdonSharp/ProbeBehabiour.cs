@@ -25,7 +25,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [SerializeField] ParticleSystem EsteParticleSystem;
     [SerializeField] GameObject LijaRotationActivaGO;
     [SerializeField] LijaRotation LijaRotationActiva;
-    [SerializeField] ActivateMirror Mirror;
 
     [SerializeField] private VRC_Pickup pickup;
     [SerializeField] private InteractProbe interactProbe;
@@ -44,8 +43,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
     };
 
 
-    public GameObject probetaShader1;
-    public GameObject probetaShader2;
+    public GameObject probetaShader;
+    //public GameObject probetaShader2;
     public float _insideColliderTimer = 0f;
     [UdonSynced] public bool _isInsideCollider = false;
     public GameObject bodyMaterial;
@@ -59,13 +58,23 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [SerializeField] private AudioClip _audioClip;
     private bool LastUserWasVR = false;
 
+
+
     private void Start()
     {
         _audioSource.clip = _audioClip;
+
+#if UNITY_ANDROID
+        gameObject.GetComponent<Rigidbody>().centerOfMass = Vector3.zero
+#endif
     }
 
     private void Update()
     {
+        if (probetaShader == null)
+        {
+            return;
+        }
 
         if (LijaRotationActiva != null)
         { 
@@ -139,20 +148,10 @@ public class ProbeBehabiour : UdonSharpBehaviour
             {
                 _insideColliderTimer += Time.deltaTime;
                 Debug.Log("Time lija: " + _insideColliderTimer);
-                if (_insideColliderTimer >= 10f || probetaShader1.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste || probetaShader2.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste)
+                if (_insideColliderTimer >= 10f || probetaShader.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste)
                 {
-                    if (Mirror.caraTrabajada == 1)
-                    {
-                        probetaShader1.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
-                        probetaShader1.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
-
-                    }
-
-                    else if (Mirror.caraTrabajada == 2)
-                    {
-                        probetaShader2.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
-                        probetaShader2.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
-                    }
+                    probetaShader.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
+                    probetaShader.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
                     gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
                 }
 
@@ -183,7 +182,10 @@ public class ProbeBehabiour : UdonSharpBehaviour
         if (!LijaRotationActiva.Rotating)
             return;
         if (Desgaste == TamañoDeGranoEnLija)
+        {
+            canLijar = true; // Para visuales al cambiar de cara
             return;
+        }
         if (Desgaste > TamañoDeGranoEnLija)
         {
             Debug.Log($"Cambio por bajar: {Desgaste} a {TamañoDeGranoEnLija}");
