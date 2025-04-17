@@ -61,7 +61,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         Augment = Aumentos[count].Int;
         if (PBcomponent == null)
             return;
-        if(PBcomponent.GetComponent<ActivateMirror>().IsReady())
+        if(PBcomponent.GetComponentInChildren<ActivateMirror>().IsReady())
         {
             TryChangeImageNew(PBcomponent.getProbeType(), Augment);
             CompText.text = $"x{Augment}";
@@ -134,7 +134,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         PBcomponent = other.gameObject.GetComponent<ProbeBehabiour>();
         if (PBcomponent != null)
         {
-            if (PBcomponent.GetComponent<ActivateMirror>().IsReady())
+            if (PBcomponent.GetComponentInChildren<ActivateMirror>().IsReady())
             {
                 TryChangeImageNew(PBcomponent.getProbeType(), Augment);
                 CompText.text = $"x{Augment}";
