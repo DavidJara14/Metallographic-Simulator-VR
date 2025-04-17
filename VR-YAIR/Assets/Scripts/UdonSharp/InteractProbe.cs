@@ -24,6 +24,7 @@ public class InteractProbe : UdonSharpBehaviour
         else if (!activate) 
         {
             canva.SetActive(false);
+            canva.GetComponent<UpdatePreview>().SendCustomEvent("scaleAllMaterial");
         }
     }
 
