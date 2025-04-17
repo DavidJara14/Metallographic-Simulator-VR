@@ -130,7 +130,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         UpdateMaterial();
 
         if(!_isInsideCollider)
-            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
+            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
     }
 
     void UpdateMaterial()
@@ -156,7 +156,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 }
 
                 else if(_insideColliderTimer<10.0f && _isInsideCollider)
-                    bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
+                    bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
             }
         }
 
@@ -164,7 +164,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             gameObject.GetComponent<BorderColor>().SendCustomEvent("colorRed");
 
         else
-            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
+            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
     }
 
     private void SetParticleRateOverTime()
@@ -273,7 +273,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             CheckInteractProve();
         }
 
-        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0.01f);
+        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
 
         if(other.gameObject.name == "Rotor")
         {
