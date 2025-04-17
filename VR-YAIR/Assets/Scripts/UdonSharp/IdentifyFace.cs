@@ -10,7 +10,6 @@ public class IdentifyFace : UdonSharpBehaviour
     [SerializeField] private GameObject myMirror;
     [SerializeField] private ProbeBehabiour probeBehabiour;
 
-
     private void OnTriggerEnter(Collider other)
     {
         Debug.LogWarning("Face: " + gameObject.name + " Collision with: " + other.gameObject.name);
