@@ -47,7 +47,7 @@ public class ActivateMirror : UdonSharpBehaviour
     public bool finishedAQ = false;
 
     [Header("Particle system")]
-    [SerializeField] ParticleSystem waterPS;
+    [SerializeField] public ParticleSystem waterPS;
     [SerializeField] ParticleSystem alcoholPS;
     [SerializeField] ParticleSystem residuosAlumina;
     [SerializeField] ParticleSystem nitalInProbePS;
@@ -65,9 +65,6 @@ public class ActivateMirror : UdonSharpBehaviour
 
     public LayerMask PCVRMask;
     public LayerMask AndroidMask;
-
-    [Header("TimerDebug")]
-    public float elapsedTime = 0.0f;
 
 
     private void Start()
@@ -109,6 +106,15 @@ public class ActivateMirror : UdonSharpBehaviour
         // Alumina gris -> Para efectos practicos le dara brillo 
         // Alumina blanca ->´Para efectos practicos le dara acabado espejo 
 
+        if (IsReady())
+        {
+            residuosAlumina.Stop();
+            nitalInProbePS.Stop();
+            alcoholPS.Stop();
+            probetaWaterPS.Stop();
+            return;
+        }
+
         RetroalimentacionYProbetaVoladora();
 
         ChangeProbetaVisual();
@@ -139,35 +145,6 @@ public class ActivateMirror : UdonSharpBehaviour
             AtaqueConNital();
         }
 
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime > 1.0f) 
-        {
-
-            Debug.Log("[<color=green>BoolsEnjuague</color>]");
-            Debug.Log($"finishedEnjuagado -> {finishedEnjuagado}");
-            Debug.Log($"finishedWater -> {finishedWater}");
-
-            Debug.Log("[<color=cyan>BoolsLimpieza</color>]");
-            Debug.Log($"isCotton -> {isCotton}");
-            Debug.Log($"haveAlcohol -> {haveAlcohol}");
-            Debug.Log($"finishCotton -> {finishCotton}");
-            Debug.Log($"finishedLimpieza -> {finishedLimpieza}");
-
-            Debug.Log("[<color=orange>BoolsNital</color>]");
-            Debug.Log($"haveNital -> {haveNital}");
-            Debug.Log($"nitalRemoved -> {nitalRemoved}");
-            Debug.Log($"finishedAQ -> {finishedAQ}");
-
-            elapsedTime = 0;
-        }
-
-        if (IsReady())
-        {
-            residuosAlumina.Stop();
-            nitalInProbePS.Stop();
-            alcoholPS.Stop();
-            probetaWaterPS.Stop();
-        }
     }
 
     private void RetroalimentacionYProbetaVoladora()
@@ -423,38 +400,38 @@ public class ActivateMirror : UdonSharpBehaviour
         nitalRemoved = true;
     }
 
-    private void OnParticleCollision(GameObject other)
-    {
-        Debug.LogWarning("[<color=green>OnParticleCollision, GO name: </color>]" + other.gameObject.name);
-
-        if (IsReady())
-        {
-            return;
-        }
-
-        if (other.GetComponentInParent<IsLiquidSource>() != null)
-        {
-            if (finishedPulido2)
-            {
-                waterPS = other.GetComponent<ParticleSystem>();
-                Debug.LogWarning("[<color=blue>waterPS, assigned: </color>]" + waterPS.name);
-            }
-        }
-
-        if (other.GetComponentInParent<BotellaLab>() != null)
-        {
-            string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
-            if (tipo == "Nital" && finishedPulido1 && finishedPulido2 && !haveNital && finishedLimpieza)
-            {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "addedNital");
-            }
-            if (tipo == "Alcohol" && finishedEnjuagado && !haveAlcohol)
-            {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "addedAlcohol");
-                Debug.LogWarning("[<color=red>Status haveAlcohol in particle collision: </color>]" + haveAlcohol);
-            }
-        }
-    }
+//    private void OnParticleCollision(GameObject other)
+//    {
+//        Debug.LogWarning("[<color=green>OnParticleCollision, GO name: </color>]" + other.gameObject.name);
+//
+//        if (IsReady())
+//        {
+//            return;
+//        }
+//
+//        if (other.GetComponentInParent<IsLiquidSource>() != null)
+//        {
+//            if (finishedPulido2)
+//            {
+//                waterPS = other.GetComponent<ParticleSystem>();
+//                Debug.LogWarning("[<color=blue>waterPS, assigned: </color>]" + waterPS.name);
+//            }
+//        }
+//
+//        if (other.GetComponentInParent<BotellaLab>() != null)
+//        {
+//            string tipo = other.GetComponentInParent<BotellaLab>().Tipo;
+//            if (tipo == "Nital" && finishedPulido1 && finishedPulido2 && !haveNital && finishedLimpieza)
+//            {
+//                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "addedNital");
+//            }
+//            if (tipo == "Alcohol" && finishedEnjuagado && !haveAlcohol)
+//            {
+//                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "addedAlcohol");
+//                Debug.LogWarning("[<color=red>Status haveAlcohol in particle collision: </color>]" + haveAlcohol);
+//            }
+//        }
+//    }
 
     public void addedAlcohol()
     {
