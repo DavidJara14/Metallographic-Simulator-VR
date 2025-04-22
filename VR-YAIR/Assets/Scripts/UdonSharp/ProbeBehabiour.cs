@@ -44,7 +44,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
 
     public GameObject probetaShader;
-    //public GameObject probetaShader2;
     public float _insideColliderTimer = 0f;
     [UdonSynced] public bool _isInsideCollider = false;
     public GameObject bodyMaterial;
@@ -65,7 +64,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
         _audioSource.clip = _audioClip;
 
 #if UNITY_ANDROID
-        gameObject.GetComponent<Rigidbody>().centerOfMass = Vector3.zero
+        gameObject.GetComponent<Rigidbody>().centerOfMass = Vector3.zero;
 #endif
     }
 
@@ -142,6 +141,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
         TryChangeDesgaste();
 
+        if (probetaShader.GetComponent<Renderer>().material.GetFloat("_GranoLija") == 800f && _isInsideCollider)
+        {
+            gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
+            return;
+        }
+
         if (_isInsideCollider && isHumedo && !IsLijadoMaximo() && canLijar)
         {
             if (LijaRotationActiva.Rotating)
@@ -183,7 +188,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             return;
         if (Desgaste == TamañoDeGranoEnLija)
         {
-            canLijar = true; // Para visuales al cambiar de cara
+            //canLijar = true; // Para visuales al cambiar de cara
             return;
         }
         if (Desgaste > TamañoDeGranoEnLija)
