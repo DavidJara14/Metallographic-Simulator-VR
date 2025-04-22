@@ -153,7 +153,7 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             if (isInPulidora)
             {
-                if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+                if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, probeBehaviour.gameObject))
                     gameObject.GetComponentInParent<HapticFeedback>().SendCustomEvent("hapticFeedbackPulido");
             }
         }
@@ -306,7 +306,7 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             //Debug.LogWarning("[<color=blue>is cotton: </color>]" + isCotton);
 
-            if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+            if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, probeBehaviour.gameObject))
             {
                 gameObject.GetComponentInParent<HapticFeedback>().SendCustomEvent("hapticFeedbackCotton");
             }
@@ -447,7 +447,7 @@ public class ActivateMirror : UdonSharpBehaviour
     {
         if (other.gameObject.name == "RotorPulidora")
         {
-            if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+            if(Networking.IsOwner(Networking.LocalPlayer, probeBehaviour.gameObject))
             {
                 ownerSays = false;
                 Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Enter: " + ownerSays.ToString());
@@ -496,7 +496,7 @@ public class ActivateMirror : UdonSharpBehaviour
             }
         }
 
-        if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+        if (Networking.IsOwner(Networking.LocalPlayer, probeBehaviour.gameObject))
         {
             Debug.LogWarning("This player is owner, objeto: " + other.gameObject.name);
             if (other.gameObject.name == "RotorPulidora")
