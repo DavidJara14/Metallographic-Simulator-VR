@@ -146,9 +146,9 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PBcomponent = other.gameObject.GetComponent<ProbeBehabiour>();
-        if (PBcomponent != null)
+        if (other.gameObject.GetComponent<ProbeBehabiour>() != null && PBcomponent == null)
         {
+            PBcomponent = other.gameObject.GetComponent<ProbeBehabiour>();
             if (TestFacesIsReady())
             {
                 TryChangeImageNew(PBcomponent.getProbeType(), Augment);
@@ -159,8 +159,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        PBcomponent = other.gameObject.GetComponent<ProbeBehabiour>();
-        if (PBcomponent != null)
+        if (other.gameObject.GetComponent<ProbeBehabiour>() == PBcomponent && PBcomponent != null)
         {
             RemoveImage();
             PBcomponent = null;
