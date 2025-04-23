@@ -46112,6 +46112,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2599295127342437393, guid: 992479a288117b34abd5f9077c63c88c,
         type: 3}
+      propertyPath: _skeleton
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2599295127342437393, guid: 992479a288117b34abd5f9077c63c88c,
+        type: 3}
       propertyPath: pressedEventName
       value: switchFaces
       objectReference: {fileID: 0}
