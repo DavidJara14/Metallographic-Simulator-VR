@@ -60,18 +60,18 @@ public class BorderColor : UdonSharpBehaviour
 
     public void colorYellow()
     {
-        bodyMaterial.GetComponent<Renderer>().materials[1].SetFloat("_Scale", 1.04f);
+        bodyMaterial.GetComponent<Renderer>().materials[0].SetFloat("_Scale", 1.04f);
         colorTimer += Time.deltaTime;
         if (colorTimer >= 0.1f)
         {
             if (isClear)
             {
-                bodyMaterial.GetComponent<Renderer>().materials[1].SetColor("_Color", Color.yellow);
+                bodyMaterial.GetComponent<Renderer>().materials[0].SetColor("_Color", Color.yellow);
                 isClear = false;
             }
             else
             {
-                bodyMaterial.GetComponent<Renderer>().materials[1].SetColor("_Color", Color.white);
+                bodyMaterial.GetComponent<Renderer>().materials[0].SetColor("_Color", Color.white);
                 isClear = true;
             }
             colorTimer = 0f;
