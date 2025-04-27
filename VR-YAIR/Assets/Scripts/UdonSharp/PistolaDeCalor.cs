@@ -124,19 +124,13 @@ public class PistolaDeCalor : UdonSharpBehaviour
             {
                 if (_pickup.currentPlayer == null) //esta suelto
                 {
-                    if (!heatable.gameObject.GetComponent<ActivateMirror>().IsReady())
-                    {
-                        heatable.SendCustomEvent("ActivateCalor");
-                        Debug.Log("SCE");
-                    }
+                    heatable.SendCustomEvent("ActivateCalor");
+                    Debug.Log("SCE");
                 }
                 else if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
                 {
-                    if (!heatable.gameObject.GetComponent<ActivateMirror>().IsReady())
-                    {
-                        Debug.Log("SCNE");
-                        heatable.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ActivateCalor");
-                    }
+                    Debug.Log("SCNE");
+                    heatable.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ActivateCalor");
                 }
 
             }
