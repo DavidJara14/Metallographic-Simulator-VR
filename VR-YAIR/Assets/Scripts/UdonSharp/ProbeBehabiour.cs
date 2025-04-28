@@ -10,19 +10,21 @@ using VRC.Udon;
 public class ProbeBehabiour : UdonSharpBehaviour
 {
     const float DesgasteMin = 0f;
-    const float DesgasteMax = 801f;
+    const float DesgasteMax = 800f;
 
     const int ParticleRateMin = 10;
     const int ParticleRateMax = 50;
 
     [SerializeField][Range(DesgasteMin, DesgasteMax)] public float Desgaste; //0 a Lija
+    [SerializeField] private float TamañoDeGranoEnLija;
+    [SerializeField] private float desgasteEnShader;
 
     [SerializeField] public Vector3 LijaToObjSize;
     [SerializeField] public Vector3 Up;
     [SerializeField] public Vector3 VectorDeDireccionDeDesgasteActual;
 
     Material EsteMaterial;
-    [SerializeField] ParticleSystem EsteParticleSystem;
+    [SerializeField] public ParticleSystem EsteParticleSystem;
     [SerializeField] GameObject LijaRotationActivaGO;
     [SerializeField] LijaRotation LijaRotationActiva;
 
@@ -44,9 +46,10 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
 
     public GameObject probetaShader;
-    public float _insideColliderTimer = 0f;
-    [UdonSynced] public bool _isInsideCollider = false;
     public GameObject bodyMaterial;
+    public float _insideColliderTimer = 0f;
+    private const float timeLijado = 3f;
+    [UdonSynced] public bool _isInsideCollider = false;
     [UdonSynced] public bool canLijar = false;
     [UdonSynced] public bool isHumedo = true;
 
@@ -83,12 +86,9 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 Up = gameObject.transform.up;
                 VectorDeDireccionDeDesgasteActual = Vector3.Cross(LijaToObjSize, Up);
 
-                if (_isInsideCollider)
+                if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
                 {
-                    if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
-                    {
-                        gameObject.GetComponent<HapticFeedback>().SendCustomEvent("hapticFeedbackDesbaste");
-                    }
+                    gameObject.GetComponent<HapticFeedback>().SendCustomEvent("hapticFeedbackDesbaste");
                 }
 
                 SetParticleRateOverTime();
@@ -126,10 +126,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
             _audioSource.Stop();
         }
 
+        desgasteEnShader = probetaShader.GetComponent<Renderer>().material.GetFloat("_GranoLija");
         UpdateMaterial();
-
-        if(!_isInsideCollider)
-            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
     }
 
     void UpdateMaterial()
@@ -141,35 +139,35 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
         TryChangeDesgaste();
 
-        if (probetaShader.GetComponent<Renderer>().material.GetFloat("_GranoLija") == 800f && _isInsideCollider)
+        if (_isInsideCollider)
         {
-            gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
-            return;
-        }
+            if (IsLijadoMax() || desgasteEnShader == TamañoDeGranoEnLija)
+            {
+                gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
+                return;
+            }
 
-        if (_isInsideCollider && isHumedo && !IsLijadoMaximo() && canLijar)
-        {
-            if (LijaRotationActiva.Rotating)
+            if (isHumedo && canLijar)
             {
                 _insideColliderTimer += Time.deltaTime;
                 Debug.Log("Time lija: " + _insideColliderTimer);
-                if (_insideColliderTimer >= 10f || probetaShader.GetComponent<Renderer>().material.GetFloat("_GranoLija") == Desgaste)
+                if (_insideColliderTimer >= timeLijado)
                 {
                     probetaShader.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
                     probetaShader.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
-                    gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
                 }
 
-                else if(_insideColliderTimer<10.0f && _isInsideCollider)
+                else
+                {
                     bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
+                }
+            }
+
+            if (!isHumedo || !canLijar)
+            {
+                gameObject.GetComponent<BorderColor>().SendCustomEvent("colorRed");
             }
         }
-
-        else if ((!isHumedo || !canLijar) && _isInsideCollider)
-            gameObject.GetComponent<BorderColor>().SendCustomEvent("colorRed");
-
-        else
-            bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
     }
 
     private void SetParticleRateOverTime()
@@ -181,14 +179,13 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     private void TryChangeDesgaste()// 120 a 800
     {
-        var TamañoDeGranoEnLija = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
+        TamañoDeGranoEnLija = LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>().TamañoDeGrano;
         if (LijaRotationActiva == null)
             return;
         if (!LijaRotationActiva.Rotating)
             return;
         if (Desgaste == TamañoDeGranoEnLija)
         {
-            //canLijar = true; // Para visuales al cambiar de cara
             return;
         }
         if (Desgaste > TamañoDeGranoEnLija)
@@ -262,6 +259,22 @@ public class ProbeBehabiour : UdonSharpBehaviour
             interactProbe.DisableCanva();
             interactProbe.gameObject.SetActive(false);
         }
+
+        if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+        {
+            if (other.GetComponent<LijaCircularBehabiour>() != null)
+            {
+                if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
+                    isHumedo = true;
+                else
+                    isHumedo = false;
+            }
+
+            if (other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
+            {
+                _isInsideCollider = true;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -313,26 +326,6 @@ public class ProbeBehabiour : UdonSharpBehaviour
         Debug.Log("ResetTimer to 0 ");
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.GetComponent<LijaCircularBehabiour>() != null && Networking.IsOwner(Networking.LocalPlayer,this.gameObject))
-        {
-            if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
-                isHumedo = true;
-            else
-                isHumedo = false;
-        }
-
-        if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
-        {
-            if(other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
-            {
-                _isInsideCollider = true;
-            }
-        }
-
-    }
-
     private void OnDrawGizmosSelected()
     {
         if (LijaRotationActiva != null)
@@ -350,14 +343,9 @@ public class ProbeBehabiour : UdonSharpBehaviour
         Gizmos.color = Color.white;
     }
 
-    private bool IsLijadoMaximo()
-    { 
-        return (int)Desgaste == (int)DesgasteMax;
-    }
-
     public bool IsLijadoMax()
     {
-        return (int)Desgaste == 800;
+        return (int)desgasteEnShader == (int)DesgasteMax;
     }
 }
 
