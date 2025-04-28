@@ -9,6 +9,7 @@ public class IdentifyFace : UdonSharpBehaviour
     [SerializeField] private GameObject myShader;
     [SerializeField] private GameObject myMirror;
     [SerializeField] private ProbeBehabiour probeBehabiour;
+    [SerializeField] private ParticleSystem residuosMaterial;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +18,7 @@ public class IdentifyFace : UdonSharpBehaviour
         {
             probeBehabiour.probetaShader = myShader;
             probeBehabiour.Desgaste = myShader.GetComponent<Renderer>().material.GetFloat("_GranoLija");
+            probeBehabiour.EsteParticleSystem = residuosMaterial;
         }
     }
 }
