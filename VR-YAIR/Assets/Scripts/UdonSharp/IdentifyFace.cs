@@ -11,6 +11,14 @@ public class IdentifyFace : UdonSharpBehaviour
     [SerializeField] private ProbeBehabiour probeBehabiour;
     [SerializeField] private ParticleSystem residuosMaterial;
 
+    private void Update()
+    {
+        if (!probeBehabiour._isInsideCollider)
+        {
+            residuosMaterial.Stop();
+        }        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.LogWarning("Face: " + gameObject.name + " Collision with: " + other.gameObject.name);
