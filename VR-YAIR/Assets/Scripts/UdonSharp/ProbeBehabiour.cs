@@ -149,17 +149,13 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
             if (isHumedo && canLijar)
             {
+                BorderToZero();
                 _insideColliderTimer += Time.deltaTime;
                 Debug.Log("Time lija: " + _insideColliderTimer);
                 if (_insideColliderTimer >= timeLijado)
                 {
                     probetaShader.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
                     probetaShader.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
-                }
-
-                else
-                {
-                    bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
                 }
             }
 
@@ -291,7 +287,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             CheckInteractProve();
         }
 
-        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
+        BorderToZero();
 
         if(other.gameObject.name == "Rotor")
         {
@@ -312,6 +308,11 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
             }
         }
+    }
+
+    public void BorderToZero()
+    {
+        bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
     }
 
     public void StartTimer()
