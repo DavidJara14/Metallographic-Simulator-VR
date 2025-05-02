@@ -168,6 +168,12 @@ public class LijaRotation : UdonSharpBehaviour
         RPMText.color = Color.gray;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.GetComponent<LijaCircularBehabiour>()) { return; } //si no es una lija, regresa
+        Debug.Log("<color=#ff0099>debug enter:</color>: " + other.gameObject.name + " is Kinematic: " + other.GetComponent<Rigidbody>().isKinematic);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (Lija != null) return; //si ya existe una lija, regresa

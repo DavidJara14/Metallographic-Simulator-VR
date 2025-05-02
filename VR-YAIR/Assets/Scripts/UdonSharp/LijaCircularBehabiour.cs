@@ -36,6 +36,7 @@ public class LijaCircularBehabiour : UdonSharpBehaviour
                 rb.constraints = RigidbodyConstraints.None;
             }
         }
+        Debug.Log(gameObject.name + " is Kinematic: " + rb.isKinematic);
     }
 
     public float GetHumedad()
