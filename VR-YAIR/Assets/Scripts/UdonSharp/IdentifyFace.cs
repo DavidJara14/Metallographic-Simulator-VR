@@ -21,7 +21,7 @@ public class IdentifyFace : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.LogWarning("Face: " + gameObject.name + " Collision with: " + other.gameObject.name);
+        //Debug.LogWarning("Face: " + gameObject.name + " Collision with: " + other.gameObject.name);
         if(other.gameObject.GetComponent<LijaCircularBehabiour>() || other.gameObject.GetComponent<PulidoraScript>())
         {
             probeBehabiour.probetaShader = myShader;

@@ -450,7 +450,7 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if (Networking.IsOwner(Networking.LocalPlayer, probeBehaviour.gameObject))
         {
-            Debug.LogWarning("This player is owner, objeto: " + other.gameObject.name);
+            //Debug.LogWarning("This player is owner, objeto: " + other.gameObject.name);
             if (other.gameObject.name == "RotorPulidora")
             {
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimerAndBool");
