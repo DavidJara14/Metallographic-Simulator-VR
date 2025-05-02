@@ -111,7 +111,7 @@ public class LijaRotation : UdonSharpBehaviour
         Lija = LijaGO.GetComponent<VRC_Pickup>();
         //esta esto puesto para que no se mueva la lija, se quita en el siguiente fixedupdate de LijaCircularBehabiour
         LijaGO.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition; 
-        Debug.Log("<color=green>lija snapped on LijaRotation</color>: " + go.gameObject.name);
+        Debug.Log("<color=green>lija snapped on LijaRotation</color>: " + go.gameObject.name + " is Kinematic: " + go.GetComponent<Rigidbody>().isKinematic);
     }
 
     public void RemoveLija(Transform go)
@@ -121,7 +121,7 @@ public class LijaRotation : UdonSharpBehaviour
         go.parent = null;
         LijaGO = null;
         Lija = null;
-        Debug.Log("<color=#ff9900>Removed lija</color>: " + go.gameObject.name);
+        Debug.Log("<color=#ff9900>Removed lija</color>: " + go.gameObject.name + " is Kinematic: " + go.GetComponent<Rigidbody>().isKinematic);
     }
 
     public void StartMachine()
