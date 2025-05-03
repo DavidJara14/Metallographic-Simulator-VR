@@ -15,7 +15,7 @@ public class IdentifyFace : UdonSharpBehaviour
     {
         if (!probeBehabiour._isInsideCollider)
         {
-            residuosMaterial.Stop();
+            //residuosMaterial.Stop();
         }        
     }
 
@@ -26,6 +26,8 @@ public class IdentifyFace : UdonSharpBehaviour
         {
             probeBehabiour.probetaShader = myShader;
             probeBehabiour.Desgaste = myShader.GetComponent<Renderer>().material.GetFloat("_GranoLija");
+            if(probeBehabiour.EsteParticleSystem.isEmitting)
+                probeBehabiour.EsteParticleSystem.Stop();
             probeBehabiour.EsteParticleSystem = residuosMaterial;
         }
     }

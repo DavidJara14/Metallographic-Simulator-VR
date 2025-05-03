@@ -77,10 +77,13 @@ public class ProbeBehabiour : UdonSharpBehaviour
         {
             return;
         }
+        if(pickup.IsHeld)
+            Debug.Log($"<color=#0ffff0>PartSystemInfo</color> EstePartSystemName{EsteParticleSystem.name}, emiting: {EsteParticleSystem.isEmitting}---------------------");
 
-        if (LijaRotationActiva != null)
-        { 
-            if(LijaRotationActiva.Rotating) 
+        if (LijaRotationActiva != null) //Esta sobre una lijadora
+        {
+            Debug.Log($"<color=#00ff00>EnLijadora</color> LijaRotation = {LijaRotationActiva}!!!------------------------");
+            if (LijaRotationActiva.Rotating) //la lijadora esta en funcionamiento
             {
                 LijaToObjSize = new Vector3(gameObject.transform.position.x - LijaRotationActiva.Lija.transform.position.x, 0f, gameObject.transform.position.z - LijaRotationActiva.Lija.transform.position.z);
                 Up = gameObject.transform.up;
@@ -104,26 +107,35 @@ public class ProbeBehabiour : UdonSharpBehaviour
                     _audioSource.Play();
                 }
             }
-            else
+            else //la lijadora no esta en funcionamiento
             {
+                Debug.Log($"<color=#f00fff>LijadoraFuncCheck</color> StopPartSystem, Lijarotatctiva:{LijaRotationActiva} , playingAudio: {_audioSource.isPlaying} ---------------------");
                 EsteParticleSystem.Stop();
                 if (_audioSource.isPlaying)
                 {
+                    Debug.Log($"<color=#ffffff>AudioCheckNoFunca</color> StopAUDIO, Lijarotatctiva:{LijaRotationActiva} , rotationg: {LijaRotationActiva.Rotating} ---------------------");
                     _audioSource.Stop();
                 }
             }
         }
 
-        else if(LijaRotationActivaGO != null)
+        else if(LijaRotationActivaGO != null) //check por referencia
         {
+            Debug.Log($"<color=#ffff00>RefCheck</color> RefCheck, LijarotActivaGO = {LijaRotationActivaGO}!!!------------------------");
             LijaRotationActiva = LijaRotationActivaGO.GetComponent<LijaRotation>();
         }
 
-        else if(EsteParticleSystem.isEmitting)
+        else if(EsteParticleSystem.isEmitting) //si no esta dentro de la pulidora, pero esta emitiendo particulas
         {
-            Debug.Log("StopEmitting!!!");
+            Debug.Log($"<color=#fff00f>AudioCheckNoPulidora</color> StopEmitting!!!, emiting:{EsteParticleSystem.isEmitting}------------------------");
             EsteParticleSystem.Stop();
             _audioSource.Stop();
+        }
+
+        else //para debug
+        {
+            if(pickup.IsHeld)
+                Debug.Log($"<color=#ff0000>ERROR IN ALL</color> no paso por nada: LijaRotActiva= {LijaRotationActiva}, EsteParticleSystem emiting = {EsteParticleSystem.isEmitting}----!!!----");
         }
 
         desgasteEnShader = probetaShader.GetComponent<Renderer>().material.GetFloat("_GranoLija");
