@@ -292,14 +292,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
             LijaRotationActivaGO = null;
             LijaRotationActiva = null;
             CheckInteractProve();
+            BorderToZero();
         }
-
-        if(other.GetComponent<PulidoraScript>() != null)
-        {
-            CheckInteractProve();
-        }
-
-        BorderToZero();
 
         if(other.gameObject.name == "Rotor")
         {
@@ -313,17 +307,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 Debug.Log("Stop Owner");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "StopTimer");
             }
-            if (!other.GetComponent<LijaRotation>().Rotating)
-            {
-                _isInsideCollider = false;
-                Debug.Log("_isInsideCollider  = " + _isInsideCollider);
-
-            }
         }
     }
 
     public void BorderToZero()
     {
+        //Debug.LogWarning("BorderToZero");
         bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
     }
 
