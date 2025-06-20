@@ -16,18 +16,20 @@ public class ActivateMirror : UdonSharpBehaviour
     [SerializeField] private VRC_Pickup pickup;
 
     [Header("Other variables")]
+    public string positionFace = null; // Up -> Cara inferior, Down -> Cara superior
     public float desgasteProbeta = 0;
     public bool newcalor = false;
+    [SerializeField] private bool scaleBorderSend = false;
 
     [Header("Pulidora")]
     [SerializeField] private GameObject rotorPulidora;
     [SerializeField] private PulidoraScript PulidoraScript;
 
-    [Header("Pulido variables")]
+    [Header("Pulido variables")] 
     [SerializeField] const float timePulido = 3f;
-    [UdonSynced] public bool haveAluminaGris = false;
-    [UdonSynced] public bool haveAluminaBlanca = false;
-    public bool isInPulidora = false;
+    public bool haveAluminaGris = false; // SCNE
+    public bool haveAluminaBlanca = false; // SCNE
+    public bool isInPulidora = false; // SCNE
     [UdonSynced] public bool finishedPulido1 = false;
     [UdonSynced] public bool finishedPulido2 = false;
 
@@ -54,7 +56,7 @@ public class ActivateMirror : UdonSharpBehaviour
     [SerializeField] ParticleSystem probetaWaterPS;
 
     private float timer = 0f;
-    [UdonSynced] private bool ownerSays = false;
+    //[UdonSynced] private bool ownerSays = false;
     
     const float LAUNCH_FORCE = 250f;
 
@@ -107,18 +109,21 @@ public class ActivateMirror : UdonSharpBehaviour
 
         if (IsReady())
         {
+            
             residuosAlumina.Stop();
             nitalInProbePS.Stop();
             alcoholPS.Stop();
             probetaWaterPS.Stop();
-            FinalState();
+            FinalState(); // Asegura que al final la probeta tenga las mismas condiciones visuales
             if (newcalor)
             {
                 gameObject.GetComponentInParent<BorderColor>().SendCustomEvent("colorGreen");
+                scaleBorderSend = false;
             }
-            if (!newcalor)
+            if (!newcalor && !scaleBorderSend)
             {
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ScaleBorder");
+                scaleBorderSend = true;
             }
             return;
         }
@@ -136,13 +141,8 @@ public class ActivateMirror : UdonSharpBehaviour
             Pulido();
         }
 
-        if (finishedPulido1 && finishedPulido2 && !finishedEnjuagado)
+        if (finishedPulido1 && finishedPulido2)
         {
-            if (waterPS != null && !waterPS.isEmitting)
-            {
-                waterPS = null;
-                residuosAlumina.Stop();
-            }
             ChorroDeAguaYSecado();
         }
 
@@ -190,13 +190,6 @@ public class ActivateMirror : UdonSharpBehaviour
             //Debug.Log("Termina de lijar");
         }
 
-        if (ownerSays)
-        {
-            Debug.LogWarning("[<color=green>OwnerSay</color>]is in trigger by error, but owner player exit, exit");
-            ResetTimerAndBool(); // Sync by owner
-            ResetVars();         // Sync by owner
-        }
-
         if (probeBehaviour.IsLijadoMax())
         {
             if (!haveNital && !haveAluminaGris && !haveAluminaBlanca)
@@ -228,10 +221,9 @@ public class ActivateMirror : UdonSharpBehaviour
         }
 
     }
-    public void ResetTimerAndBool() // SCNE
+    public void ResetTimer() // SCNE
     {
-        //Debug.Log("ResetTimersPulidora e IsInPulidoraFalse");
-        isInPulidora = false; 
+        Debug.Log("ResetTimersPulidora");
         timer = 0f;
     }
     public void ResetVars() // SCNE
@@ -244,45 +236,61 @@ public class ActivateMirror : UdonSharpBehaviour
     private void ChorroDeAguaYSecado()
     {
         //Debug.LogWarning("Enter in ChorroDeAguaYSecado");
-        if (waterPS != null)
+
+        if (finishedWater)
+        {
+            residuosAlumina.Stop();
+            if (probetaWaterPS != null && !probetaWaterPS.isEmitting && !finishedEnjuagado)
+            {
+                probetaWaterPS.Play();
+                Debug.LogWarning("[<color=blue>probetawaterPS play: </color>]");
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimer");
+            }
+
+            if (newcalor)
+            {
+                probetaWaterPS.Stop();
+                //enjuagadoFinished();
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "enjuagadoFinished");
+                Debug.LogWarning("[<color=blue>FinishedEnjuagado: </color>]" + finishedEnjuagado);
+            }
+            return;
+        }
+
+        if (waterPS != null) // Comprueba si existe una fuente emisora de agua
         {
             //Debug.LogWarning("[<color=blue>waterPS is: </color>]" + waterPS);
-            if (waterPS.isEmitting && residuosAlumina != null && !finishedWater)
+
+            //if (finishedWater) { return; }
+            
+            if (!waterPS.isEmitting) // remueve la referencia emisora de agua si no esta emitiendo
+            {
+                waterPS = null;
+                residuosAlumina.Stop();
+            }
+            
+            else if (residuosAlumina != null) 
             {
                 if (!residuosAlumina.isEmitting)
                 {
                     residuosAlumina.Play();
                     //Debug.LogWarning("[<color=gray>residuosAluminaPS play: </color>]");
                 }
-                Debug.Log("Chorro de agua fria");
-                if(generalTimer(1.5f, "time agua: "))
+                if (generalTimer(1.5f, "time agua: "))
                 {
-                    residuosAlumina.Stop();
                     SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "waterFinished");
-                    //waterFinished();
                     Debug.LogWarning("[<color=blue>waterFinished </color>]" + finishedWater);
-
-                    if (probetaWaterPS != null)
-                    {
-                        probetaWaterPS.Play();
-                        Debug.LogWarning("[<color=blue>probetawaterPS play: </color>]");
-                    }
-                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimerAndBool");
+                    //waterFinished();
                 }
+                Debug.Log("Chorro de agua fria");
             }
+
             else
             {
                 residuosAlumina.Stop();
             }
         }
 
-        if (newcalor && finishedWater)
-        {
-            probetaWaterPS.Stop();
-            //enjuagadoFinished();
-            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "enjuagadoFinished");
-            Debug.LogWarning("[<color=blue>FinishedEnjuagado: </color>]" + finishedEnjuagado);
-        }
     }
     public void waterFinished() // SCNE
     {
@@ -391,24 +399,28 @@ public class ActivateMirror : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "RotorPulidora")
+        if (Networking.IsOwner(Networking.LocalPlayer, probeBehaviour.gameObject) && other.gameObject.name == "RotorPulidora") 
         {
-            if(Networking.IsOwner(Networking.LocalPlayer, probeBehaviour.gameObject))
-            {
-                ownerSays = false;
-                Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Enter: " + ownerSays.ToString());
-            }
-
             rotorPulidora = other.GetComponentInParent<PulidoraScript>().gameObject;
             PulidoraScript = rotorPulidora.GetComponent<PulidoraScript>();
-            haveAluminaGris = PulidoraScript.GrisLoaded;
+            if (PulidoraScript.GrisLoaded)
+            {
+                //HaveAlumGrisTrue();
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "HaveAlumGrisTrue");
+            }
             if (finishedPulido1)
             {
-                haveAluminaBlanca = PulidoraScript.BlancaLoaded;            
+                if (PulidoraScript.BlancaLoaded)
+                {
+                    //HaveAlumBlanTrue();
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "HaveAlumBlanTrue");
+                }
             }
-            isInPulidora = PulidoraScript.Rotating;
-            //Debug.LogWarning("EnterTrigger, variables set");
-            //Debug.LogWarning("Face: " + gameObject.name);
+            if (PulidoraScript.Rotating)                                            
+            {
+                //IsInPulidoraTrue();
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "IsInPulidoraTrue");
+            }
         }
 
         if (IsReady())
@@ -422,7 +434,23 @@ public class ActivateMirror : UdonSharpBehaviour
             SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "cottonColission");
             Debug.LogWarning("Cotton enter");
         }
-    }                                           
+    }
+
+    public void HaveAlumBlanTrue() // SCNE
+    {
+        haveAluminaBlanca = true;
+    }
+
+    public void HaveAlumGrisTrue() // SCNE
+    {
+        haveAluminaGris = true;
+    }
+
+    public void IsInPulidoraTrue() //SCNE
+    {
+        isInPulidora = true;
+    }
+
     public void addedAlcohol() //SCNE
     {
         haveAlcohol = true;
@@ -442,9 +470,12 @@ public class ActivateMirror : UdonSharpBehaviour
             Debug.Log("No current player");
             if (isInPulidora)
             {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimerAndBool");
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimer");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
+                //IsInPulidoraFalse();
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ScaleBorder");
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "IsInPulidoraFalse");
+                //Debug.LogWarning("[<color=green>NoCurrentPlayer</color>]Owner say in Exit: " + ownerSays.ToString());
             }
         }
 
@@ -453,13 +484,20 @@ public class ActivateMirror : UdonSharpBehaviour
             //Debug.LogWarning("This player is owner, objeto: " + other.gameObject.name);
             if (other.gameObject.name == "RotorPulidora")
             {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimerAndBool");
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimer");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
+                //IsInPulidoraFalse();
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "IsInPulidoraFalse");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ScaleBorder");
-                ownerSays = true;
-                Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Exit: " + ownerSays.ToString());
+                //ownerSays = true;
+                //Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Exit: " + ownerSays.ToString());
             }
         }
+    }
+
+    public void IsInPulidoraFalse() // SCNE
+    {
+        isInPulidora = false;
     }
 
     private bool generalTimer(float maxTime, string messageDebug)
@@ -468,6 +506,7 @@ public class ActivateMirror : UdonSharpBehaviour
         Debug.Log(messageDebug + timer);
         if (timer > maxTime) { return true; }
         else { return false; }
+                
     }
     public bool IsReady()
     {
@@ -476,7 +515,18 @@ public class ActivateMirror : UdonSharpBehaviour
 
     public void ScaleBorder()
     {
-        probeBehaviour.bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
+        string dirProbe = probeBehaviour.gameObject.GetComponent<OrientationChecker>().checkOrientation();
+        if (dirProbe == null || positionFace == null) {return; }
+        if(dirProbe == positionFace)
+        {
+            Debug.LogWarning("ScaleBorder by: " + gameObject.name + " Orientation Probe: " + dirProbe);
+            probeBehaviour.bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
+        }
+        else if (IsReady())
+        {
+            Debug.LogWarning("ScaleBorder by: " + gameObject.name + " Orientation Probe: " + dirProbe + "IsReady: " + IsReady());
+            probeBehaviour.bodyMaterial.GetComponent<Renderer>().material.SetFloat("_Scale", 0f);
+        }
     }
 
 }
