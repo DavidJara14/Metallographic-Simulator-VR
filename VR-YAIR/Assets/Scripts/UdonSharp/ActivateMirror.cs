@@ -55,9 +55,7 @@ public class ActivateMirror : UdonSharpBehaviour
     [SerializeField] ParticleSystem nitalInProbePS;
     [SerializeField] ParticleSystem probetaWaterPS;
 
-    private float timer = 0f;
-    //[UdonSynced] private bool ownerSays = false;
-    
+    private float timer = 0f;    
     const float LAUNCH_FORCE = 250f;
 
     [Header("Mirror")]
@@ -155,7 +153,6 @@ public class ActivateMirror : UdonSharpBehaviour
         {
             AtaqueConNital();
         }
-
     }
 
     private void ChangeProbetaVisual()
@@ -250,7 +247,6 @@ public class ActivateMirror : UdonSharpBehaviour
             if (newcalor)
             {
                 probetaWaterPS.Stop();
-                //enjuagadoFinished();
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "enjuagadoFinished");
                 Debug.LogWarning("[<color=blue>FinishedEnjuagado: </color>]" + finishedEnjuagado);
             }
@@ -260,8 +256,6 @@ public class ActivateMirror : UdonSharpBehaviour
         if (waterPS != null) // Comprueba si existe una fuente emisora de agua
         {
             //Debug.LogWarning("[<color=blue>waterPS is: </color>]" + waterPS);
-
-            //if (finishedWater) { return; }
             
             if (!waterPS.isEmitting) // remueve la referencia emisora de agua si no esta emitiendo
             {
@@ -280,7 +274,6 @@ public class ActivateMirror : UdonSharpBehaviour
                 {
                     SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "waterFinished");
                     Debug.LogWarning("[<color=blue>waterFinished </color>]" + finishedWater);
-                    //waterFinished();
                 }
                 Debug.Log("Chorro de agua fria");
             }
@@ -290,7 +283,6 @@ public class ActivateMirror : UdonSharpBehaviour
                 residuosAlumina.Stop();
             }
         }
-
     }
     public void waterFinished() // SCNE
     {
@@ -315,12 +307,6 @@ public class ActivateMirror : UdonSharpBehaviour
         if (isCotton && alcoholPS.isEmitting) 
         {
             //Debug.LogWarning("[<color=blue>is cotton: </color>]" + isCotton);
-
-            if (pickup.currentPlayer != null && Networking.IsOwner(Networking.LocalPlayer, probeBehaviour.gameObject))
-            {
-                gameObject.GetComponentInParent<HapticFeedback>().SendCustomEvent("hapticFeedbackCotton");
-            }
-
             if (haveAlcohol)
             {
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "resetCotton");
@@ -405,14 +391,12 @@ public class ActivateMirror : UdonSharpBehaviour
             PulidoraScript = rotorPulidora.GetComponent<PulidoraScript>();
             if (PulidoraScript.GrisLoaded)
             {
-                //HaveAlumGrisTrue();
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "HaveAlumGrisTrue");
             }
             if (finishedPulido1)
             {
                 if (PulidoraScript.BlancaLoaded)
                 {
-                    //HaveAlumBlanTrue();
                     SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "HaveAlumBlanTrue");
                 }
             }
@@ -472,10 +456,8 @@ public class ActivateMirror : UdonSharpBehaviour
             {
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimer");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
-                //IsInPulidoraFalse();
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ScaleBorder");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "IsInPulidoraFalse");
-                //Debug.LogWarning("[<color=green>NoCurrentPlayer</color>]Owner say in Exit: " + ownerSays.ToString());
             }
         }
 
@@ -486,11 +468,8 @@ public class ActivateMirror : UdonSharpBehaviour
             {
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetTimer");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetVars");
-                //IsInPulidoraFalse();
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "IsInPulidoraFalse");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ScaleBorder");
-                //ownerSays = true;
-                //Debug.LogWarning("[<color=green>OwnerSay</color>]Owner say in Exit: " + ownerSays.ToString());
             }
         }
     }
