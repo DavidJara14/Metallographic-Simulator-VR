@@ -39971,11 +39971,13 @@ MonoBehaviour:
   positionFace: Up
   desgasteProbeta: 0
   newcalor: 0
+  scaleBorderSend: 0
   rotorPulidora: {fileID: 0}
   PulidoraScript: {fileID: 0}
   haveAluminaGris: 0
   haveAluminaBlanca: 0
-  isInPulidora: 0
+  isInPulidoraGris: 0
+  isInPulidoraBlanca: 0
   finishedPulido1: 0
   finishedPulido2: 0
   finishedEnjuagado: 0
@@ -41021,11 +41023,13 @@ MonoBehaviour:
   positionFace: Down
   desgasteProbeta: 0
   newcalor: 0
+  scaleBorderSend: 0
   rotorPulidora: {fileID: 0}
   PulidoraScript: {fileID: 0}
   haveAluminaGris: 0
   haveAluminaBlanca: 0
-  isInPulidora: 0
+  isInPulidoraGris: 0
+  isInPulidoraBlanca: 0
   finishedPulido1: 0
   finishedPulido2: 0
   finishedEnjuagado: 0
@@ -51099,6 +51103,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2599295127342437393, guid: 992479a288117b34abd5f9077c63c88c,
+        type: 3}
+      propertyPath: _skeleton
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2599295127342437393, guid: 992479a288117b34abd5f9077c63c88c,
         type: 3}
