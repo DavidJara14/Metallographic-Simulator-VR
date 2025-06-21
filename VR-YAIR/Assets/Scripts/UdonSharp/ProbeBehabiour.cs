@@ -66,9 +66,9 @@ public class ProbeBehabiour : UdonSharpBehaviour
     {
         _audioSource.clip = _audioClip;
 
-#if UNITY_ANDROID
+//#if UNITY_ANDROID
         gameObject.GetComponent<Rigidbody>().centerOfMass = Vector3.zero;
-#endif
+//#endif
     }
 
     private void Update()
