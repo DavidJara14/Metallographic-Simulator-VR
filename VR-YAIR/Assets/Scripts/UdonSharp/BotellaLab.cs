@@ -83,6 +83,7 @@ public class BotellaLab : UdonSharpBehaviour
 
     public void UseThisThing()
     {
+        if(_pickupComp.currentPlayer == null) { return; }
         var Mainn = _particleSystem.main;
         Mainn.startColor = WaterMaterial.GetColor("_ColorAgua");
         _particleSystem.transform.localPosition = _PSOriginalPos;

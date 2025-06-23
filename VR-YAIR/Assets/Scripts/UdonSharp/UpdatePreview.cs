@@ -10,9 +10,12 @@ public class UpdatePreview : UdonSharpBehaviour
     [Header("Faces Probeta")]
     public GameObject probetaShaderParent_inf;
     public GameObject probetaMirrorParent_inf;
+    public GameObject probetaBorderParent_inf;
+
     public GameObject probetaShaderParent_sup;
     public GameObject probetaMirrorParent_sup;
-    
+    public GameObject probetaBorderParent_sup;
+
     [Header("Faces Canva")]
     public GameObject probetaShaderChildren;
     public GameObject probetaMirrorChildren;
@@ -77,8 +80,8 @@ public class UpdatePreview : UdonSharpBehaviour
     public void switchFaces_Off()
     {
         forceActiveShader(probetaShaderParent_inf, probetaMirrorParent_inf);
-        scaleShader(probetaShaderParent_sup, 0f, 1);
-        borderColor.bodyMaterial = probetaShaderParent_inf;
+        scaleShader(probetaBorderParent_sup, 0f, 0);
+        borderColor.bodyMaterial = probetaBorderParent_inf;
         probetaShaderActual = probetaShaderParent_inf;
         supIsActive = false;
         switchFlag = true;
@@ -89,8 +92,8 @@ public class UpdatePreview : UdonSharpBehaviour
     public void switchFaces_On()
     {
         forceActiveShader(probetaShaderParent_sup, probetaMirrorParent_sup);
-        scaleShader(probetaShaderParent_inf, 0f, 1);
-        borderColor.bodyMaterial = probetaShaderParent_sup;
+        scaleShader(probetaBorderParent_inf, 0f, 0);
+        borderColor.bodyMaterial = probetaBorderParent_sup;
         probetaShaderActual = probetaShaderParent_sup;
         supIsActive = true;
         switchFlag = true;
@@ -140,7 +143,7 @@ public class UpdatePreview : UdonSharpBehaviour
 
     public void scaleAllMaterial()
     {
-        scaleShader(probetaShaderParent_inf, 0f, 1);
-        scaleShader(probetaShaderParent_sup, 0f, 1);
+        scaleShader(probetaBorderParent_inf, 0f, 0);
+        scaleShader(probetaBorderParent_sup, 0f, 0);
     }
 }
