@@ -7,6 +7,10 @@ using VRC.Udon;
 
 public class UpdatePreview : UdonSharpBehaviour
 {
+    [SerializeField] private OrientationChecker orientationChecker;
+    [SerializeField] private Vector3 positionCanvaUp = new Vector3(-0.541f, 0.291f, 0.034f);
+    [SerializeField] private Vector3 positionCanvaDown = new Vector3(-0.541f, -0.291f, 0.034f);
+
     [Header("Faces Probeta")]
     public GameObject probetaShaderParent_inf;
     public GameObject probetaMirrorParent_inf;
@@ -40,7 +44,10 @@ public class UpdatePreview : UdonSharpBehaviour
         probetaShaderActual = probetaShaderParent_inf;
     }
     private void Update()
-    {
+    {    
+        moveCanva();
+        rotateCanva();
+
         updateShader(probetaShaderChildren);
 
         if (supIsActive)
@@ -146,4 +153,36 @@ public class UpdatePreview : UdonSharpBehaviour
         scaleShader(probetaBorderParent_inf, 0f, 0);
         scaleShader(probetaBorderParent_sup, 0f, 0);
     }
+
+    /// <summary>
+    /// Rota el Canvas para que mire hacia el jugador local, manteniendo la rotación únicamente en Y.
+    /// Afecta solo al jugador local.
+    /// </summary>
+    private void rotateCanva()
+    {
+        Vector3 playerPosition = Networking.LocalPlayer.GetPosition(); // Posicion del jugador Local
+        transform.LookAt(playerPosition); // Orienta el transform para mirar al jugador
+        Vector3 euler = transform.eulerAngles;
+        transform.eulerAngles = new Vector3(euler.x - 80, euler.y, 0); // Solo rotación en X, Y
+    }
+
+    /// <summary>
+    /// Mueve el Canvas a una posición local predefinida (arriba o abajo) según la orientación detectada.
+    /// </summary>
+    private void moveCanva()
+    {
+        string state = orientationChecker.checkOrientation();
+        if(state == "Nothing") { return; }
+        //Debug.Log("[<color=orange>Postition actual: </color>]" + transform.localPosition);
+        if(state == "Up") // Is Up
+        {
+            gameObject.transform.localPosition = positionCanvaUp;
+        }
+        else // Is Down
+        {
+            gameObject.transform.localPosition = positionCanvaDown;
+        }
+        //Debug.Log("[<color=green>Postition new: </color>]" + transform.localPosition + ", State: " + state);
+    }
+
 }
