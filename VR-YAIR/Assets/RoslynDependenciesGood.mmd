@@ -1,0 +1,489 @@
+```mermaid
+graph TD
+    DependencyDiagramGenerator --> |variable| EditorWindow
+    DependencyDiagramGenerator --> |variable| string
+    DependencyDiagramGenerator -.-|llama| HashSet<string>
+    DependencyDiagramGenerator -.-|llama| Dictionary<string, string>
+    DependencyDiagramGenerator -.-|llama| HashSet<(string from, string to)>
+    DependencyDiagramGenerator -.-|llama| StreamWriter
+    DependencyDiagramGenerator -.-|llama| Directory
+    DependencyDiagramGenerator -.-|llama| File
+    DependencyDiagramGenerator -.-|llama| Regex
+    DependencyDiagramGenerator -.-|llama| Path
+    DependencyDiagramGenerator -.-|llama| AssetDatabase
+    DependencyDiagramGenerator -.-|llama| Debug
+    DependencyDiagramGenerator -.-|llama| List<(string from, string to)>
+    ReflectionDependencyDiagramGenerator --> |variable| MonoBehaviour
+    ReflectionDependencyDiagramGenerator --> |variable| string
+    ReflectionDependencyDiagramGenerator -.-|llama| HashSet<(string from, string to)>
+    ReflectionDependencyDiagramGenerator -.-|llama| StreamWriter
+    ReflectionDependencyDiagramGenerator -.-|llama| Path
+    ReflectionDependencyDiagramGenerator -.-|llama| Directory
+    ReflectionDependencyDiagramGenerator -.-|llama| File
+    ReflectionDependencyDiagramGenerator -.-|llama| Debug
+    ReflectionDependencyDiagramGenerator -.-|llama| Assembly
+    ReflectionDependencyDiagramGenerator -.-|llama| AssetDatabase
+    RoslynDependencyDiagramGenerator --> |variable| EditorWindow
+    RoslynDependencyDiagramGenerator --> |variable| string
+    RoslynDependencyDiagramGenerator -.-|llama| HashSet<(string from, string to, string kind)>
+    RoslynDependencyDiagramGenerator -.-|llama| StreamWriter
+    RoslynDependencyDiagramGenerator -.-|llama| Directory
+    RoslynDependencyDiagramGenerator -.-|llama| File
+    RoslynDependencyDiagramGenerator -.-|llama| CSharpSyntaxTree
+    RoslynDependencyDiagramGenerator -.-|llama| AssetDatabase
+    RoslynDependencyDiagramGenerator -.-|llama| Debug
+    BridgeGenerator --> |variable| MonoBehaviour
+    BridgeGenerator --> |variable| GameObject[]
+    BridgeGenerator --> |variable| GameObject
+    BridgeGenerator --> |variable| Mesh
+    BridgeGenerator --> |variable| Vector3
+    BridgeGenerator --> |variable| float
+    BridgeGenerator -.-|llama| GameObject
+    BridgeGenerator -.-|llama| Vector3
+    BridgeGenerator -.-|llama| Random
+    BridgeGenerator -.-|llama| Quaternion
+    BridgeGenerator -.-|llama| Mathf
+    BridgeGenerator -.-|llama| PreviousPlankRB
+    BridgeGenerator -.-|llama| PreviousRopeRB
+    ExtensionMetods --> |variable| Vector3
+    ExtensionMetods -.-|llama| Vector3
+    ExtensionMetods --> |variable| Vector4
+    ExtensionMetods --> |variable| Quaternion
+    ExtensionMetods -.-|llama| Vector4
+    ActivateMirror --> |variable| UdonSharpBehaviour
+    ActivateMirror --> |variable| GameObject
+    ActivateMirror --> |variable| ProbeBehabiour
+    ActivateMirror --> |variable| VRC_Pickup
+    ActivateMirror --> |variable| float
+    ActivateMirror --> |variable| bool
+    ActivateMirror --> |variable| PulidoraScript
+    ActivateMirror --> |variable| ParticleSystem
+    ActivateMirror --> |variable| VRCMirrorReflection
+    ActivateMirror --> |variable| LayerMask
+    ActivateMirror -.-|llama| Networking
+    ActivateMirror -.-|llama| Debug
+    ActivateMirror -.-|llama| ParticleSystem.MinMaxCurve
+    ActivateMirror --> |variable| Collider
+    ActivateParticlesOnPickupUse --> |variable| UdonSharpBehaviour
+    ActivateParticlesOnPickupUse --> |variable| VRC_Pickup
+    ActivateParticlesOnPickupUse --> |variable| MeshRenderer
+    ActivateParticlesOnPickupUse --> |variable| ParticleSystem
+    ActivateParticlesOnPickupUse --> |variable| Transform
+    ActivateParticlesOnPickupUse --> |variable| bool
+    ActivateParticlesOnPickupUse -.-|llama| Quaternion
+    ActivateParticlesOnTilt --> |variable| UdonSharpBehaviour
+    ActivateParticlesOnTilt --> |variable| VRC_Pickup
+    ActivateParticlesOnTilt --> |variable| MeshRenderer
+    ActivateParticlesOnTilt --> |variable| ParticleSystem
+    ActivateParticlesOnTilt --> |variable| Transform
+    ActivateParticlesOnTilt -.-|llama| Quaternion
+    AugmentsBehabiour --> |variable| UdonSharpBehaviour
+    AugmentsBehabiour --> |variable| int
+    AugmentsBehabiour --> |variable| MicroscopeBehabiour
+    AugmentsBehabiour --> |variable| GameObject
+    AugmentsBehabiour --> |variable| AudioSource
+    AugmentsBehabiour --> |variable| AudioClip
+    AugmentsBehabiour -.-|llama| Quaternion
+    BorderColor --> |variable| UdonSharpBehaviour
+    BorderColor --> |variable| GameObject
+    BorderColor --> |variable| float
+    BorderColor --> |variable| bool
+    BoteBasura --> |variable| UdonSharpBehaviour
+    BoteBasura --> |variable| Collision
+    BoteBasura -.-|llama| Debug
+    BotellaLab --> |variable| UdonSharpBehaviour
+    BotellaLab --> |variable| float
+    BotellaLab --> |variable| bool
+    BotellaLab --> |variable| string
+    BotellaLab --> |variable| GameObject
+    BotellaLab --> |variable| Material
+    BotellaLab --> |variable| VRC_Pickup
+    BotellaLab --> |variable| MeshRenderer
+    BotellaLab --> |variable| ParticleSystem
+    BotellaLab --> |variable| Vector3
+    BotellaLab --> |variable| Transform
+    BotellaLab -.-|llama| InfillGO
+    BotellaLab -.-|llama| WaterMaterial
+    BotellaLab -.-|llama| Mathf
+    BotellaLab -.-|llama| Networking
+    BotellaLab -.-|llama| Debug
+    BotellaLab -.-|llama| Quaternion
+    ButtonInteraction3D --> |variable| UdonSharpBehaviour
+    ButtonInteraction3D --> |variable| Rigidbody
+    ButtonInteraction3D --> |variable| ConfigurableJoint
+    ButtonInteraction3D --> |variable| UdonBehaviour
+    ButtonInteraction3D --> |variable| float
+    ButtonInteraction3D --> |variable| Vector3
+    ButtonInteraction3D --> |variable| string
+    ButtonInteraction3D --> |variable| bool
+    ButtonInteraction3D -.-|llama| Vector3
+    ButtonInteraction3D -.-|llama| Mathf
+    ButtonInteraction3D -.-|llama| Debug
+    ButtonInteraction3D -.-|llama| UdonEventBehabiour
+    CallerTest --> |variable| UdonSharpBehaviour
+    CallerTest --> |variable| int
+    CallerTest --> |variable| Material[]
+    CallerTest --> |variable| MeshRenderer
+    CallerTest -.-|llama| Debug
+    Cheto --> |variable| UdonSharpBehaviour
+    Cheto --> |variable| bool
+    Cheto --> |variable| Transform
+    Cheto --> |variable| ParticleSystem
+    Cheto --> |variable| AudioSource
+    CottonBehabiour --> |variable| UdonSharpBehaviour
+    CottonBehabiour --> |variable| Material
+    CubreLijaBehabiour --> |variable| UdonSharpBehaviour
+    CubreLijaBehabiour --> |variable| GameObject
+    CubreLijaBehabiour --> |variable| LijaRotation
+    CubreLijaBehabiour --> |variable| Collider
+    CubreLijaBehabiour -.-|llama| LayerMask
+    CubreLijaSnap --> |variable| UdonSharpBehaviour
+    CubreLijaSnap --> |variable| bool
+    CubreLijaSnap --> |variable| GameObject
+    CubreLijaSnap --> |variable| VRC_Pickup
+    CubreLijaSnap -.-|llama| CubreLijaGo
+    CubreLijaSnap --> |variable| Transform
+    CubreLijaSnap -.-|llama| LayerMask
+    CubreLijaSnap --> |variable| Collider
+    DetectParticleCollision --> |variable| UdonSharpBehaviour
+    DetectParticleCollision --> |variable| ActivateMirror
+    DetectParticleCollision --> |variable| GameObject
+    DetectParticleCollision -.-|llama| Debug
+    DetectParticleCollision --> |variable| string
+    DirSelectorScript --> |variable| UdonSharpBehaviour
+    DirSelectorScript --> |variable| VRC_Pickup
+    DirSelectorScript --> |variable| Transform
+    DirSelectorScript -.-|llama| Networking.LocalPlayer
+    DirSelectorScript -.-|llama| Debug
+    DoorHandleInteraction --> |variable| UdonSharpBehaviour
+    DoorHandleInteraction --> |variable| VRC_Pickup
+    DoorHandleInteraction --> |variable| Vector3[]
+    DoorHandleInteraction --> |variable| Transform
+    DoorHandleInteraction --> |variable| GameObject
+    DoorHandleInteraction --> |variable| bool
+    DoorHandleInteraction -.-|llama| Vector3
+    DoorHandleInteraction -.-|llama| Door.transform
+    DoorHandleInteraction -.-|llama| Networking
+    DoorHandleInteraction -.-|llama| Quaternion
+    DoorHandleInteraction -.-|llama| Vector4
+    DoorHandleInteraction -.-|llama| Debug
+    DoorHandleInteraction -.-|llama| GrabbableHandle.transform
+    DoorInteraction --> |variable| UdonSharpBehaviour
+    DoorInteraction --> |variable| VRC_Pickup
+    DoorInteraction --> |variable| Rigidbody
+    DoorInteraction --> |variable| GameObject
+    DoorInteraction --> |variable| GameObject[]
+    DoorInteraction --> |variable| bool
+    DoorInteraction --> |variable| float
+    DoorInteraction -.-|llama| Vector3
+    DoorInteraction -.-|llama| Door.transform
+    Ejectable --> |variable| UdonSharpBehaviour
+    EjectObject --> |variable| UdonSharpBehaviour
+    EjectObject --> |variable| GameObject
+    EjectObject --> |variable| VRC_Pickup
+    EjectObject --> |variable| Vector3
+    EjectObject -.-|llama| Vector3
+    EjectObject -.-|llama| Mathf
+    EjectObject --> |variable| Collider
+    EjectObject -.-|llama| Networking
+    ElementType --> |variable| UdonSharpBehaviour
+    ElementType --> |variable| string
+    ElementType --> |variable| IUdonEventReceiver
+    ElementType --> |variable| VRCUrl[]
+    ElementType --> |variable| IVRCImageDownload[]
+    ElementType --> |variable| VRCImageDownloader
+    ElementType --> |variable| int
+    ElementType -.-|llama| Debug
+    ElementType --> |variable| IVRCImageDownload
+    EventCallerOnHoldOnDrop --> |variable| UdonSharpBehaviour
+    EventCallerOnHoldOnDrop --> |variable| GameObject[]
+    EventCallerOnHoldOnDrop --> |variable| UdonBehaviour[]
+    EventCallerOnHoldOnDrop --> |variable| string[]
+    EventCallerOnHoldOnDrop -.-|llama| DataList
+    EventCallerOnHoldOnDrop -.-|llama| GOListeners[i]
+    EventCallerOnHoldOnDrop -.-|llama| UdonBehabiourListenersDebugVisualization[i]
+    EventCallerOnHoldOnDrop -.-|llama| Debug
+    GoToHandVR --> |variable| UdonSharpBehaviour
+    GoToHandVR --> |variable| Transform
+    GoToHandVR --> |variable| bool[]
+    GoToHandVR --> |variable| bool
+    GoToHandVR --> |variable| VRCPlayerApi
+    GoToHandVR -.-|llama| Networking.LocalPlayer
+    GoToHandVR -.-|llama| LHandHandle.gameObject
+    GoToHandVR -.-|llama| RHandHandle.gameObject
+    GoToHandVR -.-|llama| LocalPlayerInstance
+    GoToHandVR -.-|llama| Debug
+    HapticFeedback --> |variable| UdonSharpBehaviour
+    HapticFeedback --> |variable| VRC_Pickup
+    HapticFeedback --> |variable| float
+    HapticFeedback -.-|llama| Networking.LocalPlayer
+    HapticFeedback -.-|llama| Debug
+    Heatable --> |variable| UdonSharpBehaviour
+    Heatable --> |variable| UdonBehaviour[]
+    Heatable --> |variable| string
+    Heatable -.-|llama| Debug
+    Heatable -.-|llama| UdonBehabiourListenersRef[i]
+    IdentifyFace --> |variable| UdonSharpBehaviour
+    IdentifyFace --> |variable| GameObject
+    IdentifyFace --> |variable| ProbeBehabiour
+    IdentifyFace --> |variable| Collider
+    IdentifyFace -.-|llama| Debug
+    InteractProbe --> |variable| UdonSharpBehaviour
+    InteractProbe --> |variable| bool
+    InteractProbe --> |variable| GameObject
+    IsLiquidSource --> |variable| UdonSharpBehaviour
+    IsProbeTouched --> |variable| UdonSharpBehaviour
+    IsProbeTouched --> |variable| bool
+    IsProbeTouched --> |variable| string
+    IsProbeTouched --> |variable| UdonBehaviour
+    IsProbeTouched --> |variable| ProbeBehabiour
+    IsProbeTouched --> |variable| Collider
+    LijaCircularBehabiour --> |variable| UdonSharpBehaviour
+    LijaCircularBehabiour --> |variable| int
+    LijaCircularBehabiour --> |variable| LijaDataholder
+    LijaCircularBehabiour --> |variable| float
+    LijaCircularBehabiour --> |variable| TextMeshProUGUI
+    LijaCircularBehabiour --> |variable| MeshRenderer
+    LijaCircularBehabiour --> |variable| Rigidbody
+    LijaCircularBehabiour -.-|llama| Mathf
+    LijaCircularBehabiour --> |variable| GameObject
+    LijaCircularBehabiour -.-|llama| Debug
+    LijaCircularBehabiour -.-|llama| TamañoDeGrano
+    LijaCircularBehabiour --> |variable| Collider
+    LijaCircularBehabiour -.-|llama| LayerMask
+    LijaCuadrada --> |variable| UdonSharpBehaviour
+    LijaCuadrada --> |variable| LijaDataholder
+    LijaCuadrada --> |variable| GameObject[]
+    LijaCuadrada --> |variable| int
+    LijaCuadrada --> |variable| TextMeshProUGUI
+    LijaCuadrada --> |variable| bool
+    LijaCuadrada --> |variable| Rigidbody
+    LijaCuadrada -.-|llama| Debug
+    LijaCuadrada -.-|llama| TamañoDeGrano
+    LijaCuadrada --> |variable| Collider
+    LijaCuadrada -.-|llama| ReferenceGOComponent.LijaDict
+    LijaCuadrada -.-|llama| Networking
+    LijaCuadrada -.-|llama| ReferenceGOComponent.LijaPool
+    LijaDataholder --> |variable| UdonSharpBehaviour
+    LijaDataholder --> |variable| VRCObjectPool
+    LijaDataholder --> |variable| Material[]
+    LijaDataholder --> |variable| DataDictionary
+    LijaDataholder -.-|llama| Debug
+    LijaRotation --> |variable| UdonSharpBehaviour
+    LijaRotation --> |variable| bool
+    LijaRotation --> |variable| float
+    LijaRotation --> |variable| GameObject
+    LijaRotation --> |variable| VRC_Pickup
+    LijaRotation --> |variable| TextMeshProUGUI
+    LijaRotation --> |variable| AudioSource
+    LijaRotation --> |variable| AudioClip
+    LijaRotation --> |variable| CubreLijaSnap
+    LijaRotation -.-|llama| LijaGO
+    LijaRotation -.-|llama| Lija
+    LijaRotation -.-|llama| LayerMask
+    LijaRotation --> |variable| Transform
+    LijaRotation -.-|llama| Debug
+    LijaRotation --> |variable| Collider
+    MicroscopeBehabiour --> |variable| UdonSharpBehaviour
+    MicroscopeBehabiour --> |variable| Image[]
+    MicroscopeBehabiour --> |variable| RawImage[]
+    MicroscopeBehabiour --> |variable| TextMeshProUGUI
+    MicroscopeBehabiour --> |variable| MicroscopeElements
+    MicroscopeBehabiour --> |variable| GameObject
+    MicroscopeBehabiour --> |variable| ProbeBehabiour
+    MicroscopeBehabiour --> |variable| bool
+    MicroscopeBehabiour --> |variable| int
+    MicroscopeBehabiour --> |variable| DataDictionary
+    MicroscopeBehabiour -.-|llama| Debug
+    MicroscopeBehabiour -.-|llama| CanvasGO
+    MicroscopeBehabiour -.-|llama| Vector3
+    MicroscopeBehabiour -.-|llama| PBcomponent
+    MicroscopeBehabiour --> |variable| string
+    MicroscopeBehabiour -.-|llama| ReferenceGOComponent.elementos[i]
+    MicroscopeBehabiour --> |variable| Texture2D
+    MicroscopeBehabiour --> |variable| Collider
+    MicroscopeElements --> |variable| UdonSharpBehaviour
+    MicroscopeElements --> |variable| ElementType[]
+    MicroscopeElements --> |variable| Texture2D
+    MicroscopeElements --> |variable| VRCImageDownloader
+    MicroscopeElements -.-|llama| VRCImageDownloader
+    ObjectSnapBehabiour --> |variable| UdonSharpBehaviour
+    ObjectSnapBehabiour --> |variable| bool
+    ObjectSnapBehabiour --> |variable| Vector3
+    ObjectSnapBehabiour --> |variable| float
+    ObjectSnapBehabiour --> |variable| GameObject[]
+    ObjectSnapBehabiour --> |variable| UdonBehaviour[]
+    ObjectSnapBehabiour --> |variable| string[]
+    ObjectSnapBehabiour --> |variable| Collider[]
+    ObjectSnapBehabiour --> |variable| GameObject
+    ObjectSnapBehabiour --> |variable| AudioSource
+    ObjectSnapBehabiour --> |variable| AudioClip
+    ObjectSnapBehabiour -.-|llama| DataList
+    ObjectSnapBehabiour -.-|llama| GOListeners[i]
+    ObjectSnapBehabiour -.-|llama| Physics
+    ObjectSnapBehabiour -.-|llama| Debug
+    ObjectSnapBehabiour -.-|llama| Vector3
+    ObjectSnapBehabiour -.-|llama| GOToSnap
+    ObjectSnapBehabiour -.-|llama| Quaternion
+    ObjectSnapBehabiour -.-|llama| UdonBehabiourListenersRef[i]
+    ObjectSnapBehabiour -.-|llama| Color
+    ObjectSnapBehabiour -.-|llama| Gizmos
+    ObjectSnapVisual --> |variable| UdonSharpBehaviour
+    ObjectSnapVisual --> |variable| MeshRenderer
+    ObjectSnapVisual --> |variable| MeshFilter
+    ObjectSnapVisual --> |variable| Mesh
+    ObjectSnapVisual --> |variable| Material
+    OnParticleHitChangeVisual --> |variable| UdonSharpBehaviour
+    OnParticleHitChangeVisual --> |variable| MeshRenderer
+    OnParticleHitChangeVisual --> |variable| GameObject
+    OnParticleHitChangeVisual -.-|llama| Debug
+    PistolaDeCalor --> |variable| UdonSharpBehaviour
+    PistolaDeCalor --> |variable| CapsuleCollider
+    PistolaDeCalor --> |variable| bool
+    PistolaDeCalor --> |variable| Animator
+    PistolaDeCalor --> |variable| AudioSource
+    PistolaDeCalor --> |variable| ParticleSystem
+    PistolaDeCalor --> |variable| VRCPickup
+    PistolaDeCalor --> |variable| DataDictionary
+    PistolaDeCalor --> |variable| AudioClip
+    PistolaDeCalor --> |variable| float
+    PistolaDeCalor -.-|llama| Vector3
+    PistolaDeCalor -.-|llama| ActivePositionZ
+    PistolaDeCalor --> |variable| Collider
+    PistolaDeCalor -.-|llama| Debug
+    PistolaDeCalor -.-|llama| Networking
+    placeable --> |variable| UdonSharpBehaviour
+    PlayerRespawnController --> |variable| UdonSharpBehaviour
+    PlayerRespawnController --> |variable| Transform
+    PlayerRespawnController --> |variable| ParticleSystem
+    PlayerRespawnController --> |variable| VRCPlayerApi
+    PlayerRespawnController -.-|llama| Vector3
+    PourSystemTest --> |variable| UdonSharpBehaviour
+    PourSystemTest --> |variable| GameObject
+    PourSystemTest -.-|llama| Debug
+    ProbeBehabiour --> |variable| UdonSharpBehaviour
+    ProbeBehabiour --> |variable| float
+    ProbeBehabiour --> |variable| int
+    ProbeBehabiour --> |variable| Vector3
+    ProbeBehabiour --> |variable| Material
+    ProbeBehabiour --> |variable| ParticleSystem
+    ProbeBehabiour --> |variable| GameObject
+    ProbeBehabiour --> |variable| LijaRotation
+    ProbeBehabiour --> |variable| VRC_Pickup
+    ProbeBehabiour --> |variable| InteractProbe
+    ProbeBehabiour --> |variable| DataList
+    ProbeBehabiour --> |variable| bool
+    ProbeBehabiour --> |variable| string
+    ProbeBehabiour --> |variable| AudioSource
+    ProbeBehabiour --> |variable| AudioClip
+    ProbeBehabiour -.-|llama| Vector3
+    ProbeBehabiour -.-|llama| Networking
+    ProbeBehabiour -.-|llama| EsteParticleSystem
+    ProbeBehabiour -.-|llama| Quaternion
+    ProbeBehabiour -.-|llama| LijaRotationActivaGO
+    ProbeBehabiour -.-|llama| Debug
+    ProbeBehabiour -.-|llama| LijaRotationActiva.Lija.GetComponent<LijaCircularBehabiour>()
+    ProbeBehabiour -.-|llama| LijaRotationActiva.Lija
+    ProbeBehabiour -.-|llama| Mathf
+    ProbeBehabiour -.-|llama| DataToken
+    ProbeBehabiour -.-|llama| TamañosDeLija
+    ProbeBehabiour --> |variable| Collider
+    ProbeBehabiour -.-|llama| Gizmos
+    ProbetaSnap --> |variable| UdonSharpBehaviour
+    ProbetaSnap --> |variable| bool
+    ProbetaSnap --> |variable| GameObject
+    ProbetaSnap --> |variable| VRC_Pickup
+    ProbetaSnap -.-|llama| ProbetaGO
+    ProbetaSnap --> |variable| Transform
+    ProbetaSnap -.-|llama| LayerMask
+    ProbetaSnap --> |variable| Collider
+    PulidoraScript --> |variable| UdonSharpBehaviour
+    PulidoraScript --> |variable| bool
+    PulidoraScript --> |variable| float
+    PulidoraScript --> |variable| TextMeshProUGUI
+    PulidoraScript --> |variable| AudioSource
+    PulidoraScript --> |variable| AudioClip
+    PulidoraScript -.-|llama| Debug
+    PulidoraScript --> |variable| GameObject
+    SetKinematicFalseOnPickup --> |variable| UdonSharpBehaviour
+    SetKinematicFalseOnPickup --> |variable| bool
+    SetKinematicFalseOnPickup --> |variable| VRCObjectSync
+    SetKinematicFalseOnPickup --> |variable| Rigidbody
+    SetKinematicFalseOnPickup -.-|llama| Debug
+    SkyboxSetup --> |variable| UdonSharpBehaviour
+    SkyboxSetup --> |variable| Material
+    SkyboxSetup --> |variable| DataDictionary
+    SkyboxSetup -.-|llama| Networking.LocalPlayer
+    SkyboxSetup -.-|llama| SkyboxMaterial
+    SkyboxSetup -.-|llama| Debug
+    SkyboxSetup -.-|llama| StarsIntensity["VR"].Float
+    SkyboxSetup -.-|llama| StarsIntensity["PC"].Float
+    SnowParticleFollowPlayer --> |variable| UdonSharpBehaviour
+    SnowParticleFollowPlayer --> |variable| VRCObjectPool
+    SnowParticleFollowPlayer --> |variable| VRCPlayerApi
+    SnowParticlePooll --> |variable| UdonSharpBehaviour
+    SnowParticlePooll --> |variable| VRCObjectPool
+    SnowParticlePooll --> |variable| VRCPlayerApi
+    SnowParticlePooll -.-|llama| Debug
+    TijerasBehabiour --> |variable| UdonSharpBehaviour
+    TijerasBehabiour --> |variable| Animator
+    TijerasBehabiour --> |variable| AudioSource
+    TijerasBehabiour --> |variable| AudioClip
+    TriggerPulidora --> |variable| UdonSharpBehaviour
+    TriggerPulidora --> |variable| float
+    TriggerPulidora --> |variable| bool
+    TriggerPulidora --> |variable| GameObject
+    TriggerPulidora --> |variable| Vector3
+    TriggerPulidora -.-|llama| Debug
+    TriggerPulidora --> |variable| Collider
+    TriggerPulidora -.-|llama| Networking
+    TriggerPulidora -.-|llama| Vector3
+    UpdatePreview --> |variable| UdonSharpBehaviour
+    UpdatePreview --> |variable| GameObject
+    UpdatePreview --> |variable| BorderColor
+    UpdatePreview --> |variable| bool
+    UpdatePreview --> |variable| float
+    UpdatePreview --> |variable| int
+    UpdatePreview -.-|llama| Debug
+    BoneFollower --> |variable| UdonSharpBehaviour
+    BoneFollower --> |variable| HumanBodyBones
+    BoneFollower --> |variable| VRCPlayerApi
+    BoneFollower --> |variable| bool
+    InteractToggle --> |variable| UdonSharpBehaviour
+    InteractToggle --> |variable| GameObject[]
+    PlayerModSetter --> |variable| UdonSharpBehaviour
+    PlayerModSetter --> |variable| float
+    PlayerModSetter --> |variable| bool
+    TrackingDataFollower --> |variable| UdonSharpBehaviour
+    TrackingDataFollower --> |variable| VRCPlayerApi.TrackingDataType
+    TrackingDataFollower --> |variable| VRCPlayerApi
+    TrackingDataFollower --> |variable| bool
+    WorldAudioSettings --> |variable| UdonSharpBehaviour
+    WorldAudioSettings --> |variable| float
+    WorldAudioSettings --> |variable| bool
+    WorldAudioSettings --> |variable| VRCPlayerApi
+    DemoDoor --> |variable| MonoBehaviour
+    DemoDoor --> |variable| Animator
+    DemoDoor --> |variable| Collider
+    DemoFirstPersonController --> |variable| MonoBehaviour
+    DemoFirstPersonController --> |variable| Rigidbody
+    DemoFirstPersonController --> |variable| CapsuleCollider
+    DemoFirstPersonController --> |variable| bool
+    DemoFirstPersonController --> |variable| Transform
+    DemoFirstPersonController --> |variable| ControlType
+    DemoFirstPersonController --> |variable| float
+    DemoFirstPersonController --> |variable| GameObject
+    DemoFirstPersonController -.-|llama| Input
+    DemoFirstPersonController -.-|llama| Mathf
+    DemoFirstPersonController -.-|llama| Quaternion
+    DemoFirstPersonController --> |variable| int
+    GlobalToggleObject --> |variable| UdonSharpBehaviour
+    GlobalToggleObject --> |variable| GameObject
+    GlobalToggleObject --> |variable| bool
+    GlobalToggleObject -.-|llama| Networking
+    MasterToggleObject --> |variable| UdonSharpBehaviour
+    MasterToggleObject --> |variable| GameObject
+    MasterToggleObject --> |variable| bool
+    MasterToggleObject --> |variable| VRCPlayerApi
+    MasterToggleObject -.-|llama| Networking
+```
