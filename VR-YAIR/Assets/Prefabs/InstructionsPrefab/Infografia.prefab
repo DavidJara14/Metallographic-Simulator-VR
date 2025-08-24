@@ -441,9 +441,13 @@ MonoBehaviour:
   detectRigidbodies: 0
   detectStatic: 0
   ignoredColliders:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 1769643152333156155}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 6443981143672699736}
+  - {fileID: 7914904274061503580}
+  - {fileID: 2682366463609137840}
+  - {fileID: 4963008367497974922}
   isToggleButton: 0
   startToggledOn: 0
   buttonAxis: {x: 0, y: 1, z: 0}
@@ -477,7 +481,7 @@ MonoBehaviour:
   inTexture: {fileID: 0}
   onTexture: {fileID: 0}
   lockedTexture: {fileID: 0}
-  enableAnimation: 0
+  enableAnimation: 1
   animator: {fileID: 249715633024292961}
   progressParameter: Press_Progress
   enableHaptics: 1
@@ -485,11 +489,12 @@ MonoBehaviour:
   hapticsAmplitude: 0.7
   hapticsFrequency: 100
   sendPressedEvent: 1
-  pressedEventName: Button_Pressed
+  pressedEventName: Button_Prev_Pressed
   sendReleasedEvent: 0
   releasedEventName: Button_Released
   forceSendStateless: 0
-  udonReceivers: []
+  udonReceivers:
+  - {fileID: 7540726125495189750}
   cached_scale: {x: 1, y: 1, z: 1}
   cached_top: {x: -0, y: 0.068664566, z: 0}
   cached_toggleTop: {x: 0, y: 0.043464564, z: 0}
@@ -1080,15 +1085,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7343901332825649926}
-  - {fileID: 3416366696742962924}
-  - {fileID: 1848286066493218908}
   - {fileID: 1449383269029557344}
+  - {fileID: 1848286066493218908}
+  - {fileID: 3416366696742962924}
+  - {fileID: 7343901332825649926}
   m_Father: {fileID: 8405035024967957323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.0007324219}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4029123305424661388
@@ -1316,20 +1321,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3667200038273184036}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1382,7 +1387,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 641806343831509762}
   m_HandleRect: {fileID: 2631041937839135971}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 0.24999994
   m_NumberOfSteps: 4
   m_OnValueChanged:
@@ -1761,6 +1766,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1743775876952137443}
+  - component: {fileID: 472279205321458388}
+  - component: {fileID: 7540726125495189750}
   m_Layer: 0
   m_Name: Infografia
   m_TagString: Untagged
@@ -1784,6 +1791,59 @@ Transform:
   - {fileID: 575391551643906571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &472279205321458388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554244142965310314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e3d02605cc9fe4dbba37983e190a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 7540726125495189750}
+  enableTargets:
+  - {fileID: 3857119368992510948}
+  - {fileID: 3026070025261579157}
+  - {fileID: 1280632804575508793}
+  scrollbar: {fileID: 3112539150438401463}
+--- !u!114 &7540726125495189750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554244142965310314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPlacement: {fileID: 0}
+  interactText: Use
+  interactTextGO: {fileID: 0}
+  proximity: 2
+  SynchronizePosition: 0
+  AllowCollisionOwnershipTransfer: 0
+  Reliable: 0
+  _syncMethod: 2
+  serializedProgramAsset: {fileID: 11400000, guid: ae98eebec6cff81489a8423b7e73ca9b,
+    type: 2}
+  programSource: {fileID: 11400000, guid: ec617861f8045dc479b74a795408bc58, type: 2}
+  serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
+  publicVariablesUnityEngineObjects: []
+  publicVariablesSerializationDataFormat: 0
 --- !u!1 &5636983260844455590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,20 +2136,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6630541335896174132}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2188,9 +2248,11 @@ MonoBehaviour:
   detectRigidbodies: 0
   detectStatic: 0
   ignoredColliders:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 7914904274061503580}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1769643152333156155}
+  - {fileID: 6633475400366053465}
   isToggleButton: 0
   startToggledOn: 0
   buttonAxis: {x: 0, y: 1, z: 0}
@@ -2224,7 +2286,7 @@ MonoBehaviour:
   inTexture: {fileID: 0}
   onTexture: {fileID: 0}
   lockedTexture: {fileID: 0}
-  enableAnimation: 0
+  enableAnimation: 1
   animator: {fileID: 6818506794983449835}
   progressParameter: Press_Progress
   enableHaptics: 1
@@ -2232,11 +2294,12 @@ MonoBehaviour:
   hapticsAmplitude: 0.7
   hapticsFrequency: 100
   sendPressedEvent: 1
-  pressedEventName: Button_Pressed
+  pressedEventName: Button_Next_Pressed
   sendReleasedEvent: 0
   releasedEventName: Button_Released
   forceSendStateless: 0
-  udonReceivers: []
+  udonReceivers:
+  - {fileID: 7540726125495189750}
   cached_scale: {x: 1, y: 1, z: 1}
   cached_top: {x: -0, y: 0.068664566, z: 0}
   cached_toggleTop: {x: 0, y: 0.043464564, z: 0}
@@ -2502,9 +2565,11 @@ MonoBehaviour:
   detectRigidbodies: 0
   detectStatic: 0
   ignoredColliders:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 6443981143672699736}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1769643152333156155}
+  - {fileID: 6633475400366053465}
   isToggleButton: 1
   startToggledOn: 0
   buttonAxis: {x: 0, y: 1, z: 0}
@@ -2538,7 +2603,7 @@ MonoBehaviour:
   inTexture: {fileID: 0}
   onTexture: {fileID: 0}
   lockedTexture: {fileID: 0}
-  enableAnimation: 0
+  enableAnimation: 1
   animator: {fileID: 162458740979677147}
   progressParameter: Press_Progress
   enableHaptics: 1
@@ -2546,11 +2611,12 @@ MonoBehaviour:
   hapticsAmplitude: 0.7
   hapticsFrequency: 100
   sendPressedEvent: 1
-  pressedEventName: Button_Pressed
+  pressedEventName: Button_Show_Pressed
   sendReleasedEvent: 0
   releasedEventName: Button_Released
   forceSendStateless: 0
-  udonReceivers: []
+  udonReceivers:
+  - {fileID: 7540726125495189750}
   cached_scale: {x: 1, y: 1, z: 1}
   cached_top: {x: -0, y: 0.068664566, z: 0}
   cached_toggleTop: {x: 0, y: 0.043464564, z: 0}
