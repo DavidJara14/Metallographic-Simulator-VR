@@ -278,7 +278,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
                     isHumedo = false;
             }
 
-            if (other.gameObject.name == "Rotor" && other.GetComponent<LijaRotation>().Rotating)
+            if (other.gameObject.name == "Rotor" && LijaRotationActiva.Rotating)
             {
                 _isInsideCollider = true;
             }
