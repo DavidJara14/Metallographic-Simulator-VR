@@ -1,0 +1,25 @@
+```mermaid
+graph TD
+    BotellaLab -->|"Start()"| InfillGO
+    BotellaLab -->|"Start()"| WaterMaterial
+    BotellaLab -->|"Update()"| WaterMaterial
+    BotellaLab -->|"Update()"| Mathf
+    BotellaLab -->|"Update()"| _particleSystem
+    BotellaLab -->|"OnPickup()"| _pickupComp.currentPlayer
+    BotellaLab -->|"OnPickup()"| Networking
+    BotellaLab -->|"UseThisThing()"| WaterMaterial
+    BotellaLab -->|"UseThisThing()"| _pickupComp.currentPlayer
+    BotellaLab -->|"UseThisThing()"| Debug
+    BotellaLab -->|"UseThisThing()"| _particleSystem.gameObject
+    BotellaLab -->|"UseThisThing()"| _particleSystem
+    BotellaLab -->|"UseThisThing()"| Debug
+    BotellaLab -->|"UseThisThing()"| Quaternion
+    BotellaLab -->|"UseThisThing()"| _particleSystem.gameObject
+    BotellaLab -->|"UseThisThing()"| _particleSystem
+    BotellaLab -->|"UnUseThisThing()"| _particleSystem
+    BotellaLab -->|"UnUseThisThing()"| Quaternion
+    BotellaLab -->|"OnParticleCollision()"| other
+    BotellaLab -->|"OnParticleCollision()"| BotellaLab
+    BotellaLab -->|"fill()"| Debug
+    BotellaLab -->|"OnParticleCollision()"| BotellaLab
+```

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 public class ClassCallGraphGenerator : EditorWindow
 {
-    private static string targetClassName = "Player";   // <--- EDITA AQUÍ LA CLASE A ANALIZAR
+    private static string targetClassName = "BotellaLab";   // <--- EDITA AQUÍ LA CLASE A ANALIZAR
     private static string outputPath = "Assets/ClassCallGraph.mmd";
 
     [MenuItem("Tools/Generate Class Call Graph")]
@@ -117,13 +117,13 @@ public class ClassCallGraphGenerator : EditorWindow
             // Outgoing: targetClass ? others
             foreach (var call in outgoingCalls)
             {
-                writer.WriteLine($"    {call.fromClass} -->|{call.methodName}| {call.toClass}");
+                writer.WriteLine($"    {call.fromClass} -->|\"{call.methodName}\"| {call.toClass}");
             }
 
             // Incoming: others ? targetClass
             foreach (var call in incomingCalls)
             {
-                writer.WriteLine($"    {call.fromClass} -->|{call.methodName}| {call.toClass}");
+                writer.WriteLine($"    {call.fromClass} -->|\"{call.methodName}\"| {call.toClass}");
             }
 
             writer.WriteLine("```");
