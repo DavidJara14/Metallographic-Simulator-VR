@@ -1,0 +1,22 @@
+.custom-label {
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(68, 138, 255);
+}
+
+.label-no-spacing {
+    -unity-font-definition: initial;
+    -unity-font: url("project://database/Assets/Fonts/Google_Sans_Code/Google_Sans_Code/static/GoogleSansCode-Regular.ttf?fileID=12800000&guid=db4330b12bdf1db4d97f2588b7943214&type=3#GoogleSansCode-Regular");
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 14px;
+    -unity-font-style: bold;
+    height: 21px;
+    letter-spacing: 7px;
+}

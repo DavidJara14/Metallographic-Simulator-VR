@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Editor/UIToolkit/Extra/RobotElement.uss?fileID=7433441132597879392&amp;guid=84c5a706d358c6d4cab076923a94fa2e&amp;type=3#RobotElement" />
+    <ui:VisualElement name="RobotVisualElementRoot" style="flex-grow: 0; align-items: flex-start; flex-direction: row; height: 30px; align-self: flex-start; width: 100%;">
+        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LinuxTreeGONameLabel" />
+        <ui:ScrollView name="RobotCompScrollView" mode="Horizontal" enabled="true" horizontal-scroller-visibility="Auto" vertical-scroller-visibility="Hidden" style="height: 100%; width: 100%; align-items: center; flex-direction: row; flex-grow: 1; justify-content: center; align-self: center;" />
+    </ui:VisualElement>
+</ui:UXML>

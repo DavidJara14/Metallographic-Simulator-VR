@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Editor/UIToolkit/LinuxLikeTreePrinterUIToolkit.uss?fileID=7433441132597879392&amp;guid=1b0653214aefe1b4d809610cdb197b52&amp;type=3#LinuxLikeTreePrinterUIToolkit" />
+    <ui:VisualElement style="flex-grow: 1; flex-shrink: 0; height: 100%; width: 100%;">
+        <uie:ObjectField label="Root" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="GameObjectField" style="height: 20px; width: 297px; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Fonts/Google_Sans_Code/Google_Sans_Code/static/GoogleSansCode-Regular.ttf?fileID=12800000&amp;guid=db4330b12bdf1db4d97f2588b7943214&amp;type=3#GoogleSansCode-Regular&quot;);" />
+        <ui:ScrollView name="ElementsScrollView" class="label-no-spacing" style="flex-grow: 1; flex-shrink: 1; height: auto; margin-top: 0; padding-top: 4px; padding-right: 0; padding-bottom: 0; padding-left: 4px;" />
+    </ui:VisualElement>
+</ui:UXML>
