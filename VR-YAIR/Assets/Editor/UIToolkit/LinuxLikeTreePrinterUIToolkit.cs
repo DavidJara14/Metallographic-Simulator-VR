@@ -13,7 +13,7 @@ public class LinuxLikeTreePrinterUIToolkit : EditorWindow
     private ObjectField _TargetGO;
     private ScrollView _TreeScrollView;
 
-    [MenuItem("Window/UI Toolkit/LinuxLikeTreePrinterUIToolkit")]
+    [MenuItem("Window/LinuxLikeTreePrinterUIToolkit")]
     public static void ShowExample()
     {
         LinuxLikeTreePrinterUIToolkit wnd = GetWindow<LinuxLikeTreePrinterUIToolkit>();
