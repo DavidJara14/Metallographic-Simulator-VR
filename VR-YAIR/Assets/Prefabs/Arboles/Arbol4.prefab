@@ -114,6 +114,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1520649f63fe07546bb36a87d52e070e,
+        type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1520649f63fe07546bb36a87d52e070e,
         type: 3}
       propertyPath: m_Name
@@ -123,6 +128,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192800573616761333, guid: 1520649f63fe07546bb36a87d52e070e,
+        type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3516130088193065069, guid: 1520649f63fe07546bb36a87d52e070e,
         type: 3}
