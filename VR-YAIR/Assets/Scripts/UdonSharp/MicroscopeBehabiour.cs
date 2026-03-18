@@ -73,7 +73,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
     {
         bool OneFaceIsReady = false;
         int i = 0;
-        foreach (var compo in PBcomponent.GetComponentsInChildren<ActivateMirror>())
+        foreach (var compo in PBcomponent.GetComponentsInChildren<FaceBehaviour>()) // ActivateMirror si se usa el script ActivateMirror
         {
             i++;
             if (compo.IsReady())
