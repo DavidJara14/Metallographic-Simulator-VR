@@ -27,10 +27,11 @@ public class CottonTimer : UdonSharpBehaviour
         {
             Timer = 1f;
             Wet = true;
-            this.enabled = false;
             cottonBehabiour.ChangeAlcohol(Timer);
+            this.enabled = false;
         }
-        cottonBehabiour.ChangeAlcohol(Timer);
+        else
+            cottonBehabiour.ChangeAlcohol(Timer);
     }
 
     private void OnEnable()
