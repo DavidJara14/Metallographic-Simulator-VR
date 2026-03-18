@@ -9,9 +9,13 @@ public class CottonTimer : UdonSharpBehaviour
     [SerializeField] private CottonBehabiour cottonBehabiour;
     [SerializeField] private float Timer = 0f;
 
-    void Start()
+    private void Awake()
     {
         cottonBehabiour = GetComponent<CottonBehabiour>();
+    }
+
+    void Start()
+    {
         this.enabled = false;
     }
 
@@ -22,6 +26,7 @@ public class CottonTimer : UdonSharpBehaviour
         {
             Timer = 1f;
             this.enabled = false;
+            cottonBehabiour.ChangeAlcohol(Timer);
         }
         cottonBehabiour.ChangeAlcohol(Timer);
     }
@@ -29,6 +34,13 @@ public class CottonTimer : UdonSharpBehaviour
     private void OnEnable()
     {
         Timer = 0f;
+    }
+
+    private void OnDisable()
+    {
+        Timer = 0f;
+        if(cottonBehabiour != null)
+            cottonBehabiour.ChangeAlcohol(0);
     }
 
 }
