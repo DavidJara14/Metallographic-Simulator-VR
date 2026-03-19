@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -16,7 +17,7 @@ public class CottonBehabiour : UdonSharpBehaviour
     private const float AP_A = 3.5f;
     private const float HA_A = 1.0f;
 
-    private void Awake()
+    private void Start()
     {
         cottonMat = GetComponentInParent<MeshRenderer>().material;
         cottonTimer = GetComponent<CottonTimer>();
@@ -34,6 +35,11 @@ public class CottonBehabiour : UdonSharpBehaviour
 
     public void ChangeAlcohol(float value)
     {
+        if (cottonMat == null)
+        {
+            Debug.Log("Researching material cottonMat");
+            cottonMat = GetComponentInParent<MeshRenderer>().material;
+        }
         cottonMat.SetFloat("_AditionalPower", value * AP_A);
         cottonMat.SetFloat("_HasAlcoholFloat", value * HA_A); // https://www.reddit.com/r/Unity3D/comments/wgmias/property_rect_already_exists_in_the_property/?rdt=53009
     }

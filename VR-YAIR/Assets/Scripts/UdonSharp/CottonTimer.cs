@@ -6,17 +6,19 @@ using VRC.Udon;
 
 public class CottonTimer : UdonSharpBehaviour
 {
-    [SerializeField] private CottonBehabiour cottonBehabiour;
+    private CottonBehabiour cottonBehabiour;
     [SerializeField] private float Timer = 0f;
-    [SerializeField] private bool Wet = false;
+    private bool Wet = false;
 
     private void Awake()
     {
+        Debug.Log("CottonTimer: awake");
         cottonBehabiour = GetComponent<CottonBehabiour>();
     }
 
     void Start()
     {
+        if (cottonBehabiour == null) cottonBehabiour = GetComponent<CottonBehabiour>();
         this.enabled = false;
     }
 
