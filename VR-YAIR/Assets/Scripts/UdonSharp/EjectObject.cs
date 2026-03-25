@@ -55,7 +55,7 @@ public class EjectObject : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Ejectable>() != null && Networking.IsOwner(Networking.LocalPlayer, other.gameObject))
+        if(other.GetComponent<Ejectable>() != null)
         {
             objectEjectable = other.gameObject;
             objectPickup = other.GetComponent<VRC_Pickup>();
@@ -64,7 +64,7 @@ public class EjectObject : UdonSharpBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<Ejectable>() != null && Networking.IsOwner(Networking.LocalPlayer, other.gameObject))
+        if (other.GetComponent<Ejectable>() != null)
         {
             objectEjectable = null;
             objectPickup = null;

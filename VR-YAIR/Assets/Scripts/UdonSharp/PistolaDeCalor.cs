@@ -117,28 +117,30 @@ public class PistolaDeCalor : UdonSharpBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Heatable[] heatables = other.GetComponentsInChildren<Heatable>();
-        if (heatables.Length > 0)
+        Heatable heatableTarget = null;
+        string direccion = null;
+
+        if (other.GetComponent<OrientationChecker>() != null)
+        {
+            direccion = other.GetComponent<OrientationChecker>().checkOrientation();
+        }
+
+        if(direccion == "Up") { heatableTarget = heatables[1]; }
+        else if(direccion == "Down") { heatableTarget = heatables[0]; }
+        else { heatableTarget = null; }
+
+        if (heatableTarget != null)
         {
             Debug.Log("Heatable element found, trying send message");
-            foreach (Heatable heatable in heatables)
+            if (_pickup.currentPlayer == null) //esta suelto
             {
-                if (_pickup.currentPlayer == null) //esta suelto
-                {
-                    if (!heatable.gameObject.GetComponent<ActivateMirror>().IsReady())
-                    {
-                        heatable.SendCustomEvent("ActivateCalor");
-                        Debug.Log("SCE");
-                    }
-                }
-                else if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
-                {
-                    if (!heatable.gameObject.GetComponent<ActivateMirror>().IsReady())
-                    {
-                        Debug.Log("SCNE");
-                        heatable.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ActivateCalor");
-                    }
-                }
-
+                heatableTarget.SendCustomEvent("ActivateCalor");
+                Debug.Log("SCE");
+            }
+            else if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
+            {
+                Debug.Log("SCNE");
+                heatableTarget.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ActivateCalor");
             }
         }
     }

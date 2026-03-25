@@ -30,6 +30,6 @@ public class AugmentsBehabiour : UdonSharpBehaviour
             count = 0;
         microscopeBehabiour.OnAugmentChange(count);
         _audioSource.PlayOneShot(_audioClip);
-        Revolver.transform.rotation = Quaternion.Euler(90f, 0, count * 90);
+        Revolver.transform.rotation = Quaternion.Euler(0, count * 90, 0);
     }
 }

@@ -7,12 +7,19 @@ using VRC.Udon;
 
 public class UpdatePreview : UdonSharpBehaviour
 {
+    [SerializeField] private OrientationChecker orientationChecker;
+    [SerializeField] private Vector3 positionCanvaUp = new Vector3(-0.541f, 0.291f, 0.034f);
+    [SerializeField] private Vector3 positionCanvaDown = new Vector3(-0.541f, -0.291f, 0.034f);
+
     [Header("Faces Probeta")]
     public GameObject probetaShaderParent_inf;
     public GameObject probetaMirrorParent_inf;
+    public GameObject probetaBorderParent_inf;
+
     public GameObject probetaShaderParent_sup;
     public GameObject probetaMirrorParent_sup;
-    
+    public GameObject probetaBorderParent_sup;
+
     [Header("Faces Canva")]
     public GameObject probetaShaderChildren;
     public GameObject probetaMirrorChildren;
@@ -37,7 +44,10 @@ public class UpdatePreview : UdonSharpBehaviour
         probetaShaderActual = probetaShaderParent_inf;
     }
     private void Update()
-    {
+    {    
+        moveCanva();
+        rotateCanva();
+
         updateShader(probetaShaderChildren);
 
         if (supIsActive)
@@ -77,8 +87,8 @@ public class UpdatePreview : UdonSharpBehaviour
     public void switchFaces_Off()
     {
         forceActiveShader(probetaShaderParent_inf, probetaMirrorParent_inf);
-        scaleShader(probetaShaderParent_sup, 0f, 1);
-        borderColor.bodyMaterial = probetaShaderParent_inf;
+        scaleShader(probetaBorderParent_sup, 0f, 0);
+        borderColor.bodyMaterial = probetaBorderParent_inf;
         probetaShaderActual = probetaShaderParent_inf;
         supIsActive = false;
         switchFlag = true;
@@ -89,8 +99,8 @@ public class UpdatePreview : UdonSharpBehaviour
     public void switchFaces_On()
     {
         forceActiveShader(probetaShaderParent_sup, probetaMirrorParent_sup);
-        scaleShader(probetaShaderParent_inf, 0f, 1);
-        borderColor.bodyMaterial = probetaShaderParent_sup;
+        scaleShader(probetaBorderParent_inf, 0f, 0);
+        borderColor.bodyMaterial = probetaBorderParent_sup;
         probetaShaderActual = probetaShaderParent_sup;
         supIsActive = true;
         switchFlag = true;
@@ -140,7 +150,39 @@ public class UpdatePreview : UdonSharpBehaviour
 
     public void scaleAllMaterial()
     {
-        scaleShader(probetaShaderParent_inf, 0f, 1);
-        scaleShader(probetaShaderParent_sup, 0f, 1);
+        scaleShader(probetaBorderParent_inf, 0f, 0);
+        scaleShader(probetaBorderParent_sup, 0f, 0);
     }
+
+    /// <summary>
+    /// Rota el Canvas para que mire hacia el jugador local, manteniendo la rotación únicamente en Y.
+    /// Afecta solo al jugador local.
+    /// </summary>
+    private void rotateCanva()
+    {
+        Vector3 playerPosition = Networking.LocalPlayer.GetPosition(); // Posicion del jugador Local
+        transform.LookAt(playerPosition); // Orienta el transform para mirar al jugador
+        Vector3 euler = transform.eulerAngles;
+        transform.eulerAngles = new Vector3(euler.x - 80, euler.y, 0); // Solo rotación en X, Y
+    }
+
+    /// <summary>
+    /// Mueve el Canvas a una posición local predefinida (arriba o abajo) según la orientación detectada.
+    /// </summary>
+    private void moveCanva()
+    {
+        string state = orientationChecker.checkOrientation();
+        if(state == "Nothing") { return; }
+        //Debug.Log("[<color=orange>Postition actual: </color>]" + transform.localPosition);
+        if(state == "Up") // Is Up
+        {
+            gameObject.transform.localPosition = positionCanvaUp;
+        }
+        else // Is Down
+        {
+            gameObject.transform.localPosition = positionCanvaDown;
+        }
+        //Debug.Log("[<color=green>Postition new: </color>]" + transform.localPosition + ", State: " + state);
+    }
+
 }

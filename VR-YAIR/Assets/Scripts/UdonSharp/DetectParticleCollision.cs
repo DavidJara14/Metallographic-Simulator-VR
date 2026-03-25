@@ -14,37 +14,45 @@ public class DetectParticleCollision : UdonSharpBehaviour
 
         if (activateMirror1.IsReady() && activateMirror2.IsReady()) return;
 
-        liquidSource(other);
-        botellaLab(other);
+        string orientation = gameObject.GetComponent<OrientationChecker>().checkOrientation();
+
+        ActivateMirror activateMirrorTarget;
+
+        if (orientation == "Down")
+        {
+            activateMirrorTarget = activateMirror1;
+        }
+        else if (orientation == "Up")
+        {
+            activateMirrorTarget = activateMirror2;
+        }
+        else
+        {
+            activateMirrorTarget = null;
+        }
+        if (activateMirrorTarget == null) return;
+
+        liquidSource(other, activateMirrorTarget);
+        botellaLab(other, activateMirrorTarget);
     }
 
-    private void liquidSource(GameObject other)
+    private void liquidSource(GameObject other, ActivateMirror activateMirrorTarget)
     {
         var liquidSource = other.GetComponentInParent<IsLiquidSource>();
-        if (liquidSource != null)
+        if (liquidSource != null && activateMirrorTarget.finishedPulido2)
         {
-            assignWaterPS(activateMirror1, other);
-            assignWaterPS(activateMirror2, other);
+            activateMirrorTarget.waterPS = other.GetComponent<ParticleSystem>();
+            Debug.LogWarning($"[<color=blue>waterPS assigned to: </color>]{activateMirrorTarget.waterPS.name}");
         }
     }
 
-    private void assignWaterPS(ActivateMirror activateMirror, GameObject other)
-    {
-        if (activateMirror.finishedPulido2)
-        {
-            activateMirror.waterPS = other.GetComponent<ParticleSystem>();
-            Debug.LogWarning($"[<color=blue>waterPS, assigned: </color>]{activateMirror.waterPS.name}");
-        }
-    }
-
-    private void botellaLab(GameObject other)
+    private void botellaLab(GameObject other, ActivateMirror activateMirrorTarget)
     {
         var botellaLab = other.GetComponentInParent<BotellaLab>();
         if (botellaLab != null)
         {
             string tipo = botellaLab.Tipo;
-            checkAndSendEvent(activateMirror1, tipo);
-            checkAndSendEvent(activateMirror2, tipo);
+            checkAndSendEvent(activateMirrorTarget, tipo);
         }
     }
 
