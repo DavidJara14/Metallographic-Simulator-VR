@@ -82,7 +82,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AditionalPower: 1.4
+    - _AditionalPower: 0.1
     - _AlphaClip: 1
     - _Blend: 0
     - _BumpScale: 1
@@ -91,11 +91,12 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _FloatFresnelPower: 0
-    - _FresnelPower: 1.86
+    - _FresnelPower: 3
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _HasAlcohol: 0
+    - _HasAlcoholFloat: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -117,5 +118,5 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 0, b: 0, a: 0}
     - _PrimaryColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 0}
-    - _SecondaryColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SecondaryColor: {r: 0.78113204, g: 0.78113204, b: 0.78113204, a: 0}
   m_BuildTextureStacks: []

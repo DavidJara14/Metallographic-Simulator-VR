@@ -61,11 +61,26 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
         Augment = Aumentos[count].Int;
         if (PBcomponent == null)
             return;
-        if(PBcomponent.GetComponent<ActivateMirror>().IsReady())
+        if (TestFacesIsReady())//Si una cara esta lista, prueba a cambiar de tamaño
         {
             TryChangeImageNew(PBcomponent.getProbeType(), Augment);
             CompText.text = $"x{Augment}";
         }
+    }
+
+    //observa todas las caras, y ve si una esta lista
+    private bool TestFacesIsReady()
+    {
+        bool OneFaceIsReady = false;
+        int i = 0;
+        foreach (var compo in PBcomponent.GetComponentsInChildren<FaceBehaviour>()) // ActivateMirror si se usa el script ActivateMirror
+        {
+            i++;
+            if (compo.IsReady())
+                OneFaceIsReady = true;
+        }
+        Debug.Log(i);
+        return OneFaceIsReady;
     }
 
     private void TryChangeImageNew(string type, int augment, int index = 0)
@@ -131,10 +146,10 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PBcomponent = other.gameObject.GetComponent<ProbeBehabiour>();
-        if (PBcomponent != null)
+        if (other.gameObject.GetComponent<ProbeBehabiour>() != null && PBcomponent == null)
         {
-            if (PBcomponent.GetComponent<ActivateMirror>().IsReady())
+            PBcomponent = other.gameObject.GetComponent<ProbeBehabiour>();
+            if (TestFacesIsReady())
             {
                 TryChangeImageNew(PBcomponent.getProbeType(), Augment);
                 CompText.text = $"x{Augment}";
@@ -144,8 +159,7 @@ public class MicroscopeBehabiour : UdonSharpBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        PBcomponent = other.gameObject.GetComponent<ProbeBehabiour>();
-        if (PBcomponent != null)
+        if (other.gameObject.GetComponent<ProbeBehabiour>() == PBcomponent && PBcomponent != null)
         {
             RemoveImage();
             PBcomponent = null;

@@ -42,20 +42,20 @@ public class EjectObject : UdonSharpBehaviour
             RotorToObjSize = new Vector3(objectEjectable.transform.position.x - gameObject.transform.position.x, 0f, objectEjectable.transform.position.z - gameObject.transform.position.z);
             Up = objectEjectable.transform.up;
             VectorDeDireccion = Vector3.Cross(RotorToObjSize, Up);
-            Debug.Log("Vector asigned");
+            //Debug.Log("Vector asigned");
 
             if(objectPickup.currentPlayer == null)
             {
                 VectorDeDireccion.y = Mathf.Abs(VectorDeDireccion.y); 
                 objectEjectable.GetComponent<Rigidbody>().AddForce(VectorDeDireccion.normalized * 200f);
-                Debug.Log("Object Ejected");
+                //Debug.Log("Object Ejected");
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Ejectable>() != null && Networking.IsOwner(Networking.LocalPlayer, other.gameObject))
+        if(other.GetComponent<Ejectable>() != null)
         {
             objectEjectable = other.gameObject;
             objectPickup = other.GetComponent<VRC_Pickup>();
@@ -64,7 +64,7 @@ public class EjectObject : UdonSharpBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<Ejectable>() != null && Networking.IsOwner(Networking.LocalPlayer, other.gameObject))
+        if (other.GetComponent<Ejectable>() != null)
         {
             objectEjectable = null;
             objectPickup = null;

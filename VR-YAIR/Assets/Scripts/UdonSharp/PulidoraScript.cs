@@ -18,8 +18,8 @@ public class PulidoraScript : UdonSharpBehaviour
     [SerializeField] private TextMeshProUGUI RPMText;
     [SerializeField] private TextMeshProUGUI TypeOfElementText;
 
-    [SerializeField] private bool IsForGris = false;
-    [SerializeField] private bool IsForBlanca = false;
+    public bool IsForGris = false;
+    public bool IsForBlanca = false;
 
     [Header("Audio Config")]
     [SerializeField] private AudioSource _StartStopAudioSource;

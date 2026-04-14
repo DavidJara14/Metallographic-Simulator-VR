@@ -116,35 +116,54 @@ public class PistolaDeCalor : UdonSharpBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Heatable>() != null)
+        Heatable[] heatables = other.GetComponentsInChildren<Heatable>();
+        Heatable heatableTarget = null;
+        string direccion = null;
+
+        if (other.GetComponent<OrientationChecker>() != null)
+        {
+            direccion = other.GetComponent<OrientationChecker>().checkOrientation();
+        }
+
+        if(direccion == "Up") { heatableTarget = heatables[1]; }
+        else if(direccion == "Down") { heatableTarget = heatables[0]; }
+        else { heatableTarget = null; }
+
+        if (heatableTarget != null)
         {
             Debug.Log("Heatable element found, trying send message");
-            if(_pickup.currentPlayer == null) //esta suelto
+            if (_pickup.currentPlayer == null) //esta suelto
             {
-                other.gameObject.GetComponent<Heatable>().SendCustomEvent("ActivateCalor");
+                heatableTarget.SendCustomEvent("ActivateCalor");
                 Debug.Log("SCE");
             }
-            else if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
+            else if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
             {
                 Debug.Log("SCNE");
-                other.gameObject.GetComponent<Heatable>().SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ActivateCalor");
+                heatableTarget.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ActivateCalor");
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<Heatable>() != null)
+        Heatable[] heatables = other.GetComponentsInChildren<Heatable>();
+
+        if (heatables.Length > 0)
         {
-            if (_pickup.currentPlayer == null) //esta suelto
+            foreach (Heatable heatable in heatables)
             {
-                other.gameObject.GetComponent<Heatable>().SendCustomEvent("DeactivateCalor");
-            }
-            else if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
-            {
-                other.gameObject.GetComponent<Heatable>().SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "DeactivateCalor");
+                if (_pickup.currentPlayer == null) //esta suelto
+                {
+                    heatable.SendCustomEvent("DeactivateCalor");
+                }
+                else if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject)) //el trigger lo activa el owner del objeto
+                {
+                    heatable.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "DeactivateCalor");
+                }
             }
         }
     }
+
 
 }

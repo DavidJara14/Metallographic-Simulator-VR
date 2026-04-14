@@ -97,15 +97,19 @@ public class ObjectSnapBehabiour : UdonSharpBehaviour
             return;
         }
 
-        Debug.Log(gameObject.name+": = "+GrabablesNear);
+        //Debug.Log(gameObject.name+": = "+GrabablesNear);
         if(GOToSnap == null)
         {
             //Debug.LogWarning("No hay objetos cercanos, ¿hace falta asignar 'placeable'?");
             return;
         }
+        else
+        {
+            Debug.Log("Object found: " + GOToSnap.name);
+        }
 
 
-        var GOpos = gameObject.transform.position;
+            var GOpos = gameObject.transform.position;
         var GOrot = gameObject.transform.rotation;
         if(SnapPosition)
         {

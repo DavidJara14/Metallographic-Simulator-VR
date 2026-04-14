@@ -25,7 +25,7 @@ public class HapticFeedback : UdonSharpBehaviour
     public void hapticFeedbackDesbaste()
     {
         Networking.LocalPlayer.PlayHapticEventInHand(pickup.currentHand, hapticDuration, hapticAmplitudeDesbaste * (800f / Desgaste)*5, hapticFrequencyDesbaste);
-        Debug.Log("Haptic Feedback desbaste!!!!!!!!!!!!");
+        //Debug.Log("Haptic Feedback desbaste!!!!!!!!!!!!");
     }
 
     public void hapticFeedbackPulido()
