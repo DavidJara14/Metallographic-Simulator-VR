@@ -52,6 +52,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     [UdonSynced] public bool _isInsideCollider = false;
     [UdonSynced] public bool canLijar = false;
     [UdonSynced] public bool isHumedo = true;
+    private LijaCircularBehabiour lijaCircularScript = null;
 
     public string ProbeType = "";
 
@@ -159,7 +160,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 return;
             }
 
-            if (isHumedo && canLijar)
+            if (checkHumidity() && canLijar)
             {
                 BorderToZero();
                 _insideColliderTimer += Time.deltaTime;
@@ -171,11 +172,26 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 }
             }
 
-            if (!isHumedo || !canLijar)
+            if (!checkHumidity() || !canLijar)
             {
                 gameObject.GetComponent<BorderColor>().SendCustomEvent("colorRed");
             }
         }
+    }
+
+    private bool checkHumidity()
+    {
+        if (lijaCircularScript == null) { return false; }
+
+
+        if (lijaCircularScript.GetHumedad() > 0)
+        {
+            isHumedo = true;
+        }
+        else
+            isHumedo = false;
+        Debug.LogWarning("Humedad value" + lijaCircularScript.GetHumedad() + "     humedad Bool" + isHumedo);
+        return isHumedo;
     }
 
     private void SetParticleRateOverTime()
@@ -270,18 +286,19 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
         if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
         {
+
             if (other.GetComponent<LijaCircularBehabiour>() != null)
             {
-                if (other.GetComponent<LijaCircularBehabiour>().GetHumedad() > 0)
-                    isHumedo = true;
-                else
-                    isHumedo = false;
+                lijaCircularScript = other.GetComponent<LijaCircularBehabiour>(); 
             }
 
             if (other.gameObject.name == "Rotor" && LijaRotationActiva.Rotating)
             {
                 _isInsideCollider = true;
+                Debug.Log("_isInsideCollider true");
             }
+            Debug.Log("Owner is: " + Networking.LocalPlayer.displayName);
+
         }
     }
 
@@ -293,6 +310,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             LijaRotationActiva = null;
             CheckInteractProve();
             BorderToZero();
+            lijaCircularScript = null;
         }
 
         if(other.gameObject.name == "Rotor")

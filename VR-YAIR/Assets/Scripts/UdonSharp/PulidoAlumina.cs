@@ -127,6 +127,7 @@ public class PulidoAlumina : UdonSharpBehaviour
             return;
         }
 
+        checkAluminas();
         bool probeNoHaveAlumina = !haveAluminaGris && !haveAluminaBlanca;
         bool pulidoCorrecto = (isInPulidoraGris && haveAluminaGris) || (isInPulidoraBlanca && haveAluminaBlanca);
 
@@ -179,29 +180,18 @@ public class PulidoAlumina : UdonSharpBehaviour
             rotorPulidora = other.GetComponentInParent<PulidoraScript>().gameObject;
             pulidoraScript = rotorPulidora.GetComponent<PulidoraScript>();
 
-            if (pulidoraScript.GrisLoaded)
-            {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All,"HaveAlumGrisTrue");
-            }
-
-            if (finishedPulido1)
-            {
-                if (pulidoraScript.BlancaLoaded)
-                {
-                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All,"HaveAlumBlanTrue");
-                }
-            }
+            //checkAluminas();
 
             if (pulidoraScript.Rotating)
             {
                 if (pulidoraScript.IsForGris)
                 {
-                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All,"IsInPulidoraGrisTrue");
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "IsInPulidoraGrisTrue");
                 }
 
                 if (pulidoraScript.IsForBlanca)
                 {
-                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All,"IsInPulidoraBlancaTrue");
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "IsInPulidoraBlancaTrue");
 
                 }
 
@@ -211,6 +201,21 @@ public class PulidoAlumina : UdonSharpBehaviour
 
     }
 
+    private void checkAluminas()
+    {
+        if (pulidoraScript.GrisLoaded)
+        {
+            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "HaveAlumGrisTrue");
+        }
+
+        if (finishedPulido1)
+        {
+            if (pulidoraScript.BlancaLoaded)
+            {
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "HaveAlumBlanTrue");
+            }
+        }
+    }
 
     private void OnTriggerExit(Collider other)
     {
