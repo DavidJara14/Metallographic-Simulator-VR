@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1809130803}
-  m_IndirectSpecularColor: {r: 0.00540499, g: 0.004749378, b: 0.005432221, a: 1}
+  m_IndirectSpecularColor: {r: 0.00535613, g: 0.0046533137, b: 0.0053773187, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -41728,11 +41728,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 356930557006677922, guid: 7c808066c1c4d7d44beab8c6200b20ab,
         type: 3}
-      propertyPath: _skeleton
-      value: 
-      objectReference: {fileID: 1261182111}
-    - target: {fileID: 356930557006677922, guid: 7c808066c1c4d7d44beab8c6200b20ab,
-        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 356930557006677922, guid: 7c808066c1c4d7d44beab8c6200b20ab,
@@ -41809,11 +41804,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Microscopio_LP
       objectReference: {fileID: 0}
-    - target: {fileID: 3933174543156785059, guid: 7c808066c1c4d7d44beab8c6200b20ab,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6682267599620652557, guid: 7c808066c1c4d7d44beab8c6200b20ab,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -41829,11 +41819,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8604080800260494686, guid: 7c808066c1c4d7d44beab8c6200b20ab,
-        type: 3}
-      propertyPath: m_Texture
-      value: 
-      objectReference: {fileID: 2800000, guid: f5af3195fd89fb543bc663329462a657, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
