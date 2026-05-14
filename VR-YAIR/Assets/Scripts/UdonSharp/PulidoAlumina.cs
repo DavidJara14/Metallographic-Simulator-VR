@@ -127,7 +127,10 @@ public class PulidoAlumina : UdonSharpBehaviour
             return;
         }
 
-        checkAluminas();
+        if(Networking.IsOwner(Networking.LocalPlayer, probeBehaviour.gameObject))
+        {
+            checkAluminas();
+        }
         bool probeNoHaveAlumina = !haveAluminaGris && !haveAluminaBlanca;
         bool pulidoCorrecto = (isInPulidoraGris && haveAluminaGris) || (isInPulidoraBlanca && haveAluminaBlanca);
 
