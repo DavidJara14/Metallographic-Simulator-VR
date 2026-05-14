@@ -48,7 +48,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
     public GameObject probetaShader;
     public GameObject bodyMaterial;
     [UdonSynced] public float _insideColliderTimer = 0f;
-    private const float timeLijado = 3f;
+    private const float timeLijado = 10f;
     public bool _isInsideCollider = false;
     [UdonSynced] public bool canLijar = false;
     public bool isHumedo = true;
@@ -251,7 +251,7 @@ public class ProbeBehabiour : UdonSharpBehaviour
             var IndexDesgasteEnProbeta = TamañosDeLija.BinarySearch(new DataToken(Desgaste));
             var IndexTamañoDeGranoEnLija = TamañosDeLija.BinarySearch(new DataToken(TamañoDeGranoEnLija));
             if (IndexDesgasteEnProbeta < IndexTamañoDeGranoEnLija
-                && (IndexDesgasteEnProbeta + 1 == IndexTamañoDeGranoEnLija || IndexDesgasteEnProbeta + 2 == IndexTamañoDeGranoEnLija || true)) // remove true flag
+                && (IndexDesgasteEnProbeta + 1 == IndexTamañoDeGranoEnLija || IndexDesgasteEnProbeta + 2 == IndexTamañoDeGranoEnLija))
             {
                 Debug.Log($"Cambio por seguir: {Desgaste} a {TamañoDeGranoEnLija}");
                 Desgaste = TamañoDeGranoEnLija;
