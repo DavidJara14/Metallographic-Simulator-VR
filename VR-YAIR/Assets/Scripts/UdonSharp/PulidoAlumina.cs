@@ -16,7 +16,7 @@ public class PulidoAlumina : UdonSharpBehaviour
     [SerializeField] private PulidoraScript pulidoraScript;
 
     [Header("Pulido variables")]
-    const float timePulido = 3f;
+    const float timePulido = 10f;
 
     public bool haveAluminaGris = false;   //SCNE
     public bool haveAluminaBlanca = false; //SCNE
