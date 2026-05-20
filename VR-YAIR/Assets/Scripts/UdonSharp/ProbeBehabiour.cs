@@ -47,11 +47,11 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
     public GameObject probetaShader;
     public GameObject bodyMaterial;
-    public float _insideColliderTimer = 0f;
-    private const float timeLijado = 3f;
-    [UdonSynced] public bool _isInsideCollider = false;
+    [UdonSynced] public float _insideColliderTimer = 0f;
+    private const float timeLijado = 10f;
+    public bool _isInsideCollider = false;
     [UdonSynced] public bool canLijar = false;
-    [UdonSynced] public bool isHumedo = true;
+    public bool isHumedo = true;
     private LijaCircularBehabiour lijaCircularScript = null;
 
     public string ProbeType = "";
@@ -154,44 +154,72 @@ public class ProbeBehabiour : UdonSharpBehaviour
 
         if (_isInsideCollider)
         {
+            checkHumidity();
             if (IsLijadoMax() || desgasteEnShader == TamañoDeGranoEnLija)
             {
                 gameObject.GetComponent<BorderColor>().SendCustomEvent("colorGreen");
+                if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
+                {
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "updateDesgaste");
+                }
                 return;
             }
 
-            if (checkHumidity() && canLijar)
+            if (isHumedo && canLijar)
             {
                 BorderToZero();
                 _insideColliderTimer += Time.deltaTime;
                 Debug.Log("Time lija: " + _insideColliderTimer);
                 if (_insideColliderTimer >= timeLijado)
                 {
-                    probetaShader.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
-                    probetaShader.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
+                    if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject) && desgasteEnShader != Desgaste)
+                        //updateDesgaste();
+                        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "updateDesgaste");
                 }
             }
 
-            if (!checkHumidity() || !canLijar)
+            if (!isHumedo || !canLijar)
             {
                 gameObject.GetComponent<BorderColor>().SendCustomEvent("colorRed");
             }
         }
     }
 
-    private bool checkHumidity()
+    public void updateDesgaste()
     {
-        if (lijaCircularScript == null) { return false; }
+        Debug.LogWarning("Send updateDesgaste" + " Desagste is: " + Desgaste + "  desgasteEnShader: " + desgasteEnShader);
+        probetaShader.GetComponent<Renderer>().material.SetFloat("_GranoLija", Desgaste);
+        probetaShader.GetComponent<Renderer>().material.SetFloat("_AngleRotation", Quaternion.AngleAxis(Vector3.Angle(gameObject.transform.up, VectorDeDireccionDeDesgasteActual), gameObject.transform.forward).eulerAngles.z);
+    }
 
-
-        if (lijaCircularScript.GetHumedad() > 0)
+    private void checkHumidity()
+    {
+        if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
         {
-            isHumedo = true;
+            if (isHumedo)
+            {
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoTrue");
+            }
+            else if (!isHumedo) 
+            {
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoFalse");
+            }
         }
-        else
-            isHumedo = false;
-        Debug.LogWarning("Humedad value" + lijaCircularScript.GetHumedad() + "     humedad Bool" + isHumedo);
-        return isHumedo;
+
+        //if (lijaCircularScript == null) 
+        //{
+        //    Debug.Log("lijaCircularScript IS NULL");
+        //    return false; 
+        //}
+        //
+        //
+        //if (lijaCircularScript.GetHumedad() > 0)
+        //{
+        //    isHumedo = true;
+        //}
+        //else
+        //    isHumedo = false;
+        //Debug.LogWarning("Humedad value" + lijaCircularScript.GetHumedad() + "     humedad Bool" + isHumedo);
     }
 
     private void SetParticleRateOverTime()
@@ -228,6 +256,8 @@ public class ProbeBehabiour : UdonSharpBehaviour
                 Debug.Log($"Cambio por seguir: {Desgaste} a {TamañoDeGranoEnLija}");
                 Desgaste = TamañoDeGranoEnLija;
                 canLijar = true;
+                Debug.Log($"Desgaste nuevo: {Desgaste}");
+
             }
             else
             {
@@ -269,6 +299,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
             return;
         }
 
+        if (other.GetComponent<PulidoraScript>() != null)
+        {
+            interactProbe.DisableCanva();
+            interactProbe.gameObject.SetActive(false);
+        }
+
         if (other.GetComponent<LijaRotation>() != null)
         {
             Debug.Log("Lijarotation in Provebehabiour");
@@ -276,30 +312,48 @@ public class ProbeBehabiour : UdonSharpBehaviour
             LijaRotationActiva = LijaRotationActivaGO.GetComponent<LijaRotation>();
             interactProbe.DisableCanva();
             interactProbe.gameObject.SetActive(false);
+
         }
 
-        if (other.GetComponent<PulidoraScript>() != null)
-        {
-            interactProbe.DisableCanva();
-            interactProbe.gameObject.SetActive(false);
-        }
+        
+        //if (other.GetComponent<LijaCircularBehabiour>() != null)
+        //{
+        //    lijaCircularScript = other.GetComponent<LijaCircularBehabiour>(); 
+        //}
 
         if(Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
         {
-
             if (other.GetComponent<LijaCircularBehabiour>() != null)
             {
-                lijaCircularScript = other.GetComponent<LijaCircularBehabiour>(); 
+                lijaCircularScript = other.GetComponent<LijaCircularBehabiour>();
+                if (lijaCircularScript.GetHumedad() > 0)
+                    //isHumedoTrue();
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoTrue");
+                else
+                    //isHumedoFalse();
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoFalse");
+
             }
 
-            if (other.gameObject.name == "Rotor" && LijaRotationActiva.Rotating)
+            if (other.gameObject.name == "Rotor" && LijaRotationActiva.Rotating && !_isInsideCollider)
             {
-                _isInsideCollider = true;
+                //_isInsideCollider = true;
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "StartTimer");
+        
                 Debug.Log("_isInsideCollider true");
             }
-            Debug.Log("Owner is: " + Networking.LocalPlayer.displayName);
-
         }
+        Debug.Log("Owner is: " + Networking.LocalPlayer.displayName);
+    }
+
+    public void isHumedoFalse()
+    {
+        isHumedo = false;
+    }
+
+    public void isHumedoTrue()
+    {
+        isHumedo = true;
     }
 
     private void OnTriggerExit(Collider other)
@@ -319,12 +373,15 @@ public class ProbeBehabiour : UdonSharpBehaviour
             {
                 Debug.Log("Stop no current player");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "StopTimer");
+                //_isInsideCollider = false;
             }
             else if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
             {
                 Debug.Log("Stop Owner");
                 SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "StopTimer");
+                //_isInsideCollider = false;
             }
+            //_insideColliderTimer = 0f;
         }
     }
 
