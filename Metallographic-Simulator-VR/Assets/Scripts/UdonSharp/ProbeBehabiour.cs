@@ -196,30 +196,16 @@ public class ProbeBehabiour : UdonSharpBehaviour
     {
         if (Networking.IsOwner(Networking.LocalPlayer, this.gameObject))
         {
-            if (isHumedo)
+            if (lijaCircularScript != null)
             {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoTrue");
-            }
-            else if (!isHumedo) 
-            {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoFalse");
+                if (lijaCircularScript.GetHumedad() > 0)
+                    //isHumedoTrue();
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoTrue");
+                else
+                    //isHumedoFalse();
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoFalse");
             }
         }
-
-        //if (lijaCircularScript == null) 
-        //{
-        //    Debug.Log("lijaCircularScript IS NULL");
-        //    return false; 
-        //}
-        //
-        //
-        //if (lijaCircularScript.GetHumedad() > 0)
-        //{
-        //    isHumedo = true;
-        //}
-        //else
-        //    isHumedo = false;
-        //Debug.LogWarning("Humedad value" + lijaCircularScript.GetHumedad() + "     humedad Bool" + isHumedo);
     }
 
     private void SetParticleRateOverTime()
@@ -326,12 +312,12 @@ public class ProbeBehabiour : UdonSharpBehaviour
             if (other.GetComponent<LijaCircularBehabiour>() != null)
             {
                 lijaCircularScript = other.GetComponent<LijaCircularBehabiour>();
-                if (lijaCircularScript.GetHumedad() > 0)
-                    //isHumedoTrue();
-                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoTrue");
-                else
-                    //isHumedoFalse();
-                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoFalse");
+                //if (lijaCircularScript.GetHumedad() > 0)
+                //    //isHumedoTrue();
+                //    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoTrue");
+                //else
+                //    //isHumedoFalse();
+                //    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "isHumedoFalse");
 
             }
 
