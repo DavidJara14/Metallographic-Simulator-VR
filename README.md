@@ -44,8 +44,6 @@ Demostración completa del recorrido por el laboratorio virtual y del procedimie
 | **Limpieza y ataque químico** | **Microestructura al microscopio** |
 | ![Limpieza con alcohol y pistola de calor](images/03_limpieza_ataque.jpg) | ![Microestructura observada al microscopio](images/04_microestructura.jpg) |
 
-*Imágenes obtenidas del video demostrativo del proyecto.*
-
 ---
 
 ## Visualizadores web complementarios
@@ -200,4 +198,4 @@ la Educación (PAPIME)** de la **DGAPA-UNAM**, con clave **PE103324**.
 
 ### Trabajo de tesis asociado
 [*«Desarrollo de un laboratorio virtual para efectuar un ensayo metalográfico».*](https://youtu.be/dQw4w9WgXcQ?si=fXPF5bOLl0d2_r0f)
-*Puendiente - ACTUALIZAR LINK*
+*Pendiente - ACTUALIZAR LINK*
