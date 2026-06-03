@@ -36,8 +36,6 @@ Demostración completa del recorrido por el laboratorio virtual y del procedimie
 
 [![Tutorial Metalografía — Laboratorio Virtual](images/demo_portada.jpg)](https://youtu.be/KsKs8R-pFhA "▶ Ver en YouTube")
 
-> 🎥 **Tutorial Metalografía — Laboratorio Virtual** · <https://youtu.be/KsKs8R-pFhA>
-
 ### Capturas demostrativas del proceso
 
 | Desbaste / Lijado en húmedo | Pulido con alúmina |
@@ -136,11 +134,6 @@ Además del SDK de VRChat y de UdonSharp, el proyecto utiliza:
 | **EasyQuestSwitch** (Jordo) | Conmutación asistida de ajustes entre las plataformas PC y Android/Quest. | `vrchat.jordo.easyquestswitch` |
 | **Unity ProBuilder** | Modelado in-editor de elementos del entorno. | Unity Registry |
 | **TextMeshPro** | Texto en interfaces (RPM, aumentos del microscopio, etiquetas). | Unity Registry |
-| **UniTask** | Utilidades de programación asíncrona. | Dependencia de paquetes |
-
-> **Nota sobre z3y / ShaderGraph:** este paquete se obtiene directamente desde su
-> repositorio de Git. Si el resolutor del VCC no lo descarga, asegúrate de tener acceso a
-> Internet y de no haber bloqueado las dependencias declaradas vía URL en `manifest.json`.
 
 ---
 
@@ -160,7 +153,7 @@ Además del SDK de VRChat y de UdonSharp, el proyecto utiliza:
 ## Estructura de carpetas
 
 ```
-VR-Yair/
+./
 ├── .gitattributes
 ├── .gitignore
 ├── README.md
@@ -206,7 +199,5 @@ Proyecto desarrollado con el apoyo del **Programa de Apoyo a Proyectos para Inno
 la Educación (PAPIME)** de la **DGAPA-UNAM**, con clave **PE103324**.
 
 ### Trabajo de tesis asociado
-*«Desarrollo de un laboratorio virtual para efectuar un ensayo metalográfico».*
-
-> 📄 El proyecto se distribuye bajo la licencia **CC BY-NC 4.0**; consulta el archivo
-> [`LICENSE`](LICENSE).
+[*«Desarrollo de un laboratorio virtual para efectuar un ensayo metalográfico».*](https://youtu.be/dQw4w9WgXcQ?si=fXPF5bOLl0d2_r0f)
+*Puendiente - ACTUALIZAR LINK*
