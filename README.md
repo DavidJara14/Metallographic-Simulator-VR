@@ -34,13 +34,13 @@ Este proyecto constituye el desarrollo tecnológico asociado al trabajo de tesis
 
 Demostración completa del recorrido por el laboratorio virtual y del procedimiento del ensayo metalográfico. **Haz clic en la imagen para reproducir el video en YouTube:**
 
-[![Tutorial Metalografía — Laboratorio Virtual](images/demo_portada.jpg)](https://youtu.be/KsKs8R-pFhA "▶ Ver en YouTube")
+[![Tutorial Metalografía — Laboratorio Virtual](images/demo_portada.png)](https://youtu.be/KsKs8R-pFhA "▶ Ver en YouTube")
 
 ### Capturas demostrativas del proceso
 
 | Desbaste / Lijado en húmedo | Pulido con alúmina |
 |:---:|:---:|
-| ![Desbaste con lija de grano 800](images/01_desbaste.jpg) | ![Pulido con alúmina gris](images/02_pulido_alumina.jpg) |
+| ![Desbaste con lija de grano 800](images/01_desbaste.jpg) | <img src="images/02_pulido_alumina.png" alt="Pulido con alúmina gris" width="900"/>|
 | **Limpieza y ataque químico** | **Microestructura al microscopio** |
 | ![Limpieza con alcohol y pistola de calor](images/03_limpieza_ataque.jpg) | ![Microestructura observada al microscopio](images/04_microestructura.jpg) |
 
